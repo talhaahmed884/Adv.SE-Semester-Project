@@ -1,0 +1,42 @@
+@startuml
+
+title UC-8: Add a Task to a Custom To-Do List
+
+|User|
+    start
+    :Navigate to To-Do Lists page;
+
+|System|
+    :Display To-Do Lists page;
+
+|User|
+    :Open a to-do list;
+
+|System|
+    :Display all the tasks of the user-selected to-do list;
+
+|User|
+    :Choose "Add task";
+
+|System|
+    :Display a to-do list task form to enter task details;
+
+|User|
+    :Enter task description;
+
+|System|
+    :Validate input;
+    if (Valid?) then (yes)
+        :Add task to to-do list;
+        :Display newly added task in the to-do list;
+        stop
+    else (no)
+        :Show validation errors;
+        :Show task form with preserved entries;
+        note right
+            emphasize invalid values and focus first invalid field
+        end note
+        stop
+    endif
+
+@enduml

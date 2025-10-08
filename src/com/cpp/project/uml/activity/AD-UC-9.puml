@@ -1,0 +1,29 @@
+@startuml
+
+title UC-9: Mark a To-Do List Task Complete
+
+|User|
+    start
+    :Navigate to To-Do Lists page;
+
+|System|
+    :Display To-Do Lists page;
+
+|User|
+    :Open a to-do list;
+
+|System|
+    :Display all the tasks of the user-selected to-do list;
+
+|User|
+    :Mark a task as complete;
+
+|System|
+    :Update task status;
+    note right
+        update ≤500ms for 95%
+    end note
+    :Display task as completed in the list;
+    stop
+
+@enduml

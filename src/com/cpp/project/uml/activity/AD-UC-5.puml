@@ -1,0 +1,51 @@
+@startuml
+
+title UC-5: Update Progress of a Course Task
+
+|User|
+    start
+    :Navigate to courses page;
+
+|System|
+    :Display Courses page;
+
+|User|
+    :Select and open a course from the list;
+
+|System|
+    :Display details of the user-selected course page;
+
+|User|
+    :Select and open a course task from the list;
+
+|System|
+    :Display details of the user-selected course task;
+
+|User|
+    :Choose Edit progress;
+
+|System|
+    :Makes the progress of the task editable;
+
+|User|
+    :Enter progress (0-100);
+
+|System|
+    :Validate progress value;
+    if (Valid?) then (yes)
+        :Update task progress;
+        note right
+            update ≤500ms for 95%
+        end note
+        :Display updated progress;
+        stop
+    else (no)
+        :Show validation errors;
+        :Show course task progress with previous entry;
+        note right
+            emphasize invalid value and invalid field
+        end note
+        stop
+    endif
+
+@enduml

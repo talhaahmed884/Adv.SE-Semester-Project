@@ -1,0 +1,41 @@
+@startuml
+
+title UC-1: Create a User Profile
+
+|User|
+    start
+        :Open Studently application;
+
+|System|
+    :Display welcome/landing screen;
+
+|User|
+    :Navigate to sign-up page;
+
+|System|
+    :Display sign-up form;
+
+|User|
+    :Enter name, email, password;
+
+|System|
+    :Validate input;
+    while (Input valid?) is (yes)
+        :Store profile (name, email, password hash);
+        note right
+            Complete within 1s (95%)
+            Use SHA-512 for password storage
+        end note
+        :Display confirmation;
+        :Show Home Page;
+        stop
+    endwhile (no)
+
+    :Show validation errors;
+    :Show sign-up form with preserved entries;
+    note right
+        emphasize invalid values and focus first invalid field
+    end note
+    stop
+
+@enduml

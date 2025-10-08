@@ -1,0 +1,36 @@
+@startuml
+
+title UC-7: Create a Custom To-Do List
+
+|User|
+    start
+    :Navigate to To-Do Lists page;
+
+|System|
+    :Display To-Do Lists page;
+
+|User|
+    :Choose "Add To-Do List";
+
+|System|
+    :Display a To-Do list form to enter To-Do list details;
+
+|User|
+    :Enter list name;
+
+|System|
+    :Validate input;
+    if (Valid?) then (yes)
+        :Create new to-do list;
+        :Display newly created list;
+        stop
+    else (no)
+        :Show validation errors;
+        :Show To-Do list form with preserved entries;
+        note right
+            emphasize invalid values and focus first invalid field
+        end note
+        stop
+    endif
+
+@enduml
