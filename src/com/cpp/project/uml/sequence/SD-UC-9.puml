@@ -1,0 +1,23 @@
+@startuml
+
+title UC-9: Mark To-Do Task Complete
+autonumber
+
+actor "User" as U
+boundary "Studently UI" as UI
+database "DataStore" as DB
+control "ToDoService" as TodoSvc
+entity "ToDoListTask" as TTask
+
+U -> UI: Open List → Mark task as complete
+UI -> TodoSvc: completeTask(taskId)
+TodoSvc -> DB: load(TTask)
+TodoSvc -> TTask: markComplete()
+note right
+    To-Do task completion within 500 ms (95%).
+end note
+TodoSvc -> DB: save(TTask)
+DB --> TodoSvc: saved
+TodoSvc --> UI: Show task as completed
+
+@enduml

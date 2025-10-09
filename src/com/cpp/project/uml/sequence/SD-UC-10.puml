@@ -1,0 +1,27 @@
+@startuml
+
+title UC-10: View Monthly Calendar
+autonumber
+
+actor "User" as U
+boundary "Studently UI" as UI
+database "DataStore" as DB
+control "CalendarService" as CalSvc
+entity "Calendar" as Cal
+
+U -> UI: Open Monthly Calendar (month, year)
+UI -> CalSvc: getMonthlyItems(userId, month, year)
+group Collect deadlines
+    CalSvc -> DB: fetch CourseTasks with deadlines in month
+    DB --> CalSvc: tasks[]
+    CalSvc -> DB: fetch ToDoListTasks with deadlines in month
+    DB --> CalSvc: todos[]
+end
+create Cal
+CalSvc -> Cal: buildItems(tasks[], todos[])
+CalSvc --> UI: Render calendar with items
+note right
+    Load monthly view within 3s for 200+ deadlines (95%).
+end note
+
+@enduml

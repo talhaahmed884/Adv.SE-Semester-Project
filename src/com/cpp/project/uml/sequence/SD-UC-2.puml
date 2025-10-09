@@ -1,0 +1,52 @@
+@startuml
+
+title UC-2: User Login
+autonumber
+
+actor "User" as U
+boundary "Studently UI" as UI
+database "DataStore" as DB
+
+control "AuthService" as AService
+control "ValidationService" as vService
+entity "UserCredential" as Cred
+
+U -> UI: Open Login\nEnter email, password
+UI -> AService: login(email, password)
+
+alt Validate input
+    AService -> vService: validate email
+
+    alt Validation Unsuccessful
+        vService --> AService: false
+        AService --> UI: Highlights invalid inputs
+    end
+    alt Validation Successful
+        vService --> AService: true
+    end
+end
+
+
+AService -> DB: findUserByEmail(email)
+DB --> AService: UserEnt, Cred | none
+
+alt User not found
+    AService --> UI: Show "Invalid credentials"
+end
+
+alt User found
+    AService -> Cred: verify(password)
+    Cred --> AService: true | false
+
+    alt Verified
+        AService --> UI: Show confirmation\nand create session
+    else Not verified
+        AService --> UI: Show "Invalid credentials"
+    end
+end
+
+hnote over UI
+    Login completes within 3s (90%).
+end hnote
+
+@enduml

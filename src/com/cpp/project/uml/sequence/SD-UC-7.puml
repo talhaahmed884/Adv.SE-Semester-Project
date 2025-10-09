@@ -1,0 +1,31 @@
+@startuml
+
+title UC-7: Create To-Do List
+autonumber
+
+actor "User" as U
+boundary "Studently UI" as UI
+database "DataStore" as DB
+control "ToDoService" as TodoSvc
+entity "ToDoList" as TList
+entity "ToDoListTask" as TTask
+control "ValidationService" as VService
+
+U -> UI: Add To-Do List(name)
+UI -> TodoSvc: createList(userId, name)
+TodoSvc -> VService: Validate list name
+VService --> TodoSvc: Validation successful/unsuccessful
+
+alt Validation unsuccessful
+    TodoSvc --> UI: Highlights invalid input
+end
+
+alt Validation successful
+    create TList
+    TodoSvc -> TList: init(name, owner=userId)
+    TodoSvc -> DB: save(TList)
+    DB --> TodoSvc: saved
+    TodoSvc --> UI: Show newly created list
+end
+
+@enduml

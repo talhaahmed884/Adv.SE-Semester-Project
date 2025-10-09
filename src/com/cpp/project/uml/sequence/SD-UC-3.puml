@@ -1,0 +1,35 @@
+@startuml
+
+title UC-3: Create Course
+autonumber
+
+actor "User" as U
+boundary "Studently UI" as UI
+database "DataStore" as DB
+entity "User (entity)" as UserEnt
+control "CourseService" as CourseSvc
+control "ValidationService" as ValidSvc
+entity "Course" as Course
+
+U -> UI: Add Course (code, name)
+UI -> CourseSvc: addCourse(userId, code, name)
+CourseSvc -> ValidSvc: ensure per-user code uniqueness and validate course name
+ValidSvc -> DB: ensure per-user code uniqueness
+DB --> ValidSvc: validation successful | validation unsuccessful
+ValidSvc --> CourseSvc: validation successful | validation unsuccessful
+
+alt Duplicate code/Problematic course name
+    CourseSvc --> UI: Show "Course code already exists"/"Issue with course name"
+else Validation successful
+    create Course
+    CourseSvc -> Course: init(code, name, owner=userId)
+    CourseSvc -> DB: save(Course)
+    DB --> CourseSvc: saved
+    CourseSvc --> UI: Show newly added course
+end
+
+hnote over UI
+    Validate 10k+ codes within ~1s (95%).
+end hnote
+
+@enduml
