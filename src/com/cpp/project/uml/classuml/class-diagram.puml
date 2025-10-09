@@ -42,7 +42,7 @@ class Course {
 }
 
 note top of Course
-Per-user uniqueness: code must be unique for a given User.
+    Per-user uniqueness: code must be unique for a given User.
 end note
 
 User "1" o-- "0..*" Course : enrolls/creates
