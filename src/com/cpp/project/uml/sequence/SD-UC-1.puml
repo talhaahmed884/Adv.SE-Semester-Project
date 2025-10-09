@@ -20,11 +20,11 @@ alt Validate input
     aService -> vService: validate name/email/password
 
     alt Validation Unsuccessful
-        vService --> aService: false
+        vService --> aService: Validation unsuccessful
         aService --> UI: Highlights invalid inputs
     end
     alt Validation Successful
-        vService --> aService: true
+        vService --> aService: Validation successful
     end
 end
 

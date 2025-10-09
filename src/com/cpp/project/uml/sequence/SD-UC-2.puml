@@ -36,7 +36,7 @@ end
 
 alt User found
     AService -> Cred: verify(password)
-    Cred --> AService: true | false
+    Cred --> AService: Verified | Unverified
 
     alt Verified
         AService --> UI: Show confirmation\nand create session
