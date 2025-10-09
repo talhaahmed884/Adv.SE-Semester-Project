@@ -1,0 +1,18 @@
+@startuml
+
+title UC-10: View Monthly Calendar
+
+|User|
+    start
+    :Navigate to monthly calendar page;
+
+|System|
+    :Fetch tasks with deadlines in current month;
+    :Render monthly calendar with tasks;
+    :Display monthly calendar with tasks of that month;
+    note right
+        Load view ≤3s
+    end note
+    stop
+
+@enduml

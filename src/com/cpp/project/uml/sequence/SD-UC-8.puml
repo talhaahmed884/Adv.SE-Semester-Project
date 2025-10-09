@@ -1,0 +1,32 @@
+@startuml
+
+title UC-8: Add Task to To-Do List
+autonumber
+
+actor "User" as U
+boundary "Studently UI" as UI
+database "DataStore" as DB
+control "ToDoService" as TodoSvc
+entity "ToDoList" as TList
+entity "ToDoListTask" as TTask
+control "ValidationService" as VService
+
+U -> UI: Open List → Add Task(description, deadline)
+UI -> TodoSvc: addTask(listId, description, deadline)
+TodoSvc -> VService: Validate list task input
+VService --> TodoSvc: Validation successful/unsuccessful
+
+alt Validation unsuccessful
+    TodoSvc --> UI: Highlight invalid inputs
+end
+
+alt Validation successful
+    TodoSvc -> DB: load(TList)
+    create TTask
+    TodoSvc -> TTask: init(description, deadline, status=PENDING)
+    TodoSvc -> DB: save(TTask linked to TList)
+    DB --> TodoSvc: saved
+    TodoSvc --> UI: Show newly added task
+end
+
+@enduml

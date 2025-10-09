@@ -1,0 +1,35 @@
+@startuml
+
+title UC-6: Mark a Course Task Complete
+
+|User|
+    start
+    :Navigate to courses page;
+
+|System|
+    :Display Courses page;
+
+|User|
+    :Select and open a course from the list;
+
+|System|
+    :Display details of the user-selected course page;
+
+|User|
+    :Select and open a course task from the list;
+
+|System|
+    :Display details of the user-selected course task;
+
+|User|
+    :Mark task as completed;
+
+|System|
+    :Update task status;
+    note right
+        update ≤500ms for 95%
+    end note
+    :Display updated status;
+    stop
+
+@enduml

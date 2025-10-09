@@ -1,0 +1,36 @@
+@startuml
+
+title UC-5: Update Course Task Progress
+autonumber
+
+actor "User" as U
+boundary "Studently UI" as UI
+database "DataStore" as DB
+control "CourseService" as CourseSvc
+entity "Course" as Course
+entity "CourseTask" as CTask
+control "ValidationService" as VService
+
+U -> UI: Open Course → Open Task → Set progress (0..100)
+UI -> CourseSvc: updateTaskProgress(taskId, value)
+
+CourseSvc -> VService: Validate task progress
+VService --> CourseSvc: Validation successful | Validation unsuccessful
+
+alt Validation unsuccessful
+    CourseSvc --> UI: Highlight invalid inputs
+end
+
+alt Validation successful
+    CourseSvc -> DB: load(CTask)
+    CourseSvc -> CTask: updateProgress(value)
+    note right
+        Update progress within 500 ms (95%).
+    end note
+    CourseSvc -> DB: save(CTask)
+    DB --> CourseSvc: saved
+end
+
+CourseSvc --> UI: Show updated progress
+
+@enduml

@@ -1,0 +1,35 @@
+@startuml
+
+title UC-2: User Login
+
+|User|
+    start
+    :Open Studently application;
+    :Navigate to login page;
+
+|System|
+    :Display login form;
+
+|User|
+    :Enter email, password;
+
+|System|
+    :Validate and verify credentials;
+    note right
+        Response ≤3s (90%)
+    end note
+    while (Credentials match?) is (no)
+        :Show invalid credentials message;
+        :Show login form with preserved entries;
+        note right
+          emphasize invalid values and focus first invalid field
+        end note
+        stop
+    endwhile (yes)
+
+    :Show confirmation;
+    :Log user in (create session);
+    :Show Home Page;
+    stop
+
+@enduml

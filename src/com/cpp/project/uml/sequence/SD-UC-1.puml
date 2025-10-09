@@ -1,0 +1,63 @@
+@startuml
+
+title UC-1: Create User Profile (Sign-Up)
+autonumber
+
+actor "User" as U
+boundary "Studently UI" as UI
+database "DataStore" as DB
+
+control "AuthService" as aService
+control "ValidationService" as vService
+entity "User (entity)" as UserEnt
+entity "UserCredential" as Cred
+
+U -> UI: Open Sign-up\nEnter name, email, password
+
+UI -> aService: signUp(name, email, password)
+
+alt Validate input
+    aService -> vService: validate name/email/password
+
+    alt Validation Unsuccessful
+        vService --> aService: Validation unsuccessful
+        aService --> UI: Highlights invalid inputs
+    end
+    alt Validation Successful
+        vService --> aService: Validation successful
+    end
+end
+
+group Check email uniqueness
+    aService -> DB: findUserByEmail(email)?
+    DB --> aService: none | existing
+end
+
+alt Email already in use
+    aService --> UI: Show error "Email already in use"
+else Password too weak
+    aService --> UI: Show strength hints\nand keep inputs
+end
+
+alt Validation passed
+    create UserEnt
+    aService -> UserEnt: init(name, email, passwordHash)
+    UserEnt -> Cred: setPassword(password)
+    Cred --> UserEnt: passwordHash (SHA-512)
+    UserEnt --> aService: UserEnt
+
+    note right of Cred
+        store password using SHA-512.
+    end note
+
+    aService -> DB: save(UserEnt)
+    DB --> aService: saved
+
+    aService --> UI: Show confirmation\nand redirect to Home
+end
+
+hnote over UI
+    Complete sign-up within 1s (95%).
+end hnote
+
+@enduml

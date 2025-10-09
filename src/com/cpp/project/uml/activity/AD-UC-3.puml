@@ -1,0 +1,39 @@
+@startuml
+
+title UC-3: Create a Course
+
+|User|
+    start
+    :Navigate to Courses page;
+
+|System|
+    :Display Courses page;
+
+|User|
+    :Choose "Add course";
+
+|System|
+    :Display a course form to enter course details;
+
+|User|
+    :Enter course code and name;
+
+|System|
+    :Validate input (code format/uniqueness);
+    note right
+        Validate ≤1s for 95%
+    end note
+    if (Valid?) then (yes)
+        :Store course;
+        :Display newly added course in list;
+        stop
+    else (no)
+        :Show validation errors;
+        :Show course form with preserved entries;
+        note right
+            emphasize invalid values and focus first invalid field
+        end note
+        stop
+    endif
+
+@enduml

@@ -1,0 +1,33 @@
+@startuml
+
+title UC-4: Create Course Task
+autonumber
+
+actor "User" as U
+boundary "Studently UI" as UI
+database "DataStore" as DB
+control "CourseService" as CourseSvc
+entity "Course" as Course
+entity "CourseTask" as CTask
+control "ValidationService" as VService
+
+U -> UI: Open Course → Add Task(name, deadline)
+UI -> CourseSvc: addTask(courseId, name, deadline)
+CourseSvc -> Course: getById(courseId)
+
+CourseSvc -> VService: Validate task name & deadline
+VService --> CourseSvc: Validation successful | Validation unsuccessful
+
+alt Validation unsuccessful
+    CourseSvc --> UI: Highlight invalid inputs
+end
+
+alt Validation successful
+    CourseSvc -> CTask: create(name, deadline, status=PENDING, progress=0)
+    CourseSvc -> DB: save(CTask linked to Course)
+    DB --> CourseSvc: saved
+end
+
+CourseSvc --> UI: Show newly added task in list
+
+@enduml

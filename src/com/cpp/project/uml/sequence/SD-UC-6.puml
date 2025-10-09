@@ -1,0 +1,23 @@
+@startuml
+
+title UC-6: Mark Course Task Complete
+autonumber
+
+actor "User" as U
+boundary "Studently UI" as UI
+database "DataStore" as DB
+control "CourseService" as CourseSvc
+entity "CourseTask" as CTask
+
+U -> UI: Open Course → Open Task → Mark task as complete
+UI -> CourseSvc: markTaskComplete(taskId)
+CourseSvc -> DB: load(CTask)
+CourseSvc -> CTask: markComplete()
+note right
+    Update progress within 500 ms (95%).
+end note
+CourseSvc -> DB: save(CTask)
+DB --> CourseSvc: saved
+CourseSvc --> UI: Show updated status (COMPLETE)
+
+@enduml
