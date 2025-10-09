@@ -3,106 +3,116 @@
 title Studently – Class (UML) Diagram
 
 class User {
-  - UUID id
-  - String name
-  - String email
+    - UUID id
+    - String name
+    - String email
 
-  + void signUp(String name, String email, String password)
-  + boolean login(String email, String password)
-  + Course addCourse(String code, String name)
-  + ToDoList createToDoList(String name)
+    + void signUp(String name, String email, String password)
+    + boolean login(String email, String password)
+    + Course addCourse(String code, String name)
+    + ToDoList createToDoList(String name)
 }
-
-class UserCredential {
-  - String passwordHash
-  - String algorithm = "SHA-512"
-
-  + void setPassword(String passwordHash)
-  + boolean verify(String passwordHash)
-}
-
-class Course {
-  - String code
-  - String name
-
-  + int progress()
-  + CourseTask addTask(String name, Date deadline, String description)
-}
-
-class CourseTask {
-  - String name
-  - String description
-  - Date deadline
-  - int progress
-  - TaskStatus status
-
-  + void updateProgress(int value)
-  + void markComplete()
-}
-
-enum TaskStatus {
-  PENDING
-  COMPLETE
-}
-
-class ToDoList {
-  - String name
-
-  + void addTask(String description, Date deadline): ToDoListTask
-}
-
-class ToDoListTask {
-  - String description
-  - Date deadline
-  - TaskStatus status
-
-  + void markComplete()
-}
-
-class Calendar {
-  - int day
-  - int month
-  - int year
-
-  + List<CalendarItem> itemsForMonth(User user)
-}
-
-class CalendarItem {
-  - Date date
-  - String sourceType
-  - String title
-}
-
-
-User "1" o-- "1" UserCredential : owns
-User "1" o-- "0..*" Course : enrolls/creates
-Course "1" o-- "0..*" CourseTask : contains
-User "1" o-- "0..*" ToDoList : owns
-ToDoList "1" o-- "0..*" ToDoListTask : contains
-Calendar ..> CourseTask : aggregates deadlines
-Calendar ..> ToDoListTask : aggregates deadlines
-
 
 note right of User
-- Owns courses and to-do lists
-- Performs sign-up and login
+    Owns courses and to-do lists
+    Performs sign-up and login
 end note
 
+class UserCredential {
+    - String passwordHash
+    - String algorithm = "SHA-512"
+
+    + void setPassword(String passwordHash)
+    + boolean verify(String passwordHash)
+}
+
 note bottom of UserCredential
-Stores password hash; verify on login.
-Algorithm per NFR: SHA-512.
+    Stores password hash; verify on login.
+    Algorithm per NFR: SHA-512.
 end note
+
+User "1" *-- "1" UserCredential : owns
+
+class Course {
+    - String code
+    - String name
+
+    + int progress()
+    + CourseTask addTask(String name, Date deadline, String description)
+}
 
 note top of Course
 Per-user uniqueness: code must be unique for a given User.
 end note
 
+User "1" o-- "0..*" Course : enrolls/creates
+
+class CourseTask {
+    - String name
+    - String description
+    - Date deadline
+    - int progress
+    - TaskStatus status
+
+    + void updateProgress(int value)
+    + void markComplete()
+}
+
 note right of CourseTask
-Deadline shown in calendar; progress update (0–100) and completion.
+    Deadline shown in calendar; progress update (0–100) and completion.
 end note
 
+Course "1" o-- "0..*" CourseTask : contains
+
+enum TaskStatus {
+    PENDING
+    COMPLETE
+}
+
+class ToDoList {
+    - String name
+
+    + void addTask(String description, Date deadline): ToDoListTask
+}
+
+User "1" o-- "0..*" ToDoList : owns
+
+class ToDoListTask {
+    - String description
+    - Date deadline
+    - TaskStatus status
+
+    + void markComplete()
+}
+
 note right of ToDoListTask
-Optional deadline shown in calendar; can be completed.
+    Optional deadline shown in calendar; can be completed.
 end note
+
+ToDoList "1" o-- "0..*" ToDoListTask : contains
+
+class Calendar {
+    - int day
+    - int month
+    - int year
+
+    + List<CalendarItem> itemsForMonth(User user)
+}
+
+Calendar ..> CourseTask : aggregates deadlines
+Calendar ..> ToDoListTask : aggregates deadlines
+
+class CalendarItem {
+    - Date date
+    - String sourceType
+    - String title
+}
+
+enum TaskType {
+    COURSE_TASK
+    TODO_LIST_TASK
+}
+
+Calendar "1" o-- "0..*" CalendarItem : aggregates CourseTask/ToDoListTask
 
 @enduml
