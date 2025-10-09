@@ -31,7 +31,7 @@ note bottom of UserCredential
     Algorithm per NFR: SHA-512.
 end note
 
-User "1" *-- "1" UserCredential : owns
+User "1" o-- "1" UserCredential : owns
 
 class Course {
     - String code
