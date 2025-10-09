@@ -18,11 +18,11 @@ alt Validate input
     AService -> vService: validate email
 
     alt Validation Unsuccessful
-        vService --> AService: false
+        vService --> AService: unsuccessful
         AService --> UI: Highlights invalid inputs
     end
     alt Validation Successful
-        vService --> AService: true
+        vService --> AService: successful
     end
 end
 
