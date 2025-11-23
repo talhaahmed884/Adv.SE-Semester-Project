@@ -1,9 +1,6 @@
 package com.cpp.project.common.exception.service;
 
 import com.cpp.project.common.exception.entity.ExceptionHandler;
-import com.cpp.project.user.service.AuthenticationExceptionHandler;
-import com.cpp.project.user.service.UserExceptionHandler;
-import com.cpp.project.user_credential.service.UserCredentialExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

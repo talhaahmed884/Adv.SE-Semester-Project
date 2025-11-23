@@ -1,5 +1,7 @@
 package com.cpp.project.user_credential.entity;
 
+import com.cpp.project.common.validation.entity.ValidationResult;
+import com.cpp.project.common.validation.service.PasswordHashValidator;
 import com.cpp.project.user.entity.User;
 
 import javax.persistence.*;
@@ -35,7 +37,7 @@ public class UserCredential {
     public static UserCredentialBuilder builder() {
         return new UserCredentialBuilder();
     }
-    
+
     public UUID getUserId() {
         return userId;
     }
@@ -56,7 +58,9 @@ public class UserCredential {
     }
 
     public void setPasswordHash(String passwordHash) {
-        if (passwordHash == null || passwordHash.trim().isEmpty()) {
+        PasswordHashValidator validator = new PasswordHashValidator();
+        ValidationResult result = validator.validate(passwordHash);
+        if (!result.isValid()) {
             throw new UserCredentialException(UserCredentialErrorCode.PASSWORD_HASH_EMPTY);
         }
         this.passwordHash = passwordHash;

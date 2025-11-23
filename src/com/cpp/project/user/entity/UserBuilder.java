@@ -1,6 +1,13 @@
 package com.cpp.project.user.entity;
 
+import com.cpp.project.common.validation.entity.ValidationResult;
+import com.cpp.project.common.validation.service.EmailValidator;
+import com.cpp.project.common.validation.service.UserNameValidator;
+
+// Builder Pattern with validation
 public class UserBuilder {
+    private final UserNameValidator nameValidator = new UserNameValidator();
+    private final EmailValidator emailValidator = new EmailValidator();
     protected String name;
     protected String email;
 
@@ -20,15 +27,14 @@ public class UserBuilder {
     }
 
     private void validate() {
-        if (name == null || name.trim().isEmpty()) {
+        ValidationResult nameResult = nameValidator.validate(name);
+        if (!nameResult.isValid()) {
             throw new UserException(UserErrorCode.INVALID_NAME);
         }
-        if (email == null || !isValidEmail(email)) {
+
+        ValidationResult emailResult = emailValidator.validate(email);
+        if (!emailResult.isValid()) {
             throw new UserException(UserErrorCode.INVALID_EMAIL_FORMAT, email);
         }
-    }
-
-    private boolean isValidEmail(String email) {
-        return email.matches("^[A-Za-z0-9+_.-]+@(.+)$");
     }
 }

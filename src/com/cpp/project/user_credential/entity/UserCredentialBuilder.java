@@ -1,6 +1,11 @@
 package com.cpp.project.user_credential.entity;
 
+import com.cpp.project.common.validation.entity.ValidationResult;
+import com.cpp.project.common.validation.service.PasswordHashValidator;
+
+// Builder Pattern with validation
 public class UserCredentialBuilder {
+    private final PasswordHashValidator hashValidator = new PasswordHashValidator();
     protected String passwordHash;
     protected String algorithm = "SHA-512";
 
@@ -20,7 +25,8 @@ public class UserCredentialBuilder {
     }
 
     private void validate() {
-        if (passwordHash == null || passwordHash.trim().isEmpty()) {
+        ValidationResult result = hashValidator.validate(passwordHash);
+        if (!result.isValid()) {
             throw new UserCredentialException(UserCredentialErrorCode.PASSWORD_HASH_EMPTY);
         }
     }

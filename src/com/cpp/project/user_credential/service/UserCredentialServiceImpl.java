@@ -1,5 +1,7 @@
 package com.cpp.project.user_credential.service;
 
+import com.cpp.project.common.validation.entity.ValidationResult;
+import com.cpp.project.common.validation.service.UserValidationService;
 import com.cpp.project.user.entity.User;
 import com.cpp.project.user.entity.UserErrorCode;
 import com.cpp.project.user.entity.UserException;
@@ -23,20 +25,33 @@ public class UserCredentialServiceImpl implements UserCredentialService {
     private final UserRepository userRepository;
     private final UserCredentialRepository credentialRepository;
     private final PasswordHashingStrategy hashingStrategy;
+    private final UserValidationService validationService;
 
     public UserCredentialServiceImpl(UserRepository userRepository,
-                                     UserCredentialRepository credentialRepository) {
+                                     UserCredentialRepository credentialRepository,
+                                     UserValidationService validationService) {
         this.userRepository = userRepository;
         this.credentialRepository = credentialRepository;
         this.hashingStrategy = new SHA512HashingStrategy();
+        this.validationService = validationService;
     }
 
     @Override
     public void setPassword(String email, String newPassword) {
         try {
-            validateEmailNotEmpty(email);
+            // Validate email using validation framework
+            ValidationResult emailResult = validationService.validateEmail(email);
 
-            validatePasswordNotEmpty(newPassword);
+            if (!emailResult.isValid()) {
+                throw new UserException(UserErrorCode.INVALID_EMAIL_FORMAT, email);
+            }
+
+            // Validate password STRENGTH using validation framework (for password changes)
+            ValidationResult passwordResult = validationService.validatePasswordStrength(newPassword);
+
+            if (!passwordResult.isValid()) {
+                throw new UserCredentialException(UserCredentialErrorCode.PASSWORD_REQUIRED);
+            }
 
             User user = userRepository.findByEmail(email)
                     .orElseThrow(() -> new UserException(UserErrorCode.USER_NOT_FOUND, "email", email));
@@ -62,9 +77,19 @@ public class UserCredentialServiceImpl implements UserCredentialService {
     @Transactional(readOnly = true)
     public boolean verifyPassword(String email, String password) {
         try {
-            validateEmailNotEmpty(email);
+            // Validate email using validation framework
+            ValidationResult emailResult = validationService.validateEmail(email);
 
-            validatePasswordNotEmpty(password);
+            if (!emailResult.isValid()) {
+                throw new UserException(UserErrorCode.INVALID_EMAIL_FORMAT, email);
+            }
+
+            // Validate password INPUT only using validation framework (for verification)
+            ValidationResult passwordResult = validationService.validatePasswordInput(password);
+
+            if (!passwordResult.isValid()) {
+                throw new UserCredentialException(UserCredentialErrorCode.PASSWORD_REQUIRED);
+            }
 
             User user = userRepository.findByEmail(email)
                     .orElseThrow(() -> new UserException(UserErrorCode.USER_NOT_FOUND, "email", email));
@@ -81,18 +106,6 @@ public class UserCredentialServiceImpl implements UserCredentialService {
         } catch (Exception e) {
             logger.error("Unexpected error verifying password for user: {}", email, e);
             throw new UserCredentialException(UserCredentialErrorCode.PASSWORD_VERIFICATION_FAILED, e, e.getMessage());
-        }
-    }
-
-    private void validateEmailNotEmpty(String email) {
-        if (email == null || email.trim().isEmpty()) {
-            throw new UserException(UserErrorCode.INVALID_EMAIL_FORMAT, "null or empty");
-        }
-    }
-
-    private void validatePasswordNotEmpty(String password) {
-        if (password == null || password.isEmpty()) {
-            throw new UserCredentialException(UserCredentialErrorCode.PASSWORD_REQUIRED);
         }
     }
 }

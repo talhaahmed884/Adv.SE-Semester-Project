@@ -1,4 +1,4 @@
-package com.cpp.project.user.service;
+package com.cpp.project.common.exception.service;
 
 import com.cpp.project.common.exception.entity.ExceptionHandler;
 import com.cpp.project.user.entity.UserException;

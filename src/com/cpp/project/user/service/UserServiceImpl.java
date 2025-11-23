@@ -1,5 +1,7 @@
 package com.cpp.project.user.service;
 
+import com.cpp.project.common.validation.entity.ValidationResult;
+import com.cpp.project.common.validation.service.UserValidationService;
 import com.cpp.project.user.adapter.UserAdapter;
 import com.cpp.project.user.dto.LoginRequestDTO;
 import com.cpp.project.user.dto.SignUpRequestDTO;
@@ -25,19 +27,27 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserCredentialRepository credentialRepository;
     private final PasswordHashingStrategy hashingStrategy;
+    private final UserValidationService validationService;
 
     public UserServiceImpl(UserRepository userRepository,
-                           UserCredentialRepository credentialRepository) {
+                           UserCredentialRepository credentialRepository,
+                           UserValidationService validationService) {
         this.userRepository = userRepository;
         this.credentialRepository = credentialRepository;
         this.hashingStrategy = new SHA512HashingStrategy();
+        this.validationService = validationService;
     }
 
     @Override
     public UserDTO signUp(SignUpRequestDTO request) {
         try {
-            // Validate request
-            validateSignUpRequest(request);
+            // Validate request using validation framework
+            ValidationResult validationResult = validationService.validateSignUpRequest(request);
+
+            if (!validationResult.isValid()) {
+                String firstError = validationResult.getFirstError();
+                throw new UserException(UserErrorCode.INVALID_USER_DATA, firstError);
+            }
 
             // Check if user already exists
             if (userRepository.existsByEmail(request.getEmail())) {
@@ -77,8 +87,12 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public boolean login(LoginRequestDTO request) {
         try {
-            // Validate request
-            validateLoginRequest(request);
+            // Validate request using validation framework
+            ValidationResult validationResult = validationService.validateLoginRequest(request);
+
+            if (!validationResult.isValid()) {
+                throw new AuthenticationException(AuthenticationErrorCode.INVALID_CREDENTIALS);
+            }
 
             // Find user by email
             User user = userRepository.findByEmail(request.getEmail())
@@ -133,8 +147,11 @@ public class UserServiceImpl implements UserService {
     @Transactional(readOnly = true)
     public UserDTO getUserByEmail(String email) {
         try {
-            if (email == null || email.trim().isEmpty()) {
-                throw new UserException(UserErrorCode.INVALID_EMAIL_FORMAT, "null or empty");
+            // Validate email using validation framework
+            ValidationResult validationResult = validationService.validateEmail(email);
+
+            if (!validationResult.isValid()) {
+                throw new UserException(UserErrorCode.INVALID_EMAIL_FORMAT, email);
             }
 
             User user = userRepository.findByEmail(email)
@@ -163,11 +180,25 @@ public class UserServiceImpl implements UserService {
             boolean updated = false;
 
             if (name != null && !name.trim().isEmpty()) {
+                // Validate name using validation framework
+                ValidationResult nameResult = validationService.validateUserName(name);
+
+                if (!nameResult.isValid()) {
+                    throw new UserException(UserErrorCode.INVALID_NAME);
+                }
+
                 user.setName(name);
                 updated = true;
             }
 
             if (email != null && !email.equals(user.getEmail())) {
+                // Validate email using validation framework
+                ValidationResult emailResult = validationService.validateEmail(email);
+
+                if (!emailResult.isValid()) {
+                    throw new UserException(UserErrorCode.INVALID_EMAIL_FORMAT, email);
+                }
+
                 if (userRepository.existsByEmail(email)) {
                     throw new UserException(UserErrorCode.EMAIL_ALREADY_IN_USE, email);
                 }
@@ -208,33 +239,6 @@ public class UserServiceImpl implements UserService {
             logger.error("Unexpected error deleting user: {}", id, e);
             assert id != null;
             throw new UserException(UserErrorCode.USER_DELETION_FAILED, e, id.toString());
-        }
-    }
-
-    private void validateSignUpRequest(SignUpRequestDTO request) {
-        if (request == null) {
-            throw new UserException(UserErrorCode.INVALID_USER_DATA, "Request cannot be null");
-        }
-        if (request.getName() == null || request.getName().trim().isEmpty()) {
-            throw new UserException(UserErrorCode.INVALID_NAME);
-        }
-        if (request.getEmail() == null || request.getEmail().trim().isEmpty()) {
-            throw new UserException(UserErrorCode.INVALID_EMAIL_FORMAT, "null or empty");
-        }
-        if (request.getPassword() == null || request.getPassword().isEmpty()) {
-            throw new UserCredentialException(UserCredentialErrorCode.PASSWORD_REQUIRED);
-        }
-    }
-
-    private void validateLoginRequest(LoginRequestDTO request) {
-        if (request == null) {
-            throw new AuthenticationException(AuthenticationErrorCode.INVALID_CREDENTIALS);
-        }
-        if (request.getEmail() == null || request.getEmail().trim().isEmpty()) {
-            throw new AuthenticationException(AuthenticationErrorCode.INVALID_CREDENTIALS);
-        }
-        if (request.getPassword() == null || request.getPassword().isEmpty()) {
-            throw new AuthenticationException(AuthenticationErrorCode.INVALID_CREDENTIALS);
         }
     }
 }

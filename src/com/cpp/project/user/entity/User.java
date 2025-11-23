@@ -1,5 +1,8 @@
 package com.cpp.project.user.entity;
 
+import com.cpp.project.common.validation.entity.ValidationResult;
+import com.cpp.project.common.validation.service.EmailValidator;
+import com.cpp.project.common.validation.service.UserNameValidator;
 import com.cpp.project.user_credential.entity.UserCredential;
 
 import javax.persistence.*;
@@ -45,7 +48,9 @@ public class User {
     }
 
     public void setName(String name) {
-        if (name == null || name.trim().isEmpty()) {
+        UserNameValidator validator = new UserNameValidator();
+        ValidationResult result = validator.validate(name);
+        if (!result.isValid()) {
             throw new UserException(UserErrorCode.INVALID_NAME);
         }
         this.name = name;
@@ -56,7 +61,9 @@ public class User {
     }
 
     public void setEmail(String email) {
-        if (email == null || !email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+        EmailValidator validator = new EmailValidator();
+        ValidationResult result = validator.validate(email);
+        if (!result.isValid()) {
             throw new UserException(UserErrorCode.INVALID_EMAIL_FORMAT, email);
         }
         this.email = email;
