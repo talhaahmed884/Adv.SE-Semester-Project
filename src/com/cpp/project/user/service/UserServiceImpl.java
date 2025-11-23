@@ -3,15 +3,11 @@ package com.cpp.project.user.service;
 import com.cpp.project.common.validation.entity.ValidationResult;
 import com.cpp.project.common.validation.service.UserValidationService;
 import com.cpp.project.user.adapter.UserAdapter;
-import com.cpp.project.user.dto.LoginRequestDTO;
-import com.cpp.project.user.dto.SignUpRequestDTO;
 import com.cpp.project.user.dto.UserDTO;
-import com.cpp.project.user.entity.*;
+import com.cpp.project.user.entity.User;
+import com.cpp.project.user.entity.UserErrorCode;
+import com.cpp.project.user.entity.UserException;
 import com.cpp.project.user.repository.UserRepository;
-import com.cpp.project.user_credential.entity.UserCredential;
-import com.cpp.project.user_credential.entity.UserCredentialErrorCode;
-import com.cpp.project.user_credential.entity.UserCredentialException;
-import com.cpp.project.user_credential.repository.UserCredentialRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -25,100 +21,51 @@ public class UserServiceImpl implements UserService {
     private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private final UserRepository userRepository;
-    private final UserCredentialRepository credentialRepository;
-    private final PasswordHashingStrategy hashingStrategy;
     private final UserValidationService validationService;
 
-    public UserServiceImpl(UserRepository userRepository,
-                           UserCredentialRepository credentialRepository,
-                           UserValidationService validationService) {
+    public UserServiceImpl(UserRepository userRepository, UserValidationService validationService) {
         this.userRepository = userRepository;
-        this.credentialRepository = credentialRepository;
-        this.hashingStrategy = new SHA512HashingStrategy();
         this.validationService = validationService;
     }
 
     @Override
-    public UserDTO signUp(SignUpRequestDTO request) {
+    public User createUserWithoutCredential(String name, String email) {
         try {
-            // Validate request using validation framework
-            ValidationResult validationResult = validationService.validateSignUpRequest(request);
+            // Validate name using validation framework
+            ValidationResult nameResult = validationService.validateUserName(name);
 
-            if (!validationResult.isValid()) {
-                String firstError = validationResult.getFirstError();
-                throw new UserException(UserErrorCode.INVALID_USER_DATA, firstError);
+            if (!nameResult.isValid()) {
+                throw new UserException(UserErrorCode.INVALID_NAME);
+            }
+
+            // Validate email using validation framework
+            ValidationResult emailResult = validationService.validateEmail(email);
+
+            if (!emailResult.isValid()) {
+                throw new UserException(UserErrorCode.INVALID_EMAIL_FORMAT, email);
             }
 
             // Check if user already exists
-            if (userRepository.existsByEmail(request.getEmail())) {
-                throw new UserException(UserErrorCode.USER_ALREADY_EXISTS, request.getEmail());
+            if (userRepository.existsByEmail(email)) {
+                throw new UserException(UserErrorCode.USER_ALREADY_EXISTS, email);
             }
 
-            // Create user entity
+            // Create user entity without credential
             User user = User.builder()
-                    .name(request.getName())
-                    .email(request.getEmail())
+                    .name(name)
+                    .email(email)
                     .build();
 
-            // Hash password and create credential
-            String passwordHash = hashingStrategy.hash(request.getPassword());
-            UserCredential credential = UserCredential.builder()
-                    .passwordHash(passwordHash)
-                    .algorithm("SHA-512")
-                    .build();
-
-            // Associate credential with user
-            user.setCredential(credential);
-
-            // Save user (cascade will save credential)
+            // Save user
             User savedUser = userRepository.save(user);
 
-            logger.info("User signed up successfully: {}", savedUser.getEmail());
-            return UserAdapter.toDTO(savedUser);
-        } catch (UserException | UserCredentialException e) {
+            logger.info("User created successfully without credential: {}", savedUser.getEmail());
+            return savedUser;
+        } catch (UserException e) {
             throw e;
         } catch (Exception e) {
-            logger.error("Unexpected error during sign up for email: {}", request.getEmail(), e);
+            logger.error("Unexpected error during user creation for email: {}", email, e);
             throw new UserException(UserErrorCode.USER_CREATION_FAILED, e, e.getMessage());
-        }
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public boolean login(LoginRequestDTO request) {
-        try {
-            // Validate request using validation framework
-            ValidationResult validationResult = validationService.validateLoginRequest(request);
-
-            if (!validationResult.isValid()) {
-                throw new AuthenticationException(AuthenticationErrorCode.INVALID_CREDENTIALS);
-            }
-
-            // Find user by email
-            User user = userRepository.findByEmail(request.getEmail())
-                    .orElseThrow(() -> new AuthenticationException(
-                            AuthenticationErrorCode.INVALID_CREDENTIALS));
-
-            // Get credential
-            UserCredential credential = credentialRepository.findByUserId(user.getId())
-                    .orElseThrow(() -> new UserCredentialException(
-                            UserCredentialErrorCode.CREDENTIAL_NOT_FOUND, user.getEmail()));
-
-            // Verify password
-            boolean isValid = hashingStrategy.verify(request.getPassword(), credential.getPasswordHash());
-
-            if (isValid) {
-                logger.info("User logged in successfully: {}", request.getEmail());
-            } else {
-                logger.warn("Failed login attempt for user: {}", request.getEmail());
-            }
-
-            return isValid;
-        } catch (UserException | UserCredentialException | AuthenticationException e) {
-            throw e;
-        } catch (Exception e) {
-            logger.error("Unexpected error during login for email: {}", request.getEmail(), e);
-            throw new AuthenticationException(AuthenticationErrorCode.AUTHENTICATION_FAILED, e, request.getEmail());
         }
     }
 

@@ -17,6 +17,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.UUID;
+
 @Service
 @Transactional
 public class UserCredentialServiceImpl implements UserCredentialService {
@@ -27,13 +29,57 @@ public class UserCredentialServiceImpl implements UserCredentialService {
     private final PasswordHashingStrategy hashingStrategy;
     private final UserValidationService validationService;
 
-    public UserCredentialServiceImpl(UserRepository userRepository,
-                                     UserCredentialRepository credentialRepository,
+    public UserCredentialServiceImpl(UserRepository userRepository, UserCredentialRepository credentialRepository,
                                      UserValidationService validationService) {
         this.userRepository = userRepository;
         this.credentialRepository = credentialRepository;
         this.hashingStrategy = new SHA512HashingStrategy();
         this.validationService = validationService;
+    }
+
+    @Override
+    public void createCredential(UUID userId, String password) {
+        try {
+            if (userId == null) {
+                throw new UserException(UserErrorCode.INVALID_USER_DATA, "User ID cannot be null");
+            }
+
+            // Validate password STRENGTH using validation framework
+            ValidationResult passwordResult = validationService.validatePasswordStrength(password);
+
+            if (!passwordResult.isValid()) {
+                throw new UserCredentialException(UserCredentialErrorCode.PASSWORD_REQUIRED);
+            }
+
+            // Verify user exists
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> new UserException(UserErrorCode.USER_NOT_FOUND, "id", userId));
+
+            // Check if credential already exists
+            if (credentialRepository.findByUserId(userId).isPresent()) {
+                throw new UserCredentialException(UserCredentialErrorCode.CREDENTIAL_CREATION_FAILED,
+                        "Credential already exists for user");
+            }
+
+            // Hash password and create credential
+            String passwordHash = hashingStrategy.hash(password);
+            UserCredential credential = UserCredential.builder()
+                    .passwordHash(passwordHash)
+                    .algorithm("SHA-512")
+                    .build();
+
+            // Associate credential with user
+            user.setCredential(credential);
+
+            // Save credential
+            credentialRepository.save(credential);
+            logger.info("Credential created successfully for user id: {}", userId);
+        } catch (UserException | UserCredentialException e) {
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error creating credential for user id: {}", userId, e);
+            throw new UserCredentialException(UserCredentialErrorCode.CREDENTIAL_CREATION_FAILED, e, e.getMessage());
+        }
     }
 
     @Override
