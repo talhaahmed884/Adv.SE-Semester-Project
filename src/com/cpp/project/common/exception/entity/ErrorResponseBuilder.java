@@ -1,4 +1,4 @@
-package com.cpp.project.exception.entity;
+package com.cpp.project.common.exception.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

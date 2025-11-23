@@ -1,4 +1,4 @@
-package com.cpp.project.exception.entity;
+package com.cpp.project.common.exception.entity;
 
 // Exception Factory using Factory Pattern
 public class ExceptionFactory {

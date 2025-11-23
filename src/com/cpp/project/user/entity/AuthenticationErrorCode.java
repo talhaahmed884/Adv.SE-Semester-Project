@@ -1,6 +1,6 @@
 package com.cpp.project.user.entity;
 
-import com.cpp.project.exception.entity.ErrorCode;
+import com.cpp.project.common.exception.entity.ErrorCode;
 
 public enum AuthenticationErrorCode implements ErrorCode {
     AUTHENTICATION_FAILED("AUTH_001", "Authentication failed for user: %s"),

@@ -1,4 +1,4 @@
-package com.cpp.project.exception.entity;
+package com.cpp.project.common.exception.entity;
 
 // Chain of Responsibility Pattern for exception handling
 public abstract class ExceptionHandler {

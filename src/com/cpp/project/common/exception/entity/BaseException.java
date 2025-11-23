@@ -1,4 +1,4 @@
-package com.cpp.project.exception.entity;
+package com.cpp.project.common.exception.entity;
 
 // Base exception class using Template Method Pattern
 public abstract class BaseException extends RuntimeException {

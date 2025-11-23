@@ -1,7 +1,7 @@
 package com.cpp.project.user_credential.entity;
 
-import com.cpp.project.exception.entity.BaseException;
-import com.cpp.project.exception.entity.ErrorCode;
+import com.cpp.project.common.exception.entity.BaseException;
+import com.cpp.project.common.exception.entity.ErrorCode;
 
 public class UserCredentialException extends BaseException {
     public UserCredentialException(ErrorCode errorCode, Object... args) {

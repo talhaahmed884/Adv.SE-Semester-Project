@@ -1,4 +1,4 @@
-package com.cpp.project.exception.entity;
+package com.cpp.project.common.exception.entity;
 
 // Interface for error codes using Strategy Pattern
 public interface ErrorCode {

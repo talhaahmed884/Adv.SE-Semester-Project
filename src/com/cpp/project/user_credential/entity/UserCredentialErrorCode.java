@@ -1,6 +1,6 @@
 package com.cpp.project.user_credential.entity;
 
-import com.cpp.project.exception.entity.ErrorCode;
+import com.cpp.project.common.exception.entity.ErrorCode;
 
 public enum UserCredentialErrorCode implements ErrorCode {
     CREDENTIAL_NOT_FOUND("CRED_001", "Credentials not found for user: %s"),

@@ -1,6 +1,6 @@
 package com.cpp.project.user.service;
 
-import com.cpp.project.exception.entity.ExceptionHandler;
+import com.cpp.project.common.exception.entity.ExceptionHandler;
 import com.cpp.project.user.entity.AuthenticationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
