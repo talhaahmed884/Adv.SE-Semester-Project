@@ -11,8 +11,12 @@
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
-        <datasource-mapping />
-        <naming-strategy-map />
+        <datasource-mapping>
+          <factory-entry name="Adv.SE-Semester-Project" />
+        </datasource-mapping>
+        <naming-strategy-map>
+          <unit-entry name="Adv.SE-Semester-Project" />
+        </naming-strategy-map>
       </configuration>
     </facet>
   </component>
@@ -24,9 +28,17 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="hibernate.core" level="project" />
-    <orderEntry type="library" name="springframework.spring.context" level="project" />
-    <orderEntry type="library" name="springframework.spring.tx" level="project" />
-    <orderEntry type="library" name="slf4j.simple" level="project" />
-    <orderEntry type="library" name="springframework.boot.spring.starter.web" level="project" />
+    <orderEntry type="library" exported="" name="springframework.spring.context" level="project" />
+    <orderEntry type="library" exported="" name="springframework.spring.tx" level="project" />
+    <orderEntry type="library" exported="" name="springframework.boot.spring.starter.web" level="project" />
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/src/com/cpp/project/main/resources/postgresql-42.7.8.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
