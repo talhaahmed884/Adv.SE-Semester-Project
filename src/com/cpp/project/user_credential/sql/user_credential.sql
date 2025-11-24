@@ -8,25 +8,26 @@ DROP TABLE IF EXISTS user_credentials CASCADE;
 
 -- Drop existing functions and triggers
 DROP TRIGGER IF EXISTS update_user_credentials_updated_at ON user_credentials;
-DROP FUNCTION IF EXISTS update_updated_at_column();
+DROP FUNCTION IF EXISTS update_updated_at_column() CASCADE;
 
 -- ============================================================================
 -- USER_CREDENTIALS TABLE
 -- ============================================================================
 
-CREATE TABLE user_credentials (
-                                  user_id UUID PRIMARY KEY,
-                                  password_hash VARCHAR(512) NOT NULL,
-                                  algorithm VARCHAR(50) NOT NULL DEFAULT 'SHA-512',
-                                  created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                  updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+CREATE TABLE IF NOT EXISTS user_credentials
+(
+    user_id       UUID PRIMARY KEY,
+    password_hash VARCHAR(512)             NOT NULL,
+    algorithm     VARCHAR(50)              NOT NULL DEFAULT 'SHA-512',
+    created_at    TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at    TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     -- Foreign Key Constraint
-                                  CONSTRAINT fk_user_credentials_user
-                                      FOREIGN KEY (user_id)
-                                          REFERENCES users(id)
-                                          ON DELETE CASCADE
-                                          ON UPDATE CASCADE
+    CONSTRAINT fk_user_credentials_user
+        FOREIGN KEY (user_id)
+            REFERENCES users (id)
+            ON DELETE CASCADE
+            ON UPDATE CASCADE
 );
 
 -- ============================================================================
@@ -35,18 +36,20 @@ CREATE TABLE user_credentials (
 
 -- Function to automatically update the updated_at timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()
-RETURNS TRIGGER AS $$
+    RETURNS TRIGGER AS
+$$
 BEGIN
     NEW.updated_at = CURRENT_TIMESTAMP;
-RETURN NEW;
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
 -- Trigger for user_credentials table
 CREATE TRIGGER update_user_credentials_updated_at
-    BEFORE UPDATE ON user_credentials
+    BEFORE UPDATE
+    ON user_credentials
     FOR EACH ROW
-    EXECUTE FUNCTION update_updated_at_column();
+EXECUTE FUNCTION update_updated_at_column();
 
 -- ============================================================================
 -- COMMENTS (Documentation)
@@ -65,16 +68,15 @@ COMMENT ON COLUMN user_credentials.updated_at IS 'Timestamp when the credentials
 
 -- Insert sample credentials (Note: These are example hashes, not real passwords)
 INSERT INTO user_credentials (user_id, password_hash, algorithm)
-VALUES
-    ('550e8400-e29b-41d4-a716-446655440000'::uuid,
-     'aGFzaGVkX3Bhc3N3b3JkXzEyMzQ1Njc4OTBhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5eg==',
-     'SHA-512'),
-    ('550e8400-e29b-41d4-a716-446655440001'::uuid,
-     'YW5vdGhlcl9oYXNoZWRfcGFzc3dvcmRfZm9yX3Rlc3Rpbmdfb25seQ==',
-     'SHA-512'),
-    ('550e8400-e29b-41d4-a716-446655440002'::uuid,
-     'dGhpcmRfdXNlcl9oYXNoZWRfcGFzc3dvcmRfZXhhbXBsZQ==',
-     'SHA-512');
+VALUES ('550e8400-e29b-41d4-a716-446655440000'::uuid,
+        'aGFzaGVkX3Bhc3N3b3JkXzEyMzQ1Njc4OTBhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5eg==',
+        'SHA-512'),
+       ('550e8400-e29b-41d4-a716-446655440001'::uuid,
+        'YW5vdGhlcl9oYXNoZWRfcGFzc3dvcmRfZm9yX3Rlc3Rpbmdfb25seQ==',
+        'SHA-512'),
+       ('550e8400-e29b-41d4-a716-446655440002'::uuid,
+        'dGhpcmRfdXNlcl9oYXNoZWRfcGFzc3dvcmRfZXhhbXBsZQ==',
+        'SHA-512');
 
 -- ============================================================================
 -- COMMON QUERIES

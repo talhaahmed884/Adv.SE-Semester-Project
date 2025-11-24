@@ -8,18 +8,19 @@ DROP TABLE IF EXISTS users CASCADE;
 
 -- Drop existing functions and triggers
 DROP TRIGGER IF EXISTS update_users_updated_at ON users;
-DROP FUNCTION IF EXISTS update_updated_at_column();
+DROP FUNCTION IF EXISTS update_updated_at_column() CASCADE;
 
 -- ============================================================================
 -- USERS TABLE
 -- ============================================================================
 
-CREATE TABLE users (
-                       id UUID PRIMARY KEY,
-                       name VARCHAR(255) NOT NULL,
-                       email VARCHAR(255) NOT NULL UNIQUE,
-                       created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                       updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
+CREATE TABLE IF NOT EXISTS users
+(
+    id         UUID PRIMARY KEY,
+    name       VARCHAR(255)             NOT NULL,
+    email      VARCHAR(255)             NOT NULL UNIQUE,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- ============================================================================
@@ -27,10 +28,10 @@ CREATE TABLE users (
 -- ============================================================================
 
 -- Index on email for fast lookups during login
-CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_users_email ON users (email);
 
 -- Index on created_at for sorting/filtering users by registration date
-CREATE INDEX idx_users_created_at ON users(created_at DESC);
+CREATE INDEX idx_users_created_at ON users (created_at DESC);
 
 -- ============================================================================
 -- TRIGGERS FOR UPDATED_AT TIMESTAMP
@@ -38,18 +39,20 @@ CREATE INDEX idx_users_created_at ON users(created_at DESC);
 
 -- Function to automatically update the updated_at timestamp
 CREATE OR REPLACE FUNCTION update_updated_at_column()
-RETURNS TRIGGER AS $$
+    RETURNS TRIGGER AS
+$$
 BEGIN
     NEW.updated_at = CURRENT_TIMESTAMP;
-RETURN NEW;
+    RETURN NEW;
 END;
 $$ LANGUAGE plpgsql;
 
 -- Trigger for users table
 CREATE TRIGGER update_users_updated_at
-    BEFORE UPDATE ON users
+    BEFORE UPDATE
+    ON users
     FOR EACH ROW
-    EXECUTE FUNCTION update_updated_at_column();
+EXECUTE FUNCTION update_updated_at_column();
 
 -- ============================================================================
 -- COMMENTS (Documentation)
@@ -68,23 +71,21 @@ COMMENT ON COLUMN users.updated_at IS 'Timestamp when the user record was last u
 
 -- Insert sample users
 INSERT INTO users (id, name, email)
-VALUES
-    ('550e8400-e29b-41d4-a716-446655440000'::uuid, 'John Doe', 'john.doe@example.com'),
-    ('550e8400-e29b-41d4-a716-446655440001'::uuid, 'Jane Smith', 'jane.smith@example.com'),
-    ('550e8400-e29b-41d4-a716-446655440002'::uuid, 'Bob Wilson', 'bob.wilson@example.com');
+VALUES ('550e8400-e29b-41d4-a716-446655440000'::uuid, 'John Doe', 'john.doe@example.com'),
+       ('550e8400-e29b-41d4-a716-446655440001'::uuid, 'Jane Smith', 'jane.smith@example.com'),
+       ('550e8400-e29b-41d4-a716-446655440002'::uuid, 'Bob Wilson', 'bob.wilson@example.com');
 
 -- Insert sample credentials (Note: These are example hashes, not real passwords)
 INSERT INTO user_credentials (user_id, password_hash, algorithm)
-VALUES
-    ('550e8400-e29b-41d4-a716-446655440000'::uuid,
-     'aGFzaGVkX3Bhc3N3b3JkXzEyMzQ1Njc4OTBhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5eg==',
-     'SHA-512'),
-    ('550e8400-e29b-41d4-a716-446655440001'::uuid,
-     'YW5vdGhlcl9oYXNoZWRfcGFzc3dvcmRfZm9yX3Rlc3Rpbmdfb25seQ==',
-     'SHA-512'),
-    ('550e8400-e29b-41d4-a716-446655440002'::uuid,
-     'dGhpcmRfdXNlcl9oYXNoZWRfcGFzc3dvcmRfZXhhbXBsZQ==',
-     'SHA-512');
+VALUES ('550e8400-e29b-41d4-a716-446655440000'::uuid,
+        'aGFzaGVkX3Bhc3N3b3JkXzEyMzQ1Njc4OTBhYmNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5eg==',
+        'SHA-512'),
+       ('550e8400-e29b-41d4-a716-446655440001'::uuid,
+        'YW5vdGhlcl9oYXNoZWRfcGFzc3dvcmRfZm9yX3Rlc3Rpbmdfb25seQ==',
+        'SHA-512'),
+       ('550e8400-e29b-41d4-a716-446655440002'::uuid,
+        'dGhpcmRfdXNlcl9oYXNoZWRfcGFzc3dvcmRfZXhhbXBsZQ==',
+        'SHA-512');
 
 -- ============================================================================
 -- COMMON QUERIES
