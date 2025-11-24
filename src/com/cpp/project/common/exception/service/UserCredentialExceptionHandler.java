@@ -21,4 +21,3 @@ public class UserCredentialExceptionHandler extends ExceptionHandler {
                 credException.getMessage());
     }
 }
-

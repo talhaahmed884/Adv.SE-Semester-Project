@@ -3,8 +3,8 @@ package com.cpp.project.user_credential.entity;
 import com.cpp.project.common.validation.entity.ValidationResult;
 import com.cpp.project.common.validation.service.PasswordHashValidator;
 import com.cpp.project.user.entity.User;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 

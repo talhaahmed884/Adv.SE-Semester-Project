@@ -28,4 +28,3 @@ public abstract class ExceptionHandler {
         exception.printStackTrace();
     }
 }
-

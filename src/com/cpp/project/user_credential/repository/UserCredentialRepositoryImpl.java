@@ -3,14 +3,14 @@ package com.cpp.project.user_credential.repository;
 import com.cpp.project.user_credential.entity.UserCredential;
 import com.cpp.project.user_credential.entity.UserCredentialErrorCode;
 import com.cpp.project.user_credential.entity.UserCredentialException;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.PersistenceException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
 import java.util.Optional;
 import java.util.UUID;
 

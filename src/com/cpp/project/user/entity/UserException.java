@@ -12,4 +12,3 @@ public class UserException extends BaseException {
         super(errorCode, cause, args);
     }
 }
-

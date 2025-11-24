@@ -38,4 +38,3 @@ public class SignUpRequestDTO {
         this.password = password;
     }
 }
-

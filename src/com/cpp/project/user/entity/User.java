@@ -4,8 +4,8 @@ import com.cpp.project.common.validation.entity.ValidationResult;
 import com.cpp.project.common.validation.service.EmailValidator;
 import com.cpp.project.common.validation.service.UserNameValidator;
 import com.cpp.project.user_credential.entity.UserCredential;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.util.Objects;
 import java.util.UUID;
 

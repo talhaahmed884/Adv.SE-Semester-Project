@@ -12,4 +12,3 @@ public class UserCredentialException extends BaseException {
         super(errorCode, cause, args);
     }
 }
-

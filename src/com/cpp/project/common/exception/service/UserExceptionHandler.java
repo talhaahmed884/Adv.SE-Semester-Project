@@ -21,4 +21,3 @@ public class UserExceptionHandler extends ExceptionHandler {
                 userException.getMessage());
     }
 }
-

@@ -27,5 +27,6 @@
     <orderEntry type="library" name="springframework.spring.context" level="project" />
     <orderEntry type="library" name="springframework.spring.tx" level="project" />
     <orderEntry type="library" name="slf4j.simple" level="project" />
+    <orderEntry type="library" name="springframework.boot.spring.starter.web" level="project" />
   </component>
 </module>
