@@ -93,4 +93,10 @@ public class AuthenticationServiceImpl implements AuthenticationService {
             throw new AuthenticationException(AuthenticationErrorCode.AUTHENTICATION_FAILED, e, request.getEmail());
         }
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UserDTO getUserByEmail(String email) {
+        return userService.getUserByEmail(email);
+    }
 }

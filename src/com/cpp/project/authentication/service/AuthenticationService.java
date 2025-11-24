@@ -8,4 +8,6 @@ public interface AuthenticationService {
     UserDTO signUp(SignUpRequestDTO request);
 
     boolean login(LoginRequestDTO request);
+
+    UserDTO getUserByEmail(String email);
 }
