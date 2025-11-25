@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * UC-3.05: Course name is null or blank
  */
-public class UC_3_05_AddCourse_Fail_BlankName_Test extends BaseIntegrationTest {
+public class UC_3_23_AddCourse_Fail_BlankName_Test extends BaseIntegrationTest {
     @Autowired
     private CourseService courseService;
 

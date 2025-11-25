@@ -9,15 +9,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * UC-2.2: Login_Fail_WrongPassword
- * Test Case: Rejects wrong password
- * Category: Negative/Exception
- * Expected: Fail with AuthenticationException
+ * UC-2.1: Login_Success
+ * Test Case: Logs in with correct credentials
+ * Category: Positive
+ * Expected: Pass
  */
-public class UC_2_02_Login_Fail_WrongPassword_Test extends BaseIntegrationTest {
+public class UC_2_11_Login_Success_Test extends BaseIntegrationTest {
     @Autowired
     private AuthenticationService authenticationService;
 
@@ -25,26 +25,26 @@ public class UC_2_02_Login_Fail_WrongPassword_Test extends BaseIntegrationTest {
     public void setup() {
         // Create a user for login testing
         SignUpRequestDTO signUpRequest = new SignUpRequestDTO(
-                "Jane Smith",
-                "jane.smith@example.com",
-                "CorrectPassword123@"
+                "John Doe",
+                "john.doe@example.com",
+                "ValidPassword123@"
         );
         authenticationService.signUp(signUpRequest);
     }
 
     @Test
-    @DisplayName("UC-2.2: Rejects wrong password")
-    public void testLoginFailWrongPassword() {
+    @DisplayName("UC-2.1: Logs in with correct credentials")
+    public void testLoginSuccess() {
         // Arrange
         LoginRequestDTO loginRequest = new LoginRequestDTO(
-                "jane.smith@example.com",
-                "WrongPassword456@" // Incorrect password
+                "john.doe@example.com",
+                "ValidPassword123@"
         );
 
         // Act
         boolean result = authenticationService.login(loginRequest);
 
-        // Assert - Login should fail
-        assertFalse(result, "Login should fail with wrong password");
+        // Assert - Login should succeed
+        assertTrue(result);
     }
 }

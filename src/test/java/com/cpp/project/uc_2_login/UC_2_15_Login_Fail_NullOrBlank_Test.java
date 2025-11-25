@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Category: Negative/Exception
  * Expected: Fail with NullArgumentException
  */
-public class UC_2_05_Login_Fail_NullOrBlank_Test extends BaseIntegrationTest {
+public class UC_2_15_Login_Fail_NullOrBlank_Test extends BaseIntegrationTest {
     @Autowired
     private AuthenticationService authenticationService;
 

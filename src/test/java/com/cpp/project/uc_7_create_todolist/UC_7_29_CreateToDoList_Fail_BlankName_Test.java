@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * UC-7.02: Null or blank name rejected
  */
-public class UC_7_02_CreateToDoList_Fail_BlankName_Test extends BaseIntegrationTest {
+public class UC_7_29_CreateToDoList_Fail_BlankName_Test extends BaseIntegrationTest {
     @Autowired
     private ToDoListService toDoListService;
 

@@ -25,7 +25,7 @@ import static org.mockito.Mockito.*;
  * Category: Negative/Exception
  * Expected: Fail with ExternalServiceException
  */
-public class UC_2_08_Login_WhenRepositoryFails_Test extends BaseIntegrationTest {
+public class UC_2_18_Login_WhenRepositoryFails_Test extends BaseIntegrationTest {
     @Mock
     LoginRequestSanitizer loginRequestSanitizer;
 

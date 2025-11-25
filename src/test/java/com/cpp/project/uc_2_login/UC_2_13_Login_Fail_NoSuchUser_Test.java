@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Category: Negative/Exception
  * Expected: Fail with AuthenticationException
  */
-public class UC_2_03_Login_Fail_NoSuchUser_Test extends BaseIntegrationTest {
+public class UC_2_13_Login_Fail_NoSuchUser_Test extends BaseIntegrationTest {
     @Autowired
     private AuthenticationService authenticationService;
 

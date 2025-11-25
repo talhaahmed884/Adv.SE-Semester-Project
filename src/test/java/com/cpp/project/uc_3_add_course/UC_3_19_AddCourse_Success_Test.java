@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * UC-3.01: Adds a new course with a unique code for the user
  */
-public class UC_3_01_AddCourse_Success_Test extends BaseIntegrationTest {
+public class UC_3_19_AddCourse_Success_Test extends BaseIntegrationTest {
     @Autowired
     private CourseService courseService;
 

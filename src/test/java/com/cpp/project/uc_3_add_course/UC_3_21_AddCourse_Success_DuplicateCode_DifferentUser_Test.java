@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * UC-3.03: Allows same course code for a different user (per-user uniqueness)
  */
-public class UC_3_03_AddCourse_Success_DuplicateCode_DifferentUser_Test extends BaseIntegrationTest {
+public class UC_3_21_AddCourse_Success_DuplicateCode_DifferentUser_Test extends BaseIntegrationTest {
     @Autowired
     private CourseService courseService;
 

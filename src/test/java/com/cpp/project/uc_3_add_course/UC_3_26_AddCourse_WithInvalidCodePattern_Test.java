@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * UC-3.08: Rejects adding a course with a code that violates the code pattern
  * Pattern: ^[A-Z0-9_-]+$
  */
-public class UC_3_08_AddCourse_WithInvalidCodePattern_Test extends BaseIntegrationTest {
+public class UC_3_26_AddCourse_WithInvalidCodePattern_Test extends BaseIntegrationTest {
     @Autowired
     private CourseService courseService;
 

@@ -13,6 +13,7 @@ public class CourseValidationService {
     private final CourseNameValidator courseNameValidator = new CourseNameValidator();
     private final CourseTaskNameValidator taskNameValidator = new CourseTaskNameValidator();
     private final CourseTaskProgressValidator progressValidator = new CourseTaskProgressValidator();
+    private final CourseTaskDeadlineValidator deadlineValidator = new CourseTaskDeadlineValidator();
 
     /**
      * Validate course code
@@ -40,5 +41,12 @@ public class CourseValidationService {
      */
     public ValidationResult validateTaskProgress(Integer progress) {
         return progressValidator.validate(progress);
+    }
+
+    /**
+     * Validate task deadline
+     */
+    public ValidationResult validateTaskDeadline(java.util.Date deadline) {
+        return deadlineValidator.validate(deadline);
     }
 }

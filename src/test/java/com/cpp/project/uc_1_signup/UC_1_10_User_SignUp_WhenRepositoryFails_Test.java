@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class UC_1_1_User_SignUp_WhenRepositoryFails_Test extends BaseIntegrationTest {
+public class UC_1_10_User_SignUp_WhenRepositoryFails_Test extends BaseIntegrationTest {
     @Autowired
     private AuthenticationService authenticationService;
 

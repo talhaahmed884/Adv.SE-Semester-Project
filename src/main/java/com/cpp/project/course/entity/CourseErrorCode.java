@@ -20,8 +20,9 @@ public enum CourseErrorCode implements ErrorCode {
     TASK_NOT_FOUND("COURSE_TASK_001", "Task not found with id: %s", HttpStatus.NOT_FOUND),
     INVALID_TASK_NAME("COURSE_TASK_002", "Invalid task name: %s", HttpStatus.BAD_REQUEST),
     INVALID_TASK_PROGRESS("COURSE_TASK_003", "Invalid progress value: %d. Must be between 0 and 100", HttpStatus.BAD_REQUEST),
-    TASK_CREATION_FAILED("COURSE_TASK_004", "Failed to create task: %s", HttpStatus.INTERNAL_SERVER_ERROR),
-    TASK_UPDATE_FAILED("COURSE_TASK_005", "Failed to update task: %s", HttpStatus.INTERNAL_SERVER_ERROR),
+    INVALID_TASK_DEADLINE("COURSE_TASK_004", "Invalid task deadline: %s", HttpStatus.BAD_REQUEST),
+    TASK_CREATION_FAILED("COURSE_TASK_005", "Failed to create task: %s", HttpStatus.INTERNAL_SERVER_ERROR),
+    TASK_UPDATE_FAILED("COURSE_TASK_006", "Failed to update task: %s", HttpStatus.INTERNAL_SERVER_ERROR),
 
     // Validation errors
     INVALID_COURSE_DATA("COURSE_VAL_001", "Invalid course data: %s", HttpStatus.BAD_REQUEST),

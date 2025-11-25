@@ -12,43 +12,40 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
- * UC-2.7: Login_Success_PasswordNormalization
- * Test Case: Trims password before lookup
+ * UC-2.6: Login_Success_EmailNormalization
+ * Test Case: Trims and lowercases email before lookup
  * Category: Positive
  * Expected: Pass
  * Precondition: Same normalization strategy as signup works
- * <p>
- * NOTE: Based on the sanitization implementation, passwords are NOT normalized.
- * This test verifies that password matching is exact (no trimming).
  */
-public class UC_2_07_Login_Success_PasswordNormalization_Test extends BaseIntegrationTest {
+public class UC_2_16_Login_Success_EmailNormalization_Test extends BaseIntegrationTest {
     @Autowired
     private AuthenticationService authenticationService;
 
     @BeforeEach
     public void setup() {
-        // Create a user with password containing spaces
+        // Create a user with normalized email
         SignUpRequestDTO signUpRequest = new SignUpRequestDTO(
-                "Alice Johnson",
-                "alice.johnson@example.com",
-                "  MyPassword123#  " // Password with spaces
+                "Bob Wilson",
+                "bob.wilson@example.com", // Stored as lowercase
+                "ValidPassword123@"
         );
         authenticationService.signUp(signUpRequest);
     }
 
     @Test
-    @DisplayName("UC-2.7: Password is NOT trimmed (exact match required)")
-    public void testLoginPasswordNotNormalized() {
-        // Arrange - Password must match exactly as stored
+    @DisplayName("UC-2.6: Trims and lowercases email before lookup")
+    public void testLoginSuccessEmailNormalization() {
+        // Arrange - Email with spaces and mixed case
         LoginRequestDTO loginRequest = new LoginRequestDTO(
-                "alice.johnson@example.com",
-                "  MyPassword123#  " // Exact password with spaces
+                "  Bob.Wilson@Example.COM  ", // Spaces + mixed case
+                "ValidPassword123@"
         );
 
         // Act
         boolean result = authenticationService.login(loginRequest);
 
-        // Assert - Login should succeed with exact password match
-        assertTrue(result, "Login should succeed with exact password (spaces preserved)");
+        // Assert - Login should succeed after email normalization
+        assertTrue(result, "Login should succeed with email normalization (trim + lowercase)");
     }
 }

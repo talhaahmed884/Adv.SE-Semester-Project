@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * UC-3.06: Trims and uppercases course code for comparison and storage
  */
-public class UC_3_06_AddCourse_Success_CodeNormalization_Test extends BaseIntegrationTest {
+public class UC_3_24_AddCourse_Success_CodeNormalization_Test extends BaseIntegrationTest {
     @Autowired
     private CourseService courseService;
 

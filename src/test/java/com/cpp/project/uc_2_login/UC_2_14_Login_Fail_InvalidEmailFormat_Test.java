@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
  * Category: Negative/Exception
  * Expected: Fail with InvalidEmailFormatException or AuthenticationException
  */
-public class UC_2_04_Login_Fail_InvalidEmailFormat_Test extends BaseIntegrationTest {
+public class UC_2_14_Login_Fail_InvalidEmailFormat_Test extends BaseIntegrationTest {
     @Autowired
     private AuthenticationService authenticationService;
 

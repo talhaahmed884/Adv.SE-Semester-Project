@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * Based on CourseCodeValidator: MIN=2, MAX=20
  * Based on CourseNameValidator: MIN=3, MAX=255
  */
-public class UC_3_07_AddCourse_Boundaries_Test extends BaseIntegrationTest {
+public class UC_3_25_AddCourse_Boundaries_Test extends BaseIntegrationTest {
     @Autowired
     private CourseService courseService;
 

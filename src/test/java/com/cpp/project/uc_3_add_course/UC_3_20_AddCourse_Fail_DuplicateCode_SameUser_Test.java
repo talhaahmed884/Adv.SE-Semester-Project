@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * UC-3.02: Rejects adding a course with a code that already exists for this user
  */
-public class UC_3_02_AddCourse_Fail_DuplicateCode_SameUser_Test extends BaseIntegrationTest {
+public class UC_3_20_AddCourse_Fail_DuplicateCode_SameUser_Test extends BaseIntegrationTest {
     @Autowired
     private CourseService courseService;
 

@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * UC-3.04: Code is null, empty, or whitespace
  */
-public class UC_3_04_AddCourse_Fail_BlankCode_Test extends BaseIntegrationTest {
+public class UC_3_22_AddCourse_Fail_BlankCode_Test extends BaseIntegrationTest {
     @Autowired
     private CourseService courseService;
 

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * UC-7.03: Trims name before storage
  */
-public class UC_7_03_CreateToDoList_Success_TrimmedName_Test extends BaseIntegrationTest {
+public class UC_7_30_CreateToDoList_Success_TrimmedName_Test extends BaseIntegrationTest {
     @Autowired
     private ToDoListService toDoListService;
 

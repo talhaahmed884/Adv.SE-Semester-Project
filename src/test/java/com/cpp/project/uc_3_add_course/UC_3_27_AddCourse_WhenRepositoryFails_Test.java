@@ -27,7 +27,7 @@ import static org.mockito.Mockito.*;
  * This is a unit test using Mockito to simulate repository failure
  */
 @ExtendWith(MockitoExtension.class)
-public class UC_3_09_AddCourse_WhenRepositoryFails_Test {
+public class UC_3_27_AddCourse_WhenRepositoryFails_Test {
     @Mock
     private CourseRepository courseRepository;
 

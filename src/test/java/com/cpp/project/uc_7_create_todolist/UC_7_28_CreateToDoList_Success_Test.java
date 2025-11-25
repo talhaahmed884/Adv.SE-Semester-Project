@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * UC-7.01: Creates a to-do list with a non-empty name
  */
-public class UC_7_01_CreateToDoList_Success_Test extends BaseIntegrationTest {
+public class UC_7_28_CreateToDoList_Success_Test extends BaseIntegrationTest {
     @Autowired
     private ToDoListService toDoListService;
 

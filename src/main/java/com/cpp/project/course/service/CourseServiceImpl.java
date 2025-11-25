@@ -200,6 +200,11 @@ public class CourseServiceImpl implements CourseService {
                 throw new CourseException(CourseErrorCode.INVALID_TASK_NAME, nameValidation.getFirstError());
             }
 
+            ValidationResult deadlineValidation = validationService.validateTaskDeadline(deadline);
+            if (!deadlineValidation.isValid()) {
+                throw new CourseException(CourseErrorCode.INVALID_TASK_DEADLINE, deadlineValidation.getFirstError());
+            }
+
             // Step 3: Find course and add task
             Course course = courseRepository.findById(courseId)
                     .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", courseId));
