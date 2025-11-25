@@ -8,8 +8,8 @@ DROP TABLE IF EXISTS course_tasks CASCADE;
 DROP TABLE IF EXISTS courses CASCADE;
 
 -- Drop existing functions and triggers
-DROP TRIGGER IF EXISTS update_courses_updated_at ON courses;
-DROP TRIGGER IF EXISTS update_course_tasks_updated_at ON course_tasks;
+DROP TRIGGER IF EXISTS update_courses_updated_at ON courses CASCADE;
+DROP TRIGGER IF EXISTS update_course_tasks_updated_at ON course_tasks CASCADE;
 DROP FUNCTION IF EXISTS update_updated_at_column() CASCADE;
 
 -- ============================================================================
@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS courses
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     -- Foreign key to users table
-    CONSTRAINT fk_course_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    CONSTRAINT fk_course_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
 -- ============================================================================
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS course_tasks
     updated_at  TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     -- Foreign key to courses table
-    CONSTRAINT fk_course_task_course FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
+    CONSTRAINT fk_course_task_course FOREIGN KEY (course_id) REFERENCES courses (id) ON DELETE CASCADE,
 
     -- Constraint on status values
     CONSTRAINT chk_course_task_status CHECK (status IN ('PENDING', 'IN_PROGRESS', 'COMPLETED'))
