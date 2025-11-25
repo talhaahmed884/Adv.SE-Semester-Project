@@ -26,6 +26,9 @@ public class ToDoListTask {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id = UUID.randomUUID();
 
+    @Column(name = "todo_list_id", nullable = false, updatable = false, insertable = false)
+    private UUID todoListId;
+
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
@@ -36,10 +39,6 @@ public class ToDoListTask {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 50)
     private TaskStatus status = TaskStatus.PENDING;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "todo_list_id", nullable = false)
-    private ToDoList todoList;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

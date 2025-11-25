@@ -34,7 +34,8 @@ public class ToDoList {
     @Column(name = "user_id", nullable = false)
     private UUID userId;
 
-    @OneToMany(mappedBy = "todoList", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "todo_list_id", nullable = false, updatable = false, insertable = false)
     private List<ToDoListTask> tasks = new ArrayList<>();
 
     @CreationTimestamp
@@ -59,10 +60,10 @@ public class ToDoList {
      */
     public ToDoListTask addTask(String description, Date deadline) {
         ToDoListTask task = ToDoListTask.builder()
+                .todoListId(this.id)
                 .description(description)
                 .deadline(deadline)
                 .status(TaskStatus.PENDING)
-                .todoList(this)
                 .build();
 
         tasks.add(task);

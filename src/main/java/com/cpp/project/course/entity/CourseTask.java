@@ -26,6 +26,9 @@ public class CourseTask {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id = UUID.randomUUID();
 
+    @Column(name = "course_id", insertable = false, nullable = false, updatable = false)
+    private UUID courseId;
+
     @Column(name = "name", nullable = false, length = 255)
     private String name;
 
@@ -42,10 +45,6 @@ public class CourseTask {
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 50)
     private TaskStatus status = TaskStatus.PENDING;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "course_id", nullable = false)
-    private Course course;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

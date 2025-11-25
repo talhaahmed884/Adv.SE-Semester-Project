@@ -20,7 +20,6 @@ public class ToDoListTaskAdapter {
                 .description(task.getDescription())
                 .deadline(task.getDeadline())
                 .status(task.getStatus())
-                .todoListId(task.getTodoList() != null ? task.getTodoList().getId() : null)
                 .createdAt(task.getCreatedAt())
                 .updatedAt(task.getUpdatedAt())
                 .build();

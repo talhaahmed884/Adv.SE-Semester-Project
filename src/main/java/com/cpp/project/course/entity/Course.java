@@ -37,7 +37,8 @@ public class Course {
     @Column(name = "user_id", nullable = false)
     private UUID userId;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JoinColumn(name = "course_id", nullable = false, insertable = false, updatable = false)
     private List<CourseTask> tasks = new ArrayList<>();
 
     @CreationTimestamp
@@ -81,12 +82,12 @@ public class Course {
      */
     public CourseTask addTask(String name, Date deadline, String description) {
         CourseTask task = CourseTask.builder()
+                .courseId(this.id)
                 .name(name)
                 .description(description)
                 .deadline(deadline)
                 .progress(0)
                 .status(TaskStatus.PENDING)
-                .course(this)
                 .build();
 
         tasks.add(task);

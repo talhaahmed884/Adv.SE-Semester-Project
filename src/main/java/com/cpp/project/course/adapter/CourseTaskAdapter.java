@@ -22,7 +22,6 @@ public class CourseTaskAdapter {
                 .deadline(task.getDeadline())
                 .progress(task.getProgress())
                 .status(task.getStatus())
-                .courseId(task.getCourse() != null ? task.getCourse().getId() : null)
                 .createdAt(task.getCreatedAt())
                 .updatedAt(task.getUpdatedAt())
                 .build();

@@ -3,17 +3,23 @@ package com.cpp.project.course.entity;
 import com.cpp.project.common.entity.TaskStatus;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Builder Pattern for CourseTask entity
  */
 public class CourseTaskBuilder {
+    private UUID courseId;
     private String name;
     private String description;
     private Date deadline;
     private int progress = 0;
     private TaskStatus status = TaskStatus.PENDING;
-    private Course course;
+
+    public CourseTaskBuilder courseId(UUID courseId) {
+        this.courseId = courseId;
+        return this;
+    }
 
     public CourseTaskBuilder name(String name) {
         this.name = name;
@@ -40,19 +46,14 @@ public class CourseTaskBuilder {
         return this;
     }
 
-    public CourseTaskBuilder course(Course course) {
-        this.course = course;
-        return this;
-    }
-
     public CourseTask build() {
         CourseTask task = new CourseTask();
+        task.setCourseId(courseId);
         task.setName(name);
         task.setDescription(description);
         task.setDeadline(deadline);
         task.setProgress(progress);
         task.setStatus(status != null ? status : TaskStatus.PENDING);
-        task.setCourse(course);
         return task;
     }
 }
