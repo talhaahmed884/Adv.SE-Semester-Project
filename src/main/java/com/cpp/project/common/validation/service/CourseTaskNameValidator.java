@@ -7,7 +7,7 @@ import com.cpp.project.common.validation.entity.Validator;
  * Validator for course task names
  */
 public class CourseTaskNameValidator extends Validator<String> {
-    private static final int MIN_LENGTH = 1;
+    private static final int MIN_LENGTH = 2;
     private static final int MAX_LENGTH = 255;
 
     @Override
