@@ -12,7 +12,8 @@ public enum UserCredentialErrorCode implements ErrorCode {
     CREDENTIAL_UPDATE_FAILED("CRED_006", "Failed to update credentials: %s", HttpStatus.INTERNAL_SERVER_ERROR),
     INVALID_ALGORITHM("CRED_007", "Invalid hashing algorithm: %s", HttpStatus.BAD_REQUEST),
     PASSWORD_REQUIRED("CRED_008", "Password is required", HttpStatus.BAD_REQUEST),
-    PASSWORD_HASH_EMPTY("CRED_009", "Password hash cannot be null or empty", HttpStatus.BAD_REQUEST);
+    PASSWORD_HASH_EMPTY("CRED_009", "Password hash cannot be null or empty", HttpStatus.BAD_REQUEST),
+    INVALID_PASSWORD_HASH("CRED_010", "Invalid password hash: %s", HttpStatus.BAD_REQUEST);
 
     private final String code;
     private final String messageTemplate;
