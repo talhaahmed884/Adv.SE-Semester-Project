@@ -37,6 +37,11 @@ public interface CourseRepository {
     boolean existsByCode(String code);
 
     /**
+     * Check if a course with the given code exists for a specific user
+     */
+    boolean existsByCodeAndUserId(String code, UUID userId);
+
+    /**
      * Delete a course entity
      */
     void delete(Course course);

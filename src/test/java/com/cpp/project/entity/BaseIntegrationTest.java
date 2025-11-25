@@ -21,7 +21,35 @@ public abstract class BaseIntegrationTest {
     @AfterEach
     public void cleanupDatabase() {
         // Clean up test data after each test
-        jdbcTemplate.execute("DELETE FROM user_credentials WHERE user_id IN (SELECT id FROM users WHERE email LIKE '%test%')");
-        jdbcTemplate.execute("DELETE FROM users WHERE email LIKE '%test%'");
+        // Order matters due to foreign key constraints
+
+        // Clean up course-related data
+        try {
+            jdbcTemplate.execute("DELETE FROM course_tasks");
+            jdbcTemplate.execute("DELETE FROM courses");
+        } catch (Exception e) {
+            // Tables might not exist yet, ignore
+        }
+
+        // Clean up todolist-related data
+        try {
+            jdbcTemplate.execute("DELETE FROM todo_list_tasks");
+            jdbcTemplate.execute("DELETE FROM todo_lists");
+        } catch (Exception e) {
+            // Tables might not exist yet, ignore
+        }
+
+        try {
+            jdbcTemplate.execute("DELETE FROM user_credentials WHERE user_id IN (SELECT id FROM users WHERE email LIKE '%test%')");
+        } catch (Exception e) {
+            // Tables might not exist yet, ignore
+        }
+
+        try {
+            // Clean up user-related data
+            jdbcTemplate.execute("DELETE FROM users WHERE email LIKE '%test%'");
+        } catch (Exception e) {
+            // Tables might not exist yet, ignore
+        }
     }
 }

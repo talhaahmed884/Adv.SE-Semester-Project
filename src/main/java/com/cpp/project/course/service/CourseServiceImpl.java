@@ -67,8 +67,8 @@ public class CourseServiceImpl implements CourseService {
                 throw new CourseException(CourseErrorCode.INVALID_COURSE_NAME, nameValidation.getFirstError());
             }
 
-            // Step 3: Check if course with code already exists
-            if (courseRepository.existsByCode(sanitizedCode)) {
+            // Step 3: Check if course with code already exists for this user
+            if (courseRepository.existsByCodeAndUserId(sanitizedCode, userId)) {
                 throw new CourseException(CourseErrorCode.COURSE_ALREADY_EXISTS, sanitizedCode);
             }
 

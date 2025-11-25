@@ -100,6 +100,21 @@ public class CourseRepositoryImpl implements CourseRepository {
     }
 
     @Override
+    @Transactional(readOnly = true)
+    public boolean existsByCodeAndUserId(String code, UUID userId) {
+        try {
+            TypedQuery<Long> query = entityManager.createQuery(
+                    "SELECT COUNT(c) FROM Course c WHERE c.code = :code AND c.userId = :userId", Long.class);
+            query.setParameter("code", code);
+            query.setParameter("userId", userId);
+            return query.getSingleResult() > 0;
+        } catch (Exception e) {
+            logger.error("Error checking course existence by code and userId: {} for user: {}", code, userId, e);
+            return false;
+        }
+    }
+
+    @Override
     public void deleteById(UUID id) {
         try {
             findById(id).ifPresent(this::delete);
