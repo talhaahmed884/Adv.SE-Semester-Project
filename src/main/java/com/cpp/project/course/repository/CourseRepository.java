@@ -37,6 +37,11 @@ public interface CourseRepository {
     boolean existsByCode(String code);
 
     /**
+     * Delete a course entity
+     */
+    void delete(Course course);
+
+    /**
      * Delete a course by ID
      */
     void deleteById(UUID id);
@@ -45,4 +50,9 @@ public interface CourseRepository {
      * Find all courses
      */
     List<Course> findAll();
+
+    /**
+     * Count total number of courses
+     */
+    long count();
 }
