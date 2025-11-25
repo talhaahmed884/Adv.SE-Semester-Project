@@ -1,6 +1,7 @@
-package com.cpp.project.uc_3_get_course_progress;
+package com.cpp.project.uc_5_update_course_progress;
 
 import com.cpp.project.authentication.service.AuthenticationService;
+import com.cpp.project.common.entity.TaskStatus;
 import com.cpp.project.course.dto.CourseDTO;
 import com.cpp.project.course.dto.CourseTaskDTO;
 import com.cpp.project.course.service.CourseService;
@@ -19,9 +20,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * UC-3.03: Returns 100 when all tasks are completed
+ * UC-5.4.03: Sets progress to 100 -> COMPLETED
  */
-public class UC_3_03_Progress_AllCompleted_Test extends BaseIntegrationTest {
+public class UC_5_4_03_UpdateProgress_Success_ToHundred_Test extends BaseIntegrationTest {
     @Autowired
     private CourseService courseService;
 
@@ -29,38 +30,38 @@ public class UC_3_03_Progress_AllCompleted_Test extends BaseIntegrationTest {
     private AuthenticationService authenticationService;
 
     @Test
-    @DisplayName("UC-3.03: Returns 100 when all tasks are completed")
-    public void testProgressAllCompleted() {
+    @DisplayName("UC-5.4.03: Sets progress to 100 and status=COMPLETED")
+    public void testUpdateProgressToHundred() {
         // Arrange - Create a test user
         UserDTO user = authenticationService.signUp(new SignUpRequestDTO(
                 "Test User",
-                "test.user.progress.uc303@test.com",
+                "test.user.progress.uc5403@test.com",
                 "Password123!"
         ));
         UUID userId = user.getId();
 
         // Create a course
-        CourseDTO course = courseService.createCourse("CS103", "Algorithms", userId);
+        CourseDTO course = courseService.createCourse("CS105", "Operating Systems", userId);
 
+        // Create a future deadline
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDate = calendar.getTime();
-        // Add 3 tasks
-        CourseTaskDTO task1 = courseService.addTaskToCourse(course.getId(), "Task 1", futureDate, "Description 1");
-        CourseTaskDTO task2 = courseService.addTaskToCourse(course.getId(), "Task 2", futureDate, "Description 2");
-        CourseTaskDTO task3 = courseService.addTaskToCourse(course.getId(), "Task 3", futureDate, "Description 3");
+        Date futureDeadline = calendar.getTime();
 
-        // Mark all tasks as complete
-        courseService.markTaskComplete(course.getId(), task1.getId());
-        courseService.markTaskComplete(course.getId(), task2.getId());
-        courseService.markTaskComplete(course.getId(), task3.getId());
+        // Add a task
+        CourseTaskDTO task = courseService.addTaskToCourse(
+                course.getId(),
+                "Assignment 1",
+                futureDeadline,
+                "Complete the assignment"
+        );
 
-        // Act
-        CourseDTO result = courseService.getCourseById(course.getId());
+        // Act - Update progress to 100
+        CourseTaskDTO result = courseService.updateTaskProgress(course.getId(), task.getId(), 100);
 
         // Assert
         assertNotNull(result);
-        // Progress = (100 + 100 + 100) / 3 = 300 / 3 = 100
         assertEquals(100, result.getProgress());
+        assertEquals(TaskStatus.COMPLETED, result.getStatus());
     }
 }

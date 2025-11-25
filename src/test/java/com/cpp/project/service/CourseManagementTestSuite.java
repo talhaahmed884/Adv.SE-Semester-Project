@@ -13,7 +13,8 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 @SelectPackages({
         "com.cpp.project.uc_3_add_course",
         "com.cpp.project.uc_3_get_course_progress",
-        "com.cpp.project.uc_4_add_course_task"
+        "com.cpp.project.uc_4_add_course_task",
+        "com.cpp.project.uc_5_update_course_progress"
 })
 public class CourseManagementTestSuite {
     // This class remains empty, it is used only as a holder for the above annotations

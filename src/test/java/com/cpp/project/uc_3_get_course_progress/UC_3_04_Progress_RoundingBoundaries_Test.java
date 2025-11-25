@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -41,10 +42,13 @@ public class UC_3_04_Progress_RoundingBoundaries_Test extends BaseIntegrationTes
         // Create a course
         CourseDTO course = courseService.createCourse("CS104", "Software Engineering", userId);
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        Date futureDate = calendar.getTime();
         // Add 3 tasks
-        CourseTaskDTO task1 = courseService.addTaskToCourse(course.getId(), "Task 1", new Date(), "Description 1");
-        CourseTaskDTO task2 = courseService.addTaskToCourse(course.getId(), "Task 2", new Date(), "Description 2");
-        courseService.addTaskToCourse(course.getId(), "Task 3", new Date(), "Description 3");
+        CourseTaskDTO task1 = courseService.addTaskToCourse(course.getId(), "Task 1", futureDate, "Description 1");
+        CourseTaskDTO task2 = courseService.addTaskToCourse(course.getId(), "Task 2", futureDate, "Description 2");
+        courseService.addTaskToCourse(course.getId(), "Task 3", futureDate, "Description 3");
 
         // Mark 2 tasks as complete
         courseService.markTaskComplete(course.getId(), task1.getId());
@@ -74,9 +78,12 @@ public class UC_3_04_Progress_RoundingBoundaries_Test extends BaseIntegrationTes
         CourseDTO course = courseService.createCourse("CS105", "Operating Systems", userId);
 
         // Add 3 tasks
-        CourseTaskDTO task1 = courseService.addTaskToCourse(course.getId(), "Task 1", new Date(), "Description 1");
-        courseService.addTaskToCourse(course.getId(), "Task 2", new Date(), "Description 2");
-        courseService.addTaskToCourse(course.getId(), "Task 3", new Date(), "Description 3");
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        Date futureDate = calendar.getTime();
+        CourseTaskDTO task1 = courseService.addTaskToCourse(course.getId(), "Task 1", futureDate, "Description 1");
+        courseService.addTaskToCourse(course.getId(), "Task 2", futureDate, "Description 2");
+        courseService.addTaskToCourse(course.getId(), "Task 3", futureDate, "Description 3");
 
         // Mark 1 task as complete
         courseService.markTaskComplete(course.getId(), task1.getId());

@@ -10,6 +10,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -40,10 +41,13 @@ public class UC_3_05_Progress_Performance_10KTasks_Test extends BaseIntegrationT
         // Create a course
         CourseDTO course = courseService.createCourse("CS106", "Large Scale Systems", userId);
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        Date futureDate = calendar.getTime();
         // Add 10,000 tasks
         int taskCount = 10000;
         for (int i = 0; i < taskCount; i++) {
-            courseService.addTaskToCourse(course.getId(), "Task " + i, new Date(), "Description " + i);
+            courseService.addTaskToCourse(course.getId(), "Task " + i, futureDate, "Description " + i);
         }
 
         // Mark half of them as complete

@@ -11,6 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
@@ -41,12 +42,15 @@ public class UC_3_02_Progress_Partial_Test extends BaseIntegrationTest {
         // Create a course
         CourseDTO course = courseService.createCourse("CS102", "Data Structures", userId);
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_MONTH, 1);
+        Date futureDate = calendar.getTime();
         // Add 5 tasks and set 3 to 100% (completed) and 2 to 0%
-        CourseTaskDTO task1 = courseService.addTaskToCourse(course.getId(), "Task 1", new Date(), "Description 1");
-        CourseTaskDTO task2 = courseService.addTaskToCourse(course.getId(), "Task 2", new Date(), "Description 2");
-        CourseTaskDTO task3 = courseService.addTaskToCourse(course.getId(), "Task 3", new Date(), "Description 3");
-        courseService.addTaskToCourse(course.getId(), "Task 4", new Date(), "Description 4");
-        courseService.addTaskToCourse(course.getId(), "Task 5", new Date(), "Description 5");
+        CourseTaskDTO task1 = courseService.addTaskToCourse(course.getId(), "Task 1", futureDate, "Description 1");
+        CourseTaskDTO task2 = courseService.addTaskToCourse(course.getId(), "Task 2", futureDate, "Description 2");
+        CourseTaskDTO task3 = courseService.addTaskToCourse(course.getId(), "Task 3", futureDate, "Description 3");
+        courseService.addTaskToCourse(course.getId(), "Task 4", futureDate, "Description 4");
+        courseService.addTaskToCourse(course.getId(), "Task 5", futureDate, "Description 5");
 
         // Mark 3 tasks as complete (100% progress)
         courseService.markTaskComplete(course.getId(), task1.getId());
