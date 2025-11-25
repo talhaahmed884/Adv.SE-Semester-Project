@@ -96,10 +96,17 @@ public class CourseServiceImpl implements CourseService {
     public CourseDTO getCourseById(UUID id) {
         logger.debug("Getting course by id: {}", id);
 
-        Course course = courseRepository.findById(id)
-                .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", id));
+        try {
+            Course course = courseRepository.findById(id)
+                    .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", id));
 
-        return CourseAdapter.toDTO(course);
+            return CourseAdapter.toDTO(course);
+        } catch (CourseException e) {
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error getting course by id", e);
+            throw new CourseException(CourseErrorCode.COURSE_NOT_FOUND, e, "id", id);
+        }
     }
 
     @Override
