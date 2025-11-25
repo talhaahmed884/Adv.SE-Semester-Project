@@ -7,7 +7,7 @@ import com.cpp.project.common.validation.entity.Validator;
  * Validator for todo list task descriptions
  */
 public class ToDoListTaskDescriptionValidator extends Validator<String> {
-    private static final int MIN_LENGTH = 1;
+    private static final int MIN_LENGTH = 2;
     private static final int MAX_LENGTH = 5000;
 
     @Override

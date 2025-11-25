@@ -8,8 +8,8 @@ DROP TABLE IF EXISTS todo_list_tasks CASCADE;
 DROP TABLE IF EXISTS todo_lists CASCADE;
 
 -- Drop existing functions and triggers
-DROP TRIGGER IF EXISTS update_todo_lists_updated_at ON todo_lists;
-DROP TRIGGER IF EXISTS update_todo_list_tasks_updated_at ON todo_list_tasks;
+DROP TRIGGER IF EXISTS update_todo_lists_updated_at ON todo_lists CASCADE;
+DROP TRIGGER IF EXISTS update_todo_list_tasks_updated_at ON todo_list_tasks CASCADE;
 
 -- ============================================================================
 -- TODO_LISTS TABLE
@@ -24,7 +24,7 @@ CREATE TABLE IF NOT EXISTS todo_lists
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     -- Foreign key to users table
-    CONSTRAINT fk_todo_list_user FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+    CONSTRAINT fk_todo_list_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
 
 -- ============================================================================
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS todo_list_tasks
     updated_at   TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     -- Foreign key to todo_lists table
-    CONSTRAINT fk_todo_list_task_list FOREIGN KEY (todo_list_id) REFERENCES todo_lists(id) ON DELETE CASCADE,
+    CONSTRAINT fk_todo_list_task_list FOREIGN KEY (todo_list_id) REFERENCES todo_lists (id) ON DELETE CASCADE,
 
     -- Constraint on status values
     CONSTRAINT chk_todo_list_task_status CHECK (status IN ('PENDING', 'IN_PROGRESS', 'COMPLETED'))
