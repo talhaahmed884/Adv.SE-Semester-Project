@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * UC-1.08: Setting the same password twice is idempotent
  */
-public class UC_1_08_SetPassword_Success_IdempotentSetSameHash_Test extends BaseIntegrationTest {
+public class UC_1_08_SetPassword_Success_IdempotentSetSame_Test extends BaseIntegrationTest {
     @Autowired
     private UserCredentialService userCredentialService;
 

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * UC-1.04: Rejects weak passwords (password strength validation)
  */
-public class UC_1_04_SetPassword_Fail_InvalidHexChars_Test extends BaseIntegrationTest {
+public class UC_1_04_SetPassword_Fail_InvalidChars_Test extends BaseIntegrationTest {
     @Autowired
     private UserCredentialService userCredentialService;
 
