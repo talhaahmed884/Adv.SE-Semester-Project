@@ -3,15 +3,21 @@ package com.cpp.project.todolist.entity;
 import com.cpp.project.common.entity.TaskStatus;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * Builder Pattern for ToDoListTask entity
  */
 public class ToDoListTaskBuilder {
+    private UUID todoListId;
     private String description;
     private Date deadline;
     private TaskStatus status = TaskStatus.PENDING;
-    private ToDoList todoList;
+
+    public ToDoListTaskBuilder todoListId(UUID todoListId) {
+        this.todoListId = todoListId;
+        return this;
+    }
 
     public ToDoListTaskBuilder description(String description) {
         this.description = description;
@@ -28,17 +34,12 @@ public class ToDoListTaskBuilder {
         return this;
     }
 
-    public ToDoListTaskBuilder todoList(ToDoList todoList) {
-        this.todoList = todoList;
-        return this;
-    }
-
     public ToDoListTask build() {
         ToDoListTask task = new ToDoListTask();
+        task.setTodoListId(todoListId);
         task.setDescription(description);
         task.setDeadline(deadline);
         task.setStatus(status != null ? status : TaskStatus.PENDING);
-        task.setTodoList(todoList);
         return task;
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 public class ToDoListValidationService {
     private final ToDoListNameValidator nameValidator = new ToDoListNameValidator();
     private final ToDoListTaskDescriptionValidator descriptionValidator = new ToDoListTaskDescriptionValidator();
+    private final ToDoListTaskDeadlineValidator deadlineValidator = new ToDoListTaskDeadlineValidator();
 
     /**
      * Validate todo list name
@@ -24,5 +25,12 @@ public class ToDoListValidationService {
      */
     public ValidationResult validateTaskDescription(String description) {
         return descriptionValidator.validate(description);
+    }
+
+    /**
+     * Validate task deadline
+     */
+    public ValidationResult validateTaskDeadline(java.util.Date deadline) {
+        return deadlineValidator.validate(deadline);
     }
 }

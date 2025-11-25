@@ -27,6 +27,11 @@ public interface ToDoListRepository {
     List<ToDoList> findByUserId(UUID userId);
 
     /**
+     * Delete a todo list entity
+     */
+    void delete(ToDoList todoList);
+
+    /**
      * Delete a todo list by ID
      */
     void deleteById(UUID id);
@@ -35,4 +40,9 @@ public interface ToDoListRepository {
      * Find all todo lists
      */
     List<ToDoList> findAll();
+
+    /**
+     * Count total number of todo lists
+     */
+    long count();
 }

@@ -67,8 +67,8 @@ public class CourseServiceImpl implements CourseService {
                 throw new CourseException(CourseErrorCode.INVALID_COURSE_NAME, nameValidation.getFirstError());
             }
 
-            // Step 3: Check if course with code already exists
-            if (courseRepository.existsByCode(sanitizedCode)) {
+            // Step 3: Check if course with code already exists for this user
+            if (courseRepository.existsByCodeAndUserId(sanitizedCode, userId)) {
                 throw new CourseException(CourseErrorCode.COURSE_ALREADY_EXISTS, sanitizedCode);
             }
 
@@ -96,10 +96,17 @@ public class CourseServiceImpl implements CourseService {
     public CourseDTO getCourseById(UUID id) {
         logger.debug("Getting course by id: {}", id);
 
-        Course course = courseRepository.findById(id)
-                .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", id));
+        try {
+            Course course = courseRepository.findById(id)
+                    .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", id));
 
-        return CourseAdapter.toDTO(course);
+            return CourseAdapter.toDTO(course);
+        } catch (CourseException e) {
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error getting course by id", e);
+            throw new CourseException(CourseErrorCode.COURSE_NOT_FOUND, e, "id", id);
+        }
     }
 
     @Override
@@ -191,6 +198,11 @@ public class CourseServiceImpl implements CourseService {
             ValidationResult nameValidation = validationService.validateTaskName(sanitizedName);
             if (!nameValidation.isValid()) {
                 throw new CourseException(CourseErrorCode.INVALID_TASK_NAME, nameValidation.getFirstError());
+            }
+
+            ValidationResult deadlineValidation = validationService.validateTaskDeadline(deadline);
+            if (!deadlineValidation.isValid()) {
+                throw new CourseException(CourseErrorCode.INVALID_TASK_DEADLINE, deadlineValidation.getFirstError());
             }
 
             // Step 3: Find course and add task

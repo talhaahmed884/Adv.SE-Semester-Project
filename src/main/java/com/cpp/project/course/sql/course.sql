@@ -19,14 +19,18 @@ DROP FUNCTION IF EXISTS update_updated_at_column() CASCADE;
 CREATE TABLE IF NOT EXISTS courses
 (
     id         UUID PRIMARY KEY,
-    code       VARCHAR(50)              NOT NULL UNIQUE,
+    code       VARCHAR(50)              NOT NULL,
     name       VARCHAR(255)             NOT NULL,
     user_id    UUID                     NOT NULL,
     created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     -- Foreign key to users table
-    CONSTRAINT fk_course_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
+    CONSTRAINT fk_course_user FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE,
+
+    -- Unique constraint: Each user can only have one course with a given code
+    -- Different users can have courses with the same code
+    CONSTRAINT unique_course_code_per_user UNIQUE (code, user_id)
 );
 
 -- ============================================================================
@@ -59,7 +63,7 @@ CREATE TABLE IF NOT EXISTS course_tasks
 -- Index on user_id for fast lookups of user's courses
 CREATE INDEX idx_courses_user_id ON courses (user_id);
 
--- Index on code for unique course code lookups
+-- Index on code for course code lookups (note: unique constraint on (code, user_id) creates its own index)
 CREATE INDEX idx_courses_code ON courses (code);
 
 -- Index on course_id for fast lookups of tasks by course
@@ -105,7 +109,7 @@ EXECUTE FUNCTION update_updated_at_column();
 
 COMMENT ON TABLE courses IS 'Stores course information';
 COMMENT ON COLUMN courses.id IS 'Unique identifier for the course (UUID)';
-COMMENT ON COLUMN courses.code IS 'Unique course code (e.g., CS101)';
+COMMENT ON COLUMN courses.code IS 'Course code (e.g., CS101) - unique per user';
 COMMENT ON COLUMN courses.name IS 'Name of the course';
 COMMENT ON COLUMN courses.user_id IS 'User who owns this course';
 COMMENT ON COLUMN courses.created_at IS 'Timestamp when the course was created';
