@@ -166,6 +166,11 @@ public class ToDoListServiceImpl implements ToDoListService {
                 throw new ToDoListException(ToDoListErrorCode.INVALID_TASK_DESCRIPTION, descriptionValidation.getFirstError());
             }
 
+            ValidationResult deadlineValidation = validationService.validateTaskDeadline(deadline);
+            if (!deadlineValidation.isValid()) {
+                throw new ToDoListException(ToDoListErrorCode.INVALID_TASK_DEADLINE, deadlineValidation.getFirstError());
+            }
+
             // Step 3: Find list and add task
             ToDoList todoList = todoListRepository.findById(todoListId)
                     .orElseThrow(() -> new ToDoListException(ToDoListErrorCode.TODO_LIST_NOT_FOUND, "id", todoListId));
