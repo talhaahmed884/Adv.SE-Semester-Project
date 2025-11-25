@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class DataSanitizationServiceTest extends BaseIntegrationTest {
+public class DataSanitizationServiceTest extends BaseIntegrationTest {
     @Autowired
     private DataSanitizationService sanitizationService;
 

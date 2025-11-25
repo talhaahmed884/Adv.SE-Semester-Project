@@ -1,6 +1,7 @@
 package com.cpp.project.service;
 
 import com.cpp.project.common.AuthControllerIntegrationTest;
+import com.cpp.project.common.DataSanitizationServiceTest;
 import org.junit.platform.suite.api.SelectClasses;
 import org.junit.platform.suite.api.SelectPackages;
 import org.junit.platform.suite.api.Suite;
@@ -15,7 +16,8 @@ import org.junit.platform.suite.api.SuiteDisplayName;
         "com.cpp.project.uc_2_verify_password"
 })
 @SelectClasses({
-        AuthControllerIntegrationTest.class
+        AuthControllerIntegrationTest.class,
+        DataSanitizationServiceTest.class
 })
 public class UserManagementTestSuite {
     // Test suite that runs all tests
