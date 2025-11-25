@@ -1,4 +1,4 @@
-package com.cpp.project.UC_3_Add_Course;
+package com.cpp.project.uc_3_add_course;
 
 import com.cpp.project.common.sanitization.adapter.CreateCourseRequestSanitizer;
 import com.cpp.project.common.validation.entity.ValidationResultBuilder;

@@ -1,4 +1,4 @@
-package com.cpp.project.UC_2_Login;
+package com.cpp.project.uc_2_login;
 
 import com.cpp.project.authentication.service.AuthenticationServiceImpl;
 import com.cpp.project.common.sanitization.adapter.LoginRequestSanitizer;

@@ -1,4 +1,4 @@
-package com.cpp.project.UC_1_SignUp;
+package com.cpp.project.uc_1_signup;
 
 import com.cpp.project.authentication.service.AuthenticationService;
 import com.cpp.project.entity.BaseIntegrationTest;

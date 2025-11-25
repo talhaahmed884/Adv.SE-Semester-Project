@@ -7,8 +7,8 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 @Suite
 @SuiteDisplayName("Studently - Complete Test Suite")
 @SelectPackages({
-        "com.cpp.project.UC_1_SignUp",
-        "com.cpp.project.UC_2_Login"
+        "com.cpp.project.uc_1_signup",
+        "com.cpp.project.uc_2_login"
 })
 public class UserManagementTestSuite {
     // Test suite that runs all tests

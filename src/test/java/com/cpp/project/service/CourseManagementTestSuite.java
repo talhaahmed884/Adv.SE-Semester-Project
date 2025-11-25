@@ -11,7 +11,7 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 @Suite
 @SuiteDisplayName("Studently - Complete Test Suite")
 @SelectPackages({
-        "com.cpp.project.UC_3_Add_Course",
+        "com.cpp.project.uc_3_add_course",
 })
 public class CourseManagementTestSuite {
     // This class remains empty, it is used only as a holder for the above annotations
