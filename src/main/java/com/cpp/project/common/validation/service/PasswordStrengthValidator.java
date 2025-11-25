@@ -9,7 +9,7 @@ public class PasswordStrengthValidator extends Validator<String> {
     private final PasswordStrengthRule strengthRule;
 
     public PasswordStrengthValidator() {
-        this.strengthRule = PasswordStrengthRule.basic();
+        this.strengthRule = PasswordStrengthRule.standard();
     }
 
     public PasswordStrengthValidator(PasswordStrengthRule strengthRule) {

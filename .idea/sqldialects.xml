@@ -3,5 +3,7 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/src/main/java/com/cpp/project/user/sql/user.sql" dialect="PostgreSQL" />
     <file url="file://$PROJECT_DIR$/src/main/java/com/cpp/project/user_credential/sql/user_credential.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/test/java/com/cpp/project/entity/BaseIntegrationTest.java" dialect="GenericSQL" />
+    <file url="PROJECT" dialect="PostgreSQL" />
   </component>
 </project>

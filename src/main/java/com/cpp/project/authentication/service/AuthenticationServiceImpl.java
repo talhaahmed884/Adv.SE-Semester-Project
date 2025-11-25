@@ -1,5 +1,7 @@
 package com.cpp.project.authentication.service;
 
+import com.cpp.project.common.sanitization.adapter.LoginRequestSanitizer;
+import com.cpp.project.common.sanitization.adapter.SignUpRequestSanitizer;
 import com.cpp.project.common.validation.entity.ValidationResult;
 import com.cpp.project.common.validation.service.UserValidationService;
 import com.cpp.project.user.adapter.UserAdapter;
@@ -23,38 +25,43 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private final UserService userService;
     private final UserCredentialService credentialService;
     private final UserValidationService validationService;
+    private final SignUpRequestSanitizer signUpSanitizer;
+    private final LoginRequestSanitizer loginSanitizer;
 
     public AuthenticationServiceImpl(UserService userService,
                                      UserCredentialService credentialService,
-                                     UserValidationService validationService) {
+                                     UserValidationService validationService,
+                                     SignUpRequestSanitizer signUpSanitizer,
+                                     LoginRequestSanitizer loginSanitizer) {
         this.userService = userService;
         this.credentialService = credentialService;
         this.validationService = validationService;
+        this.signUpSanitizer = signUpSanitizer;
+        this.loginSanitizer = loginSanitizer;
     }
 
     @Override
     public UserDTO signUp(SignUpRequestDTO request) {
+        SignUpRequestDTO sanitizedRequest = signUpSanitizer.sanitize(request);
+
+        ValidationResult validationResult = validationService.validateSignUpRequest(sanitizedRequest);
+
+        if (!validationResult.isValid()) {
+            throw new UserException(UserErrorCode.INVALID_USER_DATA, validationResult.getFirstError());
+        }
+
         try {
-            // Validate entire request using validation framework
-            ValidationResult validationResult = validationService.validateSignUpRequest(request);
+            User user = userService.createUserWithoutCredential(sanitizedRequest.getName(), sanitizedRequest.getEmail());
 
-            if (!validationResult.isValid()) {
-                String firstError = validationResult.getFirstError();
-                throw new UserException(UserErrorCode.INVALID_USER_DATA, firstError);
-            }
-
-            // Create user without credential (delegated to UserService)
-            User user = userService.createUserWithoutCredential(request.getName(), request.getEmail());
-
-            // Create credential for user (delegated to UserCredentialService)
-            credentialService.createCredential(user.getId(), request.getPassword());
+            credentialService.createCredential(user.getId(), sanitizedRequest.getPassword());
 
             logger.info("User signed up successfully: {}", user.getEmail());
             return UserAdapter.toDTO(user);
         } catch (UserException | UserCredentialException e) {
+            logger.error("Failed during sign up for email: {}", sanitizedRequest.getEmail(), e);
             throw e;
         } catch (Exception e) {
-            logger.error("Unexpected error during sign up", e);
+            logger.error("Unexpected error during sign up for email: {}", sanitizedRequest.getEmail(), e);
             throw new UserException(UserErrorCode.USER_CREATION_FAILED, e, e.getMessage());
         }
     }
@@ -62,35 +69,33 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Override
     @Transactional(readOnly = true)
     public boolean login(LoginRequestDTO request) {
+        LoginRequestDTO sanitizedRequest = loginSanitizer.sanitize(request);
+
+        ValidationResult validationResult = validationService.validateLoginRequest(sanitizedRequest);
+
+        if (!validationResult.isValid()) {
+            logger.warn("Login validation failed for email: {}", sanitizedRequest.getEmail());
+            throw new AuthenticationException(AuthenticationErrorCode.INVALID_CREDENTIALS);
+        }
+
         try {
-            // Validate request using validation framework
-            ValidationResult validationResult = validationService.validateLoginRequest(request);
-
-            if (!validationResult.isValid()) {
-                throw new AuthenticationException(AuthenticationErrorCode.INVALID_CREDENTIALS);
-            }
-
-            // Verify user exists (delegated to UserService)
-            UserDTO user = userService.getUserByEmail(request.getEmail());
-            if (user == null) {
-                throw new AuthenticationException(AuthenticationErrorCode.INVALID_CREDENTIALS);
-            }
-
-            // Verify password (delegated to UserCredentialService)
-            boolean isValid = credentialService.verifyPassword(request.getEmail(), request.getPassword());
+            UserDTO user = userService.getUserByEmail(sanitizedRequest.getEmail());
+            boolean isValid = credentialService.verifyPassword(sanitizedRequest.getEmail(), sanitizedRequest.getPassword());
 
             if (isValid) {
-                logger.info("User logged in successfully: {}", request.getEmail());
+                logger.info("User logged in successfully: {}", sanitizedRequest.getEmail());
             } else {
-                logger.warn("Failed login attempt for user: {}", request.getEmail());
+                logger.warn("Failed login attempt for user: {}", sanitizedRequest.getEmail());
             }
 
             return isValid;
         } catch (UserException | UserCredentialException | AuthenticationException e) {
-            throw e;
+            // Convert domain exceptions to authentication failure (don't reveal user existence)
+            logger.warn("Login failed for email: {} - {}", sanitizedRequest.getEmail(), e.getClass().getSimpleName());
+            throw new AuthenticationException(AuthenticationErrorCode.INVALID_CREDENTIALS);
         } catch (Exception e) {
-            logger.error("Unexpected error during login", e);
-            throw new AuthenticationException(AuthenticationErrorCode.AUTHENTICATION_FAILED, e, request.getEmail());
+            logger.error("Unexpected error during login for email: {}", sanitizedRequest.getEmail(), e);
+            throw new AuthenticationException(AuthenticationErrorCode.AUTHENTICATION_FAILED, e, sanitizedRequest.getEmail());
         }
     }
 
