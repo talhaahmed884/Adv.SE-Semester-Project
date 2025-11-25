@@ -1,15 +1,17 @@
 <?xml version='1.0' encoding='utf-8'?>
 <!DOCTYPE hibernate-configuration PUBLIC
-    "-//Hibernate/Hibernate Configuration DTD//EN"
-    "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+        "-//Hibernate/Hibernate Configuration DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
-  <session-factory>
-    <property name="connection.url"/>
-    <property name="connection.driver_class"/>
-    <!-- <property name="connection.username"/> -->
-    <!-- <property name="connection.password"/> -->
+    <session-factory>
+        <property name="connection.url">${spring.datasource.url}</property>
+        <property name="connection.driver_class">${spring.datasource.driver-class-name}</property>
+        <property name="connection.username">${spring.datasource.username}</property>
+        <property name="connection.password">${spring.datasource.password}</property>
 
-    <!-- DB schema will be updated if needed -->
-    <!-- <property name="hibernate.hbm2ddl.auto">update</property> -->
-  </session-factory>
+        <property name="hibernate.hbm2ddl.auto">${spring.jpa.hibernate.ddl-auto}</property>
+        <property name="hibernate.show_sql">${spring.jpa.show-sql}</property>
+        <property name="hibernate.format_sql">${spring.jpa.properties.hibernate.format_sql}</property>
+        <property name="hibernate.jdbc.time_zone">${spring.jpa.properties.hibernate.jdbc.time_zone}</property>
+    </session-factory>
 </hibernate-configuration>
