@@ -2,117 +2,419 @@
 
 title Studently – Class (UML) Diagram
 
-class User {
-    - UUID id
-    - String name
-    - String email
+' ==================== DESIGN PATTERNS LEGEND ====================
 
-    + void signUp(String name, String email, String password)
-    + boolean login(String email, String password)
-    + Course addCourse(String code, String name)
-    + ToDoList createToDoList(String name)
+legend top left
+  |<back:#FFE6E6>   </back>| Adapter Pattern |
+  |<back:#E6F3FF>   </back>| Repository Pattern |
+  |<back:#E6FFE6>   </back>| Builder Pattern |
+  |<back:#FFF9E6>   </back>| Service/Facade Pattern |
+
+  **Relationships:**
+  ──> : Association
+  ──|> : Inheritance/Implementation
+  ──* : Composition (strong ownership)
+  ──o : Aggregation (weak ownership)
+  ..> : Dependency
+endlegend
+
+' ==================== ENTITIES ====================
+
+package "Domain Entities" <<Rectangle>> {
+    class User <<Entity>> {
+        - UUID id
+        - String name
+        - String email
+        - UserCredential credential
+
+        + UUID getId()
+        + String getName()
+        + void setName(String name)
+        + String getEmail()
+        + void setEmail(String email)
+        + UserCredential getCredential()
+        + void setCredential(UserCredential credential)
+    }
+
+    note right of User
+        **JPA Entity**
+        Primary entity for system users
+        @OneToOne with UserCredential (cascade all)
+        Owns courses and to-do lists via userId FK
+    end note
+
+    class UserCredential <<Entity>> {
+        - UUID userId
+        - User user
+        - String passwordHash
+        - String algorithm
+
+        + UUID getUserId()
+        + User getUser()
+        + void setUser(User user)
+        + String getPasswordHash()
+        + void setPasswordHash(String hash)
+        + String getAlgorithm()
+    }
+
+    note bottom of UserCredential
+        **JPA Entity**
+        Stores salted password hash with SHA-512
+        @OneToOne with User (userId as PK and FK)
+        Bidirectional relationship
+    end note
+
+    class Course <<Entity>> {
+        - UUID id
+        - String code
+        - String name
+        - UUID userId
+        - List<CourseTask> tasks
+        - LocalDateTime createdAt
+        - LocalDateTime updatedAt
+
+        + int progress()
+        + CourseTask addTask(String name, Date deadline, String description)
+    }
+
+    note top of Course
+        **JPA Entity**
+        Course code must be unique per user
+        Progress calculated as average of task progress
+        @OneToMany with CourseTask (cascade all, lazy fetch)
+        @ManyToOne with User via userId FK
+    end note
+
+    class CourseTask <<Entity>> {
+        - UUID id
+        - UUID courseId
+        - String name
+        - String description
+        - Date deadline
+        - int progress
+        - TaskStatus status
+        - LocalDateTime createdAt
+        - LocalDateTime updatedAt
+
+        + void updateProgress(int value)
+        + void markComplete()
+    }
+
+    note right of CourseTask
+        **JPA Entity**
+        Progress clamped to 0-100 range
+        Marking complete: progress=100, status=COMPLETED
+        @ManyToOne with Course via courseId FK
+    end note
+
+    class ToDoList <<Entity>> {
+        - UUID id
+        - String name
+        - UUID userId
+        - List<ToDoListTask> tasks
+        - LocalDateTime createdAt
+        - LocalDateTime updatedAt
+
+        + ToDoListTask addTask(String description, Date deadline)
+        + List<Date> getAggregatedDeadlines()
+    }
+
+    note right of ToDoList
+        **JPA Entity**
+        @OneToMany with ToDoListTask (cascade all, lazy fetch)
+        @ManyToOne with User via userId FK
+    end note
+
+    class ToDoListTask <<Entity>> {
+        - UUID id
+        - UUID todoListId
+        - String description
+        - Date deadline
+        - TaskStatus status
+        - LocalDateTime createdAt
+        - LocalDateTime updatedAt
+
+        + void markComplete()
+    }
+
+    note right of ToDoListTask
+        **JPA Entity**
+        Deadline is optional
+        @ManyToOne with ToDoList via todoListId FK
+    end note
+
+    enum TaskStatus {
+        PENDING
+        IN_PROGRESS
+        COMPLETED
+
+        + String getDisplayName()
+    }
+
+    note bottom of TaskStatus
+        Shared enum for task status
+        Used by both CourseTask and ToDoListTask
+    end note
 }
 
-note right of User
-    Owns courses and to-do lists
-    Performs sign-up and login
-end note
+' Entity Relationships - Using proper UML notation
+User "1" *-- "1" UserCredential : composition\n(owns)
+User "1" o-- "0..*" Course : aggregation\n(creates)
+User "1" o-- "0..*" ToDoList : aggregation\n(owns)
+Course "1" *-- "0..*" CourseTask : composition\n(contains)
+ToDoList "1" *-- "0..*" ToDoListTask : composition\n(contains)
+CourseTask --> TaskStatus : uses
+ToDoListTask --> TaskStatus : uses
 
-class UserCredential {
-    - String passwordHash
-    - String algorithm = "SHA-512"
+' ==================== DTOs (Builder Pattern) ====================
 
-    + void setPassword(String passwordHash)
-    + boolean verify(String passwordHash)
+package "Data Transfer Objects" <<Rectangle>> {
+    class UserDTO <<DTO>> #E6FFE6 {
+        - UUID id
+        - String name
+        - String email
+
+        + {static} UserDTOBuilder builder()
+    }
+
+    note right of UserDTO
+        **Builder Pattern**
+        Immutable DTO
+        Used for API responses
+    end note
+
+    class CourseDTO <<DTO>> #E6FFE6 {
+        - UUID id
+        - String code
+        - String name
+        - UUID userId
+        - int progress
+        - List<CourseTaskDTO> tasks
+        - LocalDateTime createdAt
+        - LocalDateTime updatedAt
+
+        + {static} CourseDTOBuilder builder()
+    }
+
+    class CourseTaskDTO <<DTO>> #E6FFE6 {
+        - UUID id
+        - String name
+        - String description
+        - Date deadline
+        - int progress
+        - TaskStatus status
+        - UUID courseId
+        - LocalDateTime createdAt
+        - LocalDateTime updatedAt
+
+        + {static} CourseTaskDTOBuilder builder()
+    }
+
+    class ToDoListDTO <<DTO>> #E6FFE6 {
+        - UUID id
+        - String name
+        - UUID userId
+        - List<ToDoListTaskDTO> tasks
+        - LocalDateTime createdAt
+        - LocalDateTime updatedAt
+
+        + {static} ToDoListDTOBuilder builder()
+    }
+
+    class ToDoListTaskDTO <<DTO>> #E6FFE6 {
+        - UUID id
+        - String description
+        - Date deadline
+        - TaskStatus status
+        - UUID todoListId
+        - LocalDateTime createdAt
+        - LocalDateTime updatedAt
+
+        + {static} ToDoListTaskDTOBuilder builder()
+    }
+
+    class CalendarItemDTO <<DTO>> #E6FFE6 {
+        - Date date
+        - String sourceType
+        - String title
+        - String status
+        - String sourceId
+        - String taskId
+
+        + {static} CalendarItemDTOBuilder builder()
+    }
+
+    note right of CalendarItemDTO
+        **Builder Pattern**
+        Aggregates tasks from multiple sources
+        sourceType: "COURSE" or "TODO_LIST"
+        Used by CalendarService
+    end note
 }
 
-note bottom of UserCredential
-    Stores password hash; verify on login.
-    Algorithm per NFR: SHA-512.
-end note
+' DTO Relationships
+CourseDTO "1" o-- "0..*" CourseTaskDTO : contains
+ToDoListDTO "1" o-- "0..*" ToDoListTaskDTO : contains
+CourseTaskDTO --> TaskStatus : uses
+ToDoListTaskDTO --> TaskStatus : uses
 
-User "1" o-- "1" UserCredential : owns
+' ==================== SERVICES (Service Pattern) ====================
 
-class Course {
-    - String code
-    - String name
+package "Service Layer" <<Rectangle>> {
+    interface AuthenticationService <<Service>> #FFF9E6 {
+        + UserDTO signUp(SignUpRequestDTO request)
+        + boolean login(LoginRequestDTO request)
+        + UserDTO getUserByEmail(String email)
+    }
 
-    + int progress()
-    + CourseTask addTask(String name, Date deadline, String description)
+    interface UserService <<Service>> #FFF9E6 {
+        + User createUserWithoutCredential(String name, String email)
+        + UserDTO getUserById(UUID id)
+        + UserDTO getUserByEmail(String email)
+        + void updateUser(UUID id, String name, String email)
+        + void deleteUser(UUID id)
+    }
+
+    interface UserCredentialService <<Service>> #FFF9E6 {
+        + void createCredential(UUID userId, String password)
+        + void setPassword(String email, String newPassword)
+        + boolean verifyPassword(String email, String password)
+    }
+
+    interface CourseService <<Service>> #FFF9E6 {
+        + CourseDTO createCourse(String code, String name, UUID userId)
+        + CourseDTO getCourseById(UUID id)
+        + CourseDTO getCourseByCode(String code)
+        + List<CourseDTO> getCoursesByUserId(UUID userId)
+        + CourseDTO updateCourse(UUID id, String name)
+        + void deleteCourse(UUID id)
+        + CourseTaskDTO addTaskToCourse(UUID courseId, String name, Date deadline, String description)
+        + CourseTaskDTO updateTaskProgress(UUID courseId, UUID taskId, int progress)
+        + CourseTaskDTO markTaskComplete(UUID courseId, UUID taskId)
+    }
+
+    interface ToDoListService <<Service>> #FFF9E6 {
+        + ToDoListDTO createToDoList(String name, UUID userId)
+        + ToDoListDTO getToDoListById(UUID id)
+        + List<ToDoListDTO> getToDoListsByUserId(UUID userId)
+        + ToDoListDTO updateToDoList(UUID id, String name)
+        + void deleteToDoList(UUID id)
+        + ToDoListTaskDTO addTaskToList(UUID todoListId, String description, Date deadline)
+        + ToDoListTaskDTO markTaskComplete(UUID todoListId, UUID taskId)
+        + List<Date> getAggregatedDeadlines(UUID todoListId)
+    }
+
+    interface CalendarService <<Service>> #FFF9E6 {
+        + List<CalendarItemDTO> getItemsForMonth(int year, int month, UUID userId)
+    }
+
+    note bottom of CalendarService
+        **Service/Facade Pattern**
+        Aggregates deadlines from multiple sources
+        Returns unified CalendarItemDTO list
+    end note
 }
 
-note top of Course
-    Per-user uniqueness: code must be unique for a given User.
-end note
+' Service Dependencies
+AuthenticationService ..> UserService : depends on
+AuthenticationService ..> UserCredentialService : depends on
 
-User "1" o-- "0..*" Course : enrolls/creates
+' ==================== REPOSITORIES (Repository Pattern) ====================
 
-class CourseTask {
-    - String name
-    - String description
-    - Date deadline
-    - int progress
-    - TaskStatus status
+package "Repository Layer" <<Rectangle>> {
+    interface UserRepository <<Repository>> #E6F3FF {
+        + User save(User user)
+        + Optional<User> findById(UUID id)
+        + Optional<User> findByEmail(String email)
+        + boolean existsByEmail(String email)
+        + void deleteById(UUID id)
+    }
 
-    + void updateProgress(int value)
-    + void markComplete()
+    note right of UserRepository
+        **Repository Pattern**
+        Spring Data JPA Repository
+        Extends JpaRepository
+    end note
+
+    interface UserCredentialRepository <<Repository>> #E6F3FF {
+        + UserCredential save(UserCredential credential)
+        + Optional<UserCredential> findByUserId(UUID userId)
+        + void deleteByUserId(UUID userId)
+    }
+
+    interface CourseRepository <<Repository>> #E6F3FF {
+        + Course save(Course course)
+        + Optional<Course> findById(UUID id)
+        + Optional<Course> findByCode(String code)
+        + List<Course> findByUserId(UUID userId)
+        + boolean existsByCodeAndUserId(String code, UUID userId)
+        + void deleteById(UUID id)
+    }
+
+    interface ToDoListRepository <<Repository>> #E6F3FF {
+        + ToDoList save(ToDoList todoList)
+        + Optional<ToDoList> findById(UUID id)
+        + List<ToDoList> findByUserId(UUID userId)
+        + void deleteById(UUID id)
+    }
 }
 
-note right of CourseTask
-    Deadline shown in calendar; progress update (0–100) and completion.
-end note
+' Service to Repository Dependencies
+UserService ..> UserRepository : depends on
+UserCredentialService ..> UserRepository : depends on
+UserCredentialService ..> UserCredentialRepository : depends on
+CourseService ..> CourseRepository : depends on
+ToDoListService ..> ToDoListRepository : depends on
+CalendarService ..> CourseRepository : depends on
+CalendarService ..> ToDoListRepository : depends on
 
-Course "1" o-- "0..*" CourseTask : contains
+' ==================== ADAPTERS (Adapter Pattern) ====================
 
-enum TaskStatus {
-    PENDING
-    COMPLETE
+package "Adapter Layer" <<Rectangle>> {
+    class UserAdapter <<Adapter>> #FFE6E6 {
+        + {static} UserDTO toDTO(User user)
+        + {static} User toEntity(UserDTO dto)
+    }
+
+    note right of UserAdapter
+        **Adapter Pattern**
+        Converts between Entity and DTO
+        Static utility methods
+    end note
+
+    class CourseAdapter <<Adapter>> #FFE6E6 {
+        + {static} CourseDTO toDTO(Course course)
+        + {static} CourseDTO toDTOWithoutTasks(Course course)
+    }
+
+    note bottom of CourseAdapter
+        **Adapter Pattern**
+        toDTO(): includes nested task list
+        toDTOWithoutTasks(): for list views
+    end note
+
+    class ToDoListAdapter <<Adapter>> #FFE6E6 {
+        + {static} ToDoListDTO toDTO(ToDoList todoList)
+        + {static} ToDoListDTO toDTOWithoutTasks(ToDoList todoList)
+    }
+
+    note bottom of ToDoListAdapter
+        **Adapter Pattern**
+        toDTO(): includes nested task list
+        toDTOWithoutTasks(): for list views
+    end note
 }
 
-class ToDoList {
-    - String name
+' Adapter Dependencies
+UserService ..> UserAdapter : uses
+CourseService ..> CourseAdapter : uses
+ToDoListService ..> ToDoListAdapter : uses
 
-    + void addTask(String description, Date deadline): ToDoListTask
-}
-
-User "1" o-- "0..*" ToDoList : owns
-
-class ToDoListTask {
-    - String description
-    - Date deadline
-    - TaskStatus status
-
-    + void markComplete()
-}
-
-note right of ToDoListTask
-    Optional deadline shown in calendar; can be completed.
-end note
-
-ToDoList "1" o-- "0..*" ToDoListTask : contains
-
-class Calendar {
-    - int day
-    - int month
-    - int year
-
-    + List<CalendarItem> itemsForMonth(User user)
-}
-
-Calendar ..> CourseTask : aggregates deadlines
-Calendar ..> ToDoListTask : aggregates deadlines
-
-class CalendarItem {
-    - Date date
-    - String sourceType
-    - String title
-}
-
-enum TaskType {
-    COURSE_TASK
-    TODO_LIST_TASK
-}
-
-Calendar "1" o-- "0..*" CalendarItem : aggregates CourseTask/ToDoListTask
+UserAdapter ..> User : converts
+UserAdapter ..> UserDTO : converts
+CourseAdapter ..> Course : converts
+CourseAdapter ..> CourseDTO : converts
+ToDoListAdapter ..> ToDoList : converts
+ToDoListAdapter ..> ToDoListDTO : converts
 
 @enduml

@@ -1,0 +1,481 @@
+@startuml
+
+title Studently – Infrastructure Part 2: Data Sanitization, REST Controllers & DTOs
+
+' ==================== DESIGN PATTERNS LEGEND ====================
+
+legend top left
+  |<back:#FFE6E6>   </back>| Factory Pattern |
+  |<back:#E6F3FF>   </back>| Strategy Pattern |
+  |<back:#E6FFE6>   </back>| Builder Pattern |
+  |<back:#FFF9E6>   </back>| Facade Pattern |
+  |<back:#FFEEFF>   </back>| Adapter Pattern |
+
+  **Relationships:**
+  ──> : Association
+  ──|> : Inheritance/Implementation
+  ──* : Composition
+  ──o : Aggregation
+  ..> : Dependency
+endlegend
+
+' ==================== DATA SANITIZATION INFRASTRUCTURE ====================
+
+package "Data Sanitization" <<Rectangle>> {
+    interface SanitizationStrategy <<Strategy>> #E6F3FF {
+        + String sanitize(String value)
+    }
+
+    note right of SanitizationStrategy
+        **Strategy Pattern**
+        Allows different approaches
+        Returns sanitized or null
+    end note
+
+    class EmailSanitizationStrategy <<Strategy>> #E6F3FF implements SanitizationStrategy {
+        + String sanitize(String value)
+    }
+
+    note right of EmailSanitizationStrategy
+        **Strategy Implementation**
+        Trims whitespace
+        Lowercase (RFC 5321)
+    end note
+
+    class NameSanitizationStrategy <<Strategy>> #E6F3FF implements SanitizationStrategy {
+        + String sanitize(String value)
+    }
+
+    note right of NameSanitizationStrategy
+        **Strategy Implementation**
+        Trims whitespace
+        Normalizes spaces
+    end note
+
+    class NoOpSanitizationStrategy <<Strategy>> #E6F3FF implements SanitizationStrategy {
+        + String sanitize(String value)
+    }
+
+    note right of NoOpSanitizationStrategy
+        **Strategy Implementation**
+        Returns as-is
+        For passwords
+    end note
+
+    class CompositeSanitizationStrategy <<Composite>> implements SanitizationStrategy {
+        - List<SanitizationStrategy> strategies
+
+        + CompositeSanitizationStrategy(SanitizationStrategy... strategies)
+        + String sanitize(String value)
+    }
+
+    note bottom of CompositeSanitizationStrategy
+        **Composite Pattern**
+        Chains multiple strategies
+        Sequential application
+    end note
+
+    class SanitizationStrategyFactory <<Factory>> #FFE6E6 {
+        - {static} SanitizationStrategy EMAIL_STRATEGY
+        - {static} SanitizationStrategy NAME_STRATEGY
+        - {static} SanitizationStrategy NOOP_STRATEGY
+
+        + {static} SanitizationStrategy getStrategy(FieldType fieldType)
+    }
+
+    note bottom of SanitizationStrategyFactory
+        **Factory Pattern**
+        Creates strategies
+        Singleton instances
+    end note
+
+    enum FieldType {
+        EMAIL
+        NAME
+        PASSWORD
+        GENERIC
+    }
+
+    class DataSanitizationService <<Facade>> #FFF9E6 {
+        - Logger logger
+
+        + String sanitizeEmail(String email)
+        + String sanitizeName(String name)
+        + String sanitizePassword(String password)
+        + String sanitize(String value, FieldType fieldType)
+        + String sanitize(String value, SanitizationStrategy strategy)
+    }
+
+    note bottom of DataSanitizationService
+        **Facade Pattern**
+        @Service
+        Logs at trace level
+    end note
+}
+
+' Sanitization Relationships
+SanitizationStrategyFactory ..> FieldType : uses
+SanitizationStrategyFactory ..> EmailSanitizationStrategy : creates
+SanitizationStrategyFactory ..> NameSanitizationStrategy : creates
+SanitizationStrategyFactory ..> NoOpSanitizationStrategy : creates
+DataSanitizationService ..> SanitizationStrategyFactory : uses
+CompositeSanitizationStrategy o-- SanitizationStrategy : aggregates
+
+' ==================== REQUEST SANITIZERS ====================
+
+package "Request Sanitizers" <<Rectangle>> {
+    class SignUpRequestSanitizer <<Adapter>> #FFEEFF {
+        - DataSanitizationService sanitizationService
+
+        + SignUpRequestDTO sanitize(SignUpRequestDTO request)
+    }
+
+    note right of SignUpRequestSanitizer
+        **Adapter Pattern**
+        @Component
+        Sanitizes name, email
+        Keeps password as-is
+    end note
+
+    class LoginRequestSanitizer <<Adapter>> #FFEEFF {
+        - DataSanitizationService sanitizationService
+
+        + LoginRequestDTO sanitize(LoginRequestDTO request)
+    }
+
+    note right of LoginRequestSanitizer
+        **Adapter Pattern**
+        @Component
+        Sanitizes email only
+    end note
+
+    class CreateCourseRequestSanitizer <<Adapter>> #FFEEFF {
+        - DataSanitizationService sanitizationService
+
+        + String sanitizeCode(String code)
+        + String sanitizeName(String name)
+    }
+
+    note right of CreateCourseRequestSanitizer
+        **Adapter Pattern**
+        @Component
+        Code: trim + uppercase
+    end note
+
+    class ToDoListSanitizer <<Adapter>> #FFEEFF {
+        - DataSanitizationService sanitizationService
+
+        + String sanitizeName(String name)
+    }
+
+    class CourseTaskSanitizer <<Adapter>> #FFEEFF {
+        - DataSanitizationService sanitizationService
+
+        + String sanitizeName(String name)
+        + String sanitizeDescription(String description)
+    }
+
+    class ToDoListTaskSanitizer <<Adapter>> #FFEEFF {
+        - DataSanitizationService sanitizationService
+
+        + String sanitizeDescription(String description)
+    }
+}
+
+' Sanitizer Relationships
+SignUpRequestSanitizer *-- DataSanitizationService : contains
+LoginRequestSanitizer *-- DataSanitizationService : contains
+CreateCourseRequestSanitizer *-- DataSanitizationService : contains
+ToDoListSanitizer *-- DataSanitizationService : contains
+CourseTaskSanitizer *-- DataSanitizationService : contains
+ToDoListTaskSanitizer *-- DataSanitizationService : contains
+
+' ==================== REQUEST DTOs ====================
+
+package "Request DTOs" <<Rectangle>> {
+    class SignUpRequestDTO <<DTO>> {
+        - String name
+        - String email
+        - String password
+
+        + String getName()
+        + void setName(String name)
+        + String getEmail()
+        + void setEmail(String email)
+        + String getPassword()
+        + void setPassword(String password)
+    }
+
+    class LoginRequestDTO <<DTO>> {
+        - String email
+        - String password
+
+        + String getEmail()
+        + void setEmail(String email)
+        + String getPassword()
+        + void setPassword(String password)
+    }
+
+    class UpdateUserRequestDTO <<DTO>> {
+        - String name
+        - String email
+
+        + boolean isEmpty()
+    }
+
+    class CreateCourseRequestDTO <<DTO>> {
+        - String code
+        - String name
+        - UUID userId
+
+        + boolean isEmpty()
+    }
+
+    class UpdateCourseRequestDTO <<DTO>> {
+        - String name
+
+        + boolean isEmpty()
+    }
+
+    class AddTaskRequestDTO <<DTO>> {
+        - String name
+        - Date deadline
+        - String description
+
+        + boolean isEmpty()
+    }
+
+    class UpdateTaskProgressRequestDTO <<DTO>> {
+        - Integer progress
+    }
+
+    class CreateToDoListRequestDTO <<DTO>> {
+        - String name
+        - UUID userId
+
+        + boolean isEmpty()
+    }
+
+    class UpdateToDoListRequestDTO <<DTO>> {
+        - String name
+
+        + boolean isEmpty()
+    }
+
+    class AddToDoListTaskRequestDTO <<DTO>> {
+        - String description
+        - Date deadline
+
+        + boolean isEmpty()
+    }
+
+    note bottom of AddToDoListTaskRequestDTO
+        **Plain DTOs (no builder)**
+        Include: no-arg constructor
+        All-args constructor
+        Getters and setters
+        isEmpty() validation
+    end note
+}
+
+' ==================== RESPONSE DTOs ====================
+
+package "Response DTOs" <<Rectangle>> {
+    class UserDTO <<DTO>> #E6FFE6 {
+        - UUID id
+        - String name
+        - String email
+
+        + {static} UserDTOBuilder builder()
+    }
+
+    note right of UserDTO
+        **Builder Pattern**
+        Immutable response DTO
+    end note
+
+    class AuthResponseDTO <<DTO>> #E6FFE6 {
+        - UserDTO user
+        - String message
+        - LocalDateTime timestamp
+
+        + {static} AuthResponseDTOBuilder builder()
+    }
+
+    note right of AuthResponseDTO
+        **Builder Pattern**
+        Wraps UserDTO
+        timestamp defaults to now()
+    end note
+
+    class ApiSuccessResponse<T> <<DTO>> #E6FFE6 {
+        - T data
+        - String message
+        - int statusCode
+        - LocalDateTime timestamp
+
+        + {static} ApiSuccessResponseBuilder<T> builder()
+    }
+
+    note right of ApiSuccessResponse
+        **Builder Pattern**
+        Generic wrapper for ALL responses
+        statusCode defaults to 200
+        Consistent format
+    end note
+}
+
+AuthResponseDTO o-- UserDTO : contains
+
+' ==================== REST API CONTROLLERS ====================
+
+package "REST Controllers" <<Rectangle>> {
+    class AuthController <<Controller>> {
+        - AuthenticationService authenticationService
+
+        + ResponseEntity<ApiSuccessResponse<AuthResponseDTO>> signUp(SignUpRequestDTO request)
+        + ResponseEntity<ApiSuccessResponse<AuthResponseDTO>> login(LoginRequestDTO request)
+    }
+
+    note right of AuthController
+        **@RestController: /api/auth**
+        POST /signup → 201 CREATED
+        POST /login → 200 OK
+    end note
+
+    class UserController <<Controller>> {
+        - UserService userService
+
+        + ResponseEntity<ApiSuccessResponse<UserDTO>> getUserById(UUID id)
+        + ResponseEntity<ApiSuccessResponse<UserDTO>> getUserByEmail(String email)
+        + ResponseEntity<ApiSuccessResponse<String>> updateUser(UUID id, UpdateUserRequestDTO request)
+        + ResponseEntity<ApiSuccessResponse<String>> deleteUser(UUID id)
+    }
+
+    note right of UserController
+        **@RestController: /api/users**
+        GET /{id}, GET /email/{email}
+        PUT /{id}, DELETE /{id}
+    end note
+
+    class CourseController <<Controller>> {
+        - CourseService courseService
+
+        + ResponseEntity<ApiSuccessResponse<CourseDTO>> createCourse(CreateCourseRequestDTO request)
+        + ResponseEntity<ApiSuccessResponse<CourseDTO>> getCourseById(UUID id)
+        + ResponseEntity<ApiSuccessResponse<CourseDTO>> getCourseByCode(String code)
+        + ResponseEntity<ApiSuccessResponse<List<CourseDTO>>> getCoursesByUserId(UUID userId)
+        + ResponseEntity<ApiSuccessResponse<CourseDTO>> updateCourse(UUID id, UpdateCourseRequestDTO request)
+        + ResponseEntity<ApiSuccessResponse<String>> deleteCourse(UUID id)
+        + ResponseEntity<ApiSuccessResponse<CourseTaskDTO>> addTaskToCourse(UUID courseId, AddTaskRequestDTO request)
+        + ResponseEntity<ApiSuccessResponse<CourseTaskDTO>> updateTaskProgress(UUID courseId, UUID taskId, UpdateTaskProgressRequestDTO request)
+        + ResponseEntity<ApiSuccessResponse<CourseTaskDTO>> markTaskComplete(UUID courseId, UUID taskId)
+    }
+
+    note bottom of CourseController
+        **@RestController: /api/courses**
+        Full CRUD + task management
+        POST /, GET /{id}, PUT /{id}, DELETE /{id}
+        POST /{courseId}/tasks
+        PUT /{courseId}/tasks/{taskId}/progress
+        PUT /{courseId}/tasks/{taskId}/complete
+    end note
+
+    class ToDoListController <<Controller>> {
+        - ToDoListService todoListService
+
+        + ResponseEntity<ApiSuccessResponse<ToDoListDTO>> createToDoList(CreateToDoListRequestDTO request)
+        + ResponseEntity<ApiSuccessResponse<ToDoListDTO>> getToDoListById(UUID id)
+        + ResponseEntity<ApiSuccessResponse<List<ToDoListDTO>>> getToDoListsByUserId(UUID userId)
+        + ResponseEntity<ApiSuccessResponse<ToDoListDTO>> updateToDoList(UUID id, UpdateToDoListRequestDTO request)
+        + ResponseEntity<ApiSuccessResponse<String>> deleteToDoList(UUID id)
+        + ResponseEntity<ApiSuccessResponse<ToDoListTaskDTO>> addTaskToList(UUID todoListId, AddToDoListTaskRequestDTO request)
+        + ResponseEntity<ApiSuccessResponse<ToDoListTaskDTO>> markTaskComplete(UUID todoListId, UUID taskId)
+        + ResponseEntity<ApiSuccessResponse<List<Date>>> getAggregatedDeadlines(UUID todoListId)
+    }
+
+    note bottom of ToDoListController
+        **@RestController: /api/todolists**
+        Full CRUD + task management
+        POST /{todoListId}/tasks
+        PUT /{todoListId}/tasks/{taskId}/complete
+        GET /{todoListId}/deadlines
+    end note
+
+    class CalendarController <<Controller>> {
+        - CalendarService calendarService
+
+        + ResponseEntity<ApiSuccessResponse<List<CalendarItemDTO>>> getItemsForMonth(int year, int month, UUID userId)
+    }
+
+    note right of CalendarController
+        **@RestController: /api/calendar**
+        GET /items?year&month&userId
+        GET /user/{userId}/items?year&month
+        Aggregates deadlines
+    end note
+}
+
+' Controller Relationships
+AuthController ..> SignUpRequestDTO : accepts
+AuthController ..> LoginRequestDTO : accepts
+AuthController ..> ApiSuccessResponse : returns
+AuthController o-- AuthResponseDTO : wraps
+
+UserController ..> UpdateUserRequestDTO : accepts
+UserController ..> ApiSuccessResponse : returns
+UserController ..> UserDTO : returns
+
+CourseController ..> CreateCourseRequestDTO : accepts
+CourseController ..> UpdateCourseRequestDTO : accepts
+CourseController ..> AddTaskRequestDTO : accepts
+CourseController ..> UpdateTaskProgressRequestDTO : accepts
+CourseController ..> ApiSuccessResponse : returns
+
+ToDoListController ..> CreateToDoListRequestDTO : accepts
+ToDoListController ..> UpdateToDoListRequestDTO : accepts
+ToDoListController ..> AddToDoListTaskRequestDTO : accepts
+ToDoListController ..> ApiSuccessResponse : returns
+
+CalendarController ..> ApiSuccessResponse : returns
+
+SignUpRequestSanitizer ..> SignUpRequestDTO : sanitizes
+LoginRequestSanitizer ..> LoginRequestDTO : sanitizes
+
+' ==================== COMMON ENTITIES ====================
+
+package "Shared Components" <<Rectangle>> {
+    enum TaskStatus {
+        PENDING
+        IN_PROGRESS
+        COMPLETED
+
+        + String getDisplayName()
+        + String toString()
+    }
+
+    note bottom of TaskStatus
+        **Shared Enum**
+        Used across domain and DTOs
+        Both CourseTask and ToDoListTask
+    end note
+
+    class CalendarItemDTO <<DTO>> #E6FFE6 {
+        - Date date
+        - String sourceType
+        - String title
+        - String status
+        - String sourceId
+        - String taskId
+
+        + {static} CalendarItemDTOBuilder builder()
+    }
+
+    note bottom of CalendarItemDTO
+        **Builder Pattern**
+        Aggregates tasks from multiple sources
+        sourceType: "COURSE" or "TODO_LIST"
+    end note
+}
+
+@enduml

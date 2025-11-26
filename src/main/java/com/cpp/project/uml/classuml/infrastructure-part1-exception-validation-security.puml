@@ -1,0 +1,537 @@
+@startuml
+
+title Studently – Infrastructure Part 1: Exception Handling, Validation & Security
+
+' ==================== DESIGN PATTERNS LEGEND ====================
+
+legend top left
+  |<back:#FFE6E6>   </back>| Factory Pattern |
+  |<back:#E6F3FF>   </back>| Strategy Pattern |
+  |<back:#E6FFE6>   </back>| Builder Pattern |
+  |<back:#FFF9E6>   </back>| Facade Pattern |
+  |<back:#FFE6FF>   </back>| Template Method Pattern |
+  |<back:#E6FFFF>   </back>| Chain of Responsibility |
+
+  **Relationships:**
+  ──> : Association
+  ──|> : Inheritance/Implementation
+  ──* : Composition
+  ──o : Aggregation
+  ..> : Dependency
+endlegend
+
+' ==================== EXCEPTION HANDLING INFRASTRUCTURE ====================
+
+package "Exception Handling" <<Rectangle>> {
+    abstract class BaseException <<Exception>> {
+        - ErrorCode errorCode
+        - Object[] args
+
+        + BaseException(ErrorCode errorCode, Object... args)
+        + BaseException(ErrorCode errorCode, Throwable cause, Object... args)
+        + ErrorCode getErrorCode()
+        + Object[] getArgs()
+        + String getCode()
+    }
+
+    note right of BaseException
+        **Inheritance Hierarchy**
+        Base for all custom exceptions
+        Extends RuntimeException
+        Supports parameterized error messages
+    end note
+
+    class UserException <<Exception>> extends BaseException
+    class AuthenticationException <<Exception>> extends BaseException
+    class UserCredentialException <<Exception>> extends BaseException
+    class CourseException <<Exception>> extends BaseException
+    class ToDoListException <<Exception>> extends BaseException
+    class CalendarException <<Exception>> extends BaseException
+
+    interface ErrorCode {
+        + String getCode()
+        + String getMessageTemplate()
+        + HttpStatus getHttpStatus()
+        + String getMessage(Object... args)
+    }
+
+    note right of ErrorCode
+        All error code enums implement this
+        Provides: code, message template, HTTP status
+    end note
+
+    enum UserErrorCode implements ErrorCode {
+        USER_NOT_FOUND
+        USER_ALREADY_EXISTS
+        INVALID_USER_DATA
+        USER_CREATION_FAILED
+        USER_UPDATE_FAILED
+        USER_DELETION_FAILED
+        INVALID_EMAIL_FORMAT
+        INVALID_NAME
+        EMAIL_ALREADY_IN_USE
+    }
+
+    enum AuthenticationErrorCode implements ErrorCode {
+        AUTHENTICATION_FAILED
+        INVALID_CREDENTIALS
+        USER_NOT_AUTHENTICATED
+        SESSION_EXPIRED
+    }
+
+    enum UserCredentialErrorCode implements ErrorCode {
+        CREDENTIAL_NOT_FOUND
+        INVALID_PASSWORD
+        PASSWORD_HASH_FAILED
+        PASSWORD_VERIFICATION_FAILED
+        CREDENTIAL_CREATION_FAILED
+        CREDENTIAL_UPDATE_FAILED
+        INVALID_ALGORITHM
+        PASSWORD_REQUIRED
+        PASSWORD_HASH_EMPTY
+        INVALID_PASSWORD_HASH
+    }
+
+    enum CourseErrorCode implements ErrorCode {
+        COURSE_NOT_FOUND
+        COURSE_ALREADY_EXISTS
+        INVALID_COURSE_CODE
+        INVALID_COURSE_NAME
+        TASK_NOT_FOUND
+        INVALID_COURSE_DATA
+    }
+
+    enum ToDoListErrorCode implements ErrorCode {
+        TODOLIST_NOT_FOUND
+        INVALID_TODOLIST_NAME
+        INVALID_TODOLIST_DATA
+        TASK_NOT_FOUND
+    }
+
+    enum CalendarErrorCode implements ErrorCode {
+        INVALID_DATE
+        INVALID_MONTH
+        INVALID_YEAR
+    }
+
+    class ErrorResponseDTO <<DTO>> #E6FFE6 {
+        - String code
+        - String message
+        - int statusCode
+        - String path
+        - LocalDateTime timestamp
+        - List<String> details
+        - Map<String, String> fieldErrors
+
+        + {static} ErrorResponseDTOBuilder builder()
+    }
+
+    note bottom of ErrorResponseDTO
+        **Builder Pattern**
+        REST API error response
+        Includes field-level validation errors
+    end note
+
+    class ErrorResponse <<DTO>> #E6FFE6 {
+        - String code
+        - String message
+        - LocalDateTime timestamp
+        - List<String> details
+        - String path
+
+        + {static} ErrorResponseBuilder builder()
+    }
+
+    note bottom of ErrorResponse
+        **Builder Pattern**
+        Terminal UI error response
+    end note
+
+    class GlobalExceptionHandler <<Controller>> {
+        - Logger logger
+
+        + ResponseEntity<ErrorResponseDTO> handleBaseException(BaseException ex, WebRequest request)
+        + ResponseEntity<ErrorResponseDTO> handleValidationException(MethodArgumentNotValidException ex, WebRequest request)
+        + ResponseEntity<ErrorResponseDTO> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, WebRequest request)
+        + ResponseEntity<ErrorResponseDTO> handleMethodNotSupported(HttpRequestMethodNotSupportedException ex, WebRequest request)
+        + ResponseEntity<ErrorResponseDTO> handleMissingParams(MissingServletRequestParameterException ex, WebRequest request)
+        + ResponseEntity<ErrorResponseDTO> handleGlobalException(Exception ex, WebRequest request)
+    }
+
+    note right of GlobalExceptionHandler
+        **@RestControllerAdvice**
+        Handles REST API exceptions
+        Converts to HTTP responses
+        Logs errors with context
+    end note
+
+    abstract class ExceptionHandler <<Handler>> #E6FFFF {
+        - ExceptionHandler next
+
+        + ExceptionHandler setNext(ExceptionHandler handler)
+        + void handle(Exception exception)
+        + {abstract} boolean canHandle(Exception exception)
+        + {abstract} void doHandle(Exception exception)
+    }
+
+    note right of ExceptionHandler
+        **Chain of Responsibility Pattern**
+        Used for Terminal UI
+        NOT used by REST API
+    end note
+
+    class UserExceptionHandler <<Handler>> #E6FFFF extends ExceptionHandler
+    class AuthenticationExceptionHandler <<Handler>> #E6FFFF extends ExceptionHandler
+    class UserCredentialExceptionHandler <<Handler>> #E6FFFF extends ExceptionHandler
+    class CourseExceptionHandler <<Handler>> #E6FFFF extends ExceptionHandler
+    class ToDoListExceptionHandler <<Handler>> #E6FFFF extends ExceptionHandler
+    class CalendarExceptionHandler <<Handler>> #E6FFFF extends ExceptionHandler
+
+    class ExceptionHandlerConfig <<Configuration>> {
+        + ExceptionHandler exceptionHandlerChain()
+    }
+
+    note bottom of ExceptionHandlerConfig
+        **@Configuration**
+        Creates handler chain bean
+    end note
+
+    class ExceptionFactory <<Factory>> #FFE6E6 {
+        + {static} <T extends BaseException> T create(Class<T> exceptionClass, ErrorCode errorCode, Object... args)
+        + {static} <T extends BaseException> T create(Class<T> exceptionClass, ErrorCode errorCode, Throwable cause, Object... args)
+    }
+
+    note bottom of ExceptionFactory
+        **Factory Pattern**
+        Creates exceptions via reflection
+        Supports exception chaining
+    end note
+}
+
+' Exception Relationships
+BaseException --> ErrorCode : uses
+UserException --|> BaseException : extends
+AuthenticationException --|> BaseException : extends
+UserCredentialException --|> BaseException : extends
+CourseException --|> BaseException : extends
+ToDoListException --|> BaseException : extends
+CalendarException --|> BaseException : extends
+
+UserException ..> UserErrorCode : uses
+AuthenticationException ..> AuthenticationErrorCode : uses
+UserCredentialException ..> UserCredentialErrorCode : uses
+CourseException ..> CourseErrorCode : uses
+ToDoListException ..> ToDoListErrorCode : uses
+CalendarException ..> CalendarErrorCode : uses
+
+UserErrorCode ..|> ErrorCode : implements
+AuthenticationErrorCode ..|> ErrorCode : implements
+UserCredentialErrorCode ..|> ErrorCode : implements
+CourseErrorCode ..|> ErrorCode : implements
+ToDoListErrorCode ..|> ErrorCode : implements
+CalendarErrorCode ..|> ErrorCode : implements
+
+GlobalExceptionHandler ..> ErrorResponseDTO : creates
+ExceptionHandler ..> ErrorResponse : creates
+
+UserExceptionHandler --|> ExceptionHandler : extends
+AuthenticationExceptionHandler --|> ExceptionHandler : extends
+UserCredentialExceptionHandler --|> ExceptionHandler : extends
+CourseExceptionHandler --|> ExceptionHandler : extends
+ToDoListExceptionHandler --|> ExceptionHandler : extends
+CalendarExceptionHandler --|> ExceptionHandler : extends
+
+ExceptionHandler o-- ExceptionHandler : next (chain)
+
+ExceptionHandlerConfig ..> UserExceptionHandler : creates
+ExceptionHandlerConfig ..> AuthenticationExceptionHandler : creates
+ExceptionHandlerConfig ..> UserCredentialExceptionHandler : creates
+ExceptionHandlerConfig ..> CourseExceptionHandler : creates
+ExceptionHandlerConfig ..> ToDoListExceptionHandler : creates
+ExceptionHandlerConfig ..> CalendarExceptionHandler : creates
+
+ExceptionFactory ..> BaseException : creates
+
+' ==================== VALIDATION INFRASTRUCTURE ====================
+
+package "Validation Infrastructure" <<Rectangle>> {
+    class ValidationResult <<DTO>> #E6FFE6 {
+        - boolean valid
+        - List<String> errors
+
+        + boolean isValid()
+        + List<String> getErrors()
+        + String getFirstError()
+        + {static} ValidationResult valid()
+        + {static} ValidationResult invalid(String error)
+        + {static} ValidationResultBuilder builder()
+    }
+
+    note right of ValidationResult
+        **Builder Pattern**
+        Immutable result object
+        valid = errors.isEmpty()
+    end note
+
+    interface ValidationRule<T> <<Strategy>> #E6F3FF {
+        + boolean isValid(T value)
+        + String getErrorMessage()
+    }
+
+    note right of ValidationRule
+        **Strategy Pattern**
+        Single responsibility per rule
+        Composable
+    end note
+
+    abstract class Validator<T> <<TemplateMethod>> #FFE6FF {
+        + ValidationResult validate(T value)
+        # {abstract} void performValidation(T value, ValidationResultBuilder builder)
+        # void addErrorIf(boolean condition, String message, ValidationResultBuilder builder)
+    }
+
+    note bottom of Validator
+        **Template Method Pattern**
+        validate() is template method
+        Subclasses override performValidation()
+    end note
+
+    class CompositeValidationRule<T> <<Composite>> implements ValidationRule {
+        - List<ValidationRule<T>> rules
+        - String errorMessage
+
+        + CompositeValidationRule<T> addRule(ValidationRule<T> rule)
+        + boolean isValid(T value)
+        + String getErrorMessage()
+        + List<String> getAllErrorMessages(T value)
+    }
+
+    note bottom of CompositeValidationRule
+        **Composite Pattern**
+        Combines multiple rules
+        ALL rules must pass
+    end note
+
+    abstract class ValidationHandler<T> <<ChainOfResp>> #E6FFFF {
+        - ValidationHandler<T> next
+
+        + ValidationHandler<T> setNext(ValidationHandler<T> handler)
+        + ValidationResult handle(T value)
+        # {abstract} ValidationResult doValidate(T value)
+    }
+
+    note bottom of ValidationHandler
+        **Chain of Responsibility**
+        Combines results from chain
+    end note
+
+    class ValidatorFactory <<Factory>> #FFE6E6 {
+        + {static} <T> void registerValidator(Class<?> clazz, Function<?, Validator<?>> factory)
+        + {static} <T> Validator<T> getValidator(Class<T> clazz)
+    }
+
+    note bottom of ValidatorFactory
+        **Factory Pattern**
+        Registry of validators
+    end note
+}
+
+' ==================== VALIDATION RULES ====================
+
+package "Validation Rules" <<Rectangle>> {
+    class NotNullRule<T> <<Rule>> #E6F3FF implements ValidationRule
+    class NotEmptyStringRule <<Rule>> #E6F3FF implements ValidationRule
+    class EmailFormatRule <<Rule>> #E6F3FF implements ValidationRule
+    class UserNameFormatRule <<Rule>> #E6F3FF implements ValidationRule
+    class MinLengthRule <<Rule>> #E6F3FF implements ValidationRule
+    class MaxLengthRule <<Rule>> #E6F3FF implements ValidationRule
+    class RangeRule<T> <<Rule>> #E6F3FF implements ValidationRule
+    class RegexRule <<Rule>> #E6F3FF implements ValidationRule
+
+    class PasswordStrengthRule <<Rule>> #E6F3FF implements ValidationRule {
+        - int minLength
+        - boolean requireUppercase
+        - boolean requireLowercase
+        - boolean requireDigit
+        - boolean requireSpecialChar
+
+        + {static} PasswordStrengthRule standard()
+        + {static} PasswordStrengthRule basic()
+        + {static} PasswordStrengthRule login()
+        + boolean isValid(String password)
+        + String getErrorMessage()
+    }
+
+    note bottom of PasswordStrengthRule
+        **Factory Methods**
+        - standard(): 8 chars, all requirements
+        - basic(): 6 chars, no requirements
+        - login(): 1 char, no requirements
+    end note
+
+    class PasswordHashFormatRule <<Rule>> #E6F3FF implements ValidationRule {
+        + boolean isValid(String passwordHash)
+        + String getErrorMessage()
+    }
+
+    note bottom of PasswordHashFormatRule
+        Validates Base64 format
+        For stored password hashes
+    end note
+}
+
+' ==================== CONCRETE VALIDATORS ====================
+
+package "Concrete Validators" <<Rectangle>> {
+    class EmailValidator <<Validator>> #FFE6FF extends Validator
+    class UserNameValidator <<Validator>> #FFE6FF extends Validator
+    class PasswordStrengthValidator <<Validator>> #FFE6FF extends Validator
+    class PasswordInputValidator <<Validator>> #FFE6FF extends Validator
+    class PasswordHashValidator <<Validator>> #FFE6FF extends Validator
+    class SignUpRequestValidator <<Validator>> #FFE6FF extends Validator
+    class LoginRequestValidator <<Validator>> #FFE6FF extends Validator
+    class UserEntityValidator <<Validator>> #FFE6FF extends Validator
+    class UserCredentialEntityValidator <<Validator>> #FFE6FF extends Validator
+
+    class CourseCodeValidator <<Validator>> #FFE6FF extends Validator
+    class CourseNameValidator <<Validator>> #FFE6FF extends Validator
+    class CourseTaskNameValidator <<Validator>> #FFE6FF extends Validator
+    class CourseTaskProgressValidator <<Validator>> #FFE6FF extends Validator
+    class CourseTaskDeadlineValidator <<Validator>> #FFE6FF extends Validator
+
+    class ToDoListNameValidator <<Validator>> #FFE6FF extends Validator
+    class ToDoListTaskDescriptionValidator <<Validator>> #FFE6FF extends Validator
+    class ToDoListTaskDeadlineValidator <<Validator>> #FFE6FF extends Validator
+
+    class CalendarDateValidator <<Validator>> #FFE6FF extends Validator
+}
+
+' ==================== VALIDATION SERVICE FACADES ====================
+
+package "Validation Services" <<Rectangle>> {
+    class UserValidationService <<Facade>> #FFF9E6 {
+        - SignUpRequestValidator signUpRequestValidator
+        - LoginRequestValidator loginRequestValidator
+        - EmailValidator emailValidator
+        - UserNameValidator userNameValidator
+        - PasswordInputValidator passwordInputValidator
+        - PasswordStrengthValidator passwordStrengthValidator
+        - PasswordHashValidator passwordHashValidator
+        - UserEntityValidator userEntityValidator
+        - UserCredentialEntityValidator credentialEntityValidator
+
+        + ValidationResult validateSignUpRequest(SignUpRequestDTO request)
+        + ValidationResult validateLoginRequest(LoginRequestDTO request)
+        + ValidationResult validateEmail(String email)
+        + ValidationResult validateUserName(String name)
+        + ValidationResult validatePasswordInput(String password)
+        + ValidationResult validatePasswordStrength(String password)
+        + ValidationResult validatePasswordHash(String hash)
+        + ValidationResult validateUserEntity(User user)
+        + ValidationResult validateUserCredentialEntity(UserCredential credential)
+    }
+
+    note bottom of UserValidationService
+        **Facade Pattern**
+        @Component
+        Aggregates all user/auth validators
+    end note
+
+    class CourseValidationService <<Facade>> #FFF9E6 {
+        - CourseCodeValidator courseCodeValidator
+        - CourseNameValidator courseNameValidator
+        - CourseTaskNameValidator taskNameValidator
+        - CourseTaskProgressValidator progressValidator
+        - CourseTaskDeadlineValidator deadlineValidator
+
+        + ValidationResult validateCourseCode(String code)
+        + ValidationResult validateCourseName(String name)
+        + ValidationResult validateTaskName(String name)
+        + ValidationResult validateTaskProgress(Integer progress)
+        + ValidationResult validateTaskDeadline(Date deadline)
+    }
+
+    note bottom of CourseValidationService
+        **Facade Pattern**
+        @Service
+        Used by CourseService
+    end note
+
+    class ToDoListValidationService <<Facade>> #FFF9E6 {
+        - ToDoListNameValidator nameValidator
+        - ToDoListTaskDescriptionValidator descriptionValidator
+        - ToDoListTaskDeadlineValidator deadlineValidator
+
+        + ValidationResult validateName(String name)
+        + ValidationResult validateTaskDescription(String description)
+        + ValidationResult validateTaskDeadline(Date deadline)
+    }
+
+    note bottom of ToDoListValidationService
+        **Facade Pattern**
+        @Service
+        Used by ToDoListService
+    end note
+}
+
+' Validation Relationships
+UserValidationService *-- SignUpRequestValidator : contains
+UserValidationService *-- LoginRequestValidator : contains
+UserValidationService *-- EmailValidator : contains
+UserValidationService *-- PasswordStrengthValidator : contains
+UserValidationService *-- PasswordHashValidator : contains
+
+CourseValidationService *-- CourseCodeValidator : contains
+CourseValidationService *-- CourseTaskProgressValidator : contains
+CourseValidationService *-- CourseTaskDeadlineValidator : contains
+
+ToDoListValidationService *-- ToDoListNameValidator : contains
+ToDoListValidationService *-- ToDoListTaskDescriptionValidator : contains
+
+SignUpRequestValidator ..> EmailValidator : uses
+SignUpRequestValidator ..> UserNameValidator : uses
+SignUpRequestValidator ..> PasswordStrengthValidator : uses
+
+LoginRequestValidator ..> EmailValidator : uses
+LoginRequestValidator ..> PasswordInputValidator : uses
+
+EmailValidator ..> NotEmptyStringRule : uses
+EmailValidator ..> EmailFormatRule : uses
+UserNameValidator ..> UserNameFormatRule : uses
+PasswordStrengthValidator ..> PasswordStrengthRule : uses
+PasswordHashValidator ..> PasswordHashFormatRule : uses
+
+CompositeValidationRule o-- ValidationRule : aggregates
+
+' ==================== PASSWORD HASHING SECURITY ====================
+
+package "Security" <<Rectangle>> {
+    interface PasswordHashingStrategy <<Strategy>> #E6F3FF {
+        + String hash(String password)
+        + boolean verify(String password, String hash)
+    }
+
+    note right of PasswordHashingStrategy
+        **Strategy Pattern**
+        Allows different algorithms
+        Currently: SHA-512 only
+    end note
+
+    class SHA512HashingStrategy <<Strategy>> #E6F3FF implements PasswordHashingStrategy {
+        - {static} String ALGORITHM = "SHA-512"
+        - {static} int SALT_LENGTH = 16
+        - Logger logger
+
+        + String hash(String password)
+        + boolean verify(String password, String storedHash)
+    }
+
+    note bottom of SHA512HashingStrategy
+        **Strategy Implementation**
+        16-byte random salt per password
+        Base64: salt(16) + SHA-512(salt+password)
+        Timing-safe comparison
+    end note
+}
+
+@enduml
