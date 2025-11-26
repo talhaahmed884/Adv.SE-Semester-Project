@@ -12,6 +12,7 @@ import com.googlecode.lanterna.terminal.Terminal;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.ComponentScan;
@@ -25,6 +26,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = "com.cpp.project")
 @EntityScan(basePackages = "com.cpp.project")
 @EnableJpaRepositories(basePackages = "com.cpp.project")
+@ConditionalOnProperty(name = "studently.ui.enabled", havingValue = "true", matchIfMissing = false)
 public class StudentlyTerminalUI implements CommandLineRunner {
     private final ApplicationContext applicationContext;
 
@@ -33,8 +35,9 @@ public class StudentlyTerminalUI implements CommandLineRunner {
     }
 
     public static void main(String[] args) {
-        // Set system property to indicate UI mode
+        // Set system properties to indicate UI mode
         System.setProperty("studently.ui.mode", "terminal");
+        System.setProperty("studently.ui.enabled", "true");
 
         SpringApplication app = new SpringApplication(StudentlyTerminalUI.class);
         // Disable web server since we're running terminal UI
