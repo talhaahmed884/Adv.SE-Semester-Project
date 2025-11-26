@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,7 +21,7 @@ public class ToDoListDTO {
     private UUID id;
     private String name;
     private UUID userId;
-    private List<ToDoListTaskDTO> tasks;
+    private List<ToDoListTaskDTO> tasks = new ArrayList<>();
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

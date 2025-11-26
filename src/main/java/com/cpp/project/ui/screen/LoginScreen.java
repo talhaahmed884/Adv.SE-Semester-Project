@@ -207,7 +207,13 @@ public class LoginScreen {
                 }
 
                 LoginRequestDTO loginRequest = new LoginRequestDTO(email.trim(), password);
-                authenticationService.login(loginRequest);
+                boolean loginSuccess = authenticationService.login(loginRequest);
+
+                if (!loginSuccess) {
+                    errorMessage = "Invalid email or password";
+                    return false;
+                }
+
                 successMessage = "Login successful!";
 
                 UserDTO user = authenticationService.getUserByEmail(email.trim());
@@ -225,9 +231,6 @@ public class LoginScreen {
             }
         } catch (Exception e) {
             errorMessage = e.getMessage();
-            if (errorMessage.length() > 60) {
-                errorMessage = errorMessage.substring(0, 60) + "...";
-            }
             return false;
         }
     }

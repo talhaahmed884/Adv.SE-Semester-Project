@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -22,7 +23,7 @@ public class CourseDTO {
     private String name;
     private UUID userId;
     private int progress;
-    private List<CourseTaskDTO> tasks;
+    private List<CourseTaskDTO> tasks = new ArrayList<>();
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 

@@ -23,7 +23,7 @@ public class CourseAdapter {
                 ? course.getTasks().stream()
                 .map(CourseTaskAdapter::toDTO)
                 .collect(Collectors.toList())
-                : null;
+                : List.of();
 
         return CourseDTO.builder()
                 .id(course.getId())
@@ -51,6 +51,7 @@ public class CourseAdapter {
                 .name(course.getName())
                 .userId(course.getUserId())
                 .progress(course.progress())
+                .tasks(List.of())
                 .createdAt(course.getCreatedAt())
                 .updatedAt(course.getUpdatedAt())
                 .build();

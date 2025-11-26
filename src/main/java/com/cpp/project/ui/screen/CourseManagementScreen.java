@@ -37,9 +37,9 @@ public class CourseManagementScreen {
     private String courseName = "";
     private String taskName = "";
     private String taskDescription = "";
-    private int taskDeadlineDay = 1;
-    private int taskDeadlineMonth = 1;
-    private int taskDeadlineYear = 2024;
+    private String taskDeadlineDay = "";
+    private String taskDeadlineMonth = "";
+    private String taskDeadlineYear = "";
     private String progressInput = "";
     private int inputField = 0;
 
@@ -78,8 +78,13 @@ public class CourseManagementScreen {
                 mode = 3; // Add task
                 clearInputs();
             } else if (keyStroke.getKeyType() == KeyType.F3 && mode == 2) {
-                mode = 4; // Update progress
-                progressInput = "";
+                // Only allow update progress if course has tasks
+                if (!courses.isEmpty() && courses.get(selectedCourse).getTasks() != null && !courses.get(selectedCourse).getTasks().isEmpty()) {
+                    mode = 4; // Update progress
+                    progressInput = "";
+                } else {
+                    errorMessage = "No tasks available to update";
+                }
             } else if (keyStroke.getKeyType() == KeyType.Escape) {
                 if (mode == 0) {
                     running = false; // Back to main menu
@@ -160,7 +165,8 @@ public class CourseManagementScreen {
 
     private void renderCourseDetails(TextGraphics graphics) {
         if (courses.isEmpty()) {
-            mode = 0;
+            graphics.setForegroundColor(TextColor.ANSI.RED);
+            graphics.putString(5, 5, "No courses available. Press ESC to go back.");
             return;
         }
 
@@ -170,11 +176,12 @@ public class CourseManagementScreen {
         graphics.putString(3, 3, "F2: Add Task | F3: Update Progress | ESC: Back");
 
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(3, 5, "Course: " + course.getCode() + " - " + course.getName());
+        String courseTitle = course.getCode() + " - " + course.getName() + " [" + course.getProgress() + "% complete]";
+        graphics.putString(3, 5, "Course: " + courseTitle);
 
         graphics.putString(3, 7, "Tasks:");
 
-        if (course.getTasks().isEmpty()) {
+        if (course.getTasks() == null || course.getTasks().isEmpty()) {
             graphics.setForegroundColor(TextColor.ANSI.RED);
             graphics.putString(5, 9, "No tasks yet. Press F2 to add one.");
         } else {
@@ -214,15 +221,18 @@ public class CourseManagementScreen {
 
         y += 2;
         graphics.setForegroundColor(inputField == 2 ? TextColor.ANSI.GREEN_BRIGHT : TextColor.ANSI.WHITE);
-        graphics.putString(5, y, "Deadline Year: " + taskDeadlineYear + (inputField == 2 ? "_" : ""));
+        String yearDisplay = taskDeadlineYear.isEmpty() ? "YYYY" : taskDeadlineYear;
+        graphics.putString(5, y, "Deadline Year: " + yearDisplay + (inputField == 2 ? "_" : ""));
 
         y += 1;
         graphics.setForegroundColor(inputField == 3 ? TextColor.ANSI.GREEN_BRIGHT : TextColor.ANSI.WHITE);
-        graphics.putString(5, y, "Deadline Month (1-12): " + taskDeadlineMonth + (inputField == 3 ? "_" : ""));
+        String monthDisplay = taskDeadlineMonth.isEmpty() ? "MM" : taskDeadlineMonth;
+        graphics.putString(5, y, "Deadline Month (1-12): " + monthDisplay + (inputField == 3 ? "_" : ""));
 
         y += 1;
         graphics.setForegroundColor(inputField == 4 ? TextColor.ANSI.GREEN_BRIGHT : TextColor.ANSI.WHITE);
-        graphics.putString(5, y, "Deadline Day (1-31): " + taskDeadlineDay + (inputField == 4 ? "_" : ""));
+        String dayDisplay = taskDeadlineDay.isEmpty() ? "DD" : taskDeadlineDay;
+        graphics.putString(5, y, "Deadline Day (1-31): " + dayDisplay + (inputField == 4 ? "_" : ""));
     }
 
     private void renderUpdateProgress(TextGraphics graphics) {
@@ -230,7 +240,7 @@ public class CourseManagementScreen {
         graphics.putString(3, 3, "Update Task Progress (Enter: Save, ESC: Cancel)");
 
         CourseDTO course = courses.get(selectedCourse);
-        if (course.getTasks().isEmpty()) {
+        if (course.getTasks() == null || course.getTasks().isEmpty()) {
             graphics.setForegroundColor(TextColor.ANSI.RED);
             graphics.putString(5, 5, "No tasks available");
             return;
@@ -266,15 +276,9 @@ public class CourseManagementScreen {
         } else if (mode == 3) { // Add task
             if (inputField == 0) taskName += c;
             else if (inputField == 1) taskDescription += c;
-            else if (inputField == 2 && Character.isDigit(c))
-                taskDeadlineYear = Integer.parseInt(taskDeadlineYear + "" + c);
-            else if (inputField == 3 && Character.isDigit(c)) {
-                int val = Integer.parseInt(taskDeadlineMonth + "" + c);
-                if (val <= 12) taskDeadlineMonth = val;
-            } else if (inputField == 4 && Character.isDigit(c)) {
-                int val = Integer.parseInt(taskDeadlineDay + "" + c);
-                if (val <= 31) taskDeadlineDay = val;
-            }
+            else if (inputField == 2 && Character.isDigit(c)) taskDeadlineYear += c;
+            else if (inputField == 3 && Character.isDigit(c)) taskDeadlineMonth += c;
+            else if (inputField == 4 && Character.isDigit(c)) taskDeadlineDay += c;
         } else if (mode == 4) { // Update progress
             if (Character.isDigit(c)) {
                 progressInput += c;
@@ -295,9 +299,12 @@ public class CourseManagementScreen {
                 taskName = taskName.substring(0, taskName.length() - 1);
             else if (inputField == 1 && !taskDescription.isEmpty())
                 taskDescription = taskDescription.substring(0, taskDescription.length() - 1);
-            else if (inputField == 2) taskDeadlineYear = 2024;
-            else if (inputField == 3) taskDeadlineMonth = 1;
-            else if (inputField == 4) taskDeadlineDay = 1;
+            else if (inputField == 2 && !taskDeadlineYear.isEmpty())
+                taskDeadlineYear = taskDeadlineYear.substring(0, taskDeadlineYear.length() - 1);
+            else if (inputField == 3 && !taskDeadlineMonth.isEmpty())
+                taskDeadlineMonth = taskDeadlineMonth.substring(0, taskDeadlineMonth.length() - 1);
+            else if (inputField == 4 && !taskDeadlineDay.isEmpty())
+                taskDeadlineDay = taskDeadlineDay.substring(0, taskDeadlineDay.length() - 1);
         } else if (mode == 4 && !progressInput.isEmpty()) {
             progressInput = progressInput.substring(0, progressInput.length() - 1);
         }
@@ -306,7 +313,7 @@ public class CourseManagementScreen {
     private void handleArrowUp() {
         if (mode == 0 && !courses.isEmpty()) {
             selectedCourse = (selectedCourse - 1 + courses.size()) % courses.size();
-        } else if (mode == 2 && !courses.isEmpty() && !courses.get(selectedCourse).getTasks().isEmpty()) {
+        } else if (mode == 2 && !courses.isEmpty() && courses.get(selectedCourse).getTasks() != null && !courses.get(selectedCourse).getTasks().isEmpty()) {
             int taskCount = courses.get(selectedCourse).getTasks().size();
             selectedTask = (selectedTask - 1 + taskCount) % taskCount;
         }
@@ -315,7 +322,7 @@ public class CourseManagementScreen {
     private void handleArrowDown() {
         if (mode == 0 && !courses.isEmpty()) {
             selectedCourse = (selectedCourse + 1) % courses.size();
-        } else if (mode == 2 && !courses.isEmpty() && !courses.get(selectedCourse).getTasks().isEmpty()) {
+        } else if (mode == 2 && !courses.isEmpty() && courses.get(selectedCourse).getTasks() != null && !courses.get(selectedCourse).getTasks().isEmpty()) {
             int taskCount = courses.get(selectedCourse).getTasks().size();
             selectedTask = (selectedTask + 1) % taskCount;
         }
@@ -356,9 +363,38 @@ public class CourseManagementScreen {
                     return;
                 }
 
+                // Validate and parse date fields
+                if (taskDeadlineYear.isEmpty() || taskDeadlineMonth.isEmpty() || taskDeadlineDay.isEmpty()) {
+                    errorMessage = "All date fields are required (Year, Month, Day)";
+                    return;
+                }
+
+                int year, month, day;
+                try {
+                    year = Integer.parseInt(taskDeadlineYear);
+                    month = Integer.parseInt(taskDeadlineMonth);
+                    day = Integer.parseInt(taskDeadlineDay);
+
+                    if (month < 1 || month > 12) {
+                        errorMessage = "Month must be between 1 and 12";
+                        return;
+                    }
+                    if (day < 1 || day > 31) {
+                        errorMessage = "Day must be between 1 and 31";
+                        return;
+                    }
+                    if (year < 2000 || year > 2100) {
+                        errorMessage = "Year must be between 2000 and 2100";
+                        return;
+                    }
+                } catch (NumberFormatException e) {
+                    errorMessage = "Invalid date format";
+                    return;
+                }
+
                 CourseDTO course = courses.get(selectedCourse);
                 Calendar cal = Calendar.getInstance();
-                cal.set(taskDeadlineYear, taskDeadlineMonth - 1, taskDeadlineDay);
+                cal.set(year, month - 1, day);
                 Date deadline = cal.getTime();
 
                 courseService.addTaskToCourse(course.getId(), taskName.trim(), deadline, taskDescription.trim());
@@ -368,6 +404,15 @@ public class CourseManagementScreen {
                 clearInputs();
             } else if (mode == 4) {
                 // Update progress
+                CourseDTO course = courses.get(selectedCourse);
+
+                // Check if course has tasks
+                if (course.getTasks() == null || course.getTasks().isEmpty()) {
+                    errorMessage = "No tasks available to update";
+                    mode = 2; // Go back to course details
+                    return;
+                }
+
                 if (progressInput.trim().isEmpty()) {
                     errorMessage = "Progress value is required";
                     return;
@@ -379,7 +424,6 @@ public class CourseManagementScreen {
                     return;
                 }
 
-                CourseDTO course = courses.get(selectedCourse);
                 CourseTaskDTO task = course.getTasks().get(selectedTask);
 
                 courseService.updateTaskProgress(course.getId(), task.getId(), progress);
@@ -396,9 +440,6 @@ public class CourseManagementScreen {
             }
         } catch (Exception e) {
             errorMessage = e.getMessage();
-            if (errorMessage.length() > 50) {
-                errorMessage = errorMessage.substring(0, 50) + "...";
-            }
         }
     }
 
@@ -414,9 +455,9 @@ public class CourseManagementScreen {
         courseName = "";
         taskName = "";
         taskDescription = "";
-        taskDeadlineYear = 2024;
-        taskDeadlineMonth = 1;
-        taskDeadlineDay = 1;
+        taskDeadlineYear = "";
+        taskDeadlineMonth = "";
+        taskDeadlineDay = "";
         progressInput = "";
         inputField = 0;
     }

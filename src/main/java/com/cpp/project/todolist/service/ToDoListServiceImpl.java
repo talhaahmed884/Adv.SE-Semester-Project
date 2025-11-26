@@ -98,7 +98,7 @@ public class ToDoListServiceImpl implements ToDoListService {
         List<ToDoList> todoLists = todoListRepository.findByUserId(userId);
 
         return todoLists.stream()
-                .map(ToDoListAdapter::toDTOWithoutTasks)
+                .map(ToDoListAdapter::toDTO)
                 .collect(Collectors.toList());
     }
 
