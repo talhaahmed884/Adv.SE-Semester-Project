@@ -206,9 +206,6 @@ public class LoginScreen {
                 navigateToMainMenu(response);
 
                 // User logged out, clear fields and return to login screen
-                clearFields();
-                successMessage = "Logged out successfully";
-                return false;
 
             } else {
                 // Login
@@ -240,10 +237,10 @@ public class LoginScreen {
                 navigateToMainMenu(user);
 
                 // User logged out, clear fields and return to login screen
-                clearFields();
-                successMessage = "Logged out successfully";
-                return false;
             }
+            clearFields();
+            successMessage = "Logged out successfully";
+            return false;
         } catch (Exception e) {
             errorMessage = e.getMessage();
             return false;
