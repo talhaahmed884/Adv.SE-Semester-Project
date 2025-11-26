@@ -23,7 +23,7 @@ public class ToDoListAdapter {
                 ? todoList.getTasks().stream()
                 .map(ToDoListTaskAdapter::toDTO)
                 .collect(Collectors.toList())
-                : null;
+                : List.of();
 
         return ToDoListDTO.builder()
                 .id(todoList.getId())
@@ -47,6 +47,7 @@ public class ToDoListAdapter {
                 .id(todoList.getId())
                 .name(todoList.getName())
                 .userId(todoList.getUserId())
+                .tasks(List.of())
                 .createdAt(todoList.getCreatedAt())
                 .updatedAt(todoList.getUpdatedAt())
                 .build();

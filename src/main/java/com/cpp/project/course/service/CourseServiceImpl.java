@@ -131,7 +131,7 @@ public class CourseServiceImpl implements CourseService {
         List<Course> courses = courseRepository.findByUserId(userId);
 
         return courses.stream()
-                .map(CourseAdapter::toDTOWithoutTasks)
+                .map(CourseAdapter::toDTO)
                 .collect(Collectors.toList());
     }
 
