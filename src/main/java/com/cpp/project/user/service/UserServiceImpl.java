@@ -1,5 +1,6 @@
 package com.cpp.project.user.service;
 
+import com.cpp.project.common.sanitization.service.DataSanitizationService;
 import com.cpp.project.common.validation.entity.ValidationResult;
 import com.cpp.project.common.validation.service.UserValidationService;
 import com.cpp.project.user.adapter.UserAdapter;
@@ -22,10 +23,12 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserValidationService validationService;
+    private final DataSanitizationService dataSanitizationService;
 
-    public UserServiceImpl(UserRepository userRepository, UserValidationService validationService) {
+    public UserServiceImpl(UserRepository userRepository, UserValidationService validationService, DataSanitizationService dataSanitizationService) {
         this.userRepository = userRepository;
         this.validationService = validationService;
+        this.dataSanitizationService = dataSanitizationService;
     }
 
     @Override
@@ -120,6 +123,9 @@ public class UserServiceImpl implements UserService {
             if (id == null) {
                 throw new UserException(UserErrorCode.INVALID_USER_DATA, "User ID cannot be null");
             }
+
+            email = dataSanitizationService.sanitizeEmail(email);
+            name = dataSanitizationService.sanitizeName(name);
 
             User user = userRepository.findById(id)
                     .orElseThrow(() -> new UserException(UserErrorCode.USER_NOT_FOUND, "id", id));
