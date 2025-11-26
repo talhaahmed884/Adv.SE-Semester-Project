@@ -26,7 +26,7 @@ public class CourseTask {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id = UUID.randomUUID();
 
-    @Column(name = "course_id", insertable = false, nullable = false, updatable = false)
+    @Column(name = "course_id", nullable = false)
     private UUID courseId;
 
     @Column(name = "name", nullable = false, length = 255)

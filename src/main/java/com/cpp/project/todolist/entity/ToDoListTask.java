@@ -26,7 +26,7 @@ public class ToDoListTask {
     @Column(name = "id", updatable = false, nullable = false)
     private UUID id = UUID.randomUUID();
 
-    @Column(name = "todo_list_id", nullable = false, updatable = false, insertable = false)
+    @Column(name = "todo_list_id", nullable = false)
     private UUID todoListId;
 
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
