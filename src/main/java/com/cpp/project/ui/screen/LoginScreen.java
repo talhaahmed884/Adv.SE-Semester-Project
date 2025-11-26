@@ -172,6 +172,13 @@ public class LoginScreen {
         password = "";
     }
 
+    private void clearFields() {
+        name = "";
+        email = "";
+        password = "";
+        selectedField = isSignupMode ? 2 : 0;
+    }
+
     private boolean handleEnter() {
         errorMessage = "";
         successMessage = "";
@@ -197,7 +204,11 @@ public class LoginScreen {
 
                 // Navigate to main menu
                 navigateToMainMenu(response);
-                return true;
+
+                // User logged out, clear fields and return to login screen
+                clearFields();
+                successMessage = "Logged out successfully";
+                return false;
 
             } else {
                 // Login
@@ -227,7 +238,11 @@ public class LoginScreen {
 
                 // Navigate to main menu
                 navigateToMainMenu(user);
-                return true;
+
+                // User logged out, clear fields and return to login screen
+                clearFields();
+                successMessage = "Logged out successfully";
+                return false;
             }
         } catch (Exception e) {
             errorMessage = e.getMessage();
