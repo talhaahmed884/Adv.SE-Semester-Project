@@ -4,6 +4,11 @@ import com.cpp.project.common.entity.TaskStatus;
 import com.cpp.project.todolist.dto.ToDoListDTO;
 import com.cpp.project.todolist.dto.ToDoListTaskDTO;
 import com.cpp.project.todolist.service.ToDoListService;
+import com.cpp.project.ui.component.*;
+import com.cpp.project.ui.core.ScreenState;
+import com.cpp.project.ui.core.StatefulScreen;
+import com.cpp.project.ui.factory.ComponentFactory;
+import com.cpp.project.ui.strategy.RequiredFieldStrategy;
 import com.cpp.project.user.dto.UserDTO;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -12,401 +17,372 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
-import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 /**
- * To-Do List management screen
- * Allows users to create lists, add tasks, and mark tasks as complete
+ * Refactored To-Do List Management Screen using design patterns:
+ * - State Pattern: Separate states for List, Add, Details, AddTask
+ * - Component Pattern: Reusable UI components (eliminates code duplication with CourseManagement)
+ * - Strategy Pattern: Validation strategies
  */
-public class ToDoListManagementScreen {
-    private final Screen screen;
+public class ToDoListManagementScreen extends StatefulScreen {
     private final UserDTO currentUser;
     private final ToDoListService toDoListService;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
     private List<ToDoListDTO> todoLists;
-    private int selectedList = 0;
-    private int selectedTask = 0;
-    private int mode = 0; // 0=list view, 1=add list, 2=list details, 3=add task
-    private String errorMessage = "";
-    private String successMessage = "";
-    // Input fields
-    private String listName = "";
-    private String taskDescription = "";
-    private String taskDeadlineDay = "";
-    private String taskDeadlineMonth = "";
-    private String taskDeadlineYear = "";
-    private int inputField = 0;
 
     public ToDoListManagementScreen(Screen screen, UserDTO currentUser, ToDoListService toDoListService) {
-        this.screen = screen;
+        super(screen);
         this.currentUser = currentUser;
         this.toDoListService = toDoListService;
-    }
-
-    public void display() throws IOException {
         loadToDoLists();
-        boolean running = true;
-
-        while (running) {
-            screen.clear();
-            render();
-            screen.refresh();
-
-            KeyStroke keyStroke = screen.readInput();
-            if (keyStroke.getKeyType() == KeyType.Character) {
-                handleCharacterInput(keyStroke.getCharacter());
-            } else if (keyStroke.getKeyType() == KeyType.Backspace) {
-                handleBackspace();
-            } else if (keyStroke.getKeyType() == KeyType.ArrowUp) {
-                handleArrowUp();
-            } else if (keyStroke.getKeyType() == KeyType.ArrowDown) {
-                handleArrowDown();
-            } else if (keyStroke.getKeyType() == KeyType.Tab) {
-                nextInputField();
-            } else if (keyStroke.getKeyType() == KeyType.Enter) {
-                handleEnter();
-            } else if (keyStroke.getKeyType() == KeyType.F1) {
-                mode = 1; // Add list
-                clearInputs();
-            } else if (keyStroke.getKeyType() == KeyType.F2 && mode == 2) {
-                mode = 3; // Add task
-                clearInputs();
-            } else if (keyStroke.getKeyType() == KeyType.F3 && mode == 2) {
-                handleMarkComplete();
-            } else if (keyStroke.getKeyType() == KeyType.Escape) {
-                if (mode == 0) {
-                    running = false; // Back to main menu
-                } else {
-                    mode = 0; // Back to list view
-                    loadToDoLists();
-                    clearMessages();
-                }
-            }
-        }
-    }
-
-    private void render() {
-        TextGraphics graphics = screen.newTextGraphics();
-        TerminalSize size = screen.getTerminalSize();
-
-        // Title
-        graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
-        String title = "=== TO-DO LIST MANAGEMENT ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
-
-        if (mode == 0) {
-            renderListView(graphics);
-        } else if (mode == 1) {
-            renderAddList(graphics);
-        } else if (mode == 2) {
-            renderListDetails(graphics);
-        } else if (mode == 3) {
-            renderAddTask(graphics);
-        }
-
-        // Messages
-        renderMessages(graphics, size.getRows() - 2);
-    }
-
-    private void renderListView(TextGraphics graphics) {
-        graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "F1: Add List | ESC: Back to Main Menu");
-
-        graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(3, 5, "Your To-Do Lists:");
-
-        if (todoLists.isEmpty()) {
-            graphics.setForegroundColor(TextColor.ANSI.RED);
-            graphics.putString(5, 7, "No lists yet. Press F1 to add one.");
-        } else {
-            int y = 7;
-            for (int i = 0; i < todoLists.size(); i++) {
-                ToDoListDTO list = todoLists.get(i);
-                int completedTasks = (int) list.getTasks().stream()
-                        .filter(t -> TaskStatus.COMPLETED.equals(t.getStatus()))
-                        .count();
-                String listLine = list.getName() + " (" + completedTasks + "/" + list.getTasks().size() + " completed)";
-
-                if (i == selectedList) {
-                    graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
-                    graphics.putString(5, y, ">> " + listLine);
-                } else {
-                    graphics.setForegroundColor(TextColor.ANSI.WHITE);
-                    graphics.putString(5, y, "   " + listLine);
-                }
-                y++;
-            }
-            graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-            graphics.putString(3, y + 1, "Press ENTER to view list details");
-        }
-    }
-
-    private void renderAddList(TextGraphics graphics) {
-        graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Add New To-Do List (Enter: Save, ESC: Cancel)");
-
-        graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
-        graphics.putString(5, 5, "List Name: " + listName + "_");
-    }
-
-    private void renderListDetails(TextGraphics graphics) {
-        if (todoLists.isEmpty()) {
-            graphics.setForegroundColor(TextColor.ANSI.RED);
-            graphics.putString(5, 5, "No to-do lists available. Press ESC to go back.");
-            return;
-        }
-
-        ToDoListDTO list = todoLists.get(selectedList);
-
-        graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "F2: Add Task | F3: Mark Complete | ESC: Back");
-
-        graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        int completedTasks = (int) list.getTasks().stream()
-                .filter(t -> TaskStatus.COMPLETED.equals(t.getStatus()))
-                .count();
-        String listTitle = list.getName() + " (" + completedTasks + "/" + list.getTasks().size() + " completed)";
-        graphics.putString(3, 5, "List: " + listTitle);
-
-        graphics.putString(3, 7, "Tasks:");
-
-        if (list.getTasks() == null || list.getTasks().isEmpty()) {
-            graphics.setForegroundColor(TextColor.ANSI.RED);
-            graphics.putString(5, 9, "No tasks yet. Press F2 to add one.");
-        } else {
-            int y = 9;
-            List<ToDoListTaskDTO> tasks = list.getTasks();
-            for (int i = 0; i < tasks.size(); i++) {
-                ToDoListTaskDTO task = tasks.get(i);
-                String deadline = task.getDeadline() != null ? dateFormat.format(task.getDeadline()) : "No deadline";
-                String taskLine = String.format("%s - %s (%s)",
-                        task.getDescription(),
-                        task.getStatus(),
-                        deadline);
-
-                if (i == selectedTask) {
-                    graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
-                    graphics.putString(5, y, ">> " + taskLine);
-                } else {
-                    graphics.setForegroundColor(TextColor.ANSI.WHITE);
-                    graphics.putString(5, y, "   " + taskLine);
-                }
-                y++;
-            }
-        }
-    }
-
-    private void renderAddTask(TextGraphics graphics) {
-        graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Add New Task (Tab: Next field, Enter: Save, ESC: Cancel)");
-
-        int y = 5;
-        graphics.setForegroundColor(inputField == 0 ? TextColor.ANSI.GREEN_BRIGHT : TextColor.ANSI.WHITE);
-        graphics.putString(5, y, "Description: " + taskDescription + (inputField == 0 ? "_" : ""));
-
-        y += 2;
-        graphics.setForegroundColor(inputField == 1 ? TextColor.ANSI.GREEN_BRIGHT : TextColor.ANSI.WHITE);
-        String yearDisplay = taskDeadlineYear.isEmpty() ? "YYYY" : taskDeadlineYear;
-        graphics.putString(5, y, "Deadline Year: " + yearDisplay + (inputField == 1 ? "_" : ""));
-
-        y += 1;
-        graphics.setForegroundColor(inputField == 2 ? TextColor.ANSI.GREEN_BRIGHT : TextColor.ANSI.WHITE);
-        String monthDisplay = taskDeadlineMonth.isEmpty() ? "MM" : taskDeadlineMonth;
-        graphics.putString(5, y, "Deadline Month (1-12): " + monthDisplay + (inputField == 2 ? "_" : ""));
-
-        y += 1;
-        graphics.setForegroundColor(inputField == 3 ? TextColor.ANSI.GREEN_BRIGHT : TextColor.ANSI.WHITE);
-        String dayDisplay = taskDeadlineDay.isEmpty() ? "DD" : taskDeadlineDay;
-        graphics.putString(5, y, "Deadline Day (1-31): " + dayDisplay + (inputField == 3 ? "_" : ""));
-
-        y += 2;
-        graphics.setForegroundColor(TextColor.ANSI.CYAN);
-        graphics.putString(5, y, "Note: Deadline is optional, will be set if valid date entered");
-    }
-
-    private void renderMessages(TextGraphics graphics, int y) {
-        if (!errorMessage.isEmpty()) {
-            graphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
-            graphics.putString(3, y, "Error: " + errorMessage);
-        }
-        if (!successMessage.isEmpty()) {
-            graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
-            graphics.putString(3, y, successMessage);
-        }
-    }
-
-    private void handleCharacterInput(Character c) {
-        clearMessages();
-
-        if (mode == 1) { // Add list
-            listName += c;
-        } else if (mode == 3) { // Add task
-            if (inputField == 0) taskDescription += c;
-            else if (inputField == 1 && Character.isDigit(c)) taskDeadlineYear += c;
-            else if (inputField == 2 && Character.isDigit(c)) taskDeadlineMonth += c;
-            else if (inputField == 3 && Character.isDigit(c)) taskDeadlineDay += c;
-        }
-    }
-
-    private void handleBackspace() {
-        clearMessages();
-
-        if (mode == 1 && !listName.isEmpty()) {
-            listName = listName.substring(0, listName.length() - 1);
-        } else if (mode == 3) {
-            if (inputField == 0 && !taskDescription.isEmpty())
-                taskDescription = taskDescription.substring(0, taskDescription.length() - 1);
-            else if (inputField == 1 && !taskDeadlineYear.isEmpty())
-                taskDeadlineYear = taskDeadlineYear.substring(0, taskDeadlineYear.length() - 1);
-            else if (inputField == 2 && !taskDeadlineMonth.isEmpty())
-                taskDeadlineMonth = taskDeadlineMonth.substring(0, taskDeadlineMonth.length() - 1);
-            else if (inputField == 3 && !taskDeadlineDay.isEmpty())
-                taskDeadlineDay = taskDeadlineDay.substring(0, taskDeadlineDay.length() - 1);
-        }
-    }
-
-    private void handleArrowUp() {
-        if (mode == 0 && !todoLists.isEmpty()) {
-            selectedList = (selectedList - 1 + todoLists.size()) % todoLists.size();
-        } else if (mode == 2 && !todoLists.isEmpty() && todoLists.get(selectedList).getTasks() != null && !todoLists.get(selectedList).getTasks().isEmpty()) {
-            int taskCount = todoLists.get(selectedList).getTasks().size();
-            selectedTask = (selectedTask - 1 + taskCount) % taskCount;
-        }
-    }
-
-    private void handleArrowDown() {
-        if (mode == 0 && !todoLists.isEmpty()) {
-            selectedList = (selectedList + 1) % todoLists.size();
-        } else if (mode == 2 && !todoLists.isEmpty() && todoLists.get(selectedList).getTasks() != null && !todoLists.get(selectedList).getTasks().isEmpty()) {
-            int taskCount = todoLists.get(selectedList).getTasks().size();
-            selectedTask = (selectedTask + 1) % taskCount;
-        }
-    }
-
-    private void nextInputField() {
-        if (mode == 3) {
-            inputField = (inputField + 1) % 4;
-        }
-    }
-
-    private void handleEnter() {
-        clearMessages();
-
-        try {
-            if (mode == 0 && !todoLists.isEmpty()) {
-                // View list details
-                mode = 2;
-                selectedTask = 0;
-            } else if (mode == 1) {
-                // Save new list
-                if (listName.trim().isEmpty()) {
-                    errorMessage = "List name is required";
-                    return;
-                }
-
-                toDoListService.createToDoList(listName.trim(), currentUser.getId());
-                successMessage = "To-Do List created successfully!";
-                mode = 0;
-                loadToDoLists();
-                clearInputs();
-            } else if (mode == 3) {
-                // Save new task
-                if (taskDescription.trim().isEmpty()) {
-                    errorMessage = "Task description is required";
-                    return;
-                }
-
-                ToDoListDTO list = todoLists.get(selectedList);
-                Date deadline = null;
-
-                // Try to create deadline if all date fields are provided
-                if (!taskDeadlineYear.isEmpty() && !taskDeadlineMonth.isEmpty() && !taskDeadlineDay.isEmpty()) {
-                    try {
-                        int year = Integer.parseInt(taskDeadlineYear);
-                        int month = Integer.parseInt(taskDeadlineMonth);
-                        int day = Integer.parseInt(taskDeadlineDay);
-
-                        if (month < 1 || month > 12) {
-                            errorMessage = "Month must be between 1 and 12";
-                            return;
-                        }
-                        if (day < 1 || day > 31) {
-                            errorMessage = "Day must be between 1 and 31";
-                            return;
-                        }
-                        if (year < 2000 || year > 2100) {
-                            errorMessage = "Year must be between 2000 and 2100";
-                            return;
-                        }
-
-                        Calendar cal = Calendar.getInstance();
-                        cal.set(year, month - 1, day);
-                        deadline = cal.getTime();
-                    } catch (NumberFormatException e) {
-                        errorMessage = "Invalid date format";
-                        return;
-                    }
-                }
-
-                toDoListService.addTaskToList(list.getId(), taskDescription.trim(), deadline);
-                successMessage = "Task added successfully!";
-                mode = 2;
-                loadToDoLists();
-                clearInputs();
-            }
-        } catch (Exception e) {
-            errorMessage = e.getMessage();
-        }
-    }
-
-    private void handleMarkComplete() {
-        clearMessages();
-
-        try {
-            if (todoLists.isEmpty()) return;
-
-            ToDoListDTO list = todoLists.get(selectedList);
-            if (list.getTasks() == null || list.getTasks().isEmpty()) {
-                errorMessage = "No tasks to mark as complete";
-                return;
-            }
-
-            ToDoListTaskDTO task = list.getTasks().get(selectedTask);
-            if (TaskStatus.COMPLETED.equals(task.getStatus())) {
-                errorMessage = "Task is already completed";
-                return;
-            }
-
-            toDoListService.markTaskComplete(list.getId(), task.getId());
-            successMessage = "Task marked as complete!";
-            loadToDoLists();
-        } catch (Exception e) {
-            errorMessage = e.getMessage();
-        }
+        this.currentState = new ListViewState();
     }
 
     private void loadToDoLists() {
         todoLists = toDoListService.getToDoListsByUserId(currentUser.getId());
-        if (selectedList >= todoLists.size()) {
-            selectedList = Math.max(0, todoLists.size() - 1);
+    }
+
+    /**
+     * State 1: To-Do Lists View
+     */
+    private class ListViewState implements ScreenState {
+        private final SelectionList<ToDoListDTO> listSelection;
+        private final MessagePanel messagePanel;
+
+        public ListViewState() {
+            listSelection = new SelectionList<>("Your To-Do Lists", list -> {
+                int completed = (int) list.getTasks().stream()
+                        .filter(t -> TaskStatus.COMPLETED.equals(t.getStatus()))
+                        .count();
+                return list.getName() + " (" + completed + "/" + list.getTasks().size() + " completed)";
+            });
+            listSelection.setItems(todoLists);
+            listSelection.setFocused(true);
+            messagePanel = new MessagePanel();
+        }
+
+        @Override
+        public void render(TextGraphics graphics) {
+            TerminalSize size = screen.getTerminalSize();
+
+            graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
+            String title = "=== TO-DO LIST MANAGEMENT ===";
+            graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+
+            graphics.setForegroundColor(TextColor.ANSI.YELLOW);
+            graphics.putString(3, 3, "F1: Add List | ESC: Back to Main Menu");
+
+            listSelection.render(graphics, 3, 5);
+
+            if (!listSelection.isEmpty()) {
+                graphics.setForegroundColor(TextColor.ANSI.YELLOW);
+                graphics.putString(3, 17, "Press ENTER to view list details");
+            }
+
+            messagePanel.render(graphics, 3, size.getRows() - 2);
+        }
+
+        @Override
+        public ScreenState handleInput(KeyStroke keyStroke) {
+            messagePanel.clear();
+
+            if (keyStroke.getKeyType() == KeyType.F1) {
+                return new AddListState(this);
+            } else if (keyStroke.getKeyType() == KeyType.Escape) {
+                close();
+                return this;
+            } else if (keyStroke.getKeyType() == KeyType.Enter && !listSelection.isEmpty()) {
+                return new ListDetailsState(listSelection.getSelectedItem(), this);
+            } else {
+                listSelection.handleInput(keyStroke);
+                return this;
+            }
+        }
+
+        @Override
+        public String getStateName() {
+            return "ListView";
+        }
+
+        public void setSuccessMessage(String message) {
+            messagePanel.setSuccess(message);
         }
     }
 
-    private void clearInputs() {
-        listName = "";
-        taskDescription = "";
-        taskDeadlineYear = "";
-        taskDeadlineMonth = "";
-        taskDeadlineDay = "";
-        inputField = 0;
+    /**
+     * State 2: Add To-Do List
+     */
+    private class AddListState implements ScreenState {
+        private final ListViewState previousState;
+        private final FormField nameField;
+        private final MessagePanel messagePanel;
+
+        public AddListState(ListViewState previousState) {
+            this.previousState = previousState;
+            this.nameField = ComponentFactory.createTextField("List Name");
+            this.nameField.setFocused(true);
+            this.messagePanel = new MessagePanel();
+        }
+
+        @Override
+        public void render(TextGraphics graphics) {
+            TerminalSize size = screen.getTerminalSize();
+
+            graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
+            String title = "=== ADD NEW TO-DO LIST ===";
+            graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+
+            graphics.setForegroundColor(TextColor.ANSI.YELLOW);
+            graphics.putString(3, 3, "Enter: Save | ESC: Cancel");
+
+            nameField.render(graphics, 5, 5);
+
+            messagePanel.render(graphics, 5, size.getRows() - 2);
+        }
+
+        @Override
+        public ScreenState handleInput(KeyStroke keyStroke) {
+            messagePanel.clear();
+
+            if (keyStroke.getKeyType() == KeyType.Escape) {
+                loadToDoLists();
+                return previousState;
+            } else if (keyStroke.getKeyType() == KeyType.Enter) {
+                return handleSave();
+            } else {
+                nameField.handleInput(keyStroke);
+                return this;
+            }
+        }
+
+        private ScreenState handleSave() {
+            String name = nameField.getValue().trim();
+
+            String error = new RequiredFieldStrategy("List name").validate(name);
+            if (error != null) {
+                messagePanel.setError(error);
+                return this;
+            }
+
+            try {
+                toDoListService.createToDoList(name, currentUser.getId());
+                loadToDoLists();
+                previousState.setSuccessMessage("To-Do List created successfully!");
+                return new ListViewState();
+            } catch (Exception e) {
+                messagePanel.setError(e.getMessage());
+                return this;
+            }
+        }
+
+        @Override
+        public String getStateName() {
+            return "AddList";
+        }
     }
 
-    private void clearMessages() {
-        errorMessage = "";
-        successMessage = "";
+    /**
+     * State 3: List Details View
+     */
+    private class ListDetailsState implements ScreenState {
+        private final ToDoListDTO todoList;
+        private final ListViewState listViewState;
+        private final SelectionList<ToDoListTaskDTO> taskSelection;
+        private final MessagePanel messagePanel;
+
+        public ListDetailsState(ToDoListDTO todoList, ListViewState listViewState) {
+            this.todoList = todoList;
+            this.listViewState = listViewState;
+            this.taskSelection = new SelectionList<>("Tasks", task -> {
+                String deadline = task.getDeadline() != null ?
+                        dateFormat.format(task.getDeadline()) : "No deadline";
+                return String.format("%s - %s (%s)", task.getDescription(), task.getStatus(), deadline);
+            });
+
+            if (todoList.getTasks() != null) {
+                taskSelection.setItems(todoList.getTasks());
+            }
+            taskSelection.setFocused(true);
+            messagePanel = new MessagePanel();
+        }
+
+        @Override
+        public void render(TextGraphics graphics) {
+            TerminalSize size = screen.getTerminalSize();
+
+            graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
+            String title = "=== TO-DO LIST DETAILS ===";
+            graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+
+            graphics.setForegroundColor(TextColor.ANSI.YELLOW);
+            graphics.putString(3, 3, "F2: Add Task | F3: Mark Complete | ESC: Back");
+
+            graphics.setForegroundColor(TextColor.ANSI.WHITE);
+            int completed = (int) todoList.getTasks().stream()
+                    .filter(t -> TaskStatus.COMPLETED.equals(t.getStatus()))
+                    .count();
+            String listTitle = todoList.getName() + " (" + completed + "/" + todoList.getTasks().size() + " completed)";
+            graphics.putString(3, 5, "List: " + listTitle);
+
+            taskSelection.render(graphics, 3, 7);
+
+            messagePanel.render(graphics, 3, size.getRows() - 2);
+        }
+
+        @Override
+        public ScreenState handleInput(KeyStroke keyStroke) {
+            messagePanel.clear();
+
+            if (keyStroke.getKeyType() == KeyType.F2) {
+                return new AddTaskState(todoList, this);
+            } else if (keyStroke.getKeyType() == KeyType.F3) {
+                handleMarkComplete();
+                return this;
+            } else if (keyStroke.getKeyType() == KeyType.Escape) {
+                loadToDoLists();
+                return listViewState;
+            } else {
+                taskSelection.handleInput(keyStroke);
+                return this;
+            }
+        }
+
+        private void handleMarkComplete() {
+            if (taskSelection.isEmpty()) {
+                messagePanel.setError("No tasks to mark as complete");
+                return;
+            }
+
+            ToDoListTaskDTO task = taskSelection.getSelectedItem();
+            if (TaskStatus.COMPLETED.equals(task.getStatus())) {
+                messagePanel.setError("Task is already completed");
+                return;
+            }
+
+            try {
+                toDoListService.markTaskComplete(todoList.getId(), task.getId());
+                messagePanel.setSuccess("Task marked as complete!");
+                loadToDoLists();
+                // Refresh the list
+            } catch (Exception e) {
+                messagePanel.setError(e.getMessage());
+            }
+        }
+
+        @Override
+        public String getStateName() {
+            return "ListDetails";
+        }
+
+        public void setSuccessMessage(String message) {
+            messagePanel.setSuccess(message);
+        }
+    }
+
+    /**
+     * State 4: Add Task
+     */
+    private class AddTaskState implements ScreenState {
+        private final ToDoListDTO todoList;
+        private final ListDetailsState previousState;
+        private final Form form;
+        private final FormField descriptionField;
+        private final DateInput deadlineInput;
+        private final MessagePanel messagePanel;
+
+        public AddTaskState(ToDoListDTO todoList, ListDetailsState previousState) {
+            this.todoList = todoList;
+            this.previousState = previousState;
+
+            descriptionField = ComponentFactory.createTextField("Description");
+            deadlineInput = ComponentFactory.createDateInput("Deadline (optional)");
+
+            form = new Form()
+                    .addField(descriptionField)
+                    .addField(deadlineInput);
+
+            messagePanel = new MessagePanel();
+        }
+
+        @Override
+        public void onEnter() {
+            form.setFocused(true);
+        }
+
+        @Override
+        public void render(TextGraphics graphics) {
+            TerminalSize size = screen.getTerminalSize();
+
+            graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
+            String title = "=== ADD NEW TASK ===";
+            graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+
+            graphics.setForegroundColor(TextColor.ANSI.YELLOW);
+            graphics.putString(3, 3, "Tab: Next field | Enter: Save | ESC: Cancel");
+
+            form.render(graphics, 5, 5);
+
+            graphics.setForegroundColor(TextColor.ANSI.CYAN);
+            graphics.putString(5, 14, "Note: Deadline is optional");
+
+            messagePanel.render(graphics, 5, size.getRows() - 2);
+        }
+
+        @Override
+        public ScreenState handleInput(KeyStroke keyStroke) {
+            messagePanel.clear();
+
+            if (keyStroke.getKeyType() == KeyType.Escape) {
+                loadToDoLists();
+                return previousState;
+            } else if (keyStroke.getKeyType() == KeyType.Enter) {
+                return handleSave();
+            } else {
+                form.handleInput(keyStroke);
+                return this;
+            }
+        }
+
+        private ScreenState handleSave() {
+            String description = descriptionField.getValue().trim();
+
+            String error = new RequiredFieldStrategy("Task description").validate(description);
+            if (error != null) {
+                messagePanel.setError(error);
+                return this;
+            }
+
+            Date deadline = null;
+            if (!deadlineInput.isEmpty()) {
+                deadline = deadlineInput.getDate();
+                if (deadline == null) {
+                    messagePanel.setError(deadlineInput.getErrorMessage());
+                    return this;
+                }
+            }
+
+            try {
+                toDoListService.addTaskToList(todoList.getId(), description, deadline);
+                loadToDoLists();
+                ToDoListDTO updatedList = todoLists.stream()
+                        .filter(l -> l.getId().equals(todoList.getId()))
+                        .findFirst()
+                        .orElse(todoList);
+                ListDetailsState newDetailsState = new ListDetailsState(updatedList, new ListViewState());
+                newDetailsState.setSuccessMessage("Task added successfully!");
+                return newDetailsState;
+            } catch (Exception e) {
+                messagePanel.setError(e.getMessage());
+                return this;
+            }
+        }
+
+        @Override
+        public String getStateName() {
+            return "AddTask";
+        }
     }
 }

@@ -2,6 +2,8 @@ package com.cpp.project.ui.screen;
 
 import com.cpp.project.calendar.dto.CalendarItemDTO;
 import com.cpp.project.calendar.service.CalendarService;
+import com.cpp.project.ui.core.UIScreen;
+import com.cpp.project.ui.strategy.RenderingStrategy;
 import com.cpp.project.user.dto.UserDTO;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -16,11 +18,12 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- * Calendar screen for viewing monthly calendar with tasks
- * Shows all deadlines from both courses and to-do lists
+ * Refactored Calendar Screen using design patterns:
+ * - Template Method Pattern: Extends UIScreen
+ * - Strategy Pattern: Separate rendering strategies for grid and tasks
+ * - Single Responsibility: Separated calendar grid logic from task list logic
  */
-public class CalendarScreen {
-    private final Screen screen;
+public class CalendarScreen extends UIScreen {
     private final UserDTO currentUser;
     private final CalendarService calendarService;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
@@ -28,12 +31,17 @@ public class CalendarScreen {
             "January", "February", "March", "April", "May", "June",
             "July", "August", "September", "October", "November", "December"
     };
+
     private int currentYear;
     private int currentMonth; // 1-12
     private List<CalendarItemDTO> calendarItems;
 
+    // Rendering strategies
+    private CalendarGridRenderer gridRenderer;
+    private TaskListRenderer taskListRenderer;
+
     public CalendarScreen(Screen screen, UserDTO currentUser, CalendarService calendarService) {
-        this.screen = screen;
+        super(screen);
         this.currentUser = currentUser;
         this.calendarService = calendarService;
 
@@ -41,29 +49,12 @@ public class CalendarScreen {
         Calendar cal = Calendar.getInstance();
         this.currentYear = cal.get(Calendar.YEAR);
         this.currentMonth = cal.get(Calendar.MONTH) + 1;
-    }
 
-    public void display() throws IOException {
         loadCalendarItems();
-        boolean running = true;
-
-        while (running) {
-            screen.clear();
-            render();
-            screen.refresh();
-
-            KeyStroke keyStroke = screen.readInput();
-            if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
-                previousMonth();
-            } else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
-                nextMonth();
-            } else if (keyStroke.getKeyType() == KeyType.Escape) {
-                running = false;
-            }
-        }
     }
 
-    private void render() {
+    @Override
+    protected void render() {
         TextGraphics graphics = screen.newTextGraphics();
         TerminalSize size = screen.getTerminalSize();
 
@@ -81,120 +72,24 @@ public class CalendarScreen {
         String monthYear = monthNames[currentMonth - 1] + " " + currentYear;
         graphics.putString((size.getColumns() - monthYear.length()) / 2, 5, monthYear);
 
-        // Calendar grid
-        renderCalendarGrid(graphics);
+        // Use strategy pattern for rendering
+        gridRenderer = new CalendarGridRenderer(currentYear, currentMonth, calendarItems);
+        gridRenderer.render(graphics, 5, 7);
 
-        // Tasks list
-        renderTasksList(graphics);
+        taskListRenderer = new TaskListRenderer(calendarItems, dateFormat);
+        taskListRenderer.render(graphics, 3, 20);
     }
 
-    private void renderCalendarGrid(TextGraphics graphics) {
-        int startY = 7;
-        int startX = 5;
+    @Override
+    protected void handleInput() throws IOException {
+        KeyStroke keyStroke = screen.readInput();
 
-        // Day headers
-        String[] dayHeaders = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
-        graphics.setForegroundColor(TextColor.ANSI.CYAN);
-        for (int i = 0; i < dayHeaders.length; i++) {
-            graphics.putString(startX + i * 5, startY, dayHeaders[i]);
-        }
-
-        // Calculate calendar grid
-        Calendar cal = Calendar.getInstance();
-        cal.set(currentYear, currentMonth - 1, 1);
-        int firstDayOfWeek = cal.get(Calendar.DAY_OF_WEEK) - 1; // 0=Sunday
-        int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-
-        int row = startY + 1;
-        int col = firstDayOfWeek;
-
-        for (int day = 1; day <= daysInMonth; day++) {
-            cal.set(currentYear, currentMonth - 1, day);
-
-            // Check if this day has tasks
-            int finalDay = day;
-            boolean hasTask = calendarItems.stream().anyMatch(item -> {
-                Calendar itemCal = Calendar.getInstance();
-                itemCal.setTime(item.getDate());
-                return itemCal.get(Calendar.DAY_OF_MONTH) == finalDay;
-            });
-
-            // Highlight current day
-            Calendar today = Calendar.getInstance();
-            boolean isToday = today.get(Calendar.YEAR) == currentYear &&
-                    today.get(Calendar.MONTH) == currentMonth - 1 &&
-                    today.get(Calendar.DAY_OF_MONTH) == day;
-
-            if (isToday) {
-                graphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-            } else if (hasTask) {
-                graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
-            } else {
-                graphics.setForegroundColor(TextColor.ANSI.WHITE);
-            }
-
-            String dayStr = String.format("%2d", day);
-            graphics.putString(startX + col * 5, row, dayStr + (hasTask ? "*" : " "));
-
-            col++;
-            if (col == 7) {
-                col = 0;
-                row++;
-            }
-        }
-
-        // Legend
-        graphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
-        graphics.putString(startX, row + 2, "Yellow: Today");
-        graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
-        graphics.putString(startX + 20, row + 2, "Green*: Has tasks");
-    }
-
-    private void renderTasksList(TextGraphics graphics) {
-        int startY = 20;
-
-        graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
-        graphics.putString(3, startY, "Tasks this month:");
-
-        if (calendarItems.isEmpty()) {
-            graphics.setForegroundColor(TextColor.ANSI.RED);
-            graphics.putString(5, startY + 2, "No tasks scheduled for this month");
-        } else {
-            graphics.setForegroundColor(TextColor.ANSI.WHITE);
-            int y = startY + 2;
-            int maxTasks = 8; // Limit display to avoid overflow
-
-            for (int i = 0; i < Math.min(calendarItems.size(), maxTasks); i++) {
-                CalendarItemDTO item = calendarItems.get(i);
-
-                // Format: Date | Type | Title | Status
-                String taskLine = String.format("%s | %-10s | %-25s | %s",
-                        dateFormat.format(item.getDate()),
-                        item.getSourceType(),
-                        truncate(item.getTitle(), 25),
-                        item.getStatus());
-
-                // Color code by source type
-                if ("COURSE".equals(item.getSourceType())) {
-                    graphics.setForegroundColor(TextColor.ANSI.BLUE_BRIGHT);
-                } else {
-                    graphics.setForegroundColor(TextColor.ANSI.MAGENTA_BRIGHT);
-                }
-
-                graphics.putString(5, y, taskLine);
-                y++;
-            }
-
-            if (calendarItems.size() > maxTasks) {
-                graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-                graphics.putString(5, y + 1, "... and " + (calendarItems.size() - maxTasks) + " more tasks");
-            }
-
-            // Legend
-            graphics.setForegroundColor(TextColor.ANSI.BLUE_BRIGHT);
-            graphics.putString(5, y + 3, "Blue: Course tasks");
-            graphics.setForegroundColor(TextColor.ANSI.MAGENTA_BRIGHT);
-            graphics.putString(30, y + 3, "Magenta: To-Do tasks");
+        if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
+            previousMonth();
+        } else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
+            nextMonth();
+        } else if (keyStroke.getKeyType() == KeyType.Escape) {
+            close();
         }
     }
 
@@ -224,9 +119,169 @@ public class CalendarScreen {
         }
     }
 
-    private String truncate(String text, int maxLength) {
-        if (text == null) return "";
-        if (text.length() <= maxLength) return text;
-        return text.substring(0, maxLength - 3) + "...";
+    /**
+     * Strategy Pattern: Calendar Grid Rendering Strategy
+     * Encapsulates the logic for rendering the monthly calendar grid
+     */
+    private static class CalendarGridRenderer implements RenderingStrategy {
+        private final int year;
+        private final int month;
+        private final List<CalendarItemDTO> items;
+
+        public CalendarGridRenderer(int year, int month, List<CalendarItemDTO> items) {
+            this.year = year;
+            this.month = month;
+            this.items = items;
+        }
+
+        @Override
+        public void render(TextGraphics graphics, int x, int y) {
+            // Day headers
+            String[] dayHeaders = {"Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"};
+            graphics.setForegroundColor(TextColor.ANSI.CYAN);
+            for (int i = 0; i < dayHeaders.length; i++) {
+                graphics.putString(x + i * 5, y, dayHeaders[i]);
+            }
+
+            // Calculate calendar grid
+            Calendar cal = Calendar.getInstance();
+            cal.set(year, month - 1, 1);
+            int firstDayOfWeek = cal.get(Calendar.DAY_OF_WEEK) - 1; // 0=Sunday
+            int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+
+            int row = y + 1;
+            int col = firstDayOfWeek;
+
+            // Render each day
+            for (int day = 1; day <= daysInMonth; day++) {
+                renderDay(graphics, x, row, col, day);
+
+                col++;
+                if (col == 7) {
+                    col = 0;
+                    row++;
+                }
+            }
+
+            // Legend
+            graphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
+            graphics.putString(x, row + 2, "Yellow: Today");
+            graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
+            graphics.putString(x + 20, row + 2, "Green*: Has tasks");
+        }
+
+        private void renderDay(TextGraphics graphics, int startX, int row, int col, int day) {
+            boolean hasTask = hasTasks(day);
+            boolean isToday = isToday(day);
+
+            // Choose color based on day state
+            if (isToday) {
+                graphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
+            } else if (hasTask) {
+                graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
+            } else {
+                graphics.setForegroundColor(TextColor.ANSI.WHITE);
+            }
+
+            String dayStr = String.format("%2d", day);
+            graphics.putString(startX + col * 5, row, dayStr + (hasTask ? "*" : " "));
+        }
+
+        private boolean hasTasks(int day) {
+            return items.stream().anyMatch(item -> {
+                Calendar itemCal = Calendar.getInstance();
+                itemCal.setTime(item.getDate());
+                return itemCal.get(Calendar.YEAR) == year &&
+                        itemCal.get(Calendar.MONTH) == month - 1 &&
+                        itemCal.get(Calendar.DAY_OF_MONTH) == day;
+            });
+        }
+
+        private boolean isToday(int day) {
+            Calendar today = Calendar.getInstance();
+            return today.get(Calendar.YEAR) == year &&
+                    today.get(Calendar.MONTH) == month - 1 &&
+                    today.get(Calendar.DAY_OF_MONTH) == day;
+        }
+    }
+
+    /**
+     * Strategy Pattern: Task List Rendering Strategy
+     * Encapsulates the logic for rendering the task list
+     */
+    private static class TaskListRenderer implements RenderingStrategy {
+        private static final int MAX_TASKS = 8;
+        private final List<CalendarItemDTO> items;
+        private final SimpleDateFormat dateFormat;
+
+        public TaskListRenderer(List<CalendarItemDTO> items, SimpleDateFormat dateFormat) {
+            this.items = items;
+            this.dateFormat = dateFormat;
+        }
+
+        @Override
+        public void render(TextGraphics graphics, int x, int y) {
+            graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
+            graphics.putString(x, y, "Tasks this month:");
+
+            if (items.isEmpty()) {
+                renderEmptyMessage(graphics, x, y + 2);
+            } else {
+                renderTasks(graphics, x + 2, y + 2);
+            }
+        }
+
+        private void renderEmptyMessage(TextGraphics graphics, int x, int y) {
+            graphics.setForegroundColor(TextColor.ANSI.RED);
+            graphics.putString(x, y, "No tasks scheduled for this month");
+        }
+
+        private void renderTasks(TextGraphics graphics, int x, int y) {
+            int currentY = y;
+            int taskCount = Math.min(items.size(), MAX_TASKS);
+
+            for (int i = 0; i < taskCount; i++) {
+                CalendarItemDTO item = items.get(i);
+                renderTask(graphics, x, currentY, item);
+                currentY++;
+            }
+
+            // Show overflow indicator
+            if (items.size() > MAX_TASKS) {
+                graphics.setForegroundColor(TextColor.ANSI.YELLOW);
+                graphics.putString(x, currentY + 1, "... and " + (items.size() - MAX_TASKS) + " more tasks");
+            }
+
+            // Render legend
+            renderLegend(graphics, x, currentY + 3);
+        }
+
+        private void renderTask(TextGraphics graphics, int x, int y, CalendarItemDTO item) {
+            // Format: Date | Type | Title | Status
+            String taskLine = String.format("%s | %-10s | %-25s | %s",
+                    dateFormat.format(item.getDate()),
+                    item.getSourceType(),
+                    truncate(item.getTitle(), 25),
+                    item.getStatus());
+
+            // Color code by source type
+            TextColor color = "COURSE".equals(item.getSourceType()) ?
+                    TextColor.ANSI.BLUE_BRIGHT : TextColor.ANSI.MAGENTA_BRIGHT;
+            graphics.setForegroundColor(color);
+            graphics.putString(x, y, taskLine);
+        }
+
+        private void renderLegend(TextGraphics graphics, int x, int y) {
+            graphics.setForegroundColor(TextColor.ANSI.BLUE_BRIGHT);
+            graphics.putString(x, y, "Blue: Course tasks");
+            graphics.setForegroundColor(TextColor.ANSI.MAGENTA_BRIGHT);
+            graphics.putString(x + 25, y, "Magenta: To-Do tasks");
+        }
+
+        private String truncate(String text, int maxLength) {
+            if (text == null) return "";
+            if (text.length() <= maxLength) return text;
+            return text.substring(0, maxLength - 3) + "...";
+        }
     }
 }

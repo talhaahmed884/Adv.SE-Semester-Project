@@ -4,6 +4,13 @@ import com.cpp.project.authentication.service.AuthenticationService;
 import com.cpp.project.calendar.service.CalendarService;
 import com.cpp.project.course.service.CourseService;
 import com.cpp.project.todolist.service.ToDoListService;
+import com.cpp.project.ui.component.Form;
+import com.cpp.project.ui.component.FormField;
+import com.cpp.project.ui.component.MessagePanel;
+import com.cpp.project.ui.core.ScreenState;
+import com.cpp.project.ui.core.StatefulScreen;
+import com.cpp.project.ui.factory.ComponentFactory;
+import com.cpp.project.ui.strategy.RequiredFieldStrategy;
 import com.cpp.project.user.dto.LoginRequestDTO;
 import com.cpp.project.user.dto.SignUpRequestDTO;
 import com.cpp.project.user.dto.UserDTO;
@@ -17,23 +24,16 @@ import com.googlecode.lanterna.screen.Screen;
 import java.io.IOException;
 
 /**
- * Login screen for authentication
- * Allows users to login or signup
+ * Refactored Login Screen using design patterns:
+ * - State Pattern: Login vs Signup modes
+ * - Component Pattern: Reusable form fields
+ * - Strategy Pattern: Validation strategies
  */
-public class LoginScreen {
-    private final Screen screen;
+public class LoginScreen extends StatefulScreen {
     private final AuthenticationService authenticationService;
     private final CourseService courseService;
     private final ToDoListService toDoListService;
     private final CalendarService calendarService;
-
-    private String email = "";
-    private String password = "";
-    private String name = "";
-    private int selectedField = 0; // 0=email, 1=password, 2=name (for signup)
-    private boolean isSignupMode = false;
-    private String errorMessage = "";
-    private String successMessage = "";
 
     public LoginScreen(
             Screen screen,
@@ -41,210 +41,14 @@ public class LoginScreen {
             CourseService courseService,
             ToDoListService toDoListService,
             CalendarService calendarService) {
-        this.screen = screen;
+        super(screen);
         this.authenticationService = authenticationService;
         this.courseService = courseService;
         this.toDoListService = toDoListService;
         this.calendarService = calendarService;
-    }
 
-    public void display() throws IOException {
-        boolean running = true;
-
-        while (running) {
-            screen.clear();
-            render();
-            screen.refresh();
-
-            KeyStroke keyStroke = screen.readInput();
-            if (keyStroke.getKeyType() == KeyType.Character) {
-                handleCharacterInput(keyStroke.getCharacter());
-            } else if (keyStroke.getKeyType() == KeyType.Backspace) {
-                handleBackspace();
-            } else if (keyStroke.getKeyType() == KeyType.Tab) {
-                nextField();
-            } else if (keyStroke.getKeyType() == KeyType.Enter) {
-                running = !handleEnter();
-            } else if (keyStroke.getKeyType() == KeyType.F1) {
-                toggleMode();
-            } else if (keyStroke.getKeyType() == KeyType.Escape) {
-                running = false;
-            }
-        }
-    }
-
-    private void render() {
-        TextGraphics graphics = screen.newTextGraphics();
-        TerminalSize size = screen.getTerminalSize();
-
-        // Title
-        String title = "=== STUDENTLY - " + (isSignupMode ? "SIGN UP" : "LOGIN") + " ===";
-        graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
-        graphics.putString((size.getColumns() - title.length()) / 2, 2, title);
-
-        graphics.setForegroundColor(TextColor.ANSI.WHITE);
-
-        int startY = 5;
-
-        // Instructions
-        graphics.putString(5, startY, "F1: Switch to " + (isSignupMode ? "Login" : "Signup"));
-        graphics.putString(5, startY + 1, "Tab: Next field");
-        graphics.putString(5, startY + 2, "ESC: Exit");
-
-        startY += 4;
-
-        // Name field (only in signup mode)
-        if (isSignupMode) {
-            graphics.setForegroundColor(selectedField == 2 ? TextColor.ANSI.YELLOW_BRIGHT : TextColor.ANSI.WHITE);
-            graphics.putString(5, startY, "Name: ");
-            graphics.putString(15, startY, name + (selectedField == 2 ? "_" : ""));
-            startY += 2;
-        }
-
-        // Email field
-        graphics.setForegroundColor(selectedField == 0 ? TextColor.ANSI.YELLOW_BRIGHT : TextColor.ANSI.WHITE);
-        graphics.putString(5, startY, "Email: ");
-        graphics.putString(15, startY, email + (selectedField == 0 ? "_" : ""));
-        startY += 2;
-
-        // Password field
-        graphics.setForegroundColor(selectedField == 1 ? TextColor.ANSI.YELLOW_BRIGHT : TextColor.ANSI.WHITE);
-        graphics.putString(5, startY, "Password: ");
-        graphics.putString(15, startY, "*".repeat(password.length()) + (selectedField == 1 ? "_" : ""));
-        startY += 2;
-
-        // Submit button
-        graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
-        graphics.putString(5, startY + 1, "Press ENTER to " + (isSignupMode ? "Sign Up" : "Login"));
-
-        // Error/Success messages
-        if (!errorMessage.isEmpty()) {
-            graphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
-            graphics.putString(5, startY + 3, "Error: " + errorMessage);
-        }
-        if (!successMessage.isEmpty()) {
-            graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
-            graphics.putString(5, startY + 3, successMessage);
-        }
-    }
-
-    private void handleCharacterInput(Character c) {
-        errorMessage = "";
-        successMessage = "";
-
-        if (isSignupMode && selectedField == 2) {
-            name += c;
-        } else if (selectedField == 0) {
-            email += c;
-        } else if (selectedField == 1) {
-            password += c;
-        }
-    }
-
-    private void handleBackspace() {
-        errorMessage = "";
-        successMessage = "";
-
-        if (isSignupMode && selectedField == 2 && !name.isEmpty()) {
-            name = name.substring(0, name.length() - 1);
-        } else if (selectedField == 0 && !email.isEmpty()) {
-            email = email.substring(0, email.length() - 1);
-        } else if (selectedField == 1 && !password.isEmpty()) {
-            password = password.substring(0, password.length() - 1);
-        }
-    }
-
-    private void nextField() {
-        if (isSignupMode) {
-            selectedField = (selectedField + 1) % 3;
-        } else {
-            selectedField = (selectedField + 1) % 2;
-        }
-    }
-
-    private void toggleMode() {
-        isSignupMode = !isSignupMode;
-        selectedField = isSignupMode ? 2 : 0;
-        errorMessage = "";
-        successMessage = "";
-        name = "";
-        email = "";
-        password = "";
-    }
-
-    private void clearFields() {
-        name = "";
-        email = "";
-        password = "";
-        selectedField = isSignupMode ? 2 : 0;
-    }
-
-    private boolean handleEnter() {
-        errorMessage = "";
-        successMessage = "";
-
-        try {
-            if (isSignupMode) {
-                // Signup
-                if (name.trim().isEmpty() || email.trim().isEmpty() || password.trim().isEmpty()) {
-                    errorMessage = "All fields are required";
-                    return false;
-                }
-
-                SignUpRequestDTO signUpRequest = new SignUpRequestDTO(name.trim(), email.trim(), password);
-                UserDTO response = authenticationService.signUp(signUpRequest);
-                successMessage = "Signup successful! Logging in...";
-
-                // Wait a moment to show success message
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-
-                // Navigate to main menu
-                navigateToMainMenu(response);
-
-                // User logged out, clear fields and return to login screen
-
-            } else {
-                // Login
-                if (email.trim().isEmpty() || password.trim().isEmpty()) {
-                    errorMessage = "Email and password are required";
-                    return false;
-                }
-
-                LoginRequestDTO loginRequest = new LoginRequestDTO(email.trim(), password);
-                boolean loginSuccess = authenticationService.login(loginRequest);
-
-                if (!loginSuccess) {
-                    errorMessage = "Invalid email or password";
-                    return false;
-                }
-
-                successMessage = "Login successful!";
-
-                UserDTO user = authenticationService.getUserByEmail(email.trim());
-
-                // Wait a moment to show success message
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    Thread.currentThread().interrupt();
-                }
-
-                // Navigate to main menu
-                navigateToMainMenu(user);
-
-                // User logged out, clear fields and return to login screen
-            }
-            clearFields();
-            successMessage = "Logged out successfully";
-            return false;
-        } catch (Exception e) {
-            errorMessage = e.getMessage();
-            return false;
-        }
+        // Start with login state
+        this.currentState = new LoginState();
     }
 
     private void navigateToMainMenu(UserDTO user) throws IOException {
@@ -256,5 +60,238 @@ public class LoginScreen {
                 calendarService
         );
         mainMenu.display();
+    }
+
+    /**
+     * State Pattern: Login mode state
+     */
+    private class LoginState implements ScreenState {
+        private final Form form;
+        private final MessagePanel messagePanel;
+        private final FormField emailField;
+        private final FormField passwordField;
+
+        public LoginState() {
+            emailField = ComponentFactory.createEmailField("Email");
+            passwordField = ComponentFactory.createPasswordField("Password");
+
+            form = new Form()
+                    .addField(emailField)
+                    .addField(passwordField);
+
+            messagePanel = new MessagePanel();
+        }
+
+        @Override
+        public void onEnter() {
+            form.setFocused(true);
+        }
+
+        @Override
+        public void render(TextGraphics graphics) {
+            TerminalSize size = screen.getTerminalSize();
+
+            // Title
+            graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
+            String title = "=== STUDENTLY - LOGIN ===";
+            graphics.putString((size.getColumns() - title.length()) / 2, 2, title);
+
+            // Instructions
+            graphics.setForegroundColor(TextColor.ANSI.WHITE);
+            graphics.putString(5, 5, "F1: Switch to Signup");
+            graphics.putString(5, 6, "Tab: Next field");
+            graphics.putString(5, 7, "ESC: Exit");
+
+            // Form
+            form.render(graphics, 5, 10);
+
+            // Submit instruction
+            graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
+            graphics.putString(5, 15, "Press ENTER to Login");
+
+            // Messages
+            messagePanel.render(graphics, 5, 17);
+        }
+
+        @Override
+        public ScreenState handleInput(KeyStroke keyStroke) {
+            messagePanel.clear();
+
+            if (keyStroke.getKeyType() == KeyType.F1) {
+                return new SignupState();
+            } else if (keyStroke.getKeyType() == KeyType.Escape) {
+                close();
+                return this;
+            } else if (keyStroke.getKeyType() == KeyType.Enter) {
+                handleLogin();
+                return this;
+            } else {
+                form.handleInput(keyStroke);
+                return this;
+            }
+        }
+
+        private void handleLogin() {
+            String email = emailField.getValue().trim();
+            String password = passwordField.getValue();
+
+            // Validation
+            String emailError = new RequiredFieldStrategy("Email").validate(email);
+            if (emailError != null) {
+                messagePanel.setError(emailError);
+                return;
+            }
+
+            String passwordError = new RequiredFieldStrategy("Password").validate(password);
+            if (passwordError != null) {
+                messagePanel.setError(passwordError);
+                return;
+            }
+
+            try {
+                LoginRequestDTO loginRequest = new LoginRequestDTO(email, password);
+                boolean loginSuccess = authenticationService.login(loginRequest);
+
+                if (!loginSuccess) {
+                    messagePanel.setError("Invalid email or password");
+                    return;
+                }
+
+                UserDTO user = authenticationService.getUserByEmail(email);
+                messagePanel.setSuccess("Login successful!");
+
+                // Wait to show success message
+                Thread.sleep(500);
+
+                // Navigate to main menu
+                navigateToMainMenu(user);
+
+            } catch (Exception e) {
+                messagePanel.setError(e.getMessage());
+            }
+        }
+
+        @Override
+        public String getStateName() {
+            return "Login";
+        }
+    }
+
+    /**
+     * State Pattern: Signup mode state
+     */
+    private class SignupState implements ScreenState {
+        private final Form form;
+        private final MessagePanel messagePanel;
+        private final FormField nameField;
+        private final FormField emailField;
+        private final FormField passwordField;
+
+        public SignupState() {
+            nameField = ComponentFactory.createTextField("Name");
+            emailField = ComponentFactory.createEmailField("Email");
+            passwordField = ComponentFactory.createPasswordField("Password");
+
+            form = new Form()
+                    .addField(nameField)
+                    .addField(emailField)
+                    .addField(passwordField);
+
+            messagePanel = new MessagePanel();
+        }
+
+        @Override
+        public void onEnter() {
+            form.setFocused(true);
+        }
+
+        @Override
+        public void render(TextGraphics graphics) {
+            TerminalSize size = screen.getTerminalSize();
+
+            // Title
+            graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
+            String title = "=== STUDENTLY - SIGN UP ===";
+            graphics.putString((size.getColumns() - title.length()) / 2, 2, title);
+
+            // Instructions
+            graphics.setForegroundColor(TextColor.ANSI.WHITE);
+            graphics.putString(5, 5, "F1: Switch to Login");
+            graphics.putString(5, 6, "Tab: Next field");
+            graphics.putString(5, 7, "ESC: Exit");
+
+            // Form
+            form.render(graphics, 5, 10);
+
+            // Submit instruction
+            graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
+            graphics.putString(5, 17, "Press ENTER to Sign Up");
+
+            // Messages
+            messagePanel.render(graphics, 5, 19);
+        }
+
+        @Override
+        public ScreenState handleInput(KeyStroke keyStroke) {
+            messagePanel.clear();
+
+            if (keyStroke.getKeyType() == KeyType.F1) {
+                return new LoginState();
+            } else if (keyStroke.getKeyType() == KeyType.Escape) {
+                close();
+                return this;
+            } else if (keyStroke.getKeyType() == KeyType.Enter) {
+                handleSignup();
+                return this;
+            } else {
+                form.handleInput(keyStroke);
+                return this;
+            }
+        }
+
+        private void handleSignup() {
+            String name = nameField.getValue().trim();
+            String email = emailField.getValue().trim();
+            String password = passwordField.getValue();
+
+            // Validation
+            String nameError = new RequiredFieldStrategy("Name").validate(name);
+            if (nameError != null) {
+                messagePanel.setError(nameError);
+                return;
+            }
+
+            String emailError = new RequiredFieldStrategy("Email").validate(email);
+            if (emailError != null) {
+                messagePanel.setError(emailError);
+                return;
+            }
+
+            String passwordError = new RequiredFieldStrategy("Password").validate(password);
+            if (passwordError != null) {
+                messagePanel.setError(passwordError);
+                return;
+            }
+
+            try {
+                SignUpRequestDTO signUpRequest = new SignUpRequestDTO(name, email, password);
+                UserDTO user = authenticationService.signUp(signUpRequest);
+                messagePanel.setSuccess("Signup successful! Logging in...");
+
+                // Wait to show success message
+                Thread.sleep(1000);
+
+                // Navigate to main menu
+                navigateToMainMenu(user);
+
+            } catch (Exception e) {
+                messagePanel.setError(e.getMessage());
+            }
+        }
+
+        @Override
+        public String getStateName() {
+            return "Signup";
+        }
     }
 }
