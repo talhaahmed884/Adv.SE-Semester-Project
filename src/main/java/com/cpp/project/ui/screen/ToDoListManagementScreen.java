@@ -40,10 +40,6 @@ public class ToDoListManagementScreen extends StatefulScreen {
         todoLists = toDoListService.getToDoListsByUserId(currentUser.getId());
     }
 
-    private List<ToDoListDTO> getToDoLists() {
-        return todoLists;
-    }
-
     private ListViewState createListViewState() {
         return new ListViewStateAdapter();
     }
@@ -87,20 +83,42 @@ public class ToDoListManagementScreen extends StatefulScreen {
 
         @Override
         public ScreenState handleInput(KeyStroke keyStroke) {
-            // Intercept F2 to provide all dependencies to AddTaskState
+            // Intercept F2 to create AddTaskState
             if (keyStroke.getKeyType() == KeyType.F2) {
                 return new AddTaskState(
                         screen,
                         currentUser,
                         toDoListService,
                         getToDoList(),
-                        this,
-                        ToDoListManagementScreen.this::reloadToDoLists,
-                        ToDoListManagementScreen.this::getToDoLists
+                        this
                 );
             }
-            // Let parent handle other inputs
-            return super.handleInput(keyStroke);
+
+            ScreenState newState = super.handleInput(keyStroke);
+
+            // If AddTaskState returned null, reload and create fresh details state
+            if (newState == null) {
+                reloadToDoLists();
+                ToDoListDTO updatedList = todoLists.stream()
+                        .filter(list -> list.getId().equals(getToDoList().getId()))
+                        .findFirst()
+                        .orElse(getToDoList());
+
+                ListDetailsStateAdapter newDetailsState = new ListDetailsStateAdapter(
+                        updatedList,
+                        new ListViewStateAdapter()
+                );
+                newDetailsState.setSuccessMessage("Task added successfully!");
+                return newDetailsState;
+            }
+
+            // If returning to list view (ESC pressed), reload data and create fresh list view
+            if (newState instanceof ListViewState) {
+                reloadToDoLists();
+                return new ListViewStateAdapter();
+            }
+
+            return newState;
         }
     }
 }

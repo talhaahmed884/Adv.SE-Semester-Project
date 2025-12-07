@@ -85,7 +85,7 @@ public class ListDetailsState implements ScreenState {
             handleMarkComplete();
             return this;
         } else if (keyStroke.getKeyType() == KeyType.Escape) {
-            // Reload will be handled by parent screen
+            // Adapter will reload data and create fresh list view
             return listViewState;
         } else {
             taskSelection.handleInput(keyStroke);
@@ -121,13 +121,6 @@ public class ListDetailsState implements ScreenState {
 
     public void setSuccessMessage(String message) {
         messagePanel.setSuccess(message);
-    }
-
-    /**
-     * Protected getter for listViewState - allows child states to access it
-     */
-    protected ListViewState getListViewState() {
-        return listViewState;
     }
 
     /**

@@ -89,36 +89,79 @@ public class CourseManagementScreen extends StatefulScreen {
 
         @Override
         public ScreenState handleInput(KeyStroke keyStroke) {
-            // Intercept F2 to provide all dependencies to AddTaskState
+            // Intercept F2 to create AddTaskState
             if (keyStroke.getKeyType() == KeyType.F2) {
                 return new AddTaskState(
                         screen,
                         getCourse(),
                         this,
-                        courseService,
-                        CourseManagementScreen.this::reloadCourses,
-                        CourseManagementScreen.this::getCourses,
-                        dateFormat,
-                        CourseManagementScreen.this::createCourseListState
+                        courseService
                 );
             }
-            // Let parent handle other inputs
-            return super.handleInput(keyStroke);
+
+            ScreenState newState = super.handleInput(keyStroke);
+
+            // If AddTaskState returned null, reload and create fresh details state
+            if (newState == null) {
+                reloadCourses();
+                CourseDTO updatedCourse = courses.stream()
+                        .filter(c -> c.getId().equals(getCourse().getId()))
+                        .findFirst()
+                        .orElse(getCourse());
+
+                CourseDetailsStateAdapter newDetailsState = new CourseDetailsStateAdapter(
+                        updatedCourse,
+                        new CourseListStateAdapter()
+                );
+                newDetailsState.setSuccessMessage("Task added successfully!");
+                return newDetailsState;
+            }
+
+            // If returning to list view (ESC pressed), reload data and create fresh list view
+            if (newState instanceof CourseListState) {
+                reloadCourses();
+                return new CourseListStateAdapter();
+            }
+
+            return newState;
         }
 
         @Override
         protected UpdateProgressState createUpdateProgressState(CourseTaskDTO task) {
-            return new UpdateProgressState(
-                    screen,
-                    getCourse(),
-                    task,
-                    this,
-                    courseService,
-                    CourseManagementScreen.this::reloadCourses,
-                    CourseManagementScreen.this::getCourses,
-                    dateFormat,
-                    CourseManagementScreen.this::createCourseListState
-            );
+            return new UpdateProgressStateAdapter(task);
+        }
+
+        /**
+         * Adapter for UpdateProgressState that handles null returns
+         */
+        private class UpdateProgressStateAdapter extends UpdateProgressState {
+            public UpdateProgressStateAdapter(CourseTaskDTO task) {
+                super(screen, CourseDetailsStateAdapter.this.getCourse(), task, CourseDetailsStateAdapter.this, courseService);
+            }
+
+            @Override
+            public ScreenState handleInput(KeyStroke keyStroke) {
+                ScreenState newState = super.handleInput(keyStroke);
+
+                // If update returned null, reload and create fresh details state
+                if (newState == null) {
+                    reloadCourses();
+                    CourseDTO updatedCourse = courses.stream()
+                            .filter(c -> c.getId().equals(super.getCourse().getId()))
+                            .findFirst()
+                            .orElse(super.getCourse());
+
+                    CourseDetailsStateAdapter newDetailsState = new CourseDetailsStateAdapter(
+                            updatedCourse,
+                            new CourseListStateAdapter()
+                    );
+                    String message = wasTaskCompleted() ? "Task marked as complete!" : "Progress updated successfully!";
+                    newDetailsState.setSuccessMessage(message);
+                    return newDetailsState;
+                }
+
+                return newState;
+            }
         }
     }
 }

@@ -28,8 +28,6 @@ public class AddTaskState implements ScreenState {
     private final ToDoListService toDoListService;
     private final ToDoListDTO todoList;
     private final ListDetailsState previousState;
-    private final Runnable reloadToDoLists;
-    private final java.util.function.Supplier<java.util.List<ToDoListDTO>> getToDoLists;
 
     private final Form form;
     private final FormField descriptionField;
@@ -37,15 +35,12 @@ public class AddTaskState implements ScreenState {
     private final MessagePanel messagePanel;
 
     public AddTaskState(Screen screen, UserDTO currentUser, ToDoListService toDoListService,
-                        ToDoListDTO todoList, ListDetailsState previousState,
-                        Runnable reloadToDoLists, java.util.function.Supplier<java.util.List<ToDoListDTO>> getToDoLists) {
+                        ToDoListDTO todoList, ListDetailsState previousState) {
         this.screen = screen;
         this.currentUser = currentUser;
         this.toDoListService = toDoListService;
         this.todoList = todoList;
         this.previousState = previousState;
-        this.reloadToDoLists = reloadToDoLists;
-        this.getToDoLists = getToDoLists;
 
         descriptionField = ComponentFactory.createTextField("Description");
         deadlineInput = ComponentFactory.createDateInput("Deadline (optional)");
@@ -116,19 +111,8 @@ public class AddTaskState implements ScreenState {
 
         try {
             toDoListService.addTaskToList(todoList.getId(), description, deadline);
-            // Reload data and find updated list
-            reloadToDoLists.run();
-            ToDoListDTO updatedList = getToDoLists.get().stream()
-                    .filter(list -> list.getId().equals(todoList.getId()))
-                    .findFirst()
-                    .orElse(todoList);
-
-            // Create new ListDetailsState with updated data
-            ListDetailsState newDetailsState = new ListDetailsState(
-                    screen, currentUser, toDoListService, updatedList, previousState.getListViewState()
-            );
-            newDetailsState.setSuccessMessage("Task added successfully!");
-            return newDetailsState;
+            // Return null to signal adapter to reload and recreate states
+            return null;
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());
             return this;

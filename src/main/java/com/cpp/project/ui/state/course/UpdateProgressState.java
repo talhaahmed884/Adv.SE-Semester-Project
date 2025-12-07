@@ -14,10 +14,6 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
-import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.function.Supplier;
-
 /**
  * State 5: Update Progress Form
  */
@@ -27,26 +23,17 @@ public class UpdateProgressState implements ScreenState {
     private final CourseTaskDTO task;
     private final CourseDetailsState previousState;
     private final CourseService courseService;
-    private final Runnable reloadCourses;
-    private final Supplier<List<CourseDTO>> getCourses;
-    private final SimpleDateFormat dateFormat;
-    private final Supplier<CourseListState> createNewListState;
     private final FormField progressField;
     private final MessagePanel messagePanel;
+    private boolean wasCompleted = false;
 
     public UpdateProgressState(Screen screen, CourseDTO course, CourseTaskDTO task,
-                               CourseDetailsState previousState, CourseService courseService,
-                               Runnable reloadCourses, Supplier<List<CourseDTO>> getCourses,
-                               SimpleDateFormat dateFormat, Supplier<CourseListState> createNewListState) {
+                               CourseDetailsState previousState, CourseService courseService) {
         this.screen = screen;
         this.course = course;
         this.task = task;
         this.previousState = previousState;
         this.courseService = courseService;
-        this.reloadCourses = reloadCourses;
-        this.getCourses = getCourses;
-        this.dateFormat = dateFormat;
-        this.createNewListState = createNewListState;
         this.progressField = ComponentFactory.createNumericField("New Progress (0-100)", 3);
         this.progressField.setFocused(true);
         this.messagePanel = new MessagePanel();
@@ -82,7 +69,7 @@ public class UpdateProgressState implements ScreenState {
         messagePanel.clear();
 
         if (keyStroke.getKeyType() == KeyType.Escape) {
-            reloadCourses.run();
+            // Adapter will handle reload if needed
             return previousState;
         } else if (keyStroke.getKeyType() == KeyType.Enter) {
             return handleSave();
@@ -90,6 +77,14 @@ public class UpdateProgressState implements ScreenState {
             progressField.handleInput(keyStroke);
             return this;
         }
+    }
+
+    public boolean wasTaskCompleted() {
+        return wasCompleted;
+    }
+
+    public CourseDTO getCourse() {
+        return course;
     }
 
     private ScreenState handleSave() {
@@ -111,20 +106,11 @@ public class UpdateProgressState implements ScreenState {
 
             if (progress == 100) {
                 courseService.markTaskComplete(course.getId(), task.getId());
+                wasCompleted = true;
             }
 
-            reloadCourses.run();
-            CourseDTO updatedCourse = getCourses.get().stream()
-                    .filter(c -> c.getId().equals(course.getId()))
-                    .findFirst()
-                    .orElse(course);
-            CourseDetailsState newDetailsState = new CourseDetailsState(
-                    screen, updatedCourse, createNewListState.get(), dateFormat, reloadCourses
-            );
-            newDetailsState.setSuccessMessage(
-                    progress == 100 ? "Task marked as complete!" : "Progress updated successfully!"
-            );
-            return newDetailsState;
+            // Return null to signal adapter to reload and recreate states
+            return null;
         } catch (NumberFormatException e) {
             messagePanel.setError("Invalid progress value");
             return this;

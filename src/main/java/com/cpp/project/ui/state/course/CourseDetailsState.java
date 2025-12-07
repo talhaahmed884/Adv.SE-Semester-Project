@@ -89,7 +89,7 @@ public class CourseDetailsState implements ScreenState {
             }
             return createUpdateProgressState(taskList.getSelectedItem());
         } else if (keyStroke.getKeyType() == KeyType.Escape) {
-            reloadCourses.run();
+            // Adapter will reload data and create fresh list view
             return listState;
         } else {
             taskList.handleInput(keyStroke);

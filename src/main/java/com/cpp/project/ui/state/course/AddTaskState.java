@@ -16,10 +16,7 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
-import java.util.function.Supplier;
 
 /**
  * State 4: Add Task Form
@@ -29,10 +26,6 @@ public class AddTaskState implements ScreenState {
     private final CourseDTO course;
     private final CourseDetailsState previousState;
     private final CourseService courseService;
-    private final Runnable reloadCourses;
-    private final Supplier<List<CourseDTO>> getCourses;
-    private final SimpleDateFormat dateFormat;
-    private final Supplier<CourseListState> createNewListState;
     private final Form form;
     private final FormField nameField;
     private final FormField descriptionField;
@@ -40,17 +33,11 @@ public class AddTaskState implements ScreenState {
     private final MessagePanel messagePanel;
 
     public AddTaskState(Screen screen, CourseDTO course, CourseDetailsState previousState,
-                        CourseService courseService, Runnable reloadCourses,
-                        Supplier<List<CourseDTO>> getCourses, SimpleDateFormat dateFormat,
-                        Supplier<CourseListState> createNewListState) {
+                        CourseService courseService) {
         this.screen = screen;
         this.course = course;
         this.previousState = previousState;
         this.courseService = courseService;
-        this.reloadCourses = reloadCourses;
-        this.getCourses = getCourses;
-        this.dateFormat = dateFormat;
-        this.createNewListState = createNewListState;
 
         nameField = ComponentFactory.createTextField("Task Name");
         descriptionField = ComponentFactory.createTextField("Description");
@@ -94,7 +81,7 @@ public class AddTaskState implements ScreenState {
         messagePanel.clear();
 
         if (keyStroke.getKeyType() == KeyType.Escape) {
-            reloadCourses.run();
+            // Adapter will handle reload if needed
             return previousState;
         } else if (keyStroke.getKeyType() == KeyType.Enter) {
             return handleSave();
@@ -124,16 +111,8 @@ public class AddTaskState implements ScreenState {
 
         try {
             courseService.addTaskToCourse(course.getId(), name, deadline, description);
-            reloadCourses.run();
-            CourseDTO updatedCourse = getCourses.get().stream()
-                    .filter(c -> c.getId().equals(course.getId()))
-                    .findFirst()
-                    .orElse(course);
-            CourseDetailsState newDetailsState = new CourseDetailsState(
-                    screen, updatedCourse, createNewListState.get(), dateFormat, reloadCourses
-            );
-            newDetailsState.setSuccessMessage("Task added successfully!");
-            return newDetailsState;
+            // Return null to signal adapter to reload and recreate states
+            return null;
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());
             return this;
