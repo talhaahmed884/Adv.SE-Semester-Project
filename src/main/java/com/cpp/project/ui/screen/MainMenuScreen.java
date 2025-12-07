@@ -4,6 +4,7 @@ import com.cpp.project.calendar.service.CalendarService;
 import com.cpp.project.course.service.CourseService;
 import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.component.SelectionList;
+import com.cpp.project.ui.component.menu.MenuItem;
 import com.cpp.project.ui.core.UIScreen;
 import com.cpp.project.user.dto.UserDTO;
 import com.googlecode.lanterna.TerminalSize;
@@ -82,7 +83,7 @@ public class MainMenuScreen extends UIScreen {
         } else if (keyStroke.getKeyType() == KeyType.Enter) {
             MenuItem selected = menuList.getSelectedItem();
             if (selected != null) {
-                selected.action.run();
+                selected.executeAction();
             }
         } else {
             menuList.handleInput(keyStroke);
@@ -124,22 +125,5 @@ public class MainMenuScreen extends UIScreen {
 
     private void logout() {
         close();
-    }
-
-    /**
-     * Menu item with label and action
-     */
-    private static class MenuItem {
-        private final String label;
-        private final Runnable action;
-
-        public MenuItem(String label, Runnable action) {
-            this.label = label;
-            this.action = action;
-        }
-
-        public String getLabel() {
-            return label;
-        }
     }
 }

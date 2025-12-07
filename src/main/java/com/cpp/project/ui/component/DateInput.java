@@ -82,6 +82,7 @@ public class DateInput extends AbstractComponent {
 
     private StringBuilder getCurrentField() {
         return switch (focusedField) {
+            case 0 -> year;
             case 1 -> month;
             case 2 -> day;
             default -> year;
