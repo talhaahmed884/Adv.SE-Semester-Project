@@ -1,183 +1,172 @@
 package com.cpp.project.ui.screen;
 
 import com.cpp.project.course.dto.CourseDTO;
-import com.cpp.project.course.dto.CourseTaskDTO;
 import com.cpp.project.course.service.CourseService;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.core.StatefulScreen;
+import com.cpp.project.ui.mediator.CourseMediator;
 import com.cpp.project.ui.state.course.*;
 import com.cpp.project.user.dto.UserDTO;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.UUID;
 
 /**
- * Refactored Course Management Screen using design patterns:
- * - State Pattern: Separate state classes in ui.state.course package
- * - Component Pattern: Reusable UI components
- * - Strategy Pattern: Validation strategies
+ * Course Management Screen implementing Mediator pattern
+ * <p>
+ * Design Patterns:
+ * - Mediator Pattern: Coordinates all state interactions and transitions
+ * - Facade Pattern: Provides simple interface for states to access data
+ * - Factory Method Pattern: Creates states through factory methods
+ * - State Pattern: Delegates UI behavior to state objects
+ * <p>
+ * Responsibilities:
+ * - Owns the data (fetches from service)
+ * - Coordinates state transitions
+ * - Provides data access to states
+ * - Handles state action notifications
  */
-public class CourseManagementScreen extends StatefulScreen {
+public class CourseManagementScreen extends StatefulScreen implements CourseMediator {
     private final UserDTO currentUser;
     private final CourseService courseService;
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
-    private List<CourseDTO> courses;
 
     public CourseManagementScreen(Screen screen, UserDTO currentUser, CourseService courseService) {
         super(screen);
         this.currentUser = currentUser;
         this.courseService = courseService;
-        reloadCourses();
-        this.currentState = createCourseListState();
-        // Call onEnter to set initial focus
+        // Start with course list view
+        this.currentState = createCourseListState(null);
         this.currentState.onEnter();
     }
 
-    private void reloadCourses() {
-        courses = courseService.getCoursesByUserId(currentUser.getId());
+    // ========== Facade Pattern: Simplified Data Access ==========
+
+    @Override
+    public List<CourseDTO> getAllCourses() {
+        // Always fetch fresh from service - no caching, no stale data
+        return courseService.getCoursesByUserId(currentUser.getId());
     }
 
-    private List<CourseDTO> getCourses() {
-        return courses;
+    @Override
+    public CourseDTO getCourseById(UUID courseId) {
+        // Always fetch fresh from service
+        return courseService.getCourseById(courseId);
     }
 
-    private CourseListState createCourseListState() {
-        return new CourseListStateAdapter();
+    // ========== Mediator Pattern: Action Handlers ==========
+
+    @Override
+    public void onCourseCreated() {
+        // User created a course, return to course list with success message
+        transitionTo(createCourseListState("Course created successfully!"));
+    }
+
+    @Override
+    public void onTaskAdded(UUID courseId) {
+        // User added a task, refresh the details view with success message
+        transitionTo(createCourseDetailsState(courseId, "Task added successfully!"));
+    }
+
+    @Override
+    public void onTaskProgressUpdated(UUID courseId, boolean wasCompleted) {
+        // User updated task progress, refresh the details view with appropriate message
+        String message = wasCompleted ? "Task marked as complete!" : "Progress updated successfully!";
+        transitionTo(createCourseDetailsState(courseId, message));
+    }
+
+    @Override
+    public void onViewCourseDetails(UUID courseId) {
+        // User wants to view a course's details
+        transitionTo(createCourseDetailsState(courseId, null));
+    }
+
+    @Override
+    public void onReturnToCourseList() {
+        // User pressed ESC, return to course list
+        transitionTo(createCourseListState(null));
+    }
+
+    @Override
+    public void onAddNewCourse() {
+        // User pressed F1, show add course form
+        transitionTo(createAddCourseState());
+    }
+
+    @Override
+    public void onAddTaskToCourse(UUID courseId) {
+        // User pressed F2, show add task form
+        transitionTo(createAddTaskState(courseId));
+    }
+
+    @Override
+    public void onUpdateTaskProgress(UUID courseId, UUID taskId) {
+        // User pressed F3, show update progress form
+        transitionTo(createUpdateProgressState(courseId, taskId));
+    }
+
+    // ========== ScreenMediator: Core Methods ==========
+
+    @Override
+    public void transitionTo(ScreenState newState) {
+        transitionToState(newState);
+    }
+
+    @Override
+    public void closeScreen() {
+        close();
+    }
+
+    // ========== Factory Method Pattern: State Creation ==========
+
+    /**
+     * Factory method to create course list state
+     *
+     * @param message Optional success message to display
+     * @return New course list state
+     */
+    private CourseListState createCourseListState(String message) {
+        return new CourseListState(this, message);
     }
 
     /**
-     * Adapter that handles state transitions with proper dependencies
+     * Factory method to create course details state
+     *
+     * @param courseId The course to display
+     * @param message  Optional success message to display
+     * @return New course details state
      */
-    private class CourseListStateAdapter extends CourseListState {
-        public CourseListStateAdapter() {
-            super(screen, courses, CourseManagementScreen.this::close);
-        }
-
-        @Override
-        public ScreenState handleInput(KeyStroke keyStroke) {
-            // Intercept F1 to provide all dependencies to AddCourseState
-            if (keyStroke.getKeyType() == KeyType.F1) {
-                return new AddCourseState(
-                        screen,
-                        this,
-                        courseService,
-                        currentUser,
-                        CourseManagementScreen.this::reloadCourses,
-                        CourseManagementScreen.this::createCourseListState
-                );
-            }
-            // Let parent handle other inputs but intercept Enter for CourseDetails
-            return super.handleInput(keyStroke);
-        }
-
-        @Override
-        protected CourseDetailsState createCourseDetailsState(CourseDTO course) {
-            return new CourseDetailsStateAdapter(course, this);
-        }
+    private CourseDetailsState createCourseDetailsState(UUID courseId, String message) {
+        return new CourseDetailsState(this, courseId, message);
     }
 
     /**
-     * Adapter that handles course details state transitions with proper dependencies
+     * Factory method to create add course state
+     *
+     * @return New add course state
      */
-    private class CourseDetailsStateAdapter extends CourseDetailsState {
-        public CourseDetailsStateAdapter(CourseDTO course, CourseListState listState) {
-            super(screen, course, listState, dateFormat, CourseManagementScreen.this::reloadCourses);
-        }
+    private AddCourseState createAddCourseState() {
+        return new AddCourseState(this, currentUser, courseService);
+    }
 
-        @Override
-        public ScreenState handleInput(KeyStroke keyStroke) {
-            // Intercept F2 to create AddTaskState wrapped in adapter
-            if (keyStroke.getKeyType() == KeyType.F2) {
-                return new AddTaskStateAdapter();
-            }
+    /**
+     * Factory method to create add task state
+     *
+     * @param courseId The course to add task to
+     * @return New add task state
+     */
+    private AddTaskState createAddTaskState(UUID courseId) {
+        return new AddTaskState(this, courseService, courseId);
+    }
 
-            ScreenState newState = super.handleInput(keyStroke);
-
-            // If returning to list view (ESC pressed), reload data and create fresh list view
-            if (newState instanceof CourseListState) {
-                reloadCourses();
-                return new CourseListStateAdapter();
-            }
-
-            return newState;
-        }
-
-        /**
-         * Adapter for AddTaskState that handles refresh after save
-         */
-        private class AddTaskStateAdapter extends AddTaskState {
-            public AddTaskStateAdapter() {
-                super(screen, CourseDetailsStateAdapter.this.getCourse(), CourseDetailsStateAdapter.this, courseService);
-            }
-
-            @Override
-            public ScreenState handleInput(KeyStroke keyStroke) {
-                ScreenState newState = super.handleInput(keyStroke);
-
-                // If returning to previous state and task was added, refresh
-                if (newState == CourseDetailsStateAdapter.this && wasTaskAdded()) {
-                    CourseDTO refreshedCourse = courseService.getCourseById(getCourse().getId());
-                    reloadCourses();
-
-                    CourseDetailsStateAdapter newDetailsState = new CourseDetailsStateAdapter(
-                            refreshedCourse,
-                            new CourseListStateAdapter()
-                    );
-                    newDetailsState.setSuccessMessage("Task added successfully!");
-                    return newDetailsState;
-                }
-
-                return newState;
-            }
-        }
-
-        @Override
-        protected UpdateProgressState createUpdateProgressState(CourseTaskDTO task) {
-            return new UpdateProgressStateAdapter(task);
-        }
-
-        /**
-         * Adapter for UpdateProgressState that handles null returns
-         */
-        private class UpdateProgressStateAdapter extends UpdateProgressState {
-            public UpdateProgressStateAdapter(CourseTaskDTO task) {
-                super(screen, CourseDetailsStateAdapter.this.getCourse(), task, CourseDetailsStateAdapter.this, courseService);
-            }
-
-            @Override
-            public ScreenState handleInput(KeyStroke keyStroke) {
-                ScreenState newState = super.handleInput(keyStroke);
-
-                // If returning to previous state after update, refresh this specific course from service
-                if (newState == CourseDetailsStateAdapter.this && wasTaskCompleted()) {
-                    CourseDTO refreshedCourse = courseService.getCourseById(super.getCourse().getId());
-                    reloadCourses(); // Also refresh the full list for when user goes back
-
-                    CourseDetailsStateAdapter newDetailsState = new CourseDetailsStateAdapter(
-                            refreshedCourse,
-                            new CourseListStateAdapter()
-                    );
-                    String message = "Task marked as complete!";
-                    newDetailsState.setSuccessMessage(message);
-                    return newDetailsState;
-                } else if (newState == CourseDetailsStateAdapter.this) {
-                    // Progress updated but not completed
-                    CourseDTO refreshedCourse = courseService.getCourseById(super.getCourse().getId());
-                    reloadCourses();
-
-                    CourseDetailsStateAdapter newDetailsState = new CourseDetailsStateAdapter(
-                            refreshedCourse,
-                            new CourseListStateAdapter()
-                    );
-                    newDetailsState.setSuccessMessage("Progress updated successfully!");
-                    return newDetailsState;
-                }
-
-                return newState;
-            }
-        }
+    /**
+     * Factory method to create update progress state
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task to update progress for
+     * @return New update progress state
+     */
+    private UpdateProgressState createUpdateProgressState(UUID courseId, UUID taskId) {
+        return new UpdateProgressState(this, courseService, courseId, taskId);
     }
 }

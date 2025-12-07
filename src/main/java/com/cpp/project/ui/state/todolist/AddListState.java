@@ -5,6 +5,7 @@ import com.cpp.project.ui.component.FormField;
 import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
+import com.cpp.project.ui.mediator.ToDoListMediator;
 import com.cpp.project.ui.strategy.RequiredFieldStrategy;
 import com.cpp.project.user.dto.UserDTO;
 import com.googlecode.lanterna.TerminalSize;
@@ -12,27 +13,27 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
 
 /**
  * State 2: Add To-Do List
+ *
+ * Responsibilities:
+ * - Collect list name from user
+ * - Create new list via service
+ * - Notify mediator on success or cancellation
  */
 public class AddListState implements ScreenState {
-    private final Screen screen;
+    private final ToDoListMediator mediator;
     private final UserDTO currentUser;
     private final ToDoListService toDoListService;
-    private final ListViewState previousState;
-    private boolean listCreated = false;
 
     private final FormField nameField;
     private final MessagePanel messagePanel;
 
-    public AddListState(Screen screen, UserDTO currentUser, ToDoListService toDoListService,
-                        ListViewState previousState) {
-        this.screen = screen;
+    public AddListState(ToDoListMediator mediator, UserDTO currentUser, ToDoListService toDoListService) {
+        this.mediator = mediator;
         this.currentUser = currentUser;
         this.toDoListService = toDoListService;
-        this.previousState = previousState;
 
         this.nameField = ComponentFactory.createTextField("List Name");
         this.nameField.setFocused(true);
@@ -41,7 +42,7 @@ public class AddListState implements ScreenState {
 
     @Override
     public void render(TextGraphics graphics) {
-        TerminalSize size = screen.getTerminalSize();
+        TerminalSize size = graphics.getSize();
 
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== ADD NEW TO-DO LIST ===";
@@ -60,8 +61,9 @@ public class AddListState implements ScreenState {
         messagePanel.clear();
 
         if (keyStroke.getKeyType() == KeyType.Escape) {
-            // Reload will be handled by parent screen
-            return previousState;
+            // Notify mediator to return to list view
+            mediator.onReturnToListView();
+            return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.Enter) {
             return handleSave();
         } else {
@@ -81,17 +83,13 @@ public class AddListState implements ScreenState {
 
         try {
             toDoListService.createToDoList(name, currentUser.getId());
-            listCreated = true;
-            // Return to previous state, which will check the flag and refresh
-            return previousState;
+            // Notify mediator - it will transition to list view with success message
+            mediator.onListCreated();
+            return null; // Mediator handles transition
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());
             return this;
         }
-    }
-
-    public boolean wasListCreated() {
-        return listCreated;
     }
 
     @Override

@@ -31,7 +31,9 @@ public abstract class StatefulScreen extends UIScreen {
             KeyStroke keyStroke = screen.readInput();
             ScreenState newState = currentState.handleInput(keyStroke);
 
-            if (newState != currentState) {
+            // Only transition if state returned non-null and different state
+            // null means mediator already handled the transition
+            if (newState != null && newState != currentState) {
                 transitionToState(newState);
             }
         }

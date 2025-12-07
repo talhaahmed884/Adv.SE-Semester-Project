@@ -2,40 +2,33 @@ package com.cpp.project.ui.state.todolist;
 
 import com.cpp.project.common.entity.TaskStatus;
 import com.cpp.project.todolist.dto.ToDoListDTO;
-import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.core.ScreenState;
-import com.cpp.project.user.dto.UserDTO;
+import com.cpp.project.ui.mediator.ToDoListMediator;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
 
 import java.util.List;
 
 /**
  * State 1: To-Do Lists View
+ *
+ * Responsibilities:
+ * - Display list of all to-do lists
+ * - Handle navigation to details or add list
+ * - No data ownership - fetches fresh from mediator
  */
 public class ListViewState implements ScreenState {
-    private final Screen screen;
-    private final UserDTO currentUser;
-    private final ToDoListService toDoListService;
-    private final List<ToDoListDTO> todoLists;
-    private final Runnable closeCallback;
-
+    private final ToDoListMediator mediator;
     private final SelectionList<ToDoListDTO> listSelection;
     private final MessagePanel messagePanel;
 
-    public ListViewState(Screen screen, UserDTO currentUser, ToDoListService toDoListService,
-                         List<ToDoListDTO> todoLists, Runnable closeCallback) {
-        this.screen = screen;
-        this.currentUser = currentUser;
-        this.toDoListService = toDoListService;
-        this.todoLists = todoLists;
-        this.closeCallback = closeCallback;
+    public ListViewState(ToDoListMediator mediator, String successMessage) {
+        this.mediator = mediator;
 
         listSelection = new SelectionList<>("Your To-Do Lists", list -> {
             int completed = (int) list.getTasks().stream()
@@ -43,14 +36,24 @@ public class ListViewState implements ScreenState {
                     .count();
             return list.getName() + " (" + completed + "/" + list.getTasks().size() + " completed)";
         });
-        listSelection.setItems(todoLists);
         listSelection.setFocused(true);
+
         messagePanel = new MessagePanel();
+        if (successMessage != null) {
+            messagePanel.setSuccess(successMessage);
+        }
+    }
+
+    @Override
+    public void onEnter() {
+        // Fetch fresh data when entering this state
+        List<ToDoListDTO> todoLists = mediator.getAllToDoLists();
+        listSelection.setItems(todoLists);
     }
 
     @Override
     public void render(TextGraphics graphics) {
-        TerminalSize size = screen.getTerminalSize();
+        TerminalSize size = graphics.getSize();
 
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== TO-DO LIST MANAGEMENT ===";
@@ -74,13 +77,16 @@ public class ListViewState implements ScreenState {
         messagePanel.clear();
 
         if (keyStroke.getKeyType() == KeyType.F1) {
-            return new AddListState(screen, currentUser, toDoListService, this);
+            // Notify mediator - it will create and transition to AddListState
+            mediator.onAddNewList();
+            return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.Escape) {
-            closeCallback.run();
-            return this;
+            mediator.closeScreen();
+            return null;
         } else if (keyStroke.getKeyType() == KeyType.Enter && !listSelection.isEmpty()) {
-            return new ListDetailsState(screen, currentUser, toDoListService,
-                    listSelection.getSelectedItem(), this);
+            // Notify mediator to show details
+            mediator.onViewListDetails(listSelection.getSelectedItem().getId());
+            return null; // Mediator handles transition
         } else {
             listSelection.handleInput(keyStroke);
             return this;
@@ -90,16 +96,5 @@ public class ListViewState implements ScreenState {
     @Override
     public String getStateName() {
         return "ListView";
-    }
-
-    public void setSuccessMessage(String message) {
-        messagePanel.setSuccess(message);
-    }
-
-    /**
-     * Protected getter for closeCallback - allows child states to access it
-     */
-    protected Runnable getCloseCallback() {
-        return closeCallback;
     }
 }

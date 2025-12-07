@@ -1,6 +1,5 @@
 package com.cpp.project.ui.state.course;
 
-import com.cpp.project.course.dto.CourseDTO;
 import com.cpp.project.course.service.CourseService;
 import com.cpp.project.ui.component.DateInput;
 import com.cpp.project.ui.component.Form;
@@ -8,37 +7,38 @@ import com.cpp.project.ui.component.FormField;
 import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
+import com.cpp.project.ui.mediator.CourseMediator;
 import com.cpp.project.ui.strategy.RequiredFieldStrategy;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * State 4: Add Task Form
+ * Responsibilities:
+ * - Collect task details from user
+ * - Add task to course via service
+ * - Notify mediator on success or cancellation
  */
 public class AddTaskState implements ScreenState {
-    private final Screen screen;
-    private final CourseDTO course;
-    private final CourseDetailsState previousState;
+    private final CourseMediator mediator;
     private final CourseService courseService;
+    private final UUID courseId;
     private final Form form;
     private final FormField nameField;
     private final FormField descriptionField;
     private final DateInput deadlineInput;
     private final MessagePanel messagePanel;
-    private boolean taskAdded = false;
 
-    public AddTaskState(Screen screen, CourseDTO course, CourseDetailsState previousState,
-                        CourseService courseService) {
-        this.screen = screen;
-        this.course = course;
-        this.previousState = previousState;
+    public AddTaskState(CourseMediator mediator, CourseService courseService, UUID courseId) {
+        this.mediator = mediator;
         this.courseService = courseService;
+        this.courseId = courseId;
 
         nameField = ComponentFactory.createTextField("Task Name");
         descriptionField = ComponentFactory.createTextField("Description");
@@ -59,7 +59,7 @@ public class AddTaskState implements ScreenState {
 
     @Override
     public void render(TextGraphics graphics) {
-        TerminalSize size = screen.getTerminalSize();
+        TerminalSize size = graphics.getSize();
 
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
@@ -82,8 +82,9 @@ public class AddTaskState implements ScreenState {
         messagePanel.clear();
 
         if (keyStroke.getKeyType() == KeyType.Escape) {
-            // Adapter will handle reload if needed
-            return previousState;
+            // Notify mediator to return to course details
+            mediator.onViewCourseDetails(courseId);
+            return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.Enter) {
             return handleSave();
         } else {
@@ -111,22 +112,14 @@ public class AddTaskState implements ScreenState {
         }
 
         try {
-            courseService.addTaskToCourse(course.getId(), name, deadline, description);
-            taskAdded = true;
-            // Return to previous state, which will check the flag and refresh
-            return previousState;
+            courseService.addTaskToCourse(courseId, name, deadline, description);
+            // Notify mediator - it will transition to course details with success message
+            mediator.onTaskAdded(courseId);
+            return null; // Mediator handles transition
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());
             return this;
         }
-    }
-
-    public boolean wasTaskAdded() {
-        return taskAdded;
-    }
-
-    public CourseDTO getCourse() {
-        return course;
     }
 
     @Override

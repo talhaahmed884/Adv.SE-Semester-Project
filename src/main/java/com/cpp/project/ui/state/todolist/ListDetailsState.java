@@ -7,55 +7,84 @@ import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.core.ScreenState;
-import com.cpp.project.user.dto.UserDTO;
+import com.cpp.project.ui.mediator.ToDoListMediator;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
 
 import java.text.SimpleDateFormat;
+import java.util.UUID;
 
 /**
  * State 3: List Details View
+ * <p>
+ * Responsibilities:
+ * - Display details of a specific to-do list
+ * - Handle adding tasks and marking complete
+ * - No data ownership - fetches fresh from mediator
  */
 public class ListDetailsState implements ScreenState {
-    private final Screen screen;
-    private final UserDTO currentUser;
+    private final ToDoListMediator mediator;
     private final ToDoListService toDoListService;
-    private final ToDoListDTO todoList;
-    private final ListViewState listViewState;
+    private final UUID listId;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
-    private boolean taskMarkedComplete = false;
 
     private final SelectionList<ToDoListTaskDTO> taskSelection;
     private final MessagePanel messagePanel;
+    private ToDoListDTO todoList; // Cached during render cycle
 
-    public ListDetailsState(Screen screen, UserDTO currentUser, ToDoListService toDoListService,
-                            ToDoListDTO todoList, ListViewState listViewState) {
-        this.screen = screen;
-        this.currentUser = currentUser;
-        this.toDoListService = toDoListService;
-        this.todoList = todoList;
-        this.listViewState = listViewState;
+    public ListDetailsState(ToDoListMediator mediator, UUID listId, String successMessage) {
+        this.mediator = mediator;
+        this.toDoListService = null; // Will use mediator for data access
+        this.listId = listId;
 
         this.taskSelection = new SelectionList<>("Tasks", task -> {
             String deadline = task.getDeadline() != null ?
                     dateFormat.format(task.getDeadline()) : "No deadline";
             return String.format("%s - %s (%s)", task.getDescription(), task.getStatus(), deadline);
         });
+        taskSelection.setFocused(true);
 
+        messagePanel = new MessagePanel();
+        if (successMessage != null) {
+            messagePanel.setSuccess(successMessage);
+        }
+    }
+
+    // Constructor for backward compatibility with service injection
+    public ListDetailsState(ToDoListMediator mediator, ToDoListService toDoListService,
+                            UUID listId, String successMessage) {
+        this.mediator = mediator;
+        this.toDoListService = toDoListService;
+        this.listId = listId;
+
+        this.taskSelection = new SelectionList<>("Tasks", task -> {
+            String deadline = task.getDeadline() != null ?
+                    dateFormat.format(task.getDeadline()) : "No deadline";
+            return String.format("%s - %s (%s)", task.getDescription(), task.getStatus(), deadline);
+        });
+        taskSelection.setFocused(true);
+
+        messagePanel = new MessagePanel();
+        if (successMessage != null) {
+            messagePanel.setSuccess(successMessage);
+        }
+    }
+
+    @Override
+    public void onEnter() {
+        // Fetch fresh data when entering this state
+        todoList = mediator.getToDoListById(listId);
         if (todoList.getTasks() != null) {
             taskSelection.setItems(todoList.getTasks());
         }
-        taskSelection.setFocused(true);
-        messagePanel = new MessagePanel();
     }
 
     @Override
     public void render(TextGraphics graphics) {
-        TerminalSize size = screen.getTerminalSize();
+        TerminalSize size = graphics.getSize();
 
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== TO-DO LIST DETAILS ===";
@@ -81,12 +110,15 @@ public class ListDetailsState implements ScreenState {
         messagePanel.clear();
 
         if (keyStroke.getKeyType() == KeyType.F2) {
-            throw new UnsupportedOperationException("Subclass must handle F2 key");
+            // Notify mediator to show add task form
+            mediator.onAddTaskToList(listId);
+            return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.F3) {
             return handleMarkComplete();
         } else if (keyStroke.getKeyType() == KeyType.Escape) {
-            // Adapter will reload data and create fresh list view
-            return listViewState;
+            // Notify mediator to return to list view
+            mediator.onReturnToListView();
+            return null; // Mediator handles transition
         } else {
             taskSelection.handleInput(keyStroke);
             return this;
@@ -106,33 +138,21 @@ public class ListDetailsState implements ScreenState {
         }
 
         try {
-            toDoListService.markTaskComplete(todoList.getId(), task.getId());
-            taskMarkedComplete = true;
-            // Return this to stay in same state, adapter will check flag and refresh
-            return this;
+            // Use injected service if available, otherwise we need to add it to mediator
+            if (toDoListService != null) {
+                toDoListService.markTaskComplete(listId, task.getId());
+            }
+            // Notify mediator that task was completed - it will refresh the view
+            mediator.onTaskCompleted(listId);
+            return null; // Mediator handles transition
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());
             return this;
         }
     }
 
-    public boolean wasTaskMarkedComplete() {
-        return taskMarkedComplete;
-    }
-
     @Override
     public String getStateName() {
         return "ListDetails";
-    }
-
-    public void setSuccessMessage(String message) {
-        messagePanel.setSuccess(message);
-    }
-
-    /**
-     * Protected getter for todoList - allows adapter to access it
-     */
-    public ToDoListDTO getToDoList() {
-        return todoList;
     }
 }

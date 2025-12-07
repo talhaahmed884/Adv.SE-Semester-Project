@@ -4,163 +4,154 @@ import com.cpp.project.todolist.dto.ToDoListDTO;
 import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.core.StatefulScreen;
+import com.cpp.project.ui.mediator.ToDoListMediator;
 import com.cpp.project.ui.state.todolist.AddListState;
 import com.cpp.project.ui.state.todolist.AddTaskState;
 import com.cpp.project.ui.state.todolist.ListDetailsState;
 import com.cpp.project.ui.state.todolist.ListViewState;
 import com.cpp.project.user.dto.UserDTO;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
- * Refactored To-Do List Management Screen using design patterns:
- * - State Pattern: State classes in ui.state.todolist package with adapter pattern
- * - Adapter Pattern: Screen adapters handle state transitions and data reloading
- * - Component Pattern: Reusable UI components
- * - Strategy Pattern: Validation strategies
+ * ToDoList Management Screen implementing Mediator pattern
+ * <p>
+ * Design Patterns:
+ * - Mediator Pattern: Coordinates all state interactions and transitions
+ * - Facade Pattern: Provides simple interface for states to access data
+ * - Factory Method Pattern: Creates states through factory methods
+ * - State Pattern: Delegates UI behavior to state objects
+ * <p>
+ * Responsibilities:
+ * - Owns the data (fetches from service)
+ * - Coordinates state transitions
+ * - Provides data access to states
+ * - Handles state action notifications
  */
-public class ToDoListManagementScreen extends StatefulScreen {
+public class ToDoListManagementScreen extends StatefulScreen implements ToDoListMediator {
     private final UserDTO currentUser;
     private final ToDoListService toDoListService;
-    private List<ToDoListDTO> todoLists;
 
     public ToDoListManagementScreen(Screen screen, UserDTO currentUser, ToDoListService toDoListService) {
         super(screen);
         this.currentUser = currentUser;
         this.toDoListService = toDoListService;
-        reloadToDoLists();
-        this.currentState = createListViewState();
-        // Call onEnter to set initial focus
+        // Start with list view
+        this.currentState = createListViewState(null);
         this.currentState.onEnter();
     }
 
-    private void reloadToDoLists() {
-        todoLists = toDoListService.getToDoListsByUserId(currentUser.getId());
+    // ========== Facade Pattern: Simplified Data Access ==========
+
+    @Override
+    public List<ToDoListDTO> getAllToDoLists() {
+        // Always fetch fresh from service - no caching, no stale data
+        return toDoListService.getToDoListsByUserId(currentUser.getId());
     }
 
-    private ListViewState createListViewState() {
-        return new ListViewStateAdapter();
+    @Override
+    public ToDoListDTO getToDoListById(UUID listId) {
+        // Always fetch fresh from service
+        return toDoListService.getToDoListById(listId);
+    }
+
+    // ========== Mediator Pattern: Action Handlers ==========
+
+    @Override
+    public void onListCreated() {
+        // User created a list, return to list view with success message
+        transitionTo(createListViewState("To-Do List created successfully!"));
+    }
+
+    @Override
+    public void onTaskAdded(UUID listId) {
+        // User added a task, refresh the details view with success message
+        transitionTo(createListDetailsState(listId, "Task added successfully!"));
+    }
+
+    @Override
+    public void onTaskCompleted(UUID listId) {
+        // User marked task complete, refresh the details view with success message
+        transitionTo(createListDetailsState(listId, "Task marked as complete!"));
+    }
+
+    @Override
+    public void onViewListDetails(UUID listId) {
+        // User wants to view a list's details
+        transitionTo(createListDetailsState(listId, null));
+    }
+
+    @Override
+    public void onReturnToListView() {
+        // User pressed ESC, return to list view
+        transitionTo(createListViewState(null));
+    }
+
+    @Override
+    public void onAddNewList() {
+        // User pressed F1, show add list form
+        transitionTo(createAddListState());
+    }
+
+    @Override
+    public void onAddTaskToList(UUID listId) {
+        // User pressed F2, show add task form
+        transitionTo(createAddTaskState(listId));
+    }
+
+    // ========== ScreenMediator: Core Methods ==========
+
+    @Override
+    public void transitionTo(ScreenState newState) {
+        transitionToState(newState);
+    }
+
+    @Override
+    public void closeScreen() {
+        close();
+    }
+
+    // ========== Factory Method Pattern: State Creation ==========
+
+    /**
+     * Factory method to create list view state
+     *
+     * @param message Optional success message to display
+     * @return New list view state
+     */
+    private ListViewState createListViewState(String message) {
+        return new ListViewState(this, message);
     }
 
     /**
-     * Adapter that handles state transitions with proper data reloading
+     * Factory method to create list details state
+     *
+     * @param listId  The list to display
+     * @param message Optional success message to display
+     * @return New list details state
      */
-    private class ListViewStateAdapter extends ListViewState {
-        public ListViewStateAdapter() {
-            super(screen, currentUser, toDoListService, todoLists, ToDoListManagementScreen.this::close);
-        }
-
-        @Override
-        public ScreenState handleInput(KeyStroke keyStroke) {
-            // Intercept F1 to create AddListState wrapped in adapter
-            if (keyStroke.getKeyType() == KeyType.F1) {
-                return new AddListStateAdapter();
-            }
-
-            ScreenState newState = super.handleInput(keyStroke);
-
-            // If transitioning to ListDetailsState, wrap it in adapter
-            if (newState instanceof ListDetailsState detailsState && !(newState instanceof ListDetailsStateAdapter)) {
-                return new ListDetailsStateAdapter(detailsState.getToDoList(), this);
-            }
-
-            return newState;
-        }
-
-        /**
-         * Adapter for AddListState that handles refresh after save
-         */
-        private class AddListStateAdapter extends AddListState {
-            public AddListStateAdapter() {
-                super(screen, currentUser, toDoListService, ListViewStateAdapter.this);
-            }
-
-            @Override
-            public ScreenState handleInput(KeyStroke keyStroke) {
-                ScreenState newState = super.handleInput(keyStroke);
-
-                // If returning to previous state and list was created, refresh
-                if (newState == ListViewStateAdapter.this && wasListCreated()) {
-                    reloadToDoLists();
-                    ListViewStateAdapter newListView = new ListViewStateAdapter();
-                    newListView.setSuccessMessage("To-Do List created successfully!");
-                    return newListView;
-                }
-
-                return newState;
-            }
-        }
+    private ListDetailsState createListDetailsState(UUID listId, String message) {
+        return new ListDetailsState(this, toDoListService, listId, message);
     }
 
     /**
-     * Adapter that handles list details state transitions with proper data reloading
+     * Factory method to create add list state
+     *
+     * @return New add list state
      */
-    private class ListDetailsStateAdapter extends ListDetailsState {
-        public ListDetailsStateAdapter(ToDoListDTO todoList, ListViewState listViewState) {
-            super(screen, currentUser, toDoListService, todoList, listViewState);
-        }
+    private AddListState createAddListState() {
+        return new AddListState(this, currentUser, toDoListService);
+    }
 
-        @Override
-        public ScreenState handleInput(KeyStroke keyStroke) {
-            // Intercept F2 to create AddTaskState wrapped in adapter
-            if (keyStroke.getKeyType() == KeyType.F2) {
-                return new AddTaskStateAdapter();
-            }
-
-            ScreenState newState = super.handleInput(keyStroke);
-
-            // If task was marked complete, refresh this specific list from service
-            if (newState == this && wasTaskMarkedComplete()) {
-                ToDoListDTO refreshedList = toDoListService.getToDoListById(getToDoList().getId());
-                reloadToDoLists(); // Also refresh the full list for when user goes back
-
-                ListDetailsStateAdapter newDetailsState = new ListDetailsStateAdapter(
-                        refreshedList,
-                        new ListViewStateAdapter()
-                );
-                newDetailsState.setSuccessMessage("Task marked as complete!");
-                return newDetailsState;
-            }
-
-            // If returning to list view (ESC pressed), reload data and create fresh list view
-            if (newState instanceof ListViewState) {
-                reloadToDoLists();
-                return new ListViewStateAdapter();
-            }
-
-            return newState;
-        }
-
-        /**
-         * Adapter for AddTaskState that handles refresh after save
-         */
-        private class AddTaskStateAdapter extends AddTaskState {
-            public AddTaskStateAdapter() {
-                super(screen, currentUser, toDoListService, ListDetailsStateAdapter.this.getToDoList(), ListDetailsStateAdapter.this);
-            }
-
-            @Override
-            public ScreenState handleInput(KeyStroke keyStroke) {
-                ScreenState newState = super.handleInput(keyStroke);
-
-                // If returning to previous state and task was added, refresh
-                if (newState == ListDetailsStateAdapter.this && wasTaskAdded()) {
-                    ToDoListDTO refreshedList = toDoListService.getToDoListById(getToDoList().getId());
-                    reloadToDoLists();
-
-                    ListDetailsStateAdapter newDetailsState = new ListDetailsStateAdapter(
-                            refreshedList,
-                            new ListViewStateAdapter()
-                    );
-                    newDetailsState.setSuccessMessage("Task added successfully!");
-                    return newDetailsState;
-                }
-
-                return newState;
-            }
-        }
+    /**
+     * Factory method to create add task state
+     *
+     * @param listId The list to add task to
+     * @return New add task state
+     */
+    private AddTaskState createAddTaskState(UUID listId) {
+        return new AddTaskState(this, toDoListService, listId);
     }
 }

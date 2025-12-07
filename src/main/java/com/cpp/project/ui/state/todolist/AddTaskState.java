@@ -1,6 +1,5 @@
 package com.cpp.project.ui.state.todolist;
 
-import com.cpp.project.todolist.dto.ToDoListDTO;
 import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.component.DateInput;
 import com.cpp.project.ui.component.Form;
@@ -8,40 +7,38 @@ import com.cpp.project.ui.component.FormField;
 import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
+import com.cpp.project.ui.mediator.ToDoListMediator;
 import com.cpp.project.ui.strategy.RequiredFieldStrategy;
-import com.cpp.project.user.dto.UserDTO;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * State 4: Add Task
+ * Responsibilities:
+ * - Collect task details from user
+ * - Add task to list via service
+ * - Notify mediator on success or cancellation
  */
 public class AddTaskState implements ScreenState {
-    private final Screen screen;
-    private final UserDTO currentUser;
+    private final ToDoListMediator mediator;
     private final ToDoListService toDoListService;
-    private final ToDoListDTO todoList;
-    private final ListDetailsState previousState;
-    private boolean taskAdded = false;
+    private final UUID listId;
 
     private final Form form;
     private final FormField descriptionField;
     private final DateInput deadlineInput;
     private final MessagePanel messagePanel;
 
-    public AddTaskState(Screen screen, UserDTO currentUser, ToDoListService toDoListService,
-                        ToDoListDTO todoList, ListDetailsState previousState) {
-        this.screen = screen;
-        this.currentUser = currentUser;
+    public AddTaskState(ToDoListMediator mediator, ToDoListService toDoListService, UUID listId) {
+        this.mediator = mediator;
         this.toDoListService = toDoListService;
-        this.todoList = todoList;
-        this.previousState = previousState;
+        this.listId = listId;
 
         descriptionField = ComponentFactory.createTextField("Description");
         deadlineInput = ComponentFactory.createDateInput("Deadline (optional)");
@@ -60,7 +57,7 @@ public class AddTaskState implements ScreenState {
 
     @Override
     public void render(TextGraphics graphics) {
-        TerminalSize size = screen.getTerminalSize();
+        TerminalSize size = graphics.getSize();
 
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== ADD NEW TASK ===";
@@ -82,8 +79,9 @@ public class AddTaskState implements ScreenState {
         messagePanel.clear();
 
         if (keyStroke.getKeyType() == KeyType.Escape) {
-            // Reload will be handled by parent screen
-            return previousState;
+            // Notify mediator to return to details view
+            mediator.onViewListDetails(listId);
+            return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.Enter) {
             return handleSave();
         } else {
@@ -111,22 +109,14 @@ public class AddTaskState implements ScreenState {
         }
 
         try {
-            toDoListService.addTaskToList(todoList.getId(), description, deadline);
-            taskAdded = true;
-            // Return to previous state, which will check the flag and refresh
-            return previousState;
+            toDoListService.addTaskToList(listId, description, deadline);
+            // Notify mediator - it will transition to details view with success message
+            mediator.onTaskAdded(listId);
+            return null; // Mediator handles transition
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());
             return this;
         }
-    }
-
-    public boolean wasTaskAdded() {
-        return taskAdded;
-    }
-
-    public ToDoListDTO getToDoList() {
-        return todoList;
     }
 
     @Override

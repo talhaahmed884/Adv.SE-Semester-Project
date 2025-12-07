@@ -4,41 +4,52 @@ import com.cpp.project.course.dto.CourseDTO;
 import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.core.ScreenState;
+import com.cpp.project.ui.mediator.CourseMediator;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
 
 import java.util.List;
 
 /**
  * State 1: Course List View
+ *
+ * Responsibilities:
+ * - Display list of all courses
+ * - Handle navigation to details or add course
+ * - No data ownership - fetches fresh from mediator
  */
 public class CourseListState implements ScreenState {
-    private final Screen screen;
-    private final List<CourseDTO> courses;
-    private final Runnable onClose;
+    private final CourseMediator mediator;
     private final SelectionList<CourseDTO> courseList;
     private final MessagePanel messagePanel;
 
-    public CourseListState(Screen screen, List<CourseDTO> courses, Runnable onClose) {
-        this.screen = screen;
-        this.courses = courses;
-        this.onClose = onClose;
+    public CourseListState(CourseMediator mediator, String successMessage) {
+        this.mediator = mediator;
 
         courseList = new SelectionList<>("Your Courses", course ->
                 course.getCode() + " - " + course.getName()
         );
-        courseList.setItems(courses);
         courseList.setFocused(true);
+
         messagePanel = new MessagePanel();
+        if (successMessage != null) {
+            messagePanel.setSuccess(successMessage);
+        }
+    }
+
+    @Override
+    public void onEnter() {
+        // Fetch fresh data when entering this state
+        List<CourseDTO> courses = mediator.getAllCourses();
+        courseList.setItems(courses);
     }
 
     @Override
     public void render(TextGraphics graphics) {
-        TerminalSize size = screen.getTerminalSize();
+        TerminalSize size = graphics.getSize();
 
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
@@ -66,32 +77,24 @@ public class CourseListState implements ScreenState {
         messagePanel.clear();
 
         if (keyStroke.getKeyType() == KeyType.F1) {
-            // Subclasses should override to provide proper dependencies
-            throw new UnsupportedOperationException("Subclass must handle F1 key");
+            // Notify mediator - it will create and transition to AddCourseState
+            mediator.onAddNewCourse();
+            return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.Escape) {
-            onClose.run();
-            return this;
+            mediator.closeScreen();
+            return null;
         } else if (keyStroke.getKeyType() == KeyType.Enter && !courseList.isEmpty()) {
-            return createCourseDetailsState(courseList.getSelectedItem());
+            // Notify mediator to show details
+            mediator.onViewCourseDetails(courseList.getSelectedItem().getId());
+            return null; // Mediator handles transition
         } else {
             courseList.handleInput(keyStroke);
             return this;
         }
     }
 
-    /**
-     * Factory method for creating CourseDetailsState - subclasses can override to provide proper dependencies
-     */
-    protected CourseDetailsState createCourseDetailsState(CourseDTO course) {
-        throw new UnsupportedOperationException("Subclass must override createCourseDetailsState");
-    }
-
     @Override
     public String getStateName() {
         return "CourseList";
-    }
-
-    public void setSuccessMessage(String message) {
-        messagePanel.setSuccess(message);
     }
 }

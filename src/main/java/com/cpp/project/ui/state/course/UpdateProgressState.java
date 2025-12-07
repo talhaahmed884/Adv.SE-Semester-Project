@@ -7,41 +7,56 @@ import com.cpp.project.ui.component.FormField;
 import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
+import com.cpp.project.ui.mediator.CourseMediator;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
+
+import java.util.UUID;
 
 /**
  * State 5: Update Progress Form
+ * <p>
+ * Responsibilities:
+ * - Collect new progress value from user
+ * - Update task progress via service
+ * - Notify mediator on success or cancellation
  */
 public class UpdateProgressState implements ScreenState {
-    private final Screen screen;
-    private final CourseDTO course;
-    private final CourseTaskDTO task;
-    private final CourseDetailsState previousState;
+    private final CourseMediator mediator;
     private final CourseService courseService;
+    private final UUID courseId;
+    private final UUID taskId;
     private final FormField progressField;
     private final MessagePanel messagePanel;
-    private boolean wasCompleted = false;
+    private CourseTaskDTO task; // Cached during render cycle
 
-    public UpdateProgressState(Screen screen, CourseDTO course, CourseTaskDTO task,
-                               CourseDetailsState previousState, CourseService courseService) {
-        this.screen = screen;
-        this.course = course;
-        this.task = task;
-        this.previousState = previousState;
+    public UpdateProgressState(CourseMediator mediator, CourseService courseService,
+                               UUID courseId, UUID taskId) {
+        this.mediator = mediator;
         this.courseService = courseService;
+        this.courseId = courseId;
+        this.taskId = taskId;
         this.progressField = ComponentFactory.createNumericField("New Progress (0-100)", 3);
         this.progressField.setFocused(true);
         this.messagePanel = new MessagePanel();
     }
 
     @Override
+    public void onEnter() {
+        // Fetch fresh course data to get the task
+        CourseDTO course = mediator.getCourseById(courseId);
+        task = course.getTasks().stream()
+                .filter(t -> t.getId().equals(taskId))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Task not found"));
+    }
+
+    @Override
     public void render(TextGraphics graphics) {
-        TerminalSize size = screen.getTerminalSize();
+        TerminalSize size = graphics.getSize();
 
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
@@ -69,22 +84,15 @@ public class UpdateProgressState implements ScreenState {
         messagePanel.clear();
 
         if (keyStroke.getKeyType() == KeyType.Escape) {
-            // Adapter will handle reload if needed
-            return previousState;
+            // Notify mediator to return to course details
+            mediator.onViewCourseDetails(courseId);
+            return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.Enter) {
             return handleSave();
         } else {
             progressField.handleInput(keyStroke);
             return this;
         }
-    }
-
-    public boolean wasTaskCompleted() {
-        return wasCompleted;
-    }
-
-    public CourseDTO getCourse() {
-        return course;
     }
 
     private ScreenState handleSave() {
@@ -102,15 +110,17 @@ public class UpdateProgressState implements ScreenState {
                 return this;
             }
 
-            courseService.updateTaskProgress(course.getId(), task.getId(), progress);
+            courseService.updateTaskProgress(courseId, taskId, progress);
 
+            boolean wasCompleted = false;
             if (progress == 100) {
-                courseService.markTaskComplete(course.getId(), task.getId());
+                courseService.markTaskComplete(courseId, taskId);
                 wasCompleted = true;
             }
 
-            // Return to previous state, which will check the flag and refresh
-            return previousState;
+            // Notify mediator - it will transition to course details with appropriate message
+            mediator.onTaskProgressUpdated(courseId, wasCompleted);
+            return null; // Mediator handles transition
         } catch (NumberFormatException e) {
             messagePanel.setError("Invalid progress value");
             return this;

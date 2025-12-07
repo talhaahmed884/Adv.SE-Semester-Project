@@ -6,6 +6,7 @@ import com.cpp.project.ui.component.FormField;
 import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
+import com.cpp.project.ui.mediator.CourseMediator;
 import com.cpp.project.ui.strategy.RequiredFieldStrategy;
 import com.cpp.project.user.dto.UserDTO;
 import com.googlecode.lanterna.TerminalSize;
@@ -13,34 +14,28 @@ import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
-import com.googlecode.lanterna.screen.Screen;
-
-import java.util.function.Supplier;
 
 /**
  * State 2: Add Course Form
+ *
+ * Responsibilities:
+ * - Collect course details from user
+ * - Create new course via service
+ * - Notify mediator on success or cancellation
  */
 public class AddCourseState implements ScreenState {
-    private final Screen screen;
-    private final CourseListState previousState;
+    private final CourseMediator mediator;
     private final CourseService courseService;
     private final UserDTO currentUser;
-    private final Runnable reloadCourses;
-    private final Supplier<CourseListState> createNewListState;
     private final Form form;
     private final FormField codeField;
     private final FormField nameField;
     private final MessagePanel messagePanel;
 
-    public AddCourseState(Screen screen, CourseListState previousState, CourseService courseService,
-                          UserDTO currentUser, Runnable reloadCourses,
-                          Supplier<CourseListState> createNewListState) {
-        this.screen = screen;
-        this.previousState = previousState;
+    public AddCourseState(CourseMediator mediator, UserDTO currentUser, CourseService courseService) {
+        this.mediator = mediator;
         this.courseService = courseService;
         this.currentUser = currentUser;
-        this.reloadCourses = reloadCourses;
-        this.createNewListState = createNewListState;
 
         codeField = ComponentFactory.createTextField("Course Code");
         nameField = ComponentFactory.createTextField("Course Name");
@@ -59,7 +54,7 @@ public class AddCourseState implements ScreenState {
 
     @Override
     public void render(TextGraphics graphics) {
-        TerminalSize size = screen.getTerminalSize();
+        TerminalSize size = graphics.getSize();
 
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
@@ -82,8 +77,9 @@ public class AddCourseState implements ScreenState {
         messagePanel.clear();
 
         if (keyStroke.getKeyType() == KeyType.Escape) {
-            reloadCourses.run();
-            return previousState;
+            // Notify mediator to return to course list
+            mediator.onReturnToCourseList();
+            return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.Enter) {
             return handleSave();
         } else {
@@ -111,10 +107,9 @@ public class AddCourseState implements ScreenState {
 
         try {
             courseService.createCourse(code, name, currentUser.getId());
-            reloadCourses.run();
-            CourseListState newListState = createNewListState.get();
-            newListState.setSuccessMessage("Course created successfully!");
-            return newListState;
+            // Notify mediator - it will transition to course list with success message
+            mediator.onCourseCreated();
+            return null; // Mediator handles transition
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());
             return this;
