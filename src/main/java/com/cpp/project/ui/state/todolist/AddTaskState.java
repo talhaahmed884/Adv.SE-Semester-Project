@@ -28,6 +28,7 @@ public class AddTaskState implements ScreenState {
     private final ToDoListService toDoListService;
     private final ToDoListDTO todoList;
     private final ListDetailsState previousState;
+    private boolean taskAdded = false;
 
     private final Form form;
     private final FormField descriptionField;
@@ -111,12 +112,21 @@ public class AddTaskState implements ScreenState {
 
         try {
             toDoListService.addTaskToList(todoList.getId(), description, deadline);
-            // Return null to signal adapter to reload and recreate states
-            return null;
+            taskAdded = true;
+            // Return to previous state, which will check the flag and refresh
+            return previousState;
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());
             return this;
         }
+    }
+
+    public boolean wasTaskAdded() {
+        return taskAdded;
+    }
+
+    public ToDoListDTO getToDoList() {
+        return todoList;
     }
 
     @Override

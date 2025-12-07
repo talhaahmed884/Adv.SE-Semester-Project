@@ -109,8 +109,8 @@ public class UpdateProgressState implements ScreenState {
                 wasCompleted = true;
             }
 
-            // Return null to signal adapter to reload and recreate states
-            return null;
+            // Return to previous state, which will check the flag and refresh
+            return previousState;
         } catch (NumberFormatException e) {
             messagePanel.setError("Invalid progress value");
             return this;

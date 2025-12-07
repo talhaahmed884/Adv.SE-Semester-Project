@@ -4,6 +4,7 @@ import com.cpp.project.todolist.dto.ToDoListDTO;
 import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.core.StatefulScreen;
+import com.cpp.project.ui.state.todolist.AddListState;
 import com.cpp.project.ui.state.todolist.AddTaskState;
 import com.cpp.project.ui.state.todolist.ListDetailsState;
 import com.cpp.project.ui.state.todolist.ListViewState;
@@ -54,15 +55,12 @@ public class ToDoListManagementScreen extends StatefulScreen {
 
         @Override
         public ScreenState handleInput(KeyStroke keyStroke) {
-            ScreenState newState = super.handleInput(keyStroke);
-
-            // If AddListState returns null, reload and create new ListViewState
-            if (newState == null) {
-                reloadToDoLists();
-                ListViewStateAdapter newListView = new ListViewStateAdapter();
-                newListView.setSuccessMessage("To-Do List created successfully!");
-                return newListView;
+            // Intercept F1 to create AddListState wrapped in adapter
+            if (keyStroke.getKeyType() == KeyType.F1) {
+                return new AddListStateAdapter();
             }
+
+            ScreenState newState = super.handleInput(keyStroke);
 
             // If transitioning to ListDetailsState, wrap it in adapter
             if (newState instanceof ListDetailsState detailsState && !(newState instanceof ListDetailsStateAdapter)) {
@@ -70,6 +68,30 @@ public class ToDoListManagementScreen extends StatefulScreen {
             }
 
             return newState;
+        }
+
+        /**
+         * Adapter for AddListState that handles refresh after save
+         */
+        private class AddListStateAdapter extends AddListState {
+            public AddListStateAdapter() {
+                super(screen, currentUser, toDoListService, ListViewStateAdapter.this);
+            }
+
+            @Override
+            public ScreenState handleInput(KeyStroke keyStroke) {
+                ScreenState newState = super.handleInput(keyStroke);
+
+                // If returning to previous state and list was created, refresh
+                if (newState == ListViewStateAdapter.this && wasListCreated()) {
+                    reloadToDoLists();
+                    ListViewStateAdapter newListView = new ListViewStateAdapter();
+                    newListView.setSuccessMessage("To-Do List created successfully!");
+                    return newListView;
+                }
+
+                return newState;
+            }
         }
     }
 
@@ -83,32 +105,23 @@ public class ToDoListManagementScreen extends StatefulScreen {
 
         @Override
         public ScreenState handleInput(KeyStroke keyStroke) {
-            // Intercept F2 to create AddTaskState
+            // Intercept F2 to create AddTaskState wrapped in adapter
             if (keyStroke.getKeyType() == KeyType.F2) {
-                return new AddTaskState(
-                        screen,
-                        currentUser,
-                        toDoListService,
-                        getToDoList(),
-                        this
-                );
+                return new AddTaskStateAdapter();
             }
 
             ScreenState newState = super.handleInput(keyStroke);
 
-            // If AddTaskState returned null, reload and create fresh details state
-            if (newState == null) {
-                reloadToDoLists();
-                ToDoListDTO updatedList = todoLists.stream()
-                        .filter(list -> list.getId().equals(getToDoList().getId()))
-                        .findFirst()
-                        .orElse(getToDoList());
+            // If task was marked complete, refresh this specific list from service
+            if (newState == this && wasTaskMarkedComplete()) {
+                ToDoListDTO refreshedList = toDoListService.getToDoListById(getToDoList().getId());
+                reloadToDoLists(); // Also refresh the full list for when user goes back
 
                 ListDetailsStateAdapter newDetailsState = new ListDetailsStateAdapter(
-                        updatedList,
+                        refreshedList,
                         new ListViewStateAdapter()
                 );
-                newDetailsState.setSuccessMessage("Task added successfully!");
+                newDetailsState.setSuccessMessage("Task marked as complete!");
                 return newDetailsState;
             }
 
@@ -119,6 +132,35 @@ public class ToDoListManagementScreen extends StatefulScreen {
             }
 
             return newState;
+        }
+
+        /**
+         * Adapter for AddTaskState that handles refresh after save
+         */
+        private class AddTaskStateAdapter extends AddTaskState {
+            public AddTaskStateAdapter() {
+                super(screen, currentUser, toDoListService, ListDetailsStateAdapter.this.getToDoList(), ListDetailsStateAdapter.this);
+            }
+
+            @Override
+            public ScreenState handleInput(KeyStroke keyStroke) {
+                ScreenState newState = super.handleInput(keyStroke);
+
+                // If returning to previous state and task was added, refresh
+                if (newState == ListDetailsStateAdapter.this && wasTaskAdded()) {
+                    ToDoListDTO refreshedList = toDoListService.getToDoListById(getToDoList().getId());
+                    reloadToDoLists();
+
+                    ListDetailsStateAdapter newDetailsState = new ListDetailsStateAdapter(
+                            refreshedList,
+                            new ListViewStateAdapter()
+                    );
+                    newDetailsState.setSuccessMessage("Task added successfully!");
+                    return newDetailsState;
+                }
+
+                return newState;
+            }
         }
     }
 }

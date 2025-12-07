@@ -27,6 +27,7 @@ public class ListDetailsState implements ScreenState {
     private final ToDoListDTO todoList;
     private final ListViewState listViewState;
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
+    private boolean taskMarkedComplete = false;
 
     private final SelectionList<ToDoListTaskDTO> taskSelection;
     private final MessagePanel messagePanel;
@@ -82,8 +83,7 @@ public class ListDetailsState implements ScreenState {
         if (keyStroke.getKeyType() == KeyType.F2) {
             throw new UnsupportedOperationException("Subclass must handle F2 key");
         } else if (keyStroke.getKeyType() == KeyType.F3) {
-            handleMarkComplete();
-            return this;
+            return handleMarkComplete();
         } else if (keyStroke.getKeyType() == KeyType.Escape) {
             // Adapter will reload data and create fresh list view
             return listViewState;
@@ -93,25 +93,31 @@ public class ListDetailsState implements ScreenState {
         }
     }
 
-    private void handleMarkComplete() {
+    private ScreenState handleMarkComplete() {
         if (taskSelection.isEmpty()) {
             messagePanel.setError("No tasks to mark as complete");
-            return;
+            return this;
         }
 
         ToDoListTaskDTO task = taskSelection.getSelectedItem();
         if (TaskStatus.COMPLETED.equals(task.getStatus())) {
             messagePanel.setError("Task is already completed");
-            return;
+            return this;
         }
 
         try {
             toDoListService.markTaskComplete(todoList.getId(), task.getId());
-            messagePanel.setSuccess("Task marked as complete!");
-            // Reload will be handled by parent screen
+            taskMarkedComplete = true;
+            // Return this to stay in same state, adapter will check flag and refresh
+            return this;
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());
+            return this;
         }
+    }
+
+    public boolean wasTaskMarkedComplete() {
+        return taskMarkedComplete;
     }
 
     @Override

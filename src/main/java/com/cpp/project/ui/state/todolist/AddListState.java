@@ -22,7 +22,7 @@ public class AddListState implements ScreenState {
     private final UserDTO currentUser;
     private final ToDoListService toDoListService;
     private final ListViewState previousState;
-    private final Runnable reloadListsCallback;
+    private boolean listCreated = false;
 
     private final FormField nameField;
     private final MessagePanel messagePanel;
@@ -33,7 +33,6 @@ public class AddListState implements ScreenState {
         this.currentUser = currentUser;
         this.toDoListService = toDoListService;
         this.previousState = previousState;
-        this.reloadListsCallback = null; // Will be set by parent screen
 
         this.nameField = ComponentFactory.createTextField("List Name");
         this.nameField.setFocused(true);
@@ -82,12 +81,17 @@ public class AddListState implements ScreenState {
 
         try {
             toDoListService.createToDoList(name, currentUser.getId());
-            // Return null to signal parent to reload data and recreate state
-            return null;
+            listCreated = true;
+            // Return to previous state, which will check the flag and refresh
+            return previousState;
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());
             return this;
         }
+    }
+
+    public boolean wasListCreated() {
+        return listCreated;
     }
 
     @Override

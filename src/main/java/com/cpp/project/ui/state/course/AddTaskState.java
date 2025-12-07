@@ -31,6 +31,7 @@ public class AddTaskState implements ScreenState {
     private final FormField descriptionField;
     private final DateInput deadlineInput;
     private final MessagePanel messagePanel;
+    private boolean taskAdded = false;
 
     public AddTaskState(Screen screen, CourseDTO course, CourseDetailsState previousState,
                         CourseService courseService) {
@@ -111,12 +112,21 @@ public class AddTaskState implements ScreenState {
 
         try {
             courseService.addTaskToCourse(course.getId(), name, deadline, description);
-            // Return null to signal adapter to reload and recreate states
-            return null;
+            taskAdded = true;
+            // Return to previous state, which will check the flag and refresh
+            return previousState;
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());
             return this;
         }
+    }
+
+    public boolean wasTaskAdded() {
+        return taskAdded;
+    }
+
+    public CourseDTO getCourse() {
+        return course;
     }
 
     @Override

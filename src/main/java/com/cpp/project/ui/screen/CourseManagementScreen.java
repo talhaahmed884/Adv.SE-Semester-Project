@@ -89,33 +89,12 @@ public class CourseManagementScreen extends StatefulScreen {
 
         @Override
         public ScreenState handleInput(KeyStroke keyStroke) {
-            // Intercept F2 to create AddTaskState
+            // Intercept F2 to create AddTaskState wrapped in adapter
             if (keyStroke.getKeyType() == KeyType.F2) {
-                return new AddTaskState(
-                        screen,
-                        getCourse(),
-                        this,
-                        courseService
-                );
+                return new AddTaskStateAdapter();
             }
 
             ScreenState newState = super.handleInput(keyStroke);
-
-            // If AddTaskState returned null, reload and create fresh details state
-            if (newState == null) {
-                reloadCourses();
-                CourseDTO updatedCourse = courses.stream()
-                        .filter(c -> c.getId().equals(getCourse().getId()))
-                        .findFirst()
-                        .orElse(getCourse());
-
-                CourseDetailsStateAdapter newDetailsState = new CourseDetailsStateAdapter(
-                        updatedCourse,
-                        new CourseListStateAdapter()
-                );
-                newDetailsState.setSuccessMessage("Task added successfully!");
-                return newDetailsState;
-            }
 
             // If returning to list view (ESC pressed), reload data and create fresh list view
             if (newState instanceof CourseListState) {
@@ -124,6 +103,35 @@ public class CourseManagementScreen extends StatefulScreen {
             }
 
             return newState;
+        }
+
+        /**
+         * Adapter for AddTaskState that handles refresh after save
+         */
+        private class AddTaskStateAdapter extends AddTaskState {
+            public AddTaskStateAdapter() {
+                super(screen, CourseDetailsStateAdapter.this.getCourse(), CourseDetailsStateAdapter.this, courseService);
+            }
+
+            @Override
+            public ScreenState handleInput(KeyStroke keyStroke) {
+                ScreenState newState = super.handleInput(keyStroke);
+
+                // If returning to previous state and task was added, refresh
+                if (newState == CourseDetailsStateAdapter.this && wasTaskAdded()) {
+                    CourseDTO refreshedCourse = courseService.getCourseById(getCourse().getId());
+                    reloadCourses();
+
+                    CourseDetailsStateAdapter newDetailsState = new CourseDetailsStateAdapter(
+                            refreshedCourse,
+                            new CourseListStateAdapter()
+                    );
+                    newDetailsState.setSuccessMessage("Task added successfully!");
+                    return newDetailsState;
+                }
+
+                return newState;
+            }
         }
 
         @Override
@@ -143,20 +151,28 @@ public class CourseManagementScreen extends StatefulScreen {
             public ScreenState handleInput(KeyStroke keyStroke) {
                 ScreenState newState = super.handleInput(keyStroke);
 
-                // If update returned null, reload and create fresh details state
-                if (newState == null) {
-                    reloadCourses();
-                    CourseDTO updatedCourse = courses.stream()
-                            .filter(c -> c.getId().equals(super.getCourse().getId()))
-                            .findFirst()
-                            .orElse(super.getCourse());
+                // If returning to previous state after update, refresh this specific course from service
+                if (newState == CourseDetailsStateAdapter.this && wasTaskCompleted()) {
+                    CourseDTO refreshedCourse = courseService.getCourseById(super.getCourse().getId());
+                    reloadCourses(); // Also refresh the full list for when user goes back
 
                     CourseDetailsStateAdapter newDetailsState = new CourseDetailsStateAdapter(
-                            updatedCourse,
+                            refreshedCourse,
                             new CourseListStateAdapter()
                     );
-                    String message = wasTaskCompleted() ? "Task marked as complete!" : "Progress updated successfully!";
+                    String message = "Task marked as complete!";
                     newDetailsState.setSuccessMessage(message);
+                    return newDetailsState;
+                } else if (newState == CourseDetailsStateAdapter.this) {
+                    // Progress updated but not completed
+                    CourseDTO refreshedCourse = courseService.getCourseById(super.getCourse().getId());
+                    reloadCourses();
+
+                    CourseDetailsStateAdapter newDetailsState = new CourseDetailsStateAdapter(
+                            refreshedCourse,
+                            new CourseListStateAdapter()
+                    );
+                    newDetailsState.setSuccessMessage("Progress updated successfully!");
                     return newDetailsState;
                 }
 
