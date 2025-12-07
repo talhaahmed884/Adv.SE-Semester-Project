@@ -82,10 +82,8 @@ public class AddListState implements ScreenState {
 
         try {
             toDoListService.createToDoList(name, currentUser.getId());
-            // Reload will be handled by parent screen
-            previousState.setSuccessMessage("To-Do List created successfully!");
-            // Return a new ListViewState instead of previousState
-            return null; // Signal parent to create new ListViewState
+            // Return null to signal parent to reload data and recreate state
+            return null;
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());
             return this;

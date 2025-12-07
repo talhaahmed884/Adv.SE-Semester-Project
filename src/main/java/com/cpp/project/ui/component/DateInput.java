@@ -33,7 +33,7 @@ public class DateInput extends AbstractComponent {
     @Override
     public void render(TextGraphics graphics, int x, int y) {
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(x, y, label + ":");
+        graphics.putString(x, y, label + " (use ← → to navigate):");
 
         // Year field
         TextColor yearColor = focused && focusedField == 0 ? TextColor.ANSI.GREEN_BRIGHT : TextColor.ANSI.WHITE;
@@ -72,17 +72,22 @@ public class DateInput extends AbstractComponent {
                 current.deleteCharAt(current.length() - 1);
                 return true;
             }
-        } else if (keyStroke.getKeyType() == KeyType.Tab) {
+        } else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
+            // Move to next sub-field (year → month → day → wraps to year)
             focusedField = (focusedField + 1) % 3;
+            return true;
+        } else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
+            // Move to previous sub-field (day → month → year → wraps to day)
+            focusedField = (focusedField - 1 + 3) % 3;
             return true;
         }
 
+        // Don't consume Tab - let Form handle it to move to next field
         return false;
     }
 
     private StringBuilder getCurrentField() {
         return switch (focusedField) {
-            case 0 -> year;
             case 1 -> month;
             case 2 -> day;
             default -> year;

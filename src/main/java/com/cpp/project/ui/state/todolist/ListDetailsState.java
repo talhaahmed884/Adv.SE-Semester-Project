@@ -80,7 +80,7 @@ public class ListDetailsState implements ScreenState {
         messagePanel.clear();
 
         if (keyStroke.getKeyType() == KeyType.F2) {
-            return new AddTaskState(screen, currentUser, toDoListService, todoList, this);
+            throw new UnsupportedOperationException("Subclass must handle F2 key");
         } else if (keyStroke.getKeyType() == KeyType.F3) {
             handleMarkComplete();
             return this;
@@ -121,5 +121,19 @@ public class ListDetailsState implements ScreenState {
 
     public void setSuccessMessage(String message) {
         messagePanel.setSuccess(message);
+    }
+
+    /**
+     * Protected getter for listViewState - allows child states to access it
+     */
+    protected ListViewState getListViewState() {
+        return listViewState;
+    }
+
+    /**
+     * Protected getter for todoList - allows adapter to access it
+     */
+    public ToDoListDTO getToDoList() {
+        return todoList;
     }
 }

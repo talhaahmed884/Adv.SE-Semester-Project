@@ -95,4 +95,11 @@ public class ListViewState implements ScreenState {
     public void setSuccessMessage(String message) {
         messagePanel.setSuccess(message);
     }
+
+    /**
+     * Protected getter for closeCallback - allows child states to access it
+     */
+    protected Runnable getCloseCallback() {
+        return closeCallback;
+    }
 }
