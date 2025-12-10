@@ -30,7 +30,7 @@ public class ListDetailsState implements ScreenState {
     private final ToDoListMediator mediator;
     private final ToDoListService toDoListService;
     private final UUID listId;
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy")
+    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm a")
             .withZone(ZoneId.systemDefault());
 
     private final SelectionList<ToDoListTaskDTO> taskSelection;

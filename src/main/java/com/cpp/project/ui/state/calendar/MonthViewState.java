@@ -26,7 +26,7 @@ import java.util.List;
  */
 public class MonthViewState implements ScreenState {
     private final CalendarMediator mediator;
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy")
+    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm a")
             .withZone(ZoneId.systemDefault());
 
     // Cached renderers - created once, reused for performance

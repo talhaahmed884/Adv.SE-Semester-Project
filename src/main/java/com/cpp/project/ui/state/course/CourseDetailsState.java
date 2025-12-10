@@ -27,7 +27,7 @@ import java.util.UUID;
 public class CourseDetailsState implements ScreenState {
     private final CourseMediator mediator;
     private final UUID courseId;
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy")
+    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm a")
             .withZone(ZoneId.systemDefault());
 
     private final SelectionList<CourseTaskDTO> taskList;
