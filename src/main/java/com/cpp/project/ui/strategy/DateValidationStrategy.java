@@ -1,10 +1,11 @@
 package com.cpp.project.ui.strategy;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 
 /**
- * Validates date fields
+ * Validates date fields and creates UTC-based Instant objects
  */
 public class DateValidationStrategy implements ValidationStrategy {
     /**
@@ -24,12 +25,17 @@ public class DateValidationStrategy implements ValidationStrategy {
     }
 
     /**
-     * Create Date from components
+     * Create Instant from components (interpreted as UTC midnight)
+     *
+     * @param year  Year (e.g., 2024)
+     * @param month Month (1-12)
+     * @param day   Day (1-31)
+     * @return Instant representing the date at midnight UTC
      */
-    public static Date createDate(int year, int month, int day) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month - 1, day);
-        return cal.getTime();
+    public static Instant createDate(int year, int month, int day) {
+        // Create ZonedDateTime at midnight UTC
+        ZonedDateTime utcDateTime = ZonedDateTime.of(year, month, day, 0, 0, 0, 0, ZoneId.of("UTC"));
+        return utcDateTime.toInstant();
     }
 
     @Override

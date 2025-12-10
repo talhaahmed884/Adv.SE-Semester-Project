@@ -6,7 +6,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.util.Date;
+import java.time.Instant;
 
 /**
  * Component Pattern: Date input component with built-in validation
@@ -95,9 +95,9 @@ public class DateInput extends AbstractComponent {
     }
 
     /**
-     * Validate and return Date object, or null if invalid
+     * Validate and return Instant object (UTC midnight), or null if invalid
      */
-    public Date getDate() {
+    public Instant getDate() {
         errorMessage = "";
 
         if (year.isEmpty() || month.isEmpty() || day.isEmpty()) {

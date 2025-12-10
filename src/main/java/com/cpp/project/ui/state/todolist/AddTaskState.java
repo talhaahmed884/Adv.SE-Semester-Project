@@ -15,7 +15,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.UUID;
 
 /**
@@ -99,7 +99,7 @@ public class AddTaskState implements ScreenState {
             return this;
         }
 
-        Date deadline = null;
+        Instant deadline = null;
         if (!deadlineInput.isEmpty()) {
             deadline = deadlineInput.getDate();
             if (deadline == null) {
