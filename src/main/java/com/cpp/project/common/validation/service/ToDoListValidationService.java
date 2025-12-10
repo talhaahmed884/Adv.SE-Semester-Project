@@ -3,6 +3,8 @@ package com.cpp.project.common.validation.service;
 import com.cpp.project.common.validation.entity.ValidationResult;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
+
 /**
  * Service for ToDoList domain validation
  * Facade Pattern - Provides simple interface for all todo list-related validations
@@ -30,7 +32,7 @@ public class ToDoListValidationService {
     /**
      * Validate task deadline
      */
-    public ValidationResult validateTaskDeadline(java.util.Date deadline) {
+    public ValidationResult validateTaskDeadline(Instant deadline) {
         return deadlineValidator.validate(deadline);
     }
 }

@@ -1,18 +1,18 @@
 package com.cpp.project.todolist.dto;
 
-import java.util.Date;
+import java.time.Instant;
 
 /**
  * Request DTO for adding a task to a todo list
  */
 public class AddToDoListTaskRequestDTO {
     private String description;
-    private Date deadline;
+    private Instant deadline;
 
     public AddToDoListTaskRequestDTO() {
     }
 
-    public AddToDoListTaskRequestDTO(String description, Date deadline) {
+    public AddToDoListTaskRequestDTO(String description, Instant deadline) {
         this.description = description;
         this.deadline = deadline;
     }
@@ -25,11 +25,11 @@ public class AddToDoListTaskRequestDTO {
         this.description = description;
     }
 
-    public Date getDeadline() {
+    public Instant getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(Instant deadline) {
         this.deadline = deadline;
     }
 

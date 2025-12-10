@@ -9,7 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -192,12 +192,12 @@ public class ToDoListController {
      * GET /api/todolists/{todoListId}/deadlines
      */
     @GetMapping("/{todoListId}/deadlines")
-    public ResponseEntity<ApiSuccessResponse<List<Date>>> getAggregatedDeadlines(
+    public ResponseEntity<ApiSuccessResponse<List<Instant>>> getAggregatedDeadlines(
             @PathVariable UUID todoListId) {
 
-        List<Date> deadlines = todoListService.getAggregatedDeadlines(todoListId);
+        List<Instant> deadlines = todoListService.getAggregatedDeadlines(todoListId);
 
-        ApiSuccessResponse<List<Date>> response = ApiSuccessResponse.<List<Date>>builder()
+        ApiSuccessResponse<List<Instant>> response = ApiSuccessResponse.<List<Instant>>builder()
                 .data(deadlines)
                 .message("Deadlines retrieved successfully")
                 .statusCode(HttpStatus.OK.value())

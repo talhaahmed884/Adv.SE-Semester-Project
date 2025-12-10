@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -186,7 +186,7 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public CourseTaskDTO addTaskToCourse(UUID courseId, String name, Date deadline, String description) {
+    public CourseTaskDTO addTaskToCourse(UUID courseId, String name, Instant deadline, String description) {
         logger.info("Adding task to course: {}", courseId);
 
         try {

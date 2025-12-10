@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -153,7 +153,7 @@ public class ToDoListServiceImpl implements ToDoListService {
     }
 
     @Override
-    public ToDoListTaskDTO addTaskToList(UUID todoListId, String description, Date deadline) {
+    public ToDoListTaskDTO addTaskToList(UUID todoListId, String description, Instant deadline) {
         logger.info("Adding task to todo list: {}", todoListId);
 
         try {
@@ -218,7 +218,7 @@ public class ToDoListServiceImpl implements ToDoListService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Date> getAggregatedDeadlines(UUID todoListId) {
+    public List<Instant> getAggregatedDeadlines(UUID todoListId) {
         logger.debug("Getting aggregated deadlines for todo list: {}", todoListId);
 
         ToDoList todoList = todoListRepository.findById(todoListId)
