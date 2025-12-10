@@ -12,7 +12,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,7 +47,7 @@ public class UC_6_4_18_MarkComplete_WhenRepositoryFails_Test {
                 .build();
 
         // Add a mock task to the course
-        mockCourse.addTask("Task 1", new Date(System.currentTimeMillis() + 86400000), "Description");
+        mockCourse.addTask("Task 1", Instant.now().plusMillis(86400000), "Description");
         mockCourse.getTasks().getFirst().setId(taskId);
 
         when(courseRepository.findById(courseId)).thenReturn(Optional.of(mockCourse));
@@ -57,9 +57,7 @@ public class UC_6_4_18_MarkComplete_WhenRepositoryFails_Test {
                 .thenThrow(new jakarta.persistence.PersistenceException("Database connection failed"));
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.markTaskComplete(courseId, taskId);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.markTaskComplete(courseId, taskId));
 
         assertEquals(CourseErrorCode.TASK_UPDATE_FAILED.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("failed"));
@@ -79,9 +77,7 @@ public class UC_6_4_18_MarkComplete_WhenRepositoryFails_Test {
         when(courseRepository.findById(courseId)).thenReturn(Optional.empty());
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.markTaskComplete(courseId, taskId);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.markTaskComplete(courseId, taskId));
 
         assertEquals(CourseErrorCode.COURSE_NOT_FOUND.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("not found"));
@@ -105,15 +101,13 @@ public class UC_6_4_18_MarkComplete_WhenRepositoryFails_Test {
                 .build();
 
         // Add a task with a different ID
-        mockCourse.addTask("Task 1", new Date(System.currentTimeMillis() + 86400000), "Description");
+        mockCourse.addTask("Task 1", Instant.now().plusMillis(86400000), "Description");
         mockCourse.getTasks().getFirst().setId(UUID.randomUUID());
 
         when(courseRepository.findById(courseId)).thenReturn(Optional.of(mockCourse));
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.markTaskComplete(courseId, nonExistentTaskId);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.markTaskComplete(courseId, nonExistentTaskId));
 
         assertEquals(CourseErrorCode.TASK_NOT_FOUND.getCode(), exception.getCode());
 

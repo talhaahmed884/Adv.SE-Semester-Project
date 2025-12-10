@@ -11,7 +11,8 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -25,7 +26,8 @@ import java.util.List;
  */
 public class MonthViewState implements ScreenState {
     private final CalendarMediator mediator;
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
+    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm a")
+            .withZone(ZoneId.systemDefault());
 
     // Cached renderers - created once, reused for performance
     private CalendarGridRenderer gridRenderer;
@@ -46,7 +48,7 @@ public class MonthViewState implements ScreenState {
         currentYear = mediator.getCurrentYear();
         currentMonth = mediator.getCurrentMonth();
         calendarItems = mediator.getItemsForMonth(currentYear, currentMonth,
-                java.util.UUID.randomUUID()); // Will be updated to use actual user ID
+                java.util.UUID.randomUUID(), ZoneId.systemDefault().getId()); // Will be updated to use actual user ID
 
         // Create renderers once and cache them (performance optimization)
         gridRenderer = new CalendarGridRenderer(currentYear, currentMonth, calendarItems);
@@ -112,7 +114,7 @@ public class MonthViewState implements ScreenState {
         currentYear = mediator.getCurrentYear();
         currentMonth = mediator.getCurrentMonth();
         calendarItems = mediator.getItemsForMonth(currentYear, currentMonth,
-                java.util.UUID.randomUUID()); // Will be updated to use actual user ID
+                java.util.UUID.randomUUID(), ZoneId.systemDefault().getId()); // Will be updated to use actual user ID
 
         // Update cached renderers with new data
         gridRenderer = new CalendarGridRenderer(currentYear, currentMonth, calendarItems);

@@ -2,7 +2,7 @@ package com.cpp.project.todolist.entity;
 
 import com.cpp.project.common.entity.TaskStatus;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.UUID;
 
 /**
@@ -11,7 +11,7 @@ import java.util.UUID;
 public class ToDoListTaskBuilder {
     private UUID todoListId;
     private String description;
-    private Date deadline;
+    private Instant deadline;
     private TaskStatus status = TaskStatus.PENDING;
 
     public ToDoListTaskBuilder todoListId(UUID todoListId) {
@@ -24,7 +24,7 @@ public class ToDoListTaskBuilder {
         return this;
     }
 
-    public ToDoListTaskBuilder deadline(Date deadline) {
+    public ToDoListTaskBuilder deadline(Instant deadline) {
         this.deadline = deadline;
         return this;
     }

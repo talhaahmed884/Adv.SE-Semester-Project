@@ -39,9 +39,7 @@ public class UC_10_15_ItemsForMonth_Fail_InvalidMonthExceeds_Test extends BaseIn
         int year = cal.get(Calendar.YEAR);
 
         // Act & Assert
-        CalendarException exception = assertThrows(CalendarException.class, () -> {
-            calendarService.getItemsForMonth(year, 13, user.getId());
-        });
+        CalendarException exception = assertThrows(CalendarException.class, () -> calendarService.getItemsForMonth(year, 13, user.getId(), "UTC"));
 
         assertEquals("CALENDAR_001", exception.getCode());
     }

@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,23 +44,20 @@ public class UC_10_20_ItemsForMonth_Performance_1000Items_Test extends BaseInteg
 
         UUID courseId = courseService.createCourse("CS101", "Intro to CS", user.getId()).getId();
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(2026, Calendar.APRIL, 1);
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
+        ZonedDateTime baseDate = ZonedDateTime.of(2026, 5, 1, 12, 0, 0, 0, ZoneId.of("UTC"));
+        int year = baseDate.getYear();
+        int month = baseDate.getMonthValue();
 
-        // Add 1000 tasks in the same month
+        // Add 10000 tasks in the same month
         for (int i = 0; i < 10000; i++) {
-            Calendar taskCal = Calendar.getInstance();
-            taskCal.set(2026, Calendar.APRIL, 1);
-            taskCal.set(2026, month - 1, (i % 28) + 1, 12, 0, 0);
-            Date deadline = taskCal.getTime();
+            int dayOfMonth = (i % 28) + 1;
+            Instant deadline = baseDate.withDayOfMonth(dayOfMonth).toInstant();
             courseService.addTaskToCourse(courseId, "Task " + i, deadline, "Description " + i);
         }
 
         // Act - Measure performance
         long startTime = System.currentTimeMillis();
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
         long endTime = System.currentTimeMillis();
         long duration = endTime - startTime;
 

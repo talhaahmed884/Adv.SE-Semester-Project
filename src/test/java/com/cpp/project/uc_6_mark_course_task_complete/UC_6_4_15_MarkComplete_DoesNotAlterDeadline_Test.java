@@ -12,8 +12,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,9 +45,7 @@ public class UC_6_4_15_MarkComplete_DoesNotAlterDeadline_Test extends BaseIntegr
         CourseDTO course = courseService.createCourse("CS104", "Software Engineering", userId);
 
         // Create a specific future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 7);
-        Date originalDeadline = calendar.getTime();
+        Instant originalDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(7).toInstant();
 
         // Add a task with the deadline
         CourseTaskDTO task = courseService.addTaskToCourse(

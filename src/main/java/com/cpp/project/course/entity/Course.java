@@ -8,9 +8,9 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -76,11 +76,11 @@ public class Course {
      * Add a new task to the course
      *
      * @param name        Task name
-     * @param deadline    Task deadline
+     * @param deadline    Task deadline (in UTC)
      * @param description Task description
      * @return The created CourseTask
      */
-    public CourseTask addTask(String name, Date deadline, String description) {
+    public CourseTask addTask(String name, Instant deadline, String description) {
         CourseTask task = CourseTask.builder()
                 .courseId(this.id)
                 .name(name)

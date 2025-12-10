@@ -12,8 +12,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,9 +44,7 @@ public class UC_4_10_AddCourseTask_Success_LongDescription_Test extends BaseInte
         CourseDTO course = courseService.createCourse("CS101", "Introduction to CS", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Act
         CourseTaskDTO result = courseService.addTaskToCourse(
@@ -75,9 +74,7 @@ public class UC_4_10_AddCourseTask_Success_LongDescription_Test extends BaseInte
         CourseDTO course = courseService.createCourse("CS102", "Data Structures", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Create a description with exactly 2000 characters
         String maxDescription = "A".repeat(2000);
@@ -111,22 +108,18 @@ public class UC_4_10_AddCourseTask_Success_LongDescription_Test extends BaseInte
         CourseDTO course = courseService.createCourse("CS103", "Algorithms", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Create a description with 2001 characters (exceeds limit)
         String tooLongDescription = "A".repeat(2001);
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.addTaskToCourse(
-                    course.getId(),
-                    "Task with too long description",
-                    futureDeadline,
-                    tooLongDescription
-            );
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.addTaskToCourse(
+                course.getId(),
+                "Task with too long description",
+                futureDeadline,
+                tooLongDescription
+        ));
 
         assertTrue(exception.getMessage().toLowerCase().contains("description") ||
                 exception.getMessage().toLowerCase().contains("length") ||

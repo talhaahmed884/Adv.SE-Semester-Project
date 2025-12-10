@@ -46,7 +46,7 @@ public class UC_9_6_14_MarkComplete_WhenRepositoryFails_Test {
                 .build();
 
         // Add a mock task to the list
-        mockToDoList.addTask("Buy groceries", new Date(System.currentTimeMillis() + 86400000));
+        mockToDoList.addTask("Buy groceries", new Date(System.currentTimeMillis() + 86400000).toInstant());
         mockToDoList.getTasks().getFirst().setId(taskId);
 
         when(toDoListRepository.findById(todoListId)).thenReturn(Optional.of(mockToDoList));
@@ -56,9 +56,7 @@ public class UC_9_6_14_MarkComplete_WhenRepositoryFails_Test {
                 .thenThrow(new jakarta.persistence.PersistenceException("Database connection failed"));
 
         // Act & Assert
-        ToDoListException exception = assertThrows(ToDoListException.class, () -> {
-            toDoListService.markTaskComplete(todoListId, taskId);
-        });
+        ToDoListException exception = assertThrows(ToDoListException.class, () -> toDoListService.markTaskComplete(todoListId, taskId));
 
         assertEquals(ToDoListErrorCode.TASK_UPDATE_FAILED.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("failed"));
@@ -78,9 +76,7 @@ public class UC_9_6_14_MarkComplete_WhenRepositoryFails_Test {
         when(toDoListRepository.findById(todoListId)).thenReturn(Optional.empty());
 
         // Act & Assert
-        ToDoListException exception = assertThrows(ToDoListException.class, () -> {
-            toDoListService.markTaskComplete(todoListId, taskId);
-        });
+        ToDoListException exception = assertThrows(ToDoListException.class, () -> toDoListService.markTaskComplete(todoListId, taskId));
 
         assertEquals(ToDoListErrorCode.TODO_LIST_NOT_FOUND.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("not found"));
@@ -103,15 +99,13 @@ public class UC_9_6_14_MarkComplete_WhenRepositoryFails_Test {
                 .build();
 
         // Add a task with a different ID
-        mockToDoList.addTask("Buy groceries", new Date(System.currentTimeMillis() + 86400000));
+        mockToDoList.addTask("Buy groceries", new Date(System.currentTimeMillis() + 86400000).toInstant());
         mockToDoList.getTasks().getFirst().setId(UUID.randomUUID());
 
         when(toDoListRepository.findById(todoListId)).thenReturn(Optional.of(mockToDoList));
 
         // Act & Assert
-        ToDoListException exception = assertThrows(ToDoListException.class, () -> {
-            toDoListService.markTaskComplete(todoListId, nonExistentTaskId);
-        });
+        ToDoListException exception = assertThrows(ToDoListException.class, () -> toDoListService.markTaskComplete(todoListId, nonExistentTaskId));
 
         assertEquals(ToDoListErrorCode.TASK_NOT_FOUND.getCode(), exception.getCode());
 

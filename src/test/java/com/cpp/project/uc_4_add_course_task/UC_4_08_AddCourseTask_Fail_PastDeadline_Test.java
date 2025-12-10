@@ -12,8 +12,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,19 +44,15 @@ public class UC_4_08_AddCourseTask_Fail_PastDeadline_Test extends BaseIntegratio
         CourseDTO course = courseService.createCourse("CS101", "Introduction to CS", userId);
 
         // Create a past deadline (1 day ago)
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -1);
-        Date pastDeadline = calendar.getTime();
+        Instant pastDeadline = ZonedDateTime.now(ZoneId.of("UTC")).minusDays(1).toInstant();
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.addTaskToCourse(
-                    course.getId(),
-                    "Late Task",
-                    pastDeadline,
-                    "Task with past deadline"
-            );
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.addTaskToCourse(
+                course.getId(),
+                "Late Task",
+                pastDeadline,
+                "Task with past deadline"
+        ));
 
         assertTrue(exception.getMessage().toLowerCase().contains("deadline") ||
                 exception.getMessage().toLowerCase().contains("past"));
@@ -77,19 +74,15 @@ public class UC_4_08_AddCourseTask_Fail_PastDeadline_Test extends BaseIntegratio
         CourseDTO course = courseService.createCourse("CS102", "Data Structures", userId);
 
         // Create a deadline 1ms in the past (boundary case)
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MILLISECOND, -1);
-        Date justPastDeadline = calendar.getTime();
+        Instant justPastDeadline = ZonedDateTime.now(ZoneId.of("UTC")).minusNanos(1_000_000).toInstant();
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.addTaskToCourse(
-                    course.getId(),
-                    "Barely Late Task",
-                    justPastDeadline,
-                    "Task with deadline just past"
-            );
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.addTaskToCourse(
+                course.getId(),
+                "Barely Late Task",
+                justPastDeadline,
+                "Task with deadline just past"
+        ));
 
         assertTrue(exception.getMessage().toLowerCase().contains("deadline") ||
                 exception.getMessage().toLowerCase().contains("past"));

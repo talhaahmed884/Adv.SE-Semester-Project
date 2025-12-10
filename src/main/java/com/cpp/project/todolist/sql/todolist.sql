@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS todo_list_tasks
 (
     id           UUID PRIMARY KEY,
     description  TEXT                     NOT NULL,
-    deadline     DATE,
+    deadline     TIMESTAMP WITH TIME ZONE,
     status       VARCHAR(50)              NOT NULL DEFAULT 'PENDING',
     todo_list_id UUID                     NOT NULL,
     created_at   TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -96,7 +96,7 @@ COMMENT ON COLUMN todo_lists.updated_at IS 'Timestamp when the list was last upd
 COMMENT ON TABLE todo_list_tasks IS 'Stores tasks within todo lists';
 COMMENT ON COLUMN todo_list_tasks.id IS 'Unique identifier for the task (UUID)';
 COMMENT ON COLUMN todo_list_tasks.description IS 'Description of the task';
-COMMENT ON COLUMN todo_list_tasks.deadline IS 'Deadline for task completion';
+COMMENT ON COLUMN todo_list_tasks.deadline IS 'Deadline for task completion (stored in UTC)';
 COMMENT ON COLUMN todo_list_tasks.status IS 'Task status (PENDING, IN_PROGRESS, COMPLETED)';
 COMMENT ON COLUMN todo_list_tasks.todo_list_id IS 'Todo list this task belongs to';
 COMMENT ON COLUMN todo_list_tasks.created_at IS 'Timestamp when the task was created';

@@ -1,19 +1,19 @@
 package com.cpp.project.course.dto;
 
-import java.util.Date;
+import java.time.Instant;
 
 /**
  * Request DTO for adding a task to a course
  */
 public class AddTaskRequestDTO {
     private String name;
-    private Date deadline;
+    private Instant deadline;
     private String description;
 
     public AddTaskRequestDTO() {
     }
 
-    public AddTaskRequestDTO(String name, Date deadline, String description) {
+    public AddTaskRequestDTO(String name, Instant deadline, String description) {
         this.name = name;
         this.deadline = deadline;
         this.description = description;
@@ -27,11 +27,11 @@ public class AddTaskRequestDTO {
         this.name = name;
     }
 
-    public Date getDeadline() {
+    public Instant getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(Date deadline) {
+    public void setDeadline(Instant deadline) {
         this.deadline = deadline;
     }
 

@@ -27,21 +27,22 @@ public class CalendarController {
 
     /**
      * Get all calendar items for a specific month
-     * GET /api/calendar/items?year=2024&month=1&userId={userId}
+     * GET /api/calendar/items?year=2024&month=1&userId={userId}&timezone=America/New_York
      */
     @GetMapping("/items")
     public ResponseEntity<ApiSuccessResponse<List<CalendarItemDTO>>> getCalendarItems(
             @RequestParam int year,
             @RequestParam int month,
-            @RequestParam UUID userId) {
+            @RequestParam UUID userId,
+            @RequestParam String timezone) {
 
         // Validate parameters
-        if (year == 0 || month == 0 || userId == null) {
+        if (year == 0 || month == 0 || userId == null || timezone == null || timezone.isEmpty()) {
             throw new CalendarException(CalendarErrorCode.INVALID_DATE,
-                    "Year, month, and userId are required");
+                    "Year, month, userId, and timezone are required");
         }
 
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, userId);
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, userId, timezone);
 
         ApiSuccessResponse<List<CalendarItemDTO>> response = ApiSuccessResponse.<List<CalendarItemDTO>>builder()
                 .data(items)
@@ -54,21 +55,22 @@ public class CalendarController {
 
     /**
      * Get all calendar items for a specific month (alternative endpoint with userId in path)
-     * GET /api/calendar/user/{userId}/items?year=2024&month=1
+     * GET /api/calendar/user/{userId}/items?year=2024&month=1&timezone=America/New_York
      */
     @GetMapping("/user/{userId}/items")
     public ResponseEntity<ApiSuccessResponse<List<CalendarItemDTO>>> getCalendarItemsByUser(
             @PathVariable UUID userId,
             @RequestParam int year,
-            @RequestParam int month) {
+            @RequestParam int month,
+            @RequestParam String timezone) {
 
         // Validate parameters
-        if (year == 0 || month == 0) {
+        if (year == 0 || month == 0 || timezone == null || timezone.isEmpty()) {
             throw new CalendarException(CalendarErrorCode.INVALID_DATE,
-                    "Year and month are required");
+                    "Year, month, and timezone are required");
         }
 
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, userId);
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, userId, timezone);
 
         ApiSuccessResponse<List<CalendarItemDTO>> response = ApiSuccessResponse.<List<CalendarItemDTO>>builder()
                 .data(items)

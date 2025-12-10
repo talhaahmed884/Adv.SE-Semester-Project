@@ -19,8 +19,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -60,14 +61,14 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
     @Test
     @DisplayName("GET /api/calendar/items - Success with no items (200 OK)")
     public void testGetCalendarItemsEmpty() throws Exception {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
+        ZonedDateTime nowUTC = ZonedDateTime.now(ZoneId.of("UTC"));
+        int year = nowUTC.getYear();
+        int month = nowUTC.getMonthValue();
 
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", String.valueOf(year))
                         .param("month", String.valueOf(month))
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data").isEmpty())
@@ -95,9 +96,7 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
                 .get("data").get("id").asText();
 
         // Add a task with deadline in current month
-        Calendar taskCal = Calendar.getInstance();
-        taskCal.add(Calendar.DAY_OF_MONTH, 5);
-        Date taskDeadline = taskCal.getTime();
+        Instant taskDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(5).toInstant();
 
         AddTaskRequestDTO taskRequest = new AddTaskRequestDTO(
                 "Assignment 1",
@@ -111,13 +110,14 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(status().isCreated());
 
         // Get calendar items for current month
-        int year = taskCal.get(Calendar.YEAR);
-        int month = taskCal.get(Calendar.MONTH) + 1;
+        ZonedDateTime taskDateTime = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(5);
+        int year = taskDateTime.getYear();
+        int month = taskDateTime.getMonthValue();
 
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", String.valueOf(year))
                         .param("month", String.valueOf(month))
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data[0].sourceType").value("COURSE"))
@@ -145,9 +145,7 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
                 .get("data").get("id").asText();
 
         // Add a task with deadline in current month
-        Calendar taskCal = Calendar.getInstance();
-        taskCal.add(Calendar.DAY_OF_MONTH, 3);
-        Date taskDeadline = taskCal.getTime();
+        Instant taskDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(3).toInstant();
 
         AddToDoListTaskRequestDTO taskRequest = new AddToDoListTaskRequestDTO(
                 "Buy groceries",
@@ -160,13 +158,14 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(status().isCreated());
 
         // Get calendar items for current month
-        int year = taskCal.get(Calendar.YEAR);
-        int month = taskCal.get(Calendar.MONTH) + 1;
+        ZonedDateTime taskDateTime = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(3);
+        int year = taskDateTime.getYear();
+        int month = taskDateTime.getMonthValue();
 
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", String.valueOf(year))
                         .param("month", String.valueOf(month))
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data[0].sourceType").value("TODO_LIST"))
@@ -194,10 +193,9 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
         String courseId = objectMapper.readTree(courseResult.getResponse().getContentAsString())
                 .get("data").get("id").asText();
 
-        Calendar taskCal = Calendar.getInstance();
-        taskCal.set(2026, Calendar.APRIL, 8);
-        taskCal.add(Calendar.DAY_OF_MONTH, 7);
-        Date courseTaskDeadline = taskCal.getTime();
+        Instant courseTaskDeadline = ZonedDateTime.of(2026, 5, 8, 0, 0, 0, 0, ZoneId.of("UTC"))
+                .plusDays(7)
+                .toInstant();
 
         AddTaskRequestDTO courseTaskRequest = new AddTaskRequestDTO(
                 "Homework 1",
@@ -225,10 +223,9 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
         String todoListId = objectMapper.readTree(todoListResult.getResponse().getContentAsString())
                 .get("data").get("id").asText();
 
-        Calendar todoCal = Calendar.getInstance();
-        todoCal.set(2026, Calendar.APRIL, 13);
-        todoCal.add(Calendar.DAY_OF_MONTH, 2);
-        Date todoTaskDeadline = todoCal.getTime();
+        Instant todoTaskDeadline = ZonedDateTime.of(2026, 5, 13, 0, 0, 0, 0, ZoneId.of("UTC"))
+                .plusDays(2)
+                .toInstant();
 
         AddToDoListTaskRequestDTO todoTaskRequest = new AddToDoListTaskRequestDTO(
                 "Call dentist",
@@ -241,13 +238,14 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(status().isCreated());
 
         // Get calendar items for current month
-        int year = taskCal.get(Calendar.YEAR);
-        int month = taskCal.get(Calendar.MONTH) + 1;
+        ZonedDateTime taskDateTime = ZonedDateTime.of(2026, 5, 8, 0, 0, 0, 0, ZoneId.of("UTC")).plusDays(7);
+        int year = taskDateTime.getYear();
+        int month = taskDateTime.getMonthValue();
 
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", String.valueOf(year))
                         .param("month", String.valueOf(month))
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data.length()").value(2))
@@ -258,13 +256,13 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
     @Test
     @DisplayName("GET /api/calendar/user/{userId}/items - Success (200 OK)")
     public void testGetCalendarItemsByUserPath() throws Exception {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
+        ZonedDateTime nowUTC = ZonedDateTime.now(ZoneId.of("UTC"));
+        int year = nowUTC.getYear();
+        int month = nowUTC.getMonthValue();
 
         mockMvc.perform(get("/api/calendar/user/" + testUserId + "/items")
                         .param("year", String.valueOf(year))
-                        .param("month", String.valueOf(month)))
+                        .param("month", String.valueOf(month)).param("timezone", "UTC"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.message").value("Calendar items retrieved successfully"))
@@ -274,13 +272,13 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
     @Test
     @DisplayName("GET /api/calendar/items - Invalid month (400 Bad Request)")
     public void testGetCalendarItemsInvalidMonth() throws Exception {
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
+        ZonedDateTime nowUTC = ZonedDateTime.now(ZoneId.of("UTC"));
+        int year = nowUTC.getYear();
 
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", String.valueOf(year))
                         .param("month", "13") // Invalid month
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("CALENDAR_001"))
                 .andExpect(jsonPath("$.statusCode").value(400));
@@ -292,7 +290,7 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", "1800") // Invalid year
                         .param("month", "1")
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("CALENDAR_001"))
                 .andExpect(jsonPath("$.statusCode").value(400));
@@ -318,9 +316,7 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
                 .get("data").get("id").asText();
 
         // Add task with deadline in NEXT month
-        Calendar nextMonthCal = Calendar.getInstance();
-        nextMonthCal.add(Calendar.MONTH, 1);
-        Date nextMonthDeadline = nextMonthCal.getTime();
+        Instant nextMonthDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusMonths(1).toInstant();
 
         AddTaskRequestDTO taskRequest = new AddTaskRequestDTO(
                 "Future Assignment",
@@ -334,14 +330,14 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(status().isCreated());
 
         // Query for CURRENT month - should not return the future task
-        Calendar currentCal = Calendar.getInstance();
-        int currentYear = currentCal.get(Calendar.YEAR);
-        int currentMonth = currentCal.get(Calendar.MONTH) + 1;
+        ZonedDateTime currentDateTime = ZonedDateTime.now(ZoneId.of("UTC"));
+        int currentYear = currentDateTime.getYear();
+        int currentMonth = currentDateTime.getMonthValue();
 
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", String.valueOf(currentYear))
                         .param("month", String.valueOf(currentMonth))
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data").isEmpty());

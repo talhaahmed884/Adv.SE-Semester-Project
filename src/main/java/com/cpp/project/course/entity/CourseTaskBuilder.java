@@ -2,7 +2,7 @@ package com.cpp.project.course.entity;
 
 import com.cpp.project.common.entity.TaskStatus;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.UUID;
 
 /**
@@ -12,7 +12,7 @@ public class CourseTaskBuilder {
     private UUID courseId;
     private String name;
     private String description;
-    private Date deadline;
+    private Instant deadline;
     private int progress = 0;
     private TaskStatus status = TaskStatus.PENDING;
 
@@ -31,7 +31,7 @@ public class CourseTaskBuilder {
         return this;
     }
 
-    public CourseTaskBuilder deadline(Date deadline) {
+    public CourseTaskBuilder deadline(Instant deadline) {
         this.deadline = deadline;
         return this;
     }

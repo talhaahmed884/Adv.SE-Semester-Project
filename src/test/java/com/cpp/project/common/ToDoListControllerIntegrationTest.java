@@ -18,8 +18,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -230,9 +231,7 @@ public class ToDoListControllerIntegrationTest extends BaseIntegrationTest {
                 .get("data").get("id").asText();
 
         // Add a task to the todo list
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 3);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(3).toInstant();
 
         AddToDoListTaskRequestDTO taskRequest = new AddToDoListTaskRequestDTO(
                 "Buy groceries",
@@ -298,9 +297,7 @@ public class ToDoListControllerIntegrationTest extends BaseIntegrationTest {
         String todoListId = objectMapper.readTree(createResult.getResponse().getContentAsString())
                 .get("data").get("id").asText();
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 5);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(5).toInstant();
 
         AddToDoListTaskRequestDTO taskRequest = new AddToDoListTaskRequestDTO(
                 "Complete documentation",
@@ -343,13 +340,8 @@ public class ToDoListControllerIntegrationTest extends BaseIntegrationTest {
                 .get("data").get("id").asText();
 
         // Add multiple tasks with different deadlines
-        Calendar calendar1 = Calendar.getInstance();
-        calendar1.add(Calendar.DAY_OF_MONTH, 1);
-        Date deadline1 = calendar1.getTime();
-
-        Calendar calendar2 = Calendar.getInstance();
-        calendar2.add(Calendar.DAY_OF_MONTH, 2);
-        Date deadline2 = calendar2.getTime();
+        Instant deadline1 = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
+        Instant deadline2 = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(2).toInstant();
 
         AddToDoListTaskRequestDTO task1 = new AddToDoListTaskRequestDTO("Task 1", deadline1);
         AddToDoListTaskRequestDTO task2 = new AddToDoListTaskRequestDTO("Task 2", deadline2);

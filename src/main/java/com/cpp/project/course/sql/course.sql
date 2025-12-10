@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS course_tasks
     id          UUID PRIMARY KEY,
     name        VARCHAR(255)             NOT NULL,
     description TEXT,
-    deadline    DATE,
+    deadline    TIMESTAMP WITH TIME ZONE,
     progress    INTEGER                  NOT NULL DEFAULT 0 CHECK (progress >= 0 AND progress <= 100),
     status      VARCHAR(50)              NOT NULL DEFAULT 'PENDING',
     course_id   UUID                     NOT NULL,
@@ -119,7 +119,7 @@ COMMENT ON TABLE course_tasks IS 'Stores tasks within courses';
 COMMENT ON COLUMN course_tasks.id IS 'Unique identifier for the task (UUID)';
 COMMENT ON COLUMN course_tasks.name IS 'Name of the task';
 COMMENT ON COLUMN course_tasks.description IS 'Detailed description of the task';
-COMMENT ON COLUMN course_tasks.deadline IS 'Deadline for task completion';
+COMMENT ON COLUMN course_tasks.deadline IS 'Deadline for task completion (stored in UTC)';
 COMMENT ON COLUMN course_tasks.progress IS 'Task progress (0-100)';
 COMMENT ON COLUMN course_tasks.status IS 'Task status (PENDING, IN_PROGRESS, COMPLETED)';
 COMMENT ON COLUMN course_tasks.course_id IS 'Course this task belongs to';

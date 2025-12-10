@@ -9,7 +9,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Calendar;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -33,18 +34,16 @@ public class UC_10_23_ItemsForMonth_UnavailableRepositoryFails_Test {
         // Arrange
         UUID userId = UUID.randomUUID();
 
-        Calendar cal = Calendar.getInstance();
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
+        int year = now.getYear();
+        int month = now.getMonthValue();
 
         // Mock repository to throw exception
         when(courseRepository.findByUserId(any(UUID.class)))
                 .thenThrow(new RuntimeException("Database connection failed"));
 
         // Act & Assert - Should throw exception when repository fails
-        assertThrows(RuntimeException.class, () -> {
-            calendarService.getItemsForMonth(year, month, userId);
-        });
+        assertThrows(RuntimeException.class, () -> calendarService.getItemsForMonth(year, month, userId, "UTC"));
 
         verify(courseRepository, times(1)).findByUserId(userId);
     }

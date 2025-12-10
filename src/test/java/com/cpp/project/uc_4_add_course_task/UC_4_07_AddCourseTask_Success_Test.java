@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,9 +43,7 @@ public class UC_4_07_AddCourseTask_Success_Test extends BaseIntegrationTest {
         CourseDTO course = courseService.createCourse("CS101", "Introduction to CS", userId);
 
         // Create a future deadline (now + 1 day)
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Act
         CourseTaskDTO result = courseService.addTaskToCourse(
@@ -78,9 +77,7 @@ public class UC_4_07_AddCourseTask_Success_Test extends BaseIntegrationTest {
         CourseDTO course = courseService.createCourse("CS102", "Data Structures", userId);
 
         // Create a deadline exactly 1 minute in the future (boundary case)
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, 1);
-        Date minimalFutureDeadline = calendar.getTime();
+        Instant minimalFutureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusMinutes(1).toInstant();
 
         // Act
         CourseTaskDTO result = courseService.addTaskToCourse(
@@ -111,9 +108,7 @@ public class UC_4_07_AddCourseTask_Success_Test extends BaseIntegrationTest {
         CourseDTO course = courseService.createCourse("CS103", "Algorithms", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Act
         CourseTaskDTO result = courseService.addTaskToCourse(

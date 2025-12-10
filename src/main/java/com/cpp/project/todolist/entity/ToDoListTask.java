@@ -8,8 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -32,9 +32,8 @@ public class ToDoListTask {
     @Column(name = "description", nullable = false, columnDefinition = "TEXT")
     private String description;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "deadline")
-    private Date deadline;
+    @Column(name = "deadline", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private Instant deadline;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status", nullable = false, length = 50)

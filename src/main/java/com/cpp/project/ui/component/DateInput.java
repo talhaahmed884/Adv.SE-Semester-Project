@@ -6,26 +6,31 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.util.Date;
+import java.time.DateTimeException;
+import java.time.Instant;
 
 /**
- * Component Pattern: Date input component with built-in validation
- * Composed of three separate fields: year, month, day
+ * Component Pattern: Date and Time input component with built-in validation
+ * Composed of five separate fields: year, month, day, hour, minute
  */
 public class DateInput extends AbstractComponent {
     private final String label;
     private StringBuilder year;
     private StringBuilder month;
     private StringBuilder day;
-    private int focusedField; // 0=year, 1=month, 2=day
+    private StringBuilder hour;
+    private StringBuilder minute;
+    private int focusedField; // 0=year, 1=month, 2=day, 3=hour, 4=minute
     private String errorMessage;
 
     public DateInput(String label) {
-        super(3);
+        super(5);
         this.label = label;
         this.year = new StringBuilder();
         this.month = new StringBuilder();
         this.day = new StringBuilder();
+        this.hour = new StringBuilder();
+        this.minute = new StringBuilder();
         this.focusedField = 0;
         this.errorMessage = "";
     }
@@ -52,6 +57,18 @@ public class DateInput extends AbstractComponent {
         graphics.setForegroundColor(dayColor);
         String dayDisplay = !day.isEmpty() ? day.toString() : "DD";
         graphics.putString(x + 2, y + 3, "Day (1-31): " + dayDisplay + (focused && focusedField == 2 ? "_" : ""));
+
+        // Hour field
+        TextColor hourColor = focused && focusedField == 3 ? TextColor.ANSI.GREEN_BRIGHT : TextColor.ANSI.WHITE;
+        graphics.setForegroundColor(hourColor);
+        String hourDisplay = !hour.isEmpty() ? hour.toString() : "HH";
+        graphics.putString(x + 2, y + 4, "Hour (0-23): " + hourDisplay + (focused && focusedField == 3 ? "_" : ""));
+
+        // Minute field
+        TextColor minuteColor = focused && focusedField == 4 ? TextColor.ANSI.GREEN_BRIGHT : TextColor.ANSI.WHITE;
+        graphics.setForegroundColor(minuteColor);
+        String minuteDisplay = !minute.isEmpty() ? minute.toString() : "MM";
+        graphics.putString(x + 2, y + 5, "Minute (0-59): " + minuteDisplay + (focused && focusedField == 4 ? "_" : ""));
     }
 
     @Override
@@ -73,12 +90,12 @@ public class DateInput extends AbstractComponent {
                 return true;
             }
         } else if (keyStroke.getKeyType() == KeyType.ArrowRight) {
-            // Move to next sub-field (year → month → day → wraps to year)
-            focusedField = (focusedField + 1) % 3;
+            // Move to next sub-field (year → month → day → hour → minute → wraps to year)
+            focusedField = (focusedField + 1) % 5;
             return true;
         } else if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
-            // Move to previous sub-field (day → month → year → wraps to day)
-            focusedField = (focusedField - 1 + 3) % 3;
+            // Move to previous sub-field (minute → hour → day → month → year → wraps to minute)
+            focusedField = (focusedField - 1 + 5) % 5;
             return true;
         }
 
@@ -90,17 +107,20 @@ public class DateInput extends AbstractComponent {
         return switch (focusedField) {
             case 1 -> month;
             case 2 -> day;
+            case 3 -> hour;
+            case 4 -> minute;
             default -> year;
         };
     }
 
     /**
-     * Validate and return Date object, or null if invalid
+     * Validate and return Instant object (local timezone converted to UTC), or null if invalid
      */
-    public Date getDate() {
+    public Instant getDate() {
         errorMessage = "";
 
         if (year.isEmpty() || month.isEmpty() || day.isEmpty()) {
+            errorMessage = "Invalid date/time format";
             return null;
         }
 
@@ -108,6 +128,8 @@ public class DateInput extends AbstractComponent {
             int y = Integer.parseInt(year.toString());
             int m = Integer.parseInt(month.toString());
             int d = Integer.parseInt(day.toString());
+            int h = hour.isEmpty() ? 0 : Integer.parseInt(hour.toString());
+            int min = minute.isEmpty() ? 0 : Integer.parseInt(minute.toString());
 
             if (m < 1 || m > 12) {
                 errorMessage = "Month must be between 1 and 12";
@@ -121,10 +143,21 @@ public class DateInput extends AbstractComponent {
                 errorMessage = "Year must be between 2000 and 2100";
                 return null;
             }
+            if (h < 0 || h > 23) {
+                errorMessage = "Hour must be between 0 and 23";
+                return null;
+            }
+            if (min < 0 || min > 59) {
+                errorMessage = "Minute must be between 0 and 59";
+                return null;
+            }
 
-            return DateValidationStrategy.createDate(y, m, d);
+            return DateValidationStrategy.createDateTime(y, m, d, h, min);
         } catch (NumberFormatException e) {
-            errorMessage = "Invalid date format";
+            errorMessage = "Invalid date/time format";
+            return null;
+        } catch (DateTimeException e) {
+            errorMessage = "Invalid date (e.g., Feb 31 doesn't exist)";
             return null;
         }
     }
@@ -134,13 +167,15 @@ public class DateInput extends AbstractComponent {
     }
 
     public boolean isEmpty() {
-        return year.isEmpty() && month.isEmpty() && day.isEmpty();
+        return year.isEmpty() && month.isEmpty() && day.isEmpty() && hour.isEmpty() && minute.isEmpty();
     }
 
     public void clear() {
         year = new StringBuilder();
         month = new StringBuilder();
         day = new StringBuilder();
+        hour = new StringBuilder();
+        minute = new StringBuilder();
         focusedField = 0;
         errorMessage = "";
     }

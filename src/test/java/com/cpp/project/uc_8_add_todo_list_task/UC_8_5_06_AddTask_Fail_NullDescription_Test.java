@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -43,14 +44,10 @@ public class UC_8_5_06_AddTask_Fail_NullDescription_Test extends BaseIntegration
         ToDoListDTO todoList = toDoListService.createToDoList("My Tasks", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Act & Assert
-        ToDoListException exception = assertThrows(ToDoListException.class, () -> {
-            toDoListService.addTaskToList(todoList.getId(), null, futureDeadline);
-        });
+        ToDoListException exception = assertThrows(ToDoListException.class, () -> toDoListService.addTaskToList(todoList.getId(), null, futureDeadline));
 
         assertTrue(exception.getMessage().toLowerCase().contains("description") ||
                 exception.getMessage().toLowerCase().contains("null"));

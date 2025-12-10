@@ -12,8 +12,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,9 +45,7 @@ public class UC_9_6_06_MarkComplete_Allowed_WhenDeadlineInFuture_Test extends Ba
         ToDoListDTO todoList = toDoListService.createToDoList("My Tasks", userId);
 
         // Create a deadline 1 hour in the future
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.HOUR, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusHours(1).toInstant();
 
         // Add a task
         ToDoListTaskDTO task = toDoListService.addTaskToList(

@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -43,19 +44,15 @@ public class UC_4_09_AddCourseTask_Fail_BlankName_Test extends BaseIntegrationTe
         CourseDTO course = courseService.createCourse("CS101", "Introduction to CS", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.addTaskToCourse(
-                    course.getId(),
-                    null,
-                    futureDeadline,
-                    "Task with null name"
-            );
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.addTaskToCourse(
+                course.getId(),
+                null,
+                futureDeadline,
+                "Task with null name"
+        ));
 
         assertTrue(exception.getMessage().toLowerCase().contains("name") ||
                 exception.getMessage().toLowerCase().contains("blank"));
@@ -76,19 +73,15 @@ public class UC_4_09_AddCourseTask_Fail_BlankName_Test extends BaseIntegrationTe
         CourseDTO course = courseService.createCourse("CS102", "Data Structures", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.addTaskToCourse(
-                    course.getId(),
-                    "",
-                    futureDeadline,
-                    "Task with empty name"
-            );
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.addTaskToCourse(
+                course.getId(),
+                "",
+                futureDeadline,
+                "Task with empty name"
+        ));
 
         assertTrue(exception.getMessage().toLowerCase().contains("name") ||
                 exception.getMessage().toLowerCase().contains("blank"));
@@ -109,19 +102,15 @@ public class UC_4_09_AddCourseTask_Fail_BlankName_Test extends BaseIntegrationTe
         CourseDTO course = courseService.createCourse("CS103", "Algorithms", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.addTaskToCourse(
-                    course.getId(),
-                    "   ",
-                    futureDeadline,
-                    "Task with whitespace name"
-            );
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.addTaskToCourse(
+                course.getId(),
+                "   ",
+                futureDeadline,
+                "Task with whitespace name"
+        ));
 
         assertTrue(exception.getMessage().toLowerCase().contains("name") ||
                 exception.getMessage().toLowerCase().contains("blank"));
