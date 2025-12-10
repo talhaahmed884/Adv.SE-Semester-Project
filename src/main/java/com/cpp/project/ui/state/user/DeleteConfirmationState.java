@@ -6,6 +6,8 @@ import com.cpp.project.user.service.UserService;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.input.KeyType;
 
 /**
  * Inner State: Delete Account Confirmation
@@ -67,15 +69,15 @@ public class DeleteConfirmationState implements ScreenState {
     }
 
     @Override
-    public ScreenState handleInput(com.googlecode.lanterna.input.KeyStroke keyStroke) {
-        if (keyStroke.getKeyType() == com.googlecode.lanterna.input.KeyType.Escape) {
+    public ScreenState handleInput(KeyStroke keyStroke) {
+        if (keyStroke.getKeyType() == KeyType.Escape) {
             mediator.onCancelEdit();
             return null;
-        } else if (keyStroke.getKeyType() == com.googlecode.lanterna.input.KeyType.ArrowUp ||
-                keyStroke.getKeyType() == com.googlecode.lanterna.input.KeyType.ArrowDown) {
+        } else if (keyStroke.getKeyType() == KeyType.ArrowUp ||
+                keyStroke.getKeyType() == KeyType.ArrowDown) {
             selectedOption = (selectedOption + 1) % 2;
             return this;
-        } else if (keyStroke.getKeyType() == com.googlecode.lanterna.input.KeyType.Enter) {
+        } else if (keyStroke.getKeyType() == KeyType.Enter) {
             if (selectedOption == 0) {
                 // Cancel - return to profile view
                 mediator.onCancelEdit();
