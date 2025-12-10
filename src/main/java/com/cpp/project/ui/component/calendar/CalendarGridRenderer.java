@@ -5,7 +5,9 @@ import com.cpp.project.ui.strategy.RenderingStrategy;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-import java.util.Calendar;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -32,11 +34,10 @@ public class CalendarGridRenderer implements RenderingStrategy {
             graphics.putString(x + i * 5, y, dayHeaders[i]);
         }
 
-        // Calculate calendar grid
-        Calendar cal = Calendar.getInstance();
-        cal.set(year, month - 1, 1);
-        int firstDayOfWeek = cal.get(Calendar.DAY_OF_WEEK) - 1; // 0=Sunday
-        int daysInMonth = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+        // Calculate calendar grid using LocalDate (UTC-based)
+        LocalDate firstDay = LocalDate.of(year, month, 1);
+        int firstDayOfWeek = firstDay.getDayOfWeek().getValue() % 7; // 0=Sunday, 6=Saturday
+        int daysInMonth = firstDay.lengthOfMonth();
 
         int row = y + 1;
         int col = firstDayOfWeek;
@@ -78,18 +79,19 @@ public class CalendarGridRenderer implements RenderingStrategy {
 
     private boolean hasTasks(int day) {
         return items.stream().anyMatch(item -> {
-            Calendar itemCal = Calendar.getInstance();
-            itemCal.setTime(item.getDate());
-            return itemCal.get(Calendar.YEAR) == year &&
-                    itemCal.get(Calendar.MONTH) == month - 1 &&
-                    itemCal.get(Calendar.DAY_OF_MONTH) == day;
+            // Convert Instant to UTC ZonedDateTime for date comparison
+            ZonedDateTime itemDateTime = item.getDate().atZone(ZoneId.of("UTC"));
+            return itemDateTime.getYear() == year &&
+                    itemDateTime.getMonthValue() == month &&
+                    itemDateTime.getDayOfMonth() == day;
         });
     }
 
     private boolean isToday(int day) {
-        Calendar today = Calendar.getInstance();
-        return today.get(Calendar.YEAR) == year &&
-                today.get(Calendar.MONTH) == month - 1 &&
-                today.get(Calendar.DAY_OF_MONTH) == day;
+        // Get current date in UTC
+        ZonedDateTime todayUTC = ZonedDateTime.now(ZoneId.of("UTC"));
+        return todayUTC.getYear() == year &&
+                todayUTC.getMonthValue() == month &&
+                todayUTC.getDayOfMonth() == day;
     }
 }
