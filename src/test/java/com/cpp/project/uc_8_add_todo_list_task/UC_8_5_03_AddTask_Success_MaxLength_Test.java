@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,9 +44,7 @@ public class UC_8_5_03_AddTask_Success_MaxLength_Test extends BaseIntegrationTes
         ToDoListDTO todoList = toDoListService.createToDoList("My Tasks", userId);
 
         // Create a future deadline (tomorrow)
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Create a description with exactly 500 characters
         String maxDescription = "A".repeat(5000);

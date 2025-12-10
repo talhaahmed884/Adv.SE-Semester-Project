@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,9 +43,7 @@ public class UC_8_5_12_AddTask_Behavior_DuplicateDescriptionsAllowed_Test extend
         ToDoListDTO todoList = toDoListService.createToDoList("My Tasks", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Act - Add two tasks with identical descriptions
         ToDoListTaskDTO task1 = toDoListService.addTaskToList(

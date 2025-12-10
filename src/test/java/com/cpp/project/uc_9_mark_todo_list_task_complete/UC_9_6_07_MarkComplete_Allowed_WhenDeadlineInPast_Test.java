@@ -12,8 +12,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -46,9 +47,7 @@ public class UC_9_6_07_MarkComplete_Allowed_WhenDeadlineInPast_Test extends Base
         // Create a deadline 1 day in the past
         // Note: We need to create it in the future first, then wait or manipulate
         // For this test, we'll create it slightly in the future to pass validation
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, 1);
-        Date deadline = calendar.getTime();
+        Instant deadline = ZonedDateTime.now(ZoneId.of("UTC")).plusMinutes(1).toInstant();
 
         // Add a task
         ToDoListTaskDTO task = toDoListService.addTaskToList(

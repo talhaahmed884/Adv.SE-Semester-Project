@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,24 +45,21 @@ public class UC_10_04_ItemsForMonth_Success_SeparateMonthFilters_Test extends Ba
 
         UUID courseId = courseService.createCourse("CS101", "Intro to CS", user.getId()).getId();
 
-        Calendar currentMonth = Calendar.getInstance();
-        int currentYear = currentMonth.get(Calendar.YEAR);
-        int currentMonthNum = currentMonth.get(Calendar.MONTH) + 1;
+        ZonedDateTime now = ZonedDateTime.now(ZoneId.of("UTC"));
+        int currentYear = now.getYear();
+        int currentMonthNum = now.getMonthValue();
 
         // Task in current month
-        currentMonth.add(Calendar.DAY_OF_MONTH, 5);
-        Date currentMonthDeadline = currentMonth.getTime();
+        Instant currentMonthDeadline = now.plusDays(5).toInstant();
         courseService.addTaskToCourse(courseId, "Current Month Task", currentMonthDeadline, "Task 1");
 
         // Task in next month
-        Calendar nextMonth = Calendar.getInstance();
-        nextMonth.add(Calendar.MONTH, 1);
-        nextMonth.set(Calendar.DAY_OF_MONTH, 15);
-        Date nextMonthDeadline = nextMonth.getTime();
+        ZonedDateTime nextMonth = ZonedDateTime.now(ZoneId.of("UTC"));
+        Instant nextMonthDeadline = nextMonth.plusMonths(1).withDayOfMonth(15).toInstant();
         courseService.addTaskToCourse(courseId, "Next Month Task", nextMonthDeadline, "Task 2");
 
         // Act - Query for current month only
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(currentYear, currentMonthNum, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(currentYear, currentMonthNum, user.getId(), "UTC");
 
         // Assert - Should only return current month task
         assertNotNull(items);

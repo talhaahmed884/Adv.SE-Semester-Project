@@ -3,7 +3,7 @@ package com.cpp.project.course.service;
 import com.cpp.project.course.dto.CourseDTO;
 import com.cpp.project.course.dto.CourseTaskDTO;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -71,7 +71,7 @@ public interface CourseService {
      * @param description Task description
      * @return Created task DTO
      */
-    CourseTaskDTO addTaskToCourse(UUID courseId, String name, Date deadline, String description);
+    CourseTaskDTO addTaskToCourse(UUID courseId, String name, Instant deadline, String description);
 
     /**
      * Update task progress

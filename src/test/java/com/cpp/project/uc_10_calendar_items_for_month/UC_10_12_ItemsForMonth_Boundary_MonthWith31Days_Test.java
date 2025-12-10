@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,14 +45,12 @@ public class UC_10_12_ItemsForMonth_Boundary_MonthWith31Days_Test extends BaseIn
 
         UUID courseId = courseService.createCourse("CS101", "Intro to CS", user.getId()).getId();
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(2026, Calendar.JANUARY, 31, 12, 0, 0);
-        Date jan31Deadline = cal.getTime();
+        Instant jan31Deadline = ZonedDateTime.of(2026, 1, 31, 12, 0, 0, 0, ZoneId.of("UTC")).toInstant();
 
         courseService.addTaskToCourse(courseId, "Jan 31 Task", jan31Deadline, "Description");
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(2026, 1, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(2026, 1, user.getId(), "UTC");
 
         // Assert
         assertNotNull(items);

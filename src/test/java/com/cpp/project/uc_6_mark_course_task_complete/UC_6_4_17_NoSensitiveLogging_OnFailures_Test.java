@@ -5,7 +5,6 @@ import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.read.ListAppender;
 import com.cpp.project.authentication.service.AuthenticationService;
 import com.cpp.project.course.dto.CourseDTO;
-import com.cpp.project.course.dto.CourseTaskDTO;
 import com.cpp.project.course.entity.CourseException;
 import com.cpp.project.course.service.CourseService;
 import com.cpp.project.entity.BaseIntegrationTest;
@@ -16,8 +15,9 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -54,14 +54,12 @@ public class UC_6_4_17_NoSensitiveLogging_OnFailures_Test extends BaseIntegratio
         CourseDTO course = courseService.createCourse("CS106", "Database Systems", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Add a task with sensitive information
         String sensitiveTaskName = "Confidential Assignment - Secret Project Alpha";
         String sensitiveDescription = "Access credentials: admin@example.com / password123";
-        CourseTaskDTO task = courseService.addTaskToCourse(
+        courseService.addTaskToCourse(
                 course.getId(),
                 sensitiveTaskName,
                 futureDeadline,
@@ -73,9 +71,7 @@ public class UC_6_4_17_NoSensitiveLogging_OnFailures_Test extends BaseIntegratio
 
         // Act - Try to mark a non-existent task as complete (should fail)
         UUID nonExistentTaskId = UUID.randomUUID();
-        assertThrows(CourseException.class, () -> {
-            courseService.markTaskComplete(course.getId(), nonExistentTaskId);
-        });
+        assertThrows(CourseException.class, () -> courseService.markTaskComplete(course.getId(), nonExistentTaskId));
 
         // Assert - Check that logs don't contain sensitive information
         String allLogs = listAppender.list.stream()

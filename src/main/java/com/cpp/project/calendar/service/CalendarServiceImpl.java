@@ -16,7 +16,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Implementation of CalendarService
@@ -40,8 +46,8 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
-    public List<CalendarItemDTO> getItemsForMonth(int year, int month, UUID userId) {
-        logger.info("Getting calendar items for user {} for {}/{}", userId, month, year);
+    public List<CalendarItemDTO> getItemsForMonth(int year, int month, UUID userId, String timezoneId) {
+        logger.info("Getting calendar items for user {} for {}/{} in timezone {}", userId, month, year, timezoneId);
 
         // Validate date parameters
         ValidationResult dateValidation = dateValidator.validate(
@@ -51,18 +57,22 @@ public class CalendarServiceImpl implements CalendarService {
             throw new CalendarException(CalendarErrorCode.INVALID_DATE, dateValidation.getFirstError());
         }
 
-        // Calculate date range for the month
-        Calendar startCal = Calendar.getInstance();
-        startCal.set(year, month - 1, 1, 0, 0, 0);
-        startCal.set(Calendar.MILLISECOND, 0);
-        Date startDate = startCal.getTime();
+        // Parse and validate timezone
+        ZoneId userZone;
+        try {
+            userZone = ZoneId.of(timezoneId);
+        } catch (Exception e) {
+            logger.error("Invalid timezone ID: {}", timezoneId, e);
+            throw new CalendarException(CalendarErrorCode.INVALID_DATE, "Invalid timezone: " + timezoneId);
+        }
 
-        Calendar endCal = Calendar.getInstance();
-        endCal.set(year, month - 1, 1, 0, 0, 0);
-        endCal.set(Calendar.MILLISECOND, 0);
-        endCal.add(Calendar.MONTH, 1);
-        endCal.add(Calendar.MILLISECOND, -1);
-        Date endDate = endCal.getTime();
+        // Calculate date range for the month in user's timezone, then convert to UTC
+        // The year/month parameters represent the user's timezone month
+        ZonedDateTime startLocal = ZonedDateTime.of(year, month, 1, 0, 0, 0, 0, userZone);
+        Instant startDate = startLocal.toInstant(); // Converts to UTC for DB query
+
+        ZonedDateTime endLocal = startLocal.plusMonths(1).minusNanos(1);
+        Instant endDate = endLocal.toInstant(); // Converts to UTC for DB query
 
         List<CalendarItemDTO> items = new ArrayList<>();
 
@@ -71,8 +81,8 @@ public class CalendarServiceImpl implements CalendarService {
         for (Course course : courses) {
             for (CourseTask task : course.getTasks()) {
                 if (task.getDeadline() != null &&
-                        !task.getDeadline().before(startDate) &&
-                        !task.getDeadline().after(endDate)) {
+                        !task.getDeadline().isBefore(startDate) &&
+                        !task.getDeadline().isAfter(endDate)) {
 
                     CalendarItemDTO item = CalendarItemDTO.builder()
                             .date(task.getDeadline())
@@ -93,8 +103,8 @@ public class CalendarServiceImpl implements CalendarService {
         for (ToDoList todoList : todoLists) {
             for (ToDoListTask task : todoList.getTasks()) {
                 if (task.getDeadline() != null &&
-                        !task.getDeadline().before(startDate) &&
-                        !task.getDeadline().after(endDate)) {
+                        !task.getDeadline().isBefore(startDate) &&
+                        !task.getDeadline().isAfter(endDate)) {
 
                     CalendarItemDTO item = CalendarItemDTO.builder()
                             .date(task.getDeadline())

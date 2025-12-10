@@ -3,7 +3,7 @@ package com.cpp.project.todolist.service;
 import com.cpp.project.todolist.dto.ToDoListDTO;
 import com.cpp.project.todolist.dto.ToDoListTaskDTO;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.List;
 import java.util.UUID;
 
@@ -61,7 +61,7 @@ public interface ToDoListService {
      * @param deadline    Task deadline
      * @return Created task DTO
      */
-    ToDoListTaskDTO addTaskToList(UUID todoListId, String description, Date deadline);
+    ToDoListTaskDTO addTaskToList(UUID todoListId, String description, Instant deadline);
 
     /**
      * Mark a task as complete
@@ -79,5 +79,5 @@ public interface ToDoListService {
      * @param todoListId Todo list ID
      * @return List of deadlines
      */
-    List<Date> getAggregatedDeadlines(UUID todoListId);
+    List<Instant> getAggregatedDeadlines(UUID todoListId);
 }

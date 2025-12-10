@@ -6,8 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -21,7 +21,7 @@ public class CourseTaskDTO {
     private UUID id;
     private String name;
     private String description;
-    private Date deadline;
+    private Instant deadline;
     private int progress;
     private TaskStatus status;
     private UUID courseId;

@@ -15,8 +15,9 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -52,20 +53,19 @@ public class UC_10_21_ItemsForMonth_Security_NoPrivileges_Test extends BaseInteg
 
         UUID courseId = courseService.createCourse("CS101", "Intro to CS", user.getId()).getId();
 
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_MONTH, 5);
-        Date deadline = cal.getTime();
+        ZonedDateTime nowUTC = ZonedDateTime.now(ZoneId.of("UTC"));
+        Instant deadline = nowUTC.plusDays(5).toInstant();
 
         courseService.addTaskToCourse(courseId, "Sensitive Task SSN:123-45-6789", deadline, "Description");
 
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
+        int year = nowUTC.getYear();
+        int month = nowUTC.getMonthValue();
 
         // Clear previous logs
         listAppender.list.clear();
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
 
         // Assert - Check that logs don't contain sensitive data
         assertNotNull(items);

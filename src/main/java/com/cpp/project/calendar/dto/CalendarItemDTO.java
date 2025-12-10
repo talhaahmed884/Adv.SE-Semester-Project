@@ -5,7 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
+import java.time.Instant;
 
 /**
  * DTO representing a calendar item
@@ -16,7 +16,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CalendarItemDTO {
-    private Date date;
+    private Instant date;
     private String sourceType; // "COURSE" or "TODO_LIST"
     private String title;
     private String status; // Task status (PENDING, IN_PROGRESS, COMPLETED)

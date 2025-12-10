@@ -2,8 +2,8 @@ package com.cpp.project.course.dto;
 
 import com.cpp.project.common.entity.TaskStatus;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -13,7 +13,7 @@ public class CourseTaskDTOBuilder {
     private UUID id;
     private String name;
     private String description;
-    private Date deadline;
+    private Instant deadline;
     private int progress;
     private TaskStatus status;
     private UUID courseId;
@@ -35,7 +35,7 @@ public class CourseTaskDTOBuilder {
         return this;
     }
 
-    public CourseTaskDTOBuilder deadline(Date deadline) {
+    public CourseTaskDTOBuilder deadline(Instant deadline) {
         this.deadline = deadline;
         return this;
     }

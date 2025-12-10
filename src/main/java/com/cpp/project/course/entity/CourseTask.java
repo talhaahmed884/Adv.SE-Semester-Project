@@ -8,8 +8,8 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -35,9 +35,8 @@ public class CourseTask {
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
-    @Temporal(TemporalType.DATE)
-    @Column(name = "deadline")
-    private Date deadline;
+    @Column(name = "deadline", columnDefinition = "TIMESTAMP WITH TIME ZONE")
+    private Instant deadline;
 
     @Column(name = "progress", nullable = false)
     private int progress = 0;

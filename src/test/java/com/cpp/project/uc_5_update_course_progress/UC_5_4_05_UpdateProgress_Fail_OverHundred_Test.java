@@ -13,8 +13,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -44,9 +45,7 @@ public class UC_5_4_05_UpdateProgress_Fail_OverHundred_Test extends BaseIntegrat
         CourseDTO course = courseService.createCourse("CS107", "Computer Networks", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Add a task
         CourseTaskDTO task = courseService.addTaskToCourse(
@@ -57,9 +56,7 @@ public class UC_5_4_05_UpdateProgress_Fail_OverHundred_Test extends BaseIntegrat
         );
 
         // Act & Assert - Update progress to 101 should fail
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.updateTaskProgress(course.getId(), task.getId(), 101);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.updateTaskProgress(course.getId(), task.getId(), 101));
 
         assertEquals(CourseErrorCode.INVALID_TASK_PROGRESS.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("progress") ||

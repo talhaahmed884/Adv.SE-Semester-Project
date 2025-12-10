@@ -12,8 +12,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -43,14 +44,10 @@ public class UC_8_5_11_AddTask_Fail_PastDeadline_Big_Test extends BaseIntegratio
         ToDoListDTO todoList = toDoListService.createToDoList("My Tasks", userId);
 
         // Create deadline 2 days in the past
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, -2);
-        Date pastDeadline = calendar.getTime();
+        Instant pastDeadline = ZonedDateTime.now(ZoneId.of("UTC")).minusDays(2).toInstant();
 
         // Act & Assert
-        ToDoListException exception = assertThrows(ToDoListException.class, () -> {
-            toDoListService.addTaskToList(todoList.getId(), "Very late task", pastDeadline);
-        });
+        ToDoListException exception = assertThrows(ToDoListException.class, () -> toDoListService.addTaskToList(todoList.getId(), "Very late task", pastDeadline));
 
         assertEquals(ToDoListErrorCode.INVALID_TASK_DEADLINE.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("deadline") ||

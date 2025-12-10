@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,32 +44,24 @@ public class UC_10_07_ItemsForMonth_Success_SortsByDateAsc_Test extends BaseInte
 
         UUID courseId = courseService.createCourse("CS101", "Intro to CS", user.getId()).getId();
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(2026, Calendar.MARCH, 5);
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
+        ZonedDateTime baseDate = ZonedDateTime.of(2026, 4, 5, 0, 0, 0, 0, ZoneId.of("UTC"));
+        int year = baseDate.getYear();
+        int month = baseDate.getMonthValue();
 
         // Add task with later deadline first
-        cal.add(Calendar.DAY_OF_MONTH, 15);
-        Date laterDeadline = cal.getTime();
+        Instant laterDeadline = baseDate.plusDays(15).toInstant();
         courseService.addTaskToCourse(courseId, "Later Task", laterDeadline, "Description");
 
         // Add task with earlier deadline
-        Calendar earlierCal = Calendar.getInstance();
-        earlierCal.set(2026, Calendar.MARCH, 5);
-        earlierCal.add(Calendar.DAY_OF_MONTH, 5);
-        Date earlierDeadline = earlierCal.getTime();
+        Instant earlierDeadline = baseDate.plusDays(5).toInstant();
         courseService.addTaskToCourse(courseId, "Earlier Task", earlierDeadline, "Description");
 
         // Add task with middle deadline
-        Calendar middleCal = Calendar.getInstance();
-        middleCal.set(2026, Calendar.MARCH, 5);
-        middleCal.add(Calendar.DAY_OF_MONTH, 10);
-        Date middleDeadline = middleCal.getTime();
+        Instant middleDeadline = baseDate.plusDays(10).toInstant();
         courseService.addTaskToCourse(courseId, "Middle Task", middleDeadline, "Description");
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
 
         // Assert - Should be sorted by date ascending
         assertNotNull(items);
@@ -76,7 +69,7 @@ public class UC_10_07_ItemsForMonth_Success_SortsByDateAsc_Test extends BaseInte
         assertEquals("Earlier Task", items.get(0).getTitle());
         assertEquals("Middle Task", items.get(1).getTitle());
         assertEquals("Later Task", items.get(2).getTitle());
-        assertTrue(items.get(0).getDate().before(items.get(1).getDate()));
-        assertTrue(items.get(1).getDate().before(items.get(2).getDate()));
+        assertTrue(items.get(0).getDate().isBefore(items.get(1).getDate()));
+        assertTrue(items.get(1).getDate().isBefore(items.get(2).getDate()));
     }
 }

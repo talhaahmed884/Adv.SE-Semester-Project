@@ -15,7 +15,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,7 +47,7 @@ public class UC_4_12_AddCourseTask_WhenRepositoryFails_Test {
         // Arrange
         UUID courseId = UUID.randomUUID();
         String taskName = "Assignment 1";
-        Date deadline = new Date(System.currentTimeMillis() + 86400000); // tomorrow
+        Instant deadline = Instant.now().plusMillis(86400000); // tomorrow
         String description = "Complete the assignment";
 
         // Mock sanitization
@@ -74,9 +74,7 @@ public class UC_4_12_AddCourseTask_WhenRepositoryFails_Test {
                 .thenThrow(new jakarta.persistence.PersistenceException("Database connection failed"));
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.addTaskToCourse(courseId, taskName, deadline, description);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.addTaskToCourse(courseId, taskName, deadline, description));
 
         assertEquals(CourseErrorCode.TASK_CREATION_FAILED.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("failed"));
@@ -91,7 +89,7 @@ public class UC_4_12_AddCourseTask_WhenRepositoryFails_Test {
         // Arrange
         UUID courseId = UUID.randomUUID();
         String taskName = "Assignment 1";
-        Date deadline = new Date(System.currentTimeMillis() + 86400000); // tomorrow
+        Instant deadline = Instant.now().plusMillis(86400000); // tomorrow
         String description = "Complete the assignment";
 
         // Mock sanitization
@@ -109,9 +107,7 @@ public class UC_4_12_AddCourseTask_WhenRepositoryFails_Test {
         when(courseRepository.findById(courseId)).thenReturn(Optional.empty());
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.addTaskToCourse(courseId, taskName, deadline, description);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.addTaskToCourse(courseId, taskName, deadline, description));
 
         assertEquals(CourseErrorCode.COURSE_NOT_FOUND.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("not found"));

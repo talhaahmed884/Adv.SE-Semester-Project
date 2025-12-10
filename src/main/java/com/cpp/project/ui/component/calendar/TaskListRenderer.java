@@ -5,7 +5,7 @@ import com.cpp.project.ui.strategy.RenderingStrategy;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 
-import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -15,9 +15,9 @@ import java.util.List;
 public class TaskListRenderer implements RenderingStrategy {
     private static final int MAX_TASKS = 8;
     private final List<CalendarItemDTO> items;
-    private final SimpleDateFormat dateFormat;
+    private final DateTimeFormatter dateFormat;
 
-    public TaskListRenderer(List<CalendarItemDTO> items, SimpleDateFormat dateFormat) {
+    public TaskListRenderer(List<CalendarItemDTO> items, DateTimeFormatter dateFormat) {
         this.items = items;
         this.dateFormat = dateFormat;
     }

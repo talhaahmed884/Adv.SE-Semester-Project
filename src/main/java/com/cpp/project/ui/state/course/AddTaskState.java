@@ -15,7 +15,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.UUID;
 
 /**
@@ -96,7 +96,7 @@ public class AddTaskState implements ScreenState {
     private ScreenState handleSave() {
         String name = nameField.getValue().trim();
         String description = descriptionField.getValue().trim();
-        Date deadline = deadlineInput.getDate();
+        Instant deadline = deadlineInput.getDate();
 
         // Validation
         String nameError = new RequiredFieldStrategy("Task name").validate(name);

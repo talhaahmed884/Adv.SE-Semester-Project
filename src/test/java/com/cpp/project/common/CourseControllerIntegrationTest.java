@@ -19,8 +19,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -289,9 +290,7 @@ public class CourseControllerIntegrationTest extends BaseIntegrationTest {
                 .get("data").get("id").asText();
 
         // Add a task to the course
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 7);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(7).toInstant();
 
         AddTaskRequestDTO taskRequest = new AddTaskRequestDTO(
                 "Complete Assignment 1",
@@ -327,9 +326,7 @@ public class CourseControllerIntegrationTest extends BaseIntegrationTest {
         String courseId = objectMapper.readTree(createResult.getResponse().getContentAsString())
                 .get("data").get("id").asText();
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 7);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(7).toInstant();
 
         AddTaskRequestDTO taskRequest = new AddTaskRequestDTO(
                 "Study for Exam",
@@ -378,9 +375,7 @@ public class CourseControllerIntegrationTest extends BaseIntegrationTest {
         String courseId = objectMapper.readTree(createResult.getResponse().getContentAsString())
                 .get("data").get("id").asText();
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 7);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(7).toInstant();
 
         AddTaskRequestDTO taskRequest = new AddTaskRequestDTO(
                 "Network Lab",
