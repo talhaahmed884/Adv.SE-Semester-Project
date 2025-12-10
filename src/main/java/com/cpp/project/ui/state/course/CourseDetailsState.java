@@ -12,7 +12,8 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 /**
@@ -26,7 +27,8 @@ import java.util.UUID;
 public class CourseDetailsState implements ScreenState {
     private final CourseMediator mediator;
     private final UUID courseId;
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
+    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy")
+            .withZone(ZoneId.systemDefault());
 
     private final SelectionList<CourseTaskDTO> taskList;
     private final MessagePanel messagePanel;

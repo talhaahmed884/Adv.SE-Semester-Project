@@ -14,7 +14,8 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.text.SimpleDateFormat;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 /**
@@ -29,7 +30,8 @@ public class ListDetailsState implements ScreenState {
     private final ToDoListMediator mediator;
     private final ToDoListService toDoListService;
     private final UUID listId;
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd, yyyy");
+    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy")
+            .withZone(ZoneId.systemDefault());
 
     private final SelectionList<ToDoListTaskDTO> taskSelection;
     private final MessagePanel messagePanel;

@@ -34,7 +34,7 @@ public class CalendarGridRenderer implements RenderingStrategy {
             graphics.putString(x + i * 5, y, dayHeaders[i]);
         }
 
-        // Calculate calendar grid using LocalDate (UTC-based)
+        // Calculate calendar grid using LocalDate
         LocalDate firstDay = LocalDate.of(year, month, 1);
         int firstDayOfWeek = firstDay.getDayOfWeek().getValue() % 7; // 0=Sunday, 6=Saturday
         int daysInMonth = firstDay.lengthOfMonth();
@@ -79,8 +79,8 @@ public class CalendarGridRenderer implements RenderingStrategy {
 
     private boolean hasTasks(int day) {
         return items.stream().anyMatch(item -> {
-            // Convert Instant to UTC ZonedDateTime for date comparison
-            ZonedDateTime itemDateTime = item.getDate().atZone(ZoneId.of("UTC"));
+            // Convert Instant to local timezone for date comparison
+            ZonedDateTime itemDateTime = item.getDate().atZone(ZoneId.systemDefault());
             return itemDateTime.getYear() == year &&
                     itemDateTime.getMonthValue() == month &&
                     itemDateTime.getDayOfMonth() == day;
@@ -88,10 +88,10 @@ public class CalendarGridRenderer implements RenderingStrategy {
     }
 
     private boolean isToday(int day) {
-        // Get current date in UTC
-        ZonedDateTime todayUTC = ZonedDateTime.now(ZoneId.of("UTC"));
-        return todayUTC.getYear() == year &&
-                todayUTC.getMonthValue() == month &&
-                todayUTC.getDayOfMonth() == day;
+        // Get current date in local timezone
+        ZonedDateTime todayLocal = ZonedDateTime.now(ZoneId.systemDefault());
+        return todayLocal.getYear() == year &&
+                todayLocal.getMonthValue() == month &&
+                todayLocal.getDayOfMonth() == day;
     }
 }

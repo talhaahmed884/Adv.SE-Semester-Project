@@ -25,17 +25,18 @@ public class DateValidationStrategy implements ValidationStrategy {
     }
 
     /**
-     * Create Instant from components (interpreted as UTC midnight)
+     * Create Instant from components (interpreted as local timezone midnight, converted to UTC)
      *
      * @param year  Year (e.g., 2024)
      * @param month Month (1-12)
      * @param day   Day (1-31)
-     * @return Instant representing the date at midnight UTC
+     * @return Instant representing the date at midnight in local timezone, converted to UTC
      */
     public static Instant createDate(int year, int month, int day) {
-        // Create ZonedDateTime at midnight UTC
-        ZonedDateTime utcDateTime = ZonedDateTime.of(year, month, day, 0, 0, 0, 0, ZoneId.of("UTC"));
-        return utcDateTime.toInstant();
+        // Create ZonedDateTime at midnight in user's local timezone
+        ZonedDateTime localDateTime = ZonedDateTime.of(year, month, day, 0, 0, 0, 0, ZoneId.systemDefault());
+        // Convert to Instant (automatically converts to UTC)
+        return localDateTime.toInstant();
     }
 
     @Override
