@@ -5,7 +5,10 @@ import com.cpp.project.common.validation.service.EmailValidator;
 import com.cpp.project.common.validation.service.UserNameValidator;
 import com.cpp.project.user_credential.entity.UserCredential;
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 
@@ -21,6 +24,14 @@ public class User {
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
+
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updated_at", nullable = false)
+    private LocalDateTime updatedAt;
 
     @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private UserCredential credential;
@@ -67,6 +78,14 @@ public class User {
             throw new UserException(UserErrorCode.INVALID_EMAIL_FORMAT, email);
         }
         this.email = email;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
     }
 
     public UserCredential getCredential() {

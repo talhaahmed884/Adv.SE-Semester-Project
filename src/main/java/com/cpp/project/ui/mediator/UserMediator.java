@@ -53,6 +53,24 @@ public interface UserMediator extends ScreenMediator {
     void onDeleteAccount();
 
     /**
+     * Called when user wants to change their password
+     * Mediator transitions to change password state
+     */
+    void onChangePassword();
+
+    /**
+     * Called when password change is successful
+     * Mediator refreshes data and transitions to profile view
+     */
+    void onPasswordChanged();
+
+    /**
+     * Called when user cancels password change
+     * Mediator transitions back to profile view
+     */
+    void onCancelPasswordChange();
+
+    /**
      * Called when user wants to return to main menu
      * Mediator closes the user profile screen
      */

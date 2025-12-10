@@ -4,11 +4,13 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.core.StatefulScreen;
 import com.cpp.project.ui.mediator.UserMediator;
+import com.cpp.project.ui.state.user.ChangePasswordState;
 import com.cpp.project.ui.state.user.DeleteConfirmationState;
 import com.cpp.project.ui.state.user.EditProfileState;
 import com.cpp.project.ui.state.user.UserProfileState;
 import com.cpp.project.user.dto.UserDTO;
 import com.cpp.project.user.service.UserService;
+import com.cpp.project.user_credential.service.UserCredentialService;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
@@ -24,18 +26,21 @@ import com.googlecode.lanterna.screen.Screen;
  * <p>
  * Responsibilities:
  * - Owns the user data
- * - Coordinates state transitions (Profile View ↔ Edit Profile)
+ * - Coordinates state transitions (Profile View ↔ Edit Profile ↔ Change Password ↔ Delete Confirmation)
  * - Provides data access to states via facade methods
  * - Handles state action notifications
  */
 public class UserScreen extends StatefulScreen implements UserMediator {
     private final UserService userService;
+    private final UserCredentialService credentialService;
     private final MessagePanel successPanel;
     private UserDTO currentUser;
 
-    public UserScreen(Screen screen, UserDTO currentUser, UserService userService) {
+    public UserScreen(Screen screen, UserDTO currentUser, UserService userService,
+                      UserCredentialService credentialService) {
         super(screen);
         this.userService = userService;
+        this.credentialService = credentialService;
         this.currentUser = currentUser;
         this.successPanel = new MessagePanel();
 
@@ -95,6 +100,27 @@ public class UserScreen extends StatefulScreen implements UserMediator {
     }
 
     @Override
+    public void onChangePassword() {
+        // Transition to change password state
+        transitionTo(createChangePasswordState());
+    }
+
+    @Override
+    public void onPasswordChanged() {
+        // Show success message
+        successPanel.setSuccess("Password changed successfully!");
+
+        // Transition back to profile view
+        transitionTo(createUserProfileState());
+    }
+
+    @Override
+    public void onCancelPasswordChange() {
+        // User canceled password change - return to profile view
+        transitionTo(createUserProfileState());
+    }
+
+    @Override
     public void onReturnToMainMenu() {
         // Close the user profile screen
         close();
@@ -139,6 +165,15 @@ public class UserScreen extends StatefulScreen implements UserMediator {
      */
     private ScreenState createDeleteConfirmationState() {
         return new DeleteConfirmationState(this, userService);
+    }
+
+    /**
+     * Factory method to create change password state
+     *
+     * @return New change password state
+     */
+    private ChangePasswordState createChangePasswordState() {
+        return new ChangePasswordState(this, credentialService);
     }
 
     // ========== Additional Rendering ==========

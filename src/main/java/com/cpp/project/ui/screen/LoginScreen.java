@@ -8,6 +8,7 @@ import com.cpp.project.ui.core.StatefulScreen;
 import com.cpp.project.ui.state.login.LoginState;
 import com.cpp.project.user.dto.UserDTO;
 import com.cpp.project.user.service.UserService;
+import com.cpp.project.user_credential.service.UserCredentialService;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class LoginScreen extends StatefulScreen {
     private final ToDoListService toDoListService;
     private final CalendarService calendarService;
     private final UserService userService;
+    private final UserCredentialService credentialService;
 
     public LoginScreen(
             Screen screen,
@@ -31,18 +33,20 @@ public class LoginScreen extends StatefulScreen {
             CourseService courseService,
             ToDoListService toDoListService,
             CalendarService calendarService,
-            UserService userService) {
+            UserService userService,
+            UserCredentialService credentialService) {
         super(screen);
         this.authenticationService = authenticationService;
         this.courseService = courseService;
         this.toDoListService = toDoListService;
         this.calendarService = calendarService;
         this.userService = userService;
+        this.credentialService = credentialService;
 
         // Start with login state
         this.currentState = new LoginState(
                 screen,
-                authenticationService,
+                this.authenticationService,
                 this::navigateToMainMenu,
                 this::close
         );
@@ -58,7 +62,8 @@ public class LoginScreen extends StatefulScreen {
                     courseService,
                     toDoListService,
                     calendarService,
-                    userService
+                    userService,
+                    credentialService
             );
             mainMenu.display();
         } catch (IOException e) {

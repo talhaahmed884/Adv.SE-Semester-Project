@@ -6,6 +6,7 @@ import com.cpp.project.course.service.CourseService;
 import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.screen.LoginScreen;
 import com.cpp.project.user.service.UserService;
+import com.cpp.project.user_credential.service.UserCredentialService;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
@@ -54,6 +55,7 @@ public class StudentlyTerminalUI implements CommandLineRunner {
         ToDoListService toDoListService = applicationContext.getBean(ToDoListService.class);
         CalendarService calendarService = applicationContext.getBean(CalendarService.class);
         UserService userService = applicationContext.getBean(UserService.class);
+        UserCredentialService credentialService = applicationContext.getBean(UserCredentialService.class);
 
         // Initialize terminal
         Terminal terminal = new DefaultTerminalFactory().createTerminal();
@@ -68,7 +70,8 @@ public class StudentlyTerminalUI implements CommandLineRunner {
                     courseService,
                     toDoListService,
                     calendarService,
-                    userService
+                    userService,
+                    credentialService
             );
 
             loginScreen.display();

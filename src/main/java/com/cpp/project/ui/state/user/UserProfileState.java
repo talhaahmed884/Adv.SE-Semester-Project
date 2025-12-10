@@ -9,19 +9,22 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * State: User Profile View
  * <p>
  * Responsibilities:
- * - Display current user information (name, email)
- * - Provide options to edit profile or delete account
- * - Handle navigation to edit state or back to main menu
+ * - Display current user information (name, email, member since date)
+ * - Provide options to edit profile, change password, or delete account
+ * - Handle navigation to edit state, change password state, or back to main menu
  */
 public class UserProfileState implements ScreenState {
     private final UserMediator mediator;
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy");
 
     private UserDTO currentUser;
-    private int selectedOption = 0; // 0=Edit Profile, 1=Delete Account, 2=Back
+    private int selectedOption = 0; // 0=Edit Profile, 1=Change Password, 2=Delete Account, 3=Back
 
     public UserProfileState(UserMediator mediator) {
         this.mediator = mediator;
@@ -51,36 +54,46 @@ public class UserProfileState implements ScreenState {
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         graphics.putString(5, 6, "Name:  " + currentUser.getName());
         graphics.putString(5, 7, "Email: " + currentUser.getEmail());
+        graphics.putString(5, 8, "Member Since: " + currentUser.getCreatedAt().format(dateFormatter));
 
         // Options Menu
         graphics.setForegroundColor(TextColor.ANSI.CYAN);
-        graphics.putString(5, 10, "Options:");
+        graphics.putString(5, 11, "Options:");
 
         // Edit Profile option
         if (selectedOption == 0) {
             graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
-            graphics.putString(7, 12, "> 1. Edit Profile");
+            graphics.putString(7, 13, "> 1. Edit Profile");
         } else {
             graphics.setForegroundColor(TextColor.ANSI.WHITE);
-            graphics.putString(7, 12, "  1. Edit Profile");
+            graphics.putString(7, 13, "  1. Edit Profile");
+        }
+
+        // Change Password option
+        if (selectedOption == 1) {
+            graphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
+            graphics.putString(7, 14, "> 2. Change Password");
+        } else {
+            graphics.setForegroundColor(TextColor.ANSI.WHITE);
+            graphics.putString(7, 14, "  2. Change Password");
         }
 
         // Delete Account option
-        if (selectedOption == 1) {
+        if (selectedOption == 2) {
             graphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
-            graphics.putString(7, 13, "> 2. Delete Account");
+            graphics.putString(7, 15, "> 3. Delete Account");
         } else {
             graphics.setForegroundColor(TextColor.ANSI.WHITE);
-            graphics.putString(7, 13, "  2. Delete Account");
+            graphics.putString(7, 15, "  3. Delete Account");
         }
 
         // Back option
-        if (selectedOption == 2) {
+        if (selectedOption == 3) {
             graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
-            graphics.putString(7, 14, "> 3. Back to Main Menu");
+            graphics.putString(7, 16, "> 4. Back to Main Menu");
         } else {
             graphics.setForegroundColor(TextColor.ANSI.WHITE);
-            graphics.putString(7, 14, "  3. Back to Main Menu");
+            graphics.putString(7, 16, "  4. Back to Main Menu");
         }
     }
 
@@ -90,10 +103,10 @@ public class UserProfileState implements ScreenState {
             mediator.onReturnToMainMenu();
             return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.ArrowUp) {
-            selectedOption = (selectedOption - 1 + 3) % 3;
+            selectedOption = (selectedOption - 1 + 4) % 4;
             return this;
         } else if (keyStroke.getKeyType() == KeyType.ArrowDown) {
-            selectedOption = (selectedOption + 1) % 3;
+            selectedOption = (selectedOption + 1) % 4;
             return this;
         } else if (keyStroke.getKeyType() == KeyType.Enter) {
             return handleSelection();
@@ -110,11 +123,16 @@ public class UserProfileState implements ScreenState {
                 return null; // Mediator handles transition
             }
             case 1 -> {
+                // Change Password
+                mediator.onChangePassword();
+                return null; // Mediator handles transition
+            }
+            case 2 -> {
                 // Delete Account
                 mediator.onDeleteAccount();
                 return null; // Mediator handles transition
             }
-            case 2 -> {
+            case 3 -> {
                 // Back to Main Menu
                 mediator.onReturnToMainMenu();
                 return null; // Mediator handles transition

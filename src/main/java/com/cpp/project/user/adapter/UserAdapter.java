@@ -14,6 +14,8 @@ public class UserAdapter {
                 .id(user.getId())
                 .name(user.getName())
                 .email(user.getEmail())
+                .createdAt(user.getCreatedAt())
+                .updatedAt(user.getUpdatedAt())
                 .build();
     }
 

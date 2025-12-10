@@ -8,6 +8,7 @@ import com.cpp.project.ui.component.menu.MenuItem;
 import com.cpp.project.ui.core.UIScreen;
 import com.cpp.project.user.dto.UserDTO;
 import com.cpp.project.user.service.UserService;
+import com.cpp.project.user_credential.service.UserCredentialService;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -28,6 +29,7 @@ public class MainMenuScreen extends UIScreen {
     private final ToDoListService toDoListService;
     private final CalendarService calendarService;
     private final UserService userService;
+    private final UserCredentialService credentialService;
     private final SelectionList<MenuItem> menuList;
 
     public MainMenuScreen(
@@ -36,13 +38,15 @@ public class MainMenuScreen extends UIScreen {
             CourseService courseService,
             ToDoListService toDoListService,
             CalendarService calendarService,
-            UserService userService) {
+            UserService userService,
+            UserCredentialService credentialService) {
         super(screen);
         this.currentUser = currentUser;
         this.courseService = courseService;
         this.toDoListService = toDoListService;
         this.calendarService = calendarService;
         this.userService = userService;
+        this.credentialService = credentialService;
 
         // Create menu items
         this.menuList = new SelectionList<>("Main Menu", MenuItem::getLabel);
@@ -131,7 +135,7 @@ public class MainMenuScreen extends UIScreen {
     private void openUserProfile() {
         try {
             UserScreen userScreen = new UserScreen(
-                    screen, currentUser, userService
+                    screen, currentUser, userService, credentialService
             );
             userScreen.display();
         } catch (IOException e) {
