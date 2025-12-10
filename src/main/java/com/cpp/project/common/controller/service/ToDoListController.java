@@ -149,7 +149,7 @@ public class ToDoListController {
         // Validate request
         if (request.isEmpty()) {
             throw new ToDoListException(ToDoListErrorCode.INVALID_TASK_DATA,
-                    "Task description and deadline are required");
+                    "Task description is required");
         }
 
         ToDoListTaskDTO task = todoListService.addTaskToList(

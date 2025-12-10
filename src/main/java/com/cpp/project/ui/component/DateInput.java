@@ -6,6 +6,7 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
+import java.time.DateTimeException;
 import java.time.Instant;
 
 /**
@@ -119,6 +120,7 @@ public class DateInput extends AbstractComponent {
         errorMessage = "";
 
         if (year.isEmpty() || month.isEmpty() || day.isEmpty()) {
+            errorMessage = "Invalid date/time format";
             return null;
         }
 
@@ -153,6 +155,9 @@ public class DateInput extends AbstractComponent {
             return DateValidationStrategy.createDateTime(y, m, d, h, min);
         } catch (NumberFormatException e) {
             errorMessage = "Invalid date/time format";
+            return null;
+        } catch (DateTimeException e) {
+            errorMessage = "Invalid date (e.g., Feb 31 doesn't exist)";
             return null;
         }
     }

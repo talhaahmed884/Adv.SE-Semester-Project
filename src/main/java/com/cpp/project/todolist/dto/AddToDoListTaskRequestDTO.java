@@ -4,10 +4,11 @@ import java.time.Instant;
 
 /**
  * Request DTO for adding a task to a todo list
+ * Description is required, deadline is optional
  */
 public class AddToDoListTaskRequestDTO {
     private String description;
-    private Instant deadline;
+    private Instant deadline; // Optional - can be null
 
     public AddToDoListTaskRequestDTO() {
     }
@@ -34,6 +35,7 @@ public class AddToDoListTaskRequestDTO {
     }
 
     public boolean isEmpty() {
-        return (description == null || description.trim().isEmpty()) && deadline == null;
+        // Only description is required; deadline is optional
+        return description == null || description.trim().isEmpty();
     }
 }
