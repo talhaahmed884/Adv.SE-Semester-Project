@@ -7,6 +7,8 @@ import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.component.menu.MenuItem;
 import com.cpp.project.ui.core.UIScreen;
 import com.cpp.project.user.dto.UserDTO;
+import com.cpp.project.user.service.UserService;
+import com.cpp.project.user_credential.service.UserCredentialService;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -26,6 +28,8 @@ public class MainMenuScreen extends UIScreen {
     private final CourseService courseService;
     private final ToDoListService toDoListService;
     private final CalendarService calendarService;
+    private final UserService userService;
+    private final UserCredentialService credentialService;
     private final SelectionList<MenuItem> menuList;
 
     public MainMenuScreen(
@@ -33,12 +37,16 @@ public class MainMenuScreen extends UIScreen {
             UserDTO currentUser,
             CourseService courseService,
             ToDoListService toDoListService,
-            CalendarService calendarService) {
+            CalendarService calendarService,
+            UserService userService,
+            UserCredentialService credentialService) {
         super(screen);
         this.currentUser = currentUser;
         this.courseService = courseService;
         this.toDoListService = toDoListService;
         this.calendarService = calendarService;
+        this.userService = userService;
+        this.credentialService = credentialService;
 
         // Create menu items
         this.menuList = new SelectionList<>("Main Menu", MenuItem::getLabel);
@@ -46,7 +54,8 @@ public class MainMenuScreen extends UIScreen {
                 new MenuItem("1. Manage Courses", this::openCourseManagement),
                 new MenuItem("2. Manage To-Do Lists", this::openToDoManagement),
                 new MenuItem("3. View Calendar", this::openCalendar),
-                new MenuItem("4. Logout", this::logout)
+                new MenuItem("4. My Profile", this::openUserProfile),
+                new MenuItem("5. Logout", this::logout)
         ));
         this.menuList.setFocused(true);
     }
@@ -118,6 +127,17 @@ public class MainMenuScreen extends UIScreen {
                     screen, currentUser, calendarService
             );
             calendarScreen.display();
+        } catch (IOException e) {
+            // Handle error
+        }
+    }
+
+    private void openUserProfile() {
+        try {
+            UserScreen userScreen = new UserScreen(
+                    screen, currentUser, userService, credentialService
+            );
+            userScreen.display();
         } catch (IOException e) {
             // Handle error
         }

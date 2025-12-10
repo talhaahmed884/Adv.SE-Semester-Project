@@ -7,6 +7,8 @@ import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.core.StatefulScreen;
 import com.cpp.project.ui.state.login.LoginState;
 import com.cpp.project.user.dto.UserDTO;
+import com.cpp.project.user.service.UserService;
+import com.cpp.project.user_credential.service.UserCredentialService;
 import com.googlecode.lanterna.screen.Screen;
 
 import java.io.IOException;
@@ -22,23 +24,29 @@ public class LoginScreen extends StatefulScreen {
     private final CourseService courseService;
     private final ToDoListService toDoListService;
     private final CalendarService calendarService;
+    private final UserService userService;
+    private final UserCredentialService credentialService;
 
     public LoginScreen(
             Screen screen,
             AuthenticationService authenticationService,
             CourseService courseService,
             ToDoListService toDoListService,
-            CalendarService calendarService) {
+            CalendarService calendarService,
+            UserService userService,
+            UserCredentialService credentialService) {
         super(screen);
         this.authenticationService = authenticationService;
         this.courseService = courseService;
         this.toDoListService = toDoListService;
         this.calendarService = calendarService;
+        this.userService = userService;
+        this.credentialService = credentialService;
 
         // Start with login state
         this.currentState = new LoginState(
                 screen,
-                authenticationService,
+                this.authenticationService,
                 this::navigateToMainMenu,
                 this::close
         );
@@ -53,7 +61,9 @@ public class LoginScreen extends StatefulScreen {
                     user,
                     courseService,
                     toDoListService,
-                    calendarService
+                    calendarService,
+                    userService,
+                    credentialService
             );
             mainMenu.display();
         } catch (IOException e) {

@@ -48,4 +48,8 @@ public class MessagePanel extends AbstractComponent {
         this.errorMessage = "";
         this.successMessage = "";
     }
+
+    public boolean isEmpty() {
+        return errorMessage.isEmpty() && successMessage.isEmpty();
+    }
 }
