@@ -2,8 +2,8 @@ package com.cpp.project.todolist.dto;
 
 import com.cpp.project.common.entity.TaskStatus;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.UUID;
 
 /**
@@ -12,7 +12,7 @@ import java.util.UUID;
 public class ToDoListTaskDTOBuilder {
     private UUID id;
     private String description;
-    private Date deadline;
+    private Instant deadline;
     private TaskStatus status;
     private UUID todoListId;
     private LocalDateTime createdAt;
@@ -28,7 +28,7 @@ public class ToDoListTaskDTOBuilder {
         return this;
     }
 
-    public ToDoListTaskDTOBuilder deadline(Date deadline) {
+    public ToDoListTaskDTOBuilder deadline(Instant deadline) {
         this.deadline = deadline;
         return this;
     }

@@ -8,9 +8,9 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -55,10 +55,10 @@ public class ToDoList {
      * Add a new task to the to-do list
      *
      * @param description Task description
-     * @param deadline    Task deadline
+     * @param deadline    Task deadline (in UTC)
      * @return The created ToDoListTask
      */
-    public ToDoListTask addTask(String description, Date deadline) {
+    public ToDoListTask addTask(String description, Instant deadline) {
         ToDoListTask task = ToDoListTask.builder()
                 .todoListId(this.id)
                 .description(description)
@@ -72,11 +72,11 @@ public class ToDoList {
 
     /**
      * Get all deadlines from tasks in this list
-     * Aggregates deadlines for calendar view
+     * Aggregates deadlines for calendar view (all in UTC)
      *
      * @return List of deadlines from all tasks
      */
-    public List<Date> getAggregatedDeadlines() {
+    public List<Instant> getAggregatedDeadlines() {
         return tasks.stream()
                 .map(ToDoListTask::getDeadline)
                 .filter(deadline -> deadline != null)

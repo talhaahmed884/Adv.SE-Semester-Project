@@ -16,7 +16,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.*;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * Implementation of CalendarService
@@ -51,18 +57,12 @@ public class CalendarServiceImpl implements CalendarService {
             throw new CalendarException(CalendarErrorCode.INVALID_DATE, dateValidation.getFirstError());
         }
 
-        // Calculate date range for the month
-        Calendar startCal = Calendar.getInstance();
-        startCal.set(year, month - 1, 1, 0, 0, 0);
-        startCal.set(Calendar.MILLISECOND, 0);
-        Date startDate = startCal.getTime();
+        // Calculate date range for the month in UTC
+        ZonedDateTime startUTC = ZonedDateTime.of(year, month, 1, 0, 0, 0, 0, ZoneId.of("UTC"));
+        Instant startDate = startUTC.toInstant();
 
-        Calendar endCal = Calendar.getInstance();
-        endCal.set(year, month - 1, 1, 0, 0, 0);
-        endCal.set(Calendar.MILLISECOND, 0);
-        endCal.add(Calendar.MONTH, 1);
-        endCal.add(Calendar.MILLISECOND, -1);
-        Date endDate = endCal.getTime();
+        ZonedDateTime endUTC = startUTC.plusMonths(1).minusNanos(1);
+        Instant endDate = endUTC.toInstant();
 
         List<CalendarItemDTO> items = new ArrayList<>();
 
@@ -71,8 +71,8 @@ public class CalendarServiceImpl implements CalendarService {
         for (Course course : courses) {
             for (CourseTask task : course.getTasks()) {
                 if (task.getDeadline() != null &&
-                        !task.getDeadline().before(startDate) &&
-                        !task.getDeadline().after(endDate)) {
+                        !task.getDeadline().isBefore(startDate) &&
+                        !task.getDeadline().isAfter(endDate)) {
 
                     CalendarItemDTO item = CalendarItemDTO.builder()
                             .date(task.getDeadline())
@@ -93,8 +93,8 @@ public class CalendarServiceImpl implements CalendarService {
         for (ToDoList todoList : todoLists) {
             for (ToDoListTask task : todoList.getTasks()) {
                 if (task.getDeadline() != null &&
-                        !task.getDeadline().before(startDate) &&
-                        !task.getDeadline().after(endDate)) {
+                        !task.getDeadline().isBefore(startDate) &&
+                        !task.getDeadline().isAfter(endDate)) {
 
                     CalendarItemDTO item = CalendarItemDTO.builder()
                             .date(task.getDeadline())
