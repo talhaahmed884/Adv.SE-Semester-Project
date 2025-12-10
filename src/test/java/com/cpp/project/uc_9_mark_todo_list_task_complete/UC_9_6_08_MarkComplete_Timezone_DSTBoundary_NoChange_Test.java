@@ -12,9 +12,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -45,9 +45,7 @@ public class UC_9_6_08_MarkComplete_Timezone_DSTBoundary_NoChange_Test extends B
         ToDoListDTO todoList = toDoListService.createToDoList("My Tasks", userId);
 
         // Create deadline in DST transition period
-        Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("America/New_York"));
-        calendar.set(2025, Calendar.MARCH, 9, 2, 30, 0);
-        Date dstDeadline = calendar.getTime();
+        Instant dstDeadline = ZonedDateTime.of(ZonedDateTime.now().getYear() + 1, 3, 9, 2, 30, 0, 0, ZoneId.of("America/New_York")).toInstant();
 
         // Add a task
         ToDoListTaskDTO task = toDoListService.addTaskToList(

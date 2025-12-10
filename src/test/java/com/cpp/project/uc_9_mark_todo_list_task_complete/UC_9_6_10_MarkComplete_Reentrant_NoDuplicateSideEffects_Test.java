@@ -12,8 +12,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -44,9 +45,7 @@ public class UC_9_6_10_MarkComplete_Reentrant_NoDuplicateSideEffects_Test extend
         ToDoListDTO todoList = toDoListService.createToDoList("My Tasks", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Add a task
         ToDoListTaskDTO task = toDoListService.addTaskToList(

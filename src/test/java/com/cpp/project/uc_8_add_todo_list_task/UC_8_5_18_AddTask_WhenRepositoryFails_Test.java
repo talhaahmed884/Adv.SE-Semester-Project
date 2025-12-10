@@ -15,7 +15,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -47,7 +49,7 @@ public class UC_8_5_18_AddTask_WhenRepositoryFails_Test {
         // Arrange
         UUID todoListId = UUID.randomUUID();
         String description = "Buy groceries";
-        Date deadline = new Date(System.currentTimeMillis() + 86400000); // tomorrow
+        Instant deadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant(); // tomorrow
 
         // Mock todo list retrieval - return a mock list
         ToDoList mockToDoList = ToDoList.builder()
@@ -66,9 +68,7 @@ public class UC_8_5_18_AddTask_WhenRepositoryFails_Test {
                 .thenThrow(new jakarta.persistence.PersistenceException("Database connection failed"));
 
         // Act & Assert
-        ToDoListException exception = assertThrows(ToDoListException.class, () -> {
-            toDoListService.addTaskToList(todoListId, description, deadline);
-        });
+        ToDoListException exception = assertThrows(ToDoListException.class, () -> toDoListService.addTaskToList(todoListId, description, deadline));
 
         assertEquals(ToDoListErrorCode.TASK_CREATION_FAILED.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("failed"));
@@ -83,7 +83,7 @@ public class UC_8_5_18_AddTask_WhenRepositoryFails_Test {
         // Arrange
         UUID todoListId = UUID.randomUUID();
         String description = "Buy groceries";
-        Date deadline = new Date(System.currentTimeMillis() + 86400000); // tomorrow
+        Instant deadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant(); // tomorrow
 
         when(sanitizer.sanitizeDescription(description)).thenReturn(description);
         when(validationService.validateTaskDescription(description)).thenReturn(new ValidationResultBuilder().build());
@@ -93,9 +93,7 @@ public class UC_8_5_18_AddTask_WhenRepositoryFails_Test {
         when(toDoListRepository.findById(todoListId)).thenReturn(Optional.empty());
 
         // Act & Assert
-        ToDoListException exception = assertThrows(ToDoListException.class, () -> {
-            toDoListService.addTaskToList(todoListId, description, deadline);
-        });
+        ToDoListException exception = assertThrows(ToDoListException.class, () -> toDoListService.addTaskToList(todoListId, description, deadline));
 
         assertEquals(ToDoListErrorCode.TODO_LIST_NOT_FOUND.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("not found"));

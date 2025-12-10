@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -43,17 +44,13 @@ public class UC_8_5_08_AddTask_Fail_OverMaxLength_Test extends BaseIntegrationTe
         ToDoListDTO todoList = toDoListService.createToDoList("My Tasks", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Create a description with 501 characters (exceeds limit)
         String tooLongDescription = "A".repeat(5001);
 
         // Act & Assert
-        ToDoListException exception = assertThrows(ToDoListException.class, () -> {
-            toDoListService.addTaskToList(todoList.getId(), tooLongDescription, futureDeadline);
-        });
+        ToDoListException exception = assertThrows(ToDoListException.class, () -> toDoListService.addTaskToList(todoList.getId(), tooLongDescription, futureDeadline));
 
         assertTrue(exception.getMessage().toLowerCase().contains("description") ||
                 exception.getMessage().toLowerCase().contains("length") ||

@@ -10,8 +10,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -41,9 +42,7 @@ public class UC_8_5_15_AddTask_Performance_Batch_1000_Test extends BaseIntegrati
         ToDoListDTO todoList = toDoListService.createToDoList("Performance Test Tasks", userId);
 
         // Create a future deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Act - Add 1000 tasks and measure time
         long startTime = System.currentTimeMillis();

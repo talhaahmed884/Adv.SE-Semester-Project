@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,19 +45,14 @@ public class UC_10_19_ItemsForMonth_Edge_EventEndsAtNextMonthExcluded_Test exten
 
         UUID courseId = courseService.createCourse("CS101", "Intro to CS", user.getId()).getId();
 
-        Calendar currentMonth = Calendar.getInstance();
-        int year = currentMonth.get(Calendar.YEAR);
-        int month = currentMonth.get(Calendar.MONTH) + 1;
+        ZonedDateTime currentMonth = ZonedDateTime.now(ZoneId.of("UTC"));
+        int year = currentMonth.getYear();
+        int month = currentMonth.getMonthValue();
 
         // Create task at exactly 00:00:00 on 1st of NEXT month
-        Calendar nextMonth = Calendar.getInstance();
-        nextMonth.add(Calendar.MONTH, 1);
-        nextMonth.set(Calendar.DAY_OF_MONTH, 1);
-        nextMonth.set(Calendar.HOUR_OF_DAY, 0);
-        nextMonth.set(Calendar.MINUTE, 0);
-        nextMonth.set(Calendar.SECOND, 0);
-        nextMonth.set(Calendar.MILLISECOND, 0);
-        Date nextMonthStart = nextMonth.getTime();
+        ZonedDateTime nextMonth = currentMonth.plusMonths(1).withDayOfMonth(1)
+                .withHour(0).withMinute(0).withSecond(0).withNano(0);
+        Instant nextMonthStart = nextMonth.toInstant();
 
         courseService.addTaskToCourse(courseId, "Next Month Task", nextMonthStart, "Description");
 

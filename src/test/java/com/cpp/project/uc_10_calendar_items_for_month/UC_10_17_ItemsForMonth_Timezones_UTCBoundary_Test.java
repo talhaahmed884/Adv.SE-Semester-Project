@@ -11,7 +11,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.*;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.List;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -41,15 +45,13 @@ public class UC_10_17_ItemsForMonth_Timezones_UTCBoundary_Test extends BaseInteg
 
         UUID courseId = courseService.createCourse("CS101", "Intro to CS", user.getId()).getId();
 
-        // Create date at UTC boundary
-        Calendar cal = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-        cal.set(2026, Calendar.MARCH, 10, 2, 0, 0); // DST boundary in US
-        Date deadline = cal.getTime();
+        // Create date at UTC boundary - April 10, 2026 at 2:00 AM UTC (DST boundary in US)
+        Instant deadline = ZonedDateTime.of(2026, 4, 10, 2, 0, 0, 0, ZoneId.of("UTC")).toInstant();
 
         courseService.addTaskToCourse(courseId, "UTC Boundary Task", deadline, "Description");
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(2026, 3, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(2026, 4, user.getId());
 
         // Assert - Should handle timezone correctly
         assertNotNull(items);

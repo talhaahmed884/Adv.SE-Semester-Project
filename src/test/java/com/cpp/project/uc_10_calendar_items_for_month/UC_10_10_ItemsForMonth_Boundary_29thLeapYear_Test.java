@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,9 +46,7 @@ public class UC_10_10_ItemsForMonth_Boundary_29thLeapYear_Test extends BaseInteg
         UUID courseId = courseService.createCourse("CS101", "Intro to CS", user.getId()).getId();
 
         // Use a leap year (2024)
-        Calendar cal = Calendar.getInstance();
-        cal.set(2028, Calendar.FEBRUARY, 29, 12, 0, 0);
-        Date feb29Deadline = cal.getTime();
+        Instant feb29Deadline = ZonedDateTime.of(2028, 2, 29, 12, 0, 0, 0, ZoneId.of("UTC")).toInstant();
 
         courseService.addTaskToCourse(courseId, "Feb 29 Task", feb29Deadline, "Description");
 

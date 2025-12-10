@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -43,23 +44,18 @@ public class UC_10_03_ItemsForMonth_Success_MultipleSeparatedTodos_Test extends 
 
         UUID todoListId = todoListService.createToDoList("My Tasks", user.getId()).getId();
 
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.MONTH, 1);
-        cal.set(Calendar.DAY_OF_MONTH, 1);
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
+        ZonedDateTime nextMonth = ZonedDateTime.now(ZoneId.of("UTC")).plusMonths(1).withDayOfMonth(1);
+        int year = nextMonth.getYear();
+        int month = nextMonth.getMonthValue();
 
         // Add multiple tasks in the same month
-        cal.add(Calendar.DAY_OF_MONTH, 2);
-        Date deadline1 = cal.getTime();
+        Instant deadline1 = nextMonth.plusDays(2).toInstant();
         todoListService.addTaskToList(todoListId, "Task 1", deadline1);
 
-        cal.add(Calendar.DAY_OF_MONTH, 3);
-        Date deadline2 = cal.getTime();
+        Instant deadline2 = nextMonth.plusDays(5).toInstant();
         todoListService.addTaskToList(todoListId, "Task 2", deadline2);
 
-        cal.add(Calendar.DAY_OF_MONTH, 5);
-        Date deadline3 = cal.getTime();
+        Instant deadline3 = nextMonth.plusDays(10).toInstant();
         todoListService.addTaskToList(todoListId, "Task 3", deadline3);
 
         // Act

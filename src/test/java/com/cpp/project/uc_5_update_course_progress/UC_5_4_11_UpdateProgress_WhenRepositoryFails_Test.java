@@ -14,6 +14,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.Instant;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -57,7 +58,7 @@ public class UC_5_4_11_UpdateProgress_WhenRepositoryFails_Test {
                 .build();
 
         // Add a mock task to the course
-        mockCourse.addTask("Task 1", new java.util.Date(System.currentTimeMillis() + 86400000), "Description");
+        mockCourse.addTask("Task 1", Instant.now().plusMillis(86400000), "Description");
         mockCourse.getTasks().getFirst().setId(taskId);
 
         when(courseRepository.findById(courseId)).thenReturn(Optional.of(mockCourse));
@@ -67,9 +68,7 @@ public class UC_5_4_11_UpdateProgress_WhenRepositoryFails_Test {
                 .thenThrow(new jakarta.persistence.PersistenceException("Database connection failed"));
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.updateTaskProgress(courseId, taskId, progress);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.updateTaskProgress(courseId, taskId, progress));
 
         assertEquals(CourseErrorCode.TASK_UPDATE_FAILED.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("failed"));
@@ -95,9 +94,7 @@ public class UC_5_4_11_UpdateProgress_WhenRepositoryFails_Test {
         when(courseRepository.findById(courseId)).thenReturn(Optional.empty());
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.updateTaskProgress(courseId, taskId, progress);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.updateTaskProgress(courseId, taskId, progress));
 
         assertEquals(CourseErrorCode.COURSE_NOT_FOUND.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("not found"));

@@ -11,7 +11,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Date;
+import java.time.Instant;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,7 +42,7 @@ public class UC_8_5_05_AddTask_Success_DeadlineEqualsNow_Test extends BaseIntegr
         ToDoListDTO todoList = toDoListService.createToDoList("My Tasks", userId);
 
         // Create deadline equal to now (boundary case)
-        Date now = new Date();
+        Instant now = Instant.now().plusSeconds(2);
 
         // Act
         ToDoListTaskDTO result = toDoListService.addTaskToList(

@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,15 +46,12 @@ public class UC_10_18_ItemsForMonth_Edge_EventStartsAtMonthBoundary_Test extends
         UUID courseId = courseService.createCourse("CS101", "Intro to CS", user.getId()).getId();
 
         // Create task at exactly 00:00:00 on 1st of month
-        Calendar cal = Calendar.getInstance();
-        cal.set(2026, Calendar.FEBRUARY, 1);
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
-        cal.set(year, month - 1, 1, 0, 0, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        Date exactStart = cal.getTime();
+        ZonedDateTime exactStart = ZonedDateTime.of(2026, 3, 1, 0, 0, 0, 0, ZoneId.of("UTC"));
+        int year = exactStart.getYear();
+        int month = exactStart.getMonthValue();
+        Instant exactStartInstant = exactStart.toInstant();
 
-        courseService.addTaskToCourse(courseId, "Exact Start Task", exactStart, "Description");
+        courseService.addTaskToCourse(courseId, "Exact Start Task", exactStartInstant, "Description");
 
         // Act
         List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());

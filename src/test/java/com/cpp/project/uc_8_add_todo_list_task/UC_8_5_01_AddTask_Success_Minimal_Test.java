@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,9 +44,7 @@ public class UC_8_5_01_AddTask_Success_Minimal_Test extends BaseIntegrationTest 
         ToDoListDTO todoList = toDoListService.createToDoList("My Tasks", userId);
 
         // Create deadline 1 minute in future (boundary case)
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.MINUTE, 1);
-        Date futureDeadline = calendar.getTime();
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusMinutes(1).toInstant();
 
         // Act
         ToDoListTaskDTO result = toDoListService.addTaskToList(

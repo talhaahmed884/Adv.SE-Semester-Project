@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,15 +45,12 @@ public class UC_10_08_ItemsForMonth_Boundary_FirstDayEdgeCaseInclusive_Test exte
 
         UUID courseId = courseService.createCourse("CS101", "Intro to CS", user.getId()).getId();
 
-        Calendar cal = Calendar.getInstance();
-        cal.set(2026, Calendar.FEBRUARY, 1);
-        int year = cal.get(Calendar.YEAR);
-        int month = cal.get(Calendar.MONTH) + 1;
-
         // Set to first day of month at 00:00:00
-        cal.set(year, month - 1, 1, 0, 0, 0);
-        cal.set(Calendar.MILLISECOND, 0);
-        Date firstDayDeadline = cal.getTime();
+        ZonedDateTime firstDay = ZonedDateTime.of(2026, 3, 1, 0, 0, 0, 0, ZoneId.of("UTC"));
+        int year = firstDay.getYear();
+        int month = firstDay.getMonthValue();
+
+        Instant firstDayDeadline = firstDay.toInstant();
 
         courseService.addTaskToCourse(courseId, "First Day Task", firstDayDeadline, "Description");
 

@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -44,14 +45,12 @@ public class UC_10_02_ItemsForMonth_Success_SingleCourseOnly_Test extends BaseIn
 
         UUID courseId = courseService.createCourse("CS101", "Intro to CS", user.getId()).getId();
 
-        Calendar taskCal = Calendar.getInstance();
-        taskCal.add(Calendar.DAY_OF_MONTH, 5);
-        Date deadline = taskCal.getTime();
-
+        ZonedDateTime taskCal = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(5);
+        Instant deadline = taskCal.toInstant();
         courseService.addTaskToCourse(courseId, "Assignment 1", deadline, "Complete assignment");
 
-        int year = taskCal.get(Calendar.YEAR);
-        int month = taskCal.get(Calendar.MONTH) + 1;
+        int year = taskCal.getYear();
+        int month = taskCal.getMonthValue();
 
         // Act
         List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());

@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -43,9 +44,7 @@ public class UC_8_5_13_AddTask_ReturnTask_PostNormalization_Test extends BaseInt
         ToDoListDTO todoList = toDoListService.createToDoList("My Tasks", userId);
 
         // Create a specific deadline
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 3);
-        Date exactDeadline = calendar.getTime();
+        Instant exactDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(3).toInstant();
 
         // Act - Add task with whitespace that should be normalized
         ToDoListTaskDTO result = toDoListService.addTaskToList(

@@ -11,8 +11,9 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,9 +43,7 @@ public class UC_3_04_Progress_RoundingBoundaries_Test extends BaseIntegrationTes
         // Create a course
         CourseDTO course = courseService.createCourse("CS104", "Software Engineering", userId);
 
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDate = calendar.getTime();
+        Instant futureDate = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
         // Add 3 tasks
         CourseTaskDTO task1 = courseService.addTaskToCourse(course.getId(), "Task 1", futureDate, "Description 1");
         CourseTaskDTO task2 = courseService.addTaskToCourse(course.getId(), "Task 2", futureDate, "Description 2");
@@ -78,9 +77,7 @@ public class UC_3_04_Progress_RoundingBoundaries_Test extends BaseIntegrationTes
         CourseDTO course = courseService.createCourse("CS105", "Operating Systems", userId);
 
         // Add 3 tasks
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_MONTH, 1);
-        Date futureDate = calendar.getTime();
+        Instant futureDate = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
         CourseTaskDTO task1 = courseService.addTaskToCourse(course.getId(), "Task 1", futureDate, "Description 1");
         courseService.addTaskToCourse(course.getId(), "Task 2", futureDate, "Description 2");
         courseService.addTaskToCourse(course.getId(), "Task 3", futureDate, "Description 3");
