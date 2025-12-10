@@ -68,7 +68,7 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", String.valueOf(year))
                         .param("month", String.valueOf(month))
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data").isEmpty())
@@ -117,7 +117,7 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", String.valueOf(year))
                         .param("month", String.valueOf(month))
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data[0].sourceType").value("COURSE"))
@@ -165,7 +165,7 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", String.valueOf(year))
                         .param("month", String.valueOf(month))
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data[0].sourceType").value("TODO_LIST"))
@@ -245,7 +245,7 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", String.valueOf(year))
                         .param("month", String.valueOf(month))
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data.length()").value(2))
@@ -262,7 +262,7 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
 
         mockMvc.perform(get("/api/calendar/user/" + testUserId + "/items")
                         .param("year", String.valueOf(year))
-                        .param("month", String.valueOf(month)))
+                        .param("month", String.valueOf(month)).param("timezone", "UTC"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.message").value("Calendar items retrieved successfully"))
@@ -278,7 +278,7 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", String.valueOf(year))
                         .param("month", "13") // Invalid month
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("CALENDAR_001"))
                 .andExpect(jsonPath("$.statusCode").value(400));
@@ -290,7 +290,7 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", "1800") // Invalid year
                         .param("month", "1")
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isBadRequest())
                 .andExpect(jsonPath("$.code").value("CALENDAR_001"))
                 .andExpect(jsonPath("$.statusCode").value(400));
@@ -337,7 +337,7 @@ public class CalendarControllerIntegrationTest extends BaseIntegrationTest {
         mockMvc.perform(get("/api/calendar/items")
                         .param("year", String.valueOf(currentYear))
                         .param("month", String.valueOf(currentMonth))
-                        .param("userId", testUserId.toString()))
+                        .param("userId", testUserId.toString()).param("timezone", "UTC"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.data").isArray())
                 .andExpect(jsonPath("$.data").isEmpty());

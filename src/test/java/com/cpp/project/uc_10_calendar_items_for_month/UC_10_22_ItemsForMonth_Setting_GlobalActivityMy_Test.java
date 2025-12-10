@@ -57,7 +57,7 @@ public class UC_10_22_ItemsForMonth_Setting_GlobalActivityMy_Test extends BaseIn
         int month = nowUTC.getMonthValue();
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
 
         // Assert - Should include status information
         assertNotNull(items);

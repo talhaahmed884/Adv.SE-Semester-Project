@@ -21,9 +21,9 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * UC-10.17: Events spanning UTC change are provided in consistent manner
+ * UC-10.24: Calendar items retrieved correctly with America/New_York timezone
  */
-public class UC_10_17_ItemsForMonth_Timezones_UTCBoundary_Test extends BaseIntegrationTest {
+public class UC_10_24_ItemsForMonth_Timezones_AmericaNewYork_Test extends BaseIntegrationTest {
     @Autowired
     private CalendarService calendarService;
 
@@ -34,28 +34,30 @@ public class UC_10_17_ItemsForMonth_Timezones_UTCBoundary_Test extends BaseInteg
     private CourseService courseService;
 
     @Test
-    @DisplayName("UC-10.17: Handles UTC timezone boundaries correctly")
-    public void testItemsForMonthTimezonesUTCBoundary() {
+    @DisplayName("UC-10.24: Returns items correctly for America/New_York timezone")
+    public void testItemsForMonthTimezonesAmericaNewYork() {
         // Arrange
         UserDTO user = authenticationService.signUp(new SignUpRequestDTO(
                 "Test User",
-                "calendar.uc1017@test.com",
+                "calendar.uc1024@test.com",
                 "Password123!"
         ));
 
         UUID courseId = courseService.createCourse("CS101", "Intro to CS", user.getId()).getId();
 
-        // Create date at UTC boundary - April 10, 2026 at 2:00 AM UTC (DST boundary in US)
-        Instant deadline = ZonedDateTime.of(2026, 4, 10, 2, 0, 0, 0, ZoneId.of("UTC")).toInstant();
+        // Create task on January 15, 2026 at 3:00 PM EST (8:00 PM UTC)
+        Instant deadline = ZonedDateTime.of(2026, 1, 15, 15, 0, 0, 0,
+                ZoneId.of("America/New_York")).toInstant();
 
-        courseService.addTaskToCourse(courseId, "UTC Boundary Task", deadline, "Description");
+        courseService.addTaskToCourse(courseId, "EST Task", deadline, "Description");
 
-        // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(2026, 4, user.getId(), "UTC");
+        // Act - Query for January 2026 in EST
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(2026, 1, user.getId(), "America/New_York");
 
-        // Assert - Should handle timezone correctly
+        // Assert - Should find the task
         assertNotNull(items);
         assertEquals(1, items.size());
-        assertEquals("UTC Boundary Task", items.getFirst().getTitle());
+        assertEquals("EST Task", items.getFirst().getTitle());
+        assertEquals("COURSE", items.getFirst().getSourceType());
     }
 }

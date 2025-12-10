@@ -53,7 +53,7 @@ public class UC_10_02_ItemsForMonth_Success_SingleCourseOnly_Test extends BaseIn
         int month = taskCal.getMonthValue();
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
 
         // Assert
         assertNotNull(items);

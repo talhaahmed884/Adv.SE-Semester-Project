@@ -63,7 +63,7 @@ public class UC_10_06_ItemsForMonth_Success_FiltersByUserDate_Test extends BaseI
         int month = nowUTC.getMonthValue();
 
         // Act - Get calendar items for user1
-        List<CalendarItemDTO> user1Items = calendarService.getItemsForMonth(year, month, user1.getId());
+        List<CalendarItemDTO> user1Items = calendarService.getItemsForMonth(year, month, user1.getId(), "UTC");
 
         // Assert - Should only return user1's items
         assertNotNull(user1Items);

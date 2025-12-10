@@ -1,7 +1,7 @@
 package com.cpp.project.uc_10_calendar_items_for_month;
 
 import com.cpp.project.authentication.service.AuthenticationService;
-import com.cpp.project.calendar.dto.CalendarItemDTO;
+import com.cpp.project.calendar.entity.CalendarException;
 import com.cpp.project.calendar.service.CalendarService;
 import com.cpp.project.entity.BaseIntegrationTest;
 import com.cpp.project.user.dto.SignUpRequestDTO;
@@ -12,15 +12,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
-import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * UC-10.01: Returns empty list results when user has no items in month
+ * UC-10.29: Null timezone throws CalendarException
  */
-public class UC_10_01_ItemsForMonth_Success_NoItems_Test extends BaseIntegrationTest {
+public class UC_10_29_ItemsForMonth_Fail_NullTimezone_Test extends BaseIntegrationTest {
     @Autowired
     private CalendarService calendarService;
 
@@ -28,12 +26,12 @@ public class UC_10_01_ItemsForMonth_Success_NoItems_Test extends BaseIntegration
     private AuthenticationService authenticationService;
 
     @Test
-    @DisplayName("UC-10.01: Returns empty list when user has no items in month")
-    public void testItemsForMonthSuccessNoItems() {
-        // Arrange - Create a user with no courses or todo lists
+    @DisplayName("UC-10.29: Null timezone throws CalendarException")
+    public void testItemsForMonthFailNullTimezone() {
+        // Arrange
         UserDTO user = authenticationService.signUp(new SignUpRequestDTO(
                 "Test User",
-                "calendar.uc1001@test.com",
+                "calendar.uc1029@test.com",
                 "Password123!"
         ));
 
@@ -41,11 +39,7 @@ public class UC_10_01_ItemsForMonth_Success_NoItems_Test extends BaseIntegration
         int year = now.getYear();
         int month = now.getMonthValue();
 
-        // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
-
-        // Assert
-        assertNotNull(items);
-        assertTrue(items.isEmpty());
+        // Act & Assert - Should throw CalendarException for null timezone
+        assertThrows(CalendarException.class, () -> calendarService.getItemsForMonth(year, month, user.getId(), null));
     }
 }

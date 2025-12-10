@@ -50,7 +50,7 @@ public class UC_10_11_ItemsForMonth_Boundary_MonthWith30Days_Test extends BaseIn
         courseService.addTaskToCourse(courseId, "April 30 Task", april30Deadline, "Description");
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(2026, 4, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(2026, 4, user.getId(), "UTC");
 
         // Assert
         assertNotNull(items);

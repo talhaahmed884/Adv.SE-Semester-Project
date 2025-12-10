@@ -57,7 +57,7 @@ public class UC_10_20_ItemsForMonth_Performance_1000Items_Test extends BaseInteg
 
         // Act - Measure performance
         long startTime = System.currentTimeMillis();
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
         long endTime = System.currentTimeMillis();
         long duration = endTime - startTime;
 

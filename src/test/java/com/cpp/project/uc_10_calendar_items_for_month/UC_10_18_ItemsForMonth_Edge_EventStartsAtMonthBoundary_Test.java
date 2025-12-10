@@ -54,7 +54,7 @@ public class UC_10_18_ItemsForMonth_Edge_EventStartsAtMonthBoundary_Test extends
         courseService.addTaskToCourse(courseId, "Exact Start Task", exactStartInstant, "Description");
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
 
         // Assert
         assertNotNull(items);

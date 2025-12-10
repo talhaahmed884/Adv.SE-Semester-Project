@@ -20,12 +20,13 @@ public interface CalendarMediator extends ScreenMediator {
     /**
      * Get calendar items for a specific month
      *
-     * @param year   The year
-     * @param month  The month (1-12)
-     * @param userId The user ID
+     * @param year       The year
+     * @param month      The month (1-12)
+     * @param userId     The user ID
+     * @param timezoneId The user's timezone ID (e.g., "America/New_York")
      * @return Fresh list of calendar items from service
      */
-    List<CalendarItemDTO> getItemsForMonth(int year, int month, UUID userId);
+    List<CalendarItemDTO> getItemsForMonth(int year, int month, UUID userId, String timezoneId);
 
     /**
      * Get current year being displayed

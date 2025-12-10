@@ -51,7 +51,7 @@ public class UC_10_09_ItemsForMonth_Boundary_28thOr29thLeap_Test extends BaseInt
         courseService.addTaskToCourse(courseId, "Feb 28 Task", feb28Deadline, "Description");
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(2026, 2, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(2026, 2, user.getId(), "UTC");
 
         // Assert
         assertNotNull(items);

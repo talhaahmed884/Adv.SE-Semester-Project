@@ -59,7 +59,7 @@ public class UC_10_04_ItemsForMonth_Success_SeparateMonthFilters_Test extends Ba
         courseService.addTaskToCourse(courseId, "Next Month Task", nextMonthDeadline, "Task 2");
 
         // Act - Query for current month only
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(currentYear, currentMonthNum, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(currentYear, currentMonthNum, user.getId(), "UTC");
 
         // Assert - Should only return current month task
         assertNotNull(items);

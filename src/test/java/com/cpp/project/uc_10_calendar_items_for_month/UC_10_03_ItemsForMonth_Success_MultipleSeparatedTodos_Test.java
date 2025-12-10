@@ -59,7 +59,7 @@ public class UC_10_03_ItemsForMonth_Success_MultipleSeparatedTodos_Test extends 
         todoListService.addTaskToList(todoListId, "Task 3", deadline3);
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
 
         // Assert
         assertNotNull(items);

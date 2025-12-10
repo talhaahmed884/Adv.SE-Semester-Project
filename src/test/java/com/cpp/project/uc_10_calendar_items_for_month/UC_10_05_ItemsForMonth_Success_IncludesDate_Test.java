@@ -54,7 +54,7 @@ public class UC_10_05_ItemsForMonth_Success_IncludesDate_Test extends BaseIntegr
         int month = nowUTC.getMonthValue();
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
 
         // Assert
         assertNotNull(items);

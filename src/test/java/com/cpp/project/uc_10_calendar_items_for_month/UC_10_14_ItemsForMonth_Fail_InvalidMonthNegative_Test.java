@@ -39,9 +39,7 @@ public class UC_10_14_ItemsForMonth_Fail_InvalidMonthNegative_Test extends BaseI
         int year = cal.get(Calendar.YEAR);
 
         // Act & Assert
-        CalendarException exception = assertThrows(CalendarException.class, () -> {
-            calendarService.getItemsForMonth(year, -1, user.getId());
-        });
+        CalendarException exception = assertThrows(CalendarException.class, () -> calendarService.getItemsForMonth(year, -1, user.getId(), "UTC"));
 
         assertEquals("CALENDAR_001", exception.getCode());
     }

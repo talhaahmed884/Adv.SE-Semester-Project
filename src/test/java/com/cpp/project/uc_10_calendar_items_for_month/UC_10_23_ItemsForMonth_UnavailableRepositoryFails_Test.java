@@ -43,7 +43,7 @@ public class UC_10_23_ItemsForMonth_UnavailableRepositoryFails_Test {
                 .thenThrow(new RuntimeException("Database connection failed"));
 
         // Act & Assert - Should throw exception when repository fails
-        assertThrows(RuntimeException.class, () -> calendarService.getItemsForMonth(year, month, userId));
+        assertThrows(RuntimeException.class, () -> calendarService.getItemsForMonth(year, month, userId, "UTC"));
 
         verify(courseRepository, times(1)).findByUserId(userId);
     }

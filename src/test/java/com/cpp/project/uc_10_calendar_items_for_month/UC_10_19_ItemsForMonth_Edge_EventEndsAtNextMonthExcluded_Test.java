@@ -57,7 +57,7 @@ public class UC_10_19_ItemsForMonth_Edge_EventEndsAtNextMonthExcluded_Test exten
         courseService.addTaskToCourse(courseId, "Next Month Task", nextMonthStart, "Description");
 
         // Act - Query for current month
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
 
         // Assert - Should not include next month's task
         assertNotNull(items);

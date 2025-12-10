@@ -58,10 +58,10 @@ public class CalendarScreen extends StatefulScreen implements CalendarMediator {
     // ========== Facade Pattern: Simplified Data Access ==========
 
     @Override
-    public List<CalendarItemDTO> getItemsForMonth(int year, int month, UUID userId) {
+    public List<CalendarItemDTO> getItemsForMonth(int year, int month, UUID userId, String timezoneId) {
         // Always fetch fresh from service
         try {
-            return calendarService.getItemsForMonth(year, month, currentUser.getId());
+            return calendarService.getItemsForMonth(year, month, currentUser.getId(), timezoneId);
         } catch (Exception e) {
             return List.of();
         }

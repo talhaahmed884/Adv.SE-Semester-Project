@@ -33,7 +33,7 @@ public class UC_10_13_ItemsForMonth_Fail_NoUser_Test extends BaseIntegrationTest
         int month = now.getMonthValue();
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, nonExistentUserId);
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, nonExistentUserId, "UTC");
 
         // Assert - Should return empty list (no exception thrown)
         assertNotNull(items);

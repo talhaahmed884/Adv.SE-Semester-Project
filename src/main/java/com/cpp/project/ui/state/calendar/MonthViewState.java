@@ -48,7 +48,7 @@ public class MonthViewState implements ScreenState {
         currentYear = mediator.getCurrentYear();
         currentMonth = mediator.getCurrentMonth();
         calendarItems = mediator.getItemsForMonth(currentYear, currentMonth,
-                java.util.UUID.randomUUID()); // Will be updated to use actual user ID
+                java.util.UUID.randomUUID(), ZoneId.systemDefault().getId()); // Will be updated to use actual user ID
 
         // Create renderers once and cache them (performance optimization)
         gridRenderer = new CalendarGridRenderer(currentYear, currentMonth, calendarItems);
@@ -114,7 +114,7 @@ public class MonthViewState implements ScreenState {
         currentYear = mediator.getCurrentYear();
         currentMonth = mediator.getCurrentMonth();
         calendarItems = mediator.getItemsForMonth(currentYear, currentMonth,
-                java.util.UUID.randomUUID()); // Will be updated to use actual user ID
+                java.util.UUID.randomUUID(), ZoneId.systemDefault().getId()); // Will be updated to use actual user ID
 
         // Update cached renderers with new data
         gridRenderer = new CalendarGridRenderer(currentYear, currentMonth, calendarItems);

@@ -65,7 +65,7 @@ public class UC_10_21_ItemsForMonth_Security_NoPrivileges_Test extends BaseInteg
         listAppender.list.clear();
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
 
         // Assert - Check that logs don't contain sensitive data
         assertNotNull(items);

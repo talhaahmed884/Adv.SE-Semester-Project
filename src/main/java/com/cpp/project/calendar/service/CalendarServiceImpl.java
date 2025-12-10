@@ -46,8 +46,8 @@ public class CalendarServiceImpl implements CalendarService {
     }
 
     @Override
-    public List<CalendarItemDTO> getItemsForMonth(int year, int month, UUID userId) {
-        logger.info("Getting calendar items for user {} for {}/{}", userId, month, year);
+    public List<CalendarItemDTO> getItemsForMonth(int year, int month, UUID userId, String timezoneId) {
+        logger.info("Getting calendar items for user {} for {}/{} in timezone {}", userId, month, year, timezoneId);
 
         // Validate date parameters
         ValidationResult dateValidation = dateValidator.validate(
@@ -57,12 +57,22 @@ public class CalendarServiceImpl implements CalendarService {
             throw new CalendarException(CalendarErrorCode.INVALID_DATE, dateValidation.getFirstError());
         }
 
-        // Calculate date range for the month in UTC
-        ZonedDateTime startUTC = ZonedDateTime.of(year, month, 1, 0, 0, 0, 0, ZoneId.of("UTC"));
-        Instant startDate = startUTC.toInstant();
+        // Parse and validate timezone
+        ZoneId userZone;
+        try {
+            userZone = ZoneId.of(timezoneId);
+        } catch (Exception e) {
+            logger.error("Invalid timezone ID: {}", timezoneId, e);
+            throw new CalendarException(CalendarErrorCode.INVALID_DATE, "Invalid timezone: " + timezoneId);
+        }
 
-        ZonedDateTime endUTC = startUTC.plusMonths(1).minusNanos(1);
-        Instant endDate = endUTC.toInstant();
+        // Calculate date range for the month in user's timezone, then convert to UTC
+        // The year/month parameters represent the user's timezone month
+        ZonedDateTime startLocal = ZonedDateTime.of(year, month, 1, 0, 0, 0, 0, userZone);
+        Instant startDate = startLocal.toInstant(); // Converts to UTC for DB query
+
+        ZonedDateTime endLocal = startLocal.plusMonths(1).minusNanos(1);
+        Instant endDate = endLocal.toInstant(); // Converts to UTC for DB query
 
         List<CalendarItemDTO> items = new ArrayList<>();
 

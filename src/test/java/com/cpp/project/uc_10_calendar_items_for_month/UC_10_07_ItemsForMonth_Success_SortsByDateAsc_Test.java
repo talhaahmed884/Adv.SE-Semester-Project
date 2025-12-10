@@ -61,7 +61,7 @@ public class UC_10_07_ItemsForMonth_Success_SortsByDateAsc_Test extends BaseInte
         courseService.addTaskToCourse(courseId, "Middle Task", middleDeadline, "Description");
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
 
         // Assert - Should be sorted by date ascending
         assertNotNull(items);

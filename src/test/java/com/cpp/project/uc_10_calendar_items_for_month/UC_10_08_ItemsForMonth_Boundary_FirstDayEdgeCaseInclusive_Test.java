@@ -55,7 +55,7 @@ public class UC_10_08_ItemsForMonth_Boundary_FirstDayEdgeCaseInclusive_Test exte
         courseService.addTaskToCourse(courseId, "First Day Task", firstDayDeadline, "Description");
 
         // Act
-        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId());
+        List<CalendarItemDTO> items = calendarService.getItemsForMonth(year, month, user.getId(), "UTC");
 
         // Assert - Should include task on first day
         assertNotNull(items);
