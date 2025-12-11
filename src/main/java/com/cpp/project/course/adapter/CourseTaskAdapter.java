@@ -17,6 +17,7 @@ public class CourseTaskAdapter {
 
         return CourseTaskDTO.builder()
                 .id(task.getId())
+                .courseId(task.getCourseId())
                 .name(task.getName())
                 .description(task.getDescription())
                 .deadline(task.getDeadline())

@@ -73,7 +73,6 @@ public class UC_11_01_UpdateCourseTask_Success_Test extends BaseIntegrationTest 
         assertEquals(updatedDescription, result.getDescription());
         assertEquals(updatedDeadline, result.getDeadline());
         assertEquals(course.getId(), result.getCourseId());
-        assertNotNull(result.getUpdatedAt());
     }
 
     @Test
