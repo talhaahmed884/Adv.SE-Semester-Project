@@ -231,4 +231,57 @@ public class CourseController {
 
         return ResponseEntity.ok(response);
     }
+
+    /**
+     * Update a task
+     * PUT /api/courses/{courseId}/tasks/{taskId}
+     */
+    @PutMapping("/{courseId}/tasks/{taskId}")
+    public ResponseEntity<ApiSuccessResponse<CourseTaskDTO>> updateTask(
+            @PathVariable UUID courseId,
+            @PathVariable UUID taskId,
+            @RequestBody UpdateTaskRequestDTO request) {
+
+        // Validate request
+        if (request.isEmpty()) {
+            throw new CourseException(CourseErrorCode.INVALID_TASK_DATA,
+                    "At least one field (name, deadline, or description) must be provided");
+        }
+
+        CourseTaskDTO task = courseService.updateTask(
+                courseId,
+                taskId,
+                request.getName(),
+                request.getDeadline(),
+                request.getDescription()
+        );
+
+        ApiSuccessResponse<CourseTaskDTO> response = ApiSuccessResponse.<CourseTaskDTO>builder()
+                .data(task)
+                .message("Task updated successfully")
+                .statusCode(HttpStatus.OK.value())
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Delete a task
+     * DELETE /api/courses/{courseId}/tasks/{taskId}
+     */
+    @DeleteMapping("/{courseId}/tasks/{taskId}")
+    public ResponseEntity<ApiSuccessResponse<String>> deleteTask(
+            @PathVariable UUID courseId,
+            @PathVariable UUID taskId) {
+
+        courseService.deleteTask(courseId, taskId);
+
+        ApiSuccessResponse<String> response = ApiSuccessResponse.<String>builder()
+                .data("Task deleted successfully")
+                .message("Deletion successful")
+                .statusCode(HttpStatus.OK.value())
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
 }

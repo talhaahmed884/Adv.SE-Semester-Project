@@ -291,7 +291,22 @@ public class CourseServiceImpl implements CourseService {
         logger.info("Updating task: {} in course: {}", taskId, courseId);
 
         try {
-            // Step 1: Find course and task
+            // Step 1: Sanitize input
+            String sanitizedName = taskSanitizer.sanitizeName(name);
+            String sanitizedDescription = taskSanitizer.sanitizeDescription(description);
+
+            // Step 2: Validate sanitized input
+            ValidationResult nameValidation = validationService.validateTaskName(sanitizedName);
+            if (!nameValidation.isValid()) {
+                throw new CourseException(CourseErrorCode.INVALID_TASK_NAME, nameValidation.getFirstError());
+            }
+
+            ValidationResult deadlineValidation = validationService.validateTaskDeadline(deadline);
+            if (!deadlineValidation.isValid()) {
+                throw new CourseException(CourseErrorCode.INVALID_TASK_DEADLINE, deadlineValidation.getFirstError());
+            }
+
+            // Step 3: Find course and task
             Course course = courseRepository.findById(courseId)
                     .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", courseId));
 
@@ -300,12 +315,12 @@ public class CourseServiceImpl implements CourseService {
                     .findFirst()
                     .orElseThrow(() -> new CourseException(CourseErrorCode.TASK_NOT_FOUND, taskId));
 
-            // Step 2: Update task fields
-            task.setName(name);
-            task.setDescription(description);
+            // Step 4: Update task fields
+            task.setName(sanitizedName);
+            task.setDescription(sanitizedDescription);
             task.setDeadline(deadline);
 
-            // Step 3: Save changes
+            // Step 5: Save changes
             courseRepository.save(course);
             logger.info("Task updated successfully");
 
