@@ -284,4 +284,66 @@ public class CourseServiceImpl implements CourseService {
             throw new CourseException(CourseErrorCode.TASK_UPDATE_FAILED, e, e.getMessage());
         }
     }
+
+    @Override
+    @Transactional
+    public CourseTaskDTO updateTask(UUID courseId, UUID taskId, String name, Instant deadline, String description) {
+        logger.info("Updating task: {} in course: {}", taskId, courseId);
+
+        try {
+            // Step 1: Find course and task
+            Course course = courseRepository.findById(courseId)
+                    .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", courseId));
+
+            CourseTask task = course.getTasks().stream()
+                    .filter(t -> t.getId().equals(taskId))
+                    .findFirst()
+                    .orElseThrow(() -> new CourseException(CourseErrorCode.TASK_NOT_FOUND, taskId));
+
+            // Step 2: Update task fields
+            task.setName(name);
+            task.setDescription(description);
+            task.setDeadline(deadline);
+
+            // Step 3: Save changes
+            courseRepository.save(course);
+            logger.info("Task updated successfully");
+
+            return CourseTaskAdapter.toDTO(task);
+        } catch (CourseException e) {
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error updating task: {}", taskId, e);
+            throw new CourseException(CourseErrorCode.TASK_UPDATE_FAILED, e, e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public void deleteTask(UUID courseId, UUID taskId) {
+        logger.info("Deleting task: {} from course: {}", taskId, courseId);
+
+        try {
+            // Step 1: Find course
+            Course course = courseRepository.findById(courseId)
+                    .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", courseId));
+
+            // Step 2: Find and remove task
+            CourseTask task = course.getTasks().stream()
+                    .filter(t -> t.getId().equals(taskId))
+                    .findFirst()
+                    .orElseThrow(() -> new CourseException(CourseErrorCode.TASK_NOT_FOUND, taskId));
+
+            course.getTasks().remove(task);
+
+            // Step 3: Save changes
+            courseRepository.save(course);
+            logger.info("Task deleted successfully");
+        } catch (CourseException e) {
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error deleting task: {}", taskId, e);
+            throw new CourseException(CourseErrorCode.TASK_DELETE_FAILED, e, e.getMessage());
+        }
+    }
 }

@@ -179,4 +179,28 @@ public class DateInput extends AbstractComponent {
         focusedField = 0;
         errorMessage = "";
     }
+
+    /**
+     * Set the date fields from an Instant
+     * Converts UTC instant to local timezone for display
+     *
+     * @param instant The instant to set
+     */
+    public void setDate(Instant instant) {
+        if (instant == null) {
+            clear();
+            return;
+        }
+
+        java.time.ZonedDateTime zonedDateTime = instant.atZone(java.time.ZoneId.systemDefault());
+
+        year = new StringBuilder(String.valueOf(zonedDateTime.getYear()));
+        month = new StringBuilder(String.valueOf(zonedDateTime.getMonthValue()));
+        day = new StringBuilder(String.valueOf(zonedDateTime.getDayOfMonth()));
+        hour = new StringBuilder(String.valueOf(zonedDateTime.getHour()));
+        minute = new StringBuilder(String.valueOf(zonedDateTime.getMinute()));
+
+        focusedField = 0;
+        errorMessage = "";
+    }
 }

@@ -23,6 +23,7 @@ public enum CourseErrorCode implements ErrorCode {
     INVALID_TASK_DEADLINE("COURSE_TASK_004", "Invalid task deadline: %s", HttpStatus.BAD_REQUEST),
     TASK_CREATION_FAILED("COURSE_TASK_005", "Failed to create task: %s", HttpStatus.INTERNAL_SERVER_ERROR),
     TASK_UPDATE_FAILED("COURSE_TASK_006", "Failed to update task: %s", HttpStatus.INTERNAL_SERVER_ERROR),
+    TASK_DELETE_FAILED("COURSE_TASK_007", "Failed to delete task: %s", HttpStatus.INTERNAL_SERVER_ERROR),
 
     // Validation errors
     INVALID_COURSE_DATA("COURSE_VAL_001", "Invalid course data: %s", HttpStatus.BAD_REQUEST),

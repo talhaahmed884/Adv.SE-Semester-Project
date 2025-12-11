@@ -93,4 +93,68 @@ public interface CourseMediator extends ScreenMediator {
      * @param taskId   The task to update
      */
     void onUpdateTaskProgress(UUID courseId, UUID taskId);
+
+    /**
+     * Called when user wants to edit a course
+     * Mediator transitions to edit course state
+     *
+     * @param courseId The course to edit
+     */
+    void onEditCourse(UUID courseId);
+
+    /**
+     * Called when a course is updated
+     * Mediator decides next state (usually refresh details view)
+     *
+     * @param courseId The course that was updated
+     */
+    void onCourseUpdated(UUID courseId);
+
+    /**
+     * Called when user wants to delete a course
+     * Mediator transitions to delete confirmation state
+     *
+     * @param courseId The course to delete
+     */
+    void onDeleteCourse(UUID courseId);
+
+    /**
+     * Called when a course is deleted
+     * Mediator decides next state (usually return to list view with message)
+     */
+    void onCourseDeleted();
+
+    /**
+     * Called when user wants to edit a task
+     * Mediator transitions to edit task state
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task to edit
+     */
+    void onEditTask(UUID courseId, UUID taskId);
+
+    /**
+     * Called when a task is updated
+     * Mediator decides next state (usually refresh details view)
+     *
+     * @param courseId The course containing the task
+     */
+    void onTaskUpdated(UUID courseId);
+
+    /**
+     * Called when user wants to delete a task
+     * Mediator transitions to delete confirmation state
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task to delete
+     */
+    void onDeleteTask(UUID courseId, UUID taskId);
+
+    /**
+     * Called when a task is deleted
+     * Mediator decides next state (usually refresh details view)
+     *
+     * @param courseId The course that was modified
+     */
+    void onTaskDeleted(UUID courseId);
 }
