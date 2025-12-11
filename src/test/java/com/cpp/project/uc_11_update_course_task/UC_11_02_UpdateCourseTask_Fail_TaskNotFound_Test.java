@@ -48,15 +48,13 @@ public class UC_11_02_UpdateCourseTask_Fail_TaskNotFound_Test extends BaseIntegr
         Instant deadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.updateTask(
-                    course.getId(),
-                    nonExistentTaskId,
-                    "Updated Name",
-                    deadline,
-                    "Updated description"
-            );
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.updateTask(
+                course.getId(),
+                nonExistentTaskId,
+                "Updated Name",
+                deadline,
+                "Updated description"
+        ));
 
         assertEquals(CourseErrorCode.TASK_NOT_FOUND, exception.getErrorCode());
         assertTrue(exception.getMessage().contains(nonExistentTaskId.toString()));
@@ -66,7 +64,7 @@ public class UC_11_02_UpdateCourseTask_Fail_TaskNotFound_Test extends BaseIntegr
     @DisplayName("UC-11.02: Fails to update task with non-existent course ID")
     public void testUpdateTaskWithNonExistentCourse() {
         // Arrange - Create a test user
-        UserDTO user = authenticationService.signUp(new SignUpRequestDTO(
+        authenticationService.signUp(new SignUpRequestDTO(
                 "Test User",
                 "test.user.updatetask.uc1102b@test.com",
                 "Password123!"
@@ -78,15 +76,13 @@ public class UC_11_02_UpdateCourseTask_Fail_TaskNotFound_Test extends BaseIntegr
         Instant deadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(1).toInstant();
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.updateTask(
-                    nonExistentCourseId,
-                    nonExistentTaskId,
-                    "Updated Name",
-                    deadline,
-                    "Updated description"
-            );
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.updateTask(
+                nonExistentCourseId,
+                nonExistentTaskId,
+                "Updated Name",
+                deadline,
+                "Updated description"
+        ));
 
         assertEquals(CourseErrorCode.COURSE_NOT_FOUND, exception.getErrorCode());
         assertTrue(exception.getMessage().contains(nonExistentCourseId.toString()));

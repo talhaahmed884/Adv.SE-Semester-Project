@@ -44,9 +44,7 @@ public class UC_12_02_DeleteCourseTask_Fail_TaskNotFound_Test extends BaseIntegr
         UUID nonExistentTaskId = UUID.randomUUID();
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.deleteTask(course.getId(), nonExistentTaskId);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.deleteTask(course.getId(), nonExistentTaskId));
 
         assertEquals(CourseErrorCode.TASK_NOT_FOUND, exception.getErrorCode());
         assertTrue(exception.getMessage().contains(nonExistentTaskId.toString()));
@@ -60,9 +58,7 @@ public class UC_12_02_DeleteCourseTask_Fail_TaskNotFound_Test extends BaseIntegr
         UUID nonExistentTaskId = UUID.randomUUID();
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.deleteTask(nonExistentCourseId, nonExistentTaskId);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.deleteTask(nonExistentCourseId, nonExistentTaskId));
 
         assertEquals(CourseErrorCode.COURSE_NOT_FOUND, exception.getErrorCode());
         assertTrue(exception.getMessage().contains(nonExistentCourseId.toString()));
@@ -95,9 +91,7 @@ public class UC_12_02_DeleteCourseTask_Fail_TaskNotFound_Test extends BaseIntegr
         courseService.deleteTask(course.getId(), task.getId());
 
         // Act & Assert - Try to delete again
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.deleteTask(course.getId(), task.getId());
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.deleteTask(course.getId(), task.getId()));
 
         assertEquals(CourseErrorCode.TASK_NOT_FOUND, exception.getErrorCode());
     }

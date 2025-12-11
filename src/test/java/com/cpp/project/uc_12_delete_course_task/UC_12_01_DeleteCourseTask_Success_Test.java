@@ -181,9 +181,7 @@ public class UC_12_01_DeleteCourseTask_Success_Test extends BaseIntegrationTest 
         courseService.deleteTask(course.getId(), task.getId());
 
         // Assert - Attempting to update the deleted task should fail
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.updateTaskProgress(course.getId(), task.getId(), 50);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.updateTaskProgress(course.getId(), task.getId(), 50));
 
         assertEquals(CourseErrorCode.TASK_NOT_FOUND, exception.getErrorCode());
     }
