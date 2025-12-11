@@ -83,4 +83,68 @@ public interface ToDoListMediator extends ScreenMediator {
      * @param listId The list to add task to
      */
     void onAddTaskToList(UUID listId);
+
+    /**
+     * Called when user wants to edit a list
+     * Mediator transitions to edit list state
+     *
+     * @param listId The list to edit
+     */
+    void onEditList(UUID listId);
+
+    /**
+     * Called when a list is updated
+     * Mediator decides next state (usually refresh details view)
+     *
+     * @param listId The list that was updated
+     */
+    void onListUpdated(UUID listId);
+
+    /**
+     * Called when user wants to delete a list
+     * Mediator transitions to delete confirmation state
+     *
+     * @param listId The list to delete
+     */
+    void onDeleteList(UUID listId);
+
+    /**
+     * Called when a list is deleted
+     * Mediator decides next state (usually return to list view with message)
+     */
+    void onListDeleted();
+
+    /**
+     * Called when user wants to edit a task
+     * Mediator transitions to edit task state
+     *
+     * @param listId The list containing the task
+     * @param taskId The task to edit
+     */
+    void onEditTask(UUID listId, UUID taskId);
+
+    /**
+     * Called when a task is updated
+     * Mediator decides next state (usually refresh details view)
+     *
+     * @param listId The list containing the task
+     */
+    void onTaskUpdated(UUID listId);
+
+    /**
+     * Called when user wants to delete a task
+     * Mediator transitions to delete confirmation state
+     *
+     * @param listId The list containing the task
+     * @param taskId The task to delete
+     */
+    void onDeleteTask(UUID listId, UUID taskId);
+
+    /**
+     * Called when a task is deleted
+     * Mediator decides next state (usually refresh details view)
+     *
+     * @param listId The list that was modified
+     */
+    void onTaskDeleted(UUID listId);
 }

@@ -93,16 +93,17 @@ public class ListDetailsState implements ScreenState {
         graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
 
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "F2: Add Task | F3: Mark Complete | ESC: Back");
+        graphics.putString(3, 3, "F2: Add Task | F3: Mark Complete | F4: Edit List | F5: Delete List");
+        graphics.putString(3, 4, "F6: Edit Task | F7: Delete Task | ESC: Back");
 
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         int completed = (int) todoList.getTasks().stream()
                 .filter(t -> TaskStatus.COMPLETED.equals(t.getStatus()))
                 .count();
         String listTitle = todoList.getName() + " (" + completed + "/" + todoList.getTasks().size() + " completed)";
-        graphics.putString(3, 5, "List: " + listTitle);
+        graphics.putString(3, 6, "List: " + listTitle);
 
-        taskSelection.render(graphics, 3, 7);
+        taskSelection.render(graphics, 3, 8);
 
         messagePanel.render(graphics, 3, size.getRows() - 2);
     }
@@ -117,6 +118,32 @@ public class ListDetailsState implements ScreenState {
             return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.F3) {
             return handleMarkComplete();
+        } else if (keyStroke.getKeyType() == KeyType.F4) {
+            // Notify mediator to show edit list form
+            mediator.onEditList(listId);
+            return null; // Mediator handles transition
+        } else if (keyStroke.getKeyType() == KeyType.F5) {
+            // Notify mediator to show delete list confirmation
+            mediator.onDeleteList(listId);
+            return null; // Mediator handles transition
+        } else if (keyStroke.getKeyType() == KeyType.F6) {
+            if (taskSelection.isEmpty()) {
+                messagePanel.setError("No tasks available to edit");
+                return this;
+            }
+            // Notify mediator to show edit task form
+            ToDoListTaskDTO selectedTask = taskSelection.getSelectedItem();
+            mediator.onEditTask(listId, selectedTask.getId());
+            return null; // Mediator handles transition
+        } else if (keyStroke.getKeyType() == KeyType.F7) {
+            if (taskSelection.isEmpty()) {
+                messagePanel.setError("No tasks available to delete");
+                return this;
+            }
+            // Notify mediator to show delete task confirmation
+            ToDoListTaskDTO selectedTask = taskSelection.getSelectedItem();
+            mediator.onDeleteTask(listId, selectedTask.getId());
+            return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.Escape) {
             // Notify mediator to return to list view
             mediator.onReturnToListView();

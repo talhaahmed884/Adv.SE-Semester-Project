@@ -20,6 +20,7 @@ public enum ToDoListErrorCode implements ErrorCode {
     INVALID_TASK_DEADLINE("TODO_TASK_003", "Invalid task deadline: %s", HttpStatus.BAD_REQUEST),
     TASK_CREATION_FAILED("TODO_TASK_004", "Failed to create task: %s", HttpStatus.INTERNAL_SERVER_ERROR),
     TASK_UPDATE_FAILED("TODO_TASK_005", "Failed to update task: %s", HttpStatus.INTERNAL_SERVER_ERROR),
+    TASK_DELETE_FAILED("TODO_TASK_006", "Failed to delete task: %s", HttpStatus.INTERNAL_SERVER_ERROR),
 
     // Validation errors
     INVALID_TODO_LIST_DATA("TODO_VAL_001", "Invalid todo list data: %s", HttpStatus.BAD_REQUEST),
