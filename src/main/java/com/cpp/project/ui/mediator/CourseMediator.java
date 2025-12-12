@@ -1,6 +1,7 @@
 package com.cpp.project.ui.mediator;
 
 import com.cpp.project.course.dto.CourseDTO;
+import com.cpp.project.timer.dto.TaskTimerSummaryDTO;
 import com.cpp.project.ui.core.ScreenMediator;
 
 import java.util.List;
@@ -157,4 +158,52 @@ public interface CourseMediator extends ScreenMediator {
      * @param courseId The course that was modified
      */
     void onTaskDeleted(UUID courseId);
+
+    // ========== Timer Feature: Data Access Methods ==========
+
+    /**
+     * Get timer summary for a specific course task
+     * Facade method for states to access timer data
+     *
+     * @param courseTaskId The task ID to get timer summary for
+     * @return Timer summary with total time, sessions, and active timer
+     */
+    TaskTimerSummaryDTO getTimerSummary(UUID courseTaskId);
+
+    // ========== Timer Feature: Action Notification Methods ==========
+
+    /**
+     * Called when user wants to view timer details for a task
+     * Mediator transitions to timer view state
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task to view timer for
+     */
+    void onViewTimerDetails(UUID courseId, UUID taskId);
+
+    /**
+     * Called when a timer is started successfully
+     * Mediator decides next state (usually refresh timer view with success message)
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task that timer was started for
+     */
+    void onTimerStarted(UUID courseId, UUID taskId);
+
+    /**
+     * Called when a timer is stopped successfully
+     * Mediator decides next state (usually refresh timer view with success message)
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task that timer was stopped for
+     */
+    void onTimerStopped(UUID courseId, UUID taskId);
+
+    /**
+     * Called when a timer operation fails
+     * Mediator shows error message in current state
+     *
+     * @param errorMessage The error message to display
+     */
+    void onTimerError(String errorMessage);
 }

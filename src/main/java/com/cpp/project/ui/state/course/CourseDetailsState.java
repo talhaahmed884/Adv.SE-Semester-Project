@@ -2,10 +2,13 @@ package com.cpp.project.ui.state.course;
 
 import com.cpp.project.course.dto.CourseDTO;
 import com.cpp.project.course.dto.CourseTaskDTO;
+import com.cpp.project.timer.dto.TaskTimerSummaryDTO;
+import com.cpp.project.timer.entity.TimerStatus;
 import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.CourseMediator;
+import com.cpp.project.ui.util.TimerFormatUtils;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -14,11 +17,13 @@ import com.googlecode.lanterna.input.KeyType;
 
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
  * State 3: Course Details View
- *
+ * <p>
  * Responsibilities:
  * - Display details of a specific course
  * - Handle adding tasks and updating progress
@@ -33,17 +38,14 @@ public class CourseDetailsState implements ScreenState {
     private final SelectionList<CourseTaskDTO> taskList;
     private final MessagePanel messagePanel;
     private CourseDTO course; // Cached during render cycle
+    private Map<UUID, TaskTimerSummaryDTO> timerSummaries; // Timer data for each task
 
     public CourseDetailsState(CourseMediator mediator, UUID courseId, String successMessage) {
         this.mediator = mediator;
         this.courseId = courseId;
+        this.timerSummaries = new HashMap<>();
 
-        this.taskList = new SelectionList<>("Tasks", task ->
-                String.format("%s - %s [%d%%] (%s)",
-                        task.getName(),
-                        task.getStatus(),
-                        task.getProgress(),
-                        dateFormat.format(task.getDeadline()))
+        this.taskList = new SelectionList<>("Tasks", this::formatTaskWithTimer
         );
         taskList.setFocused(true);
 
@@ -53,12 +55,67 @@ public class CourseDetailsState implements ScreenState {
         }
     }
 
+    /**
+     * Format task display with timer information
+     */
+    private String formatTaskWithTimer(CourseTaskDTO task) {
+        StringBuilder display = new StringBuilder();
+
+        // Basic task info
+        display.append(String.format("%s - %s [%d%%] (%s)",
+                task.getName(),
+                task.getStatus(),
+                task.getProgress(),
+                dateFormat.format(task.getDeadline())));
+
+        // Add timer information if available
+        TaskTimerSummaryDTO timerSummary = timerSummaries.get(task.getId());
+        if (timerSummary != null) {
+            // Show total time
+            if (timerSummary.getTotalTimeMillis() > 0) {
+                display.append(" [Timer: ")
+                        .append(TimerFormatUtils.formatDuration(timerSummary.getTotalTimeMillis()))
+                        .append("]");
+            }
+
+            // Show running indicator
+            if (timerSummary.getActiveSession() != null &&
+                    timerSummary.getActiveSession().getStatus() == TimerStatus.RUNNING) {
+                display.append(" [RUNNING]");
+            }
+        }
+
+        return display.toString();
+    }
+
     @Override
     public void onEnter() {
         // Fetch fresh data when entering this state
         course = mediator.getCourseById(courseId);
         if (course.getTasks() != null) {
+            // Load timer summaries for all tasks
+            loadTimerSummaries();
+
             taskList.setItems(course.getTasks());
+        }
+    }
+
+    /**
+     * Load timer summaries for all tasks in the course
+     */
+    private void loadTimerSummaries() {
+        timerSummaries.clear();
+        if (course.getTasks() != null) {
+            for (CourseTaskDTO task : course.getTasks()) {
+                try {
+                    TaskTimerSummaryDTO summary = mediator.getTimerSummary(task.getId());
+                    if (summary != null) {
+                        timerSummaries.put(task.getId(), summary);
+                    }
+                } catch (Exception e) {
+                    // Silently ignore - timer data is optional
+                }
+            }
         }
     }
 
@@ -74,7 +131,7 @@ public class CourseDetailsState implements ScreenState {
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
         graphics.putString(3, 3, "F2: Add Task | F3: Update Progress | F4: Edit Course | F5: Delete Course");
-        graphics.putString(3, 4, "F6: Edit Task | F7: Delete Task | ESC: Back");
+        graphics.putString(3, 4, "F6: Edit Task | F7: Delete Task | F8: View Timer | ESC: Back");
 
         // Course info
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
@@ -131,6 +188,15 @@ public class CourseDetailsState implements ScreenState {
             // Notify mediator to show delete task confirmation
             CourseTaskDTO selectedTask = taskList.getSelectedItem();
             mediator.onDeleteTask(courseId, selectedTask.getId());
+            return null; // Mediator handles transition
+        } else if (keyStroke.getKeyType() == KeyType.F8) {
+            if (taskList.isEmpty()) {
+                messagePanel.setError("No tasks available");
+                return this;
+            }
+            // Notify mediator to show timer view
+            CourseTaskDTO selectedTask = taskList.getSelectedItem();
+            mediator.onViewTimerDetails(courseId, selectedTask.getId());
             return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.Escape) {
             // Notify mediator to return to course list

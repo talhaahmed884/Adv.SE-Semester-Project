@@ -2,6 +2,8 @@ package com.cpp.project.ui.screen;
 
 import com.cpp.project.course.dto.CourseDTO;
 import com.cpp.project.course.service.CourseService;
+import com.cpp.project.timer.dto.TaskTimerSummaryDTO;
+import com.cpp.project.timer.service.TimerService;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.core.StatefulScreen;
 import com.cpp.project.ui.mediator.CourseMediator;
@@ -30,11 +32,13 @@ import java.util.UUID;
 public class CourseManagementScreen extends StatefulScreen implements CourseMediator {
     private final UserDTO currentUser;
     private final CourseService courseService;
+    private final TimerService timerService;
 
-    public CourseManagementScreen(Screen screen, UserDTO currentUser, CourseService courseService) {
+    public CourseManagementScreen(Screen screen, UserDTO currentUser, CourseService courseService, TimerService timerService) {
         super(screen);
         this.currentUser = currentUser;
         this.courseService = courseService;
+        this.timerService = timerService;
         // Start with course list view
         this.currentState = createCourseListState(null);
         this.currentState.onEnter();
@@ -165,6 +169,42 @@ public class CourseManagementScreen extends StatefulScreen implements CourseMedi
         close();
     }
 
+    // ========== Timer Feature: Data Access ==========
+
+    @Override
+    public TaskTimerSummaryDTO getTimerSummary(UUID courseTaskId) {
+        // Always fetch fresh from service - no caching, no stale data
+        return timerService.getTimerSummaryByTaskId(courseTaskId);
+    }
+
+    // ========== Timer Feature: Action Handlers ==========
+
+    @Override
+    public void onViewTimerDetails(UUID courseId, UUID taskId) {
+        // User wants to view timer details for a task
+        transitionTo(createTimerViewState(courseId, taskId, null));
+    }
+
+    @Override
+    public void onTimerStarted(UUID courseId, UUID taskId) {
+        // Timer started successfully, refresh timer view with success message
+        transitionTo(createTimerViewState(courseId, taskId, "Timer started successfully!"));
+    }
+
+    @Override
+    public void onTimerStopped(UUID courseId, UUID taskId) {
+        // Timer stopped successfully, refresh timer view with success message
+        transitionTo(createTimerViewState(courseId, taskId, "Timer stopped successfully!"));
+    }
+
+    @Override
+    public void onTimerError(String errorMessage) {
+        // Error occurred in timer operation
+        // Current state should handle displaying this error via MessagePanel
+        // We'll refresh the current timer view state with the error message
+        // This is handled within the TimerViewState itself by catching exceptions
+    }
+
     // ========== Factory Method Pattern: State Creation ==========
 
     /**
@@ -258,5 +298,17 @@ public class CourseManagementScreen extends StatefulScreen implements CourseMedi
      */
     private DeleteCourseTaskState createDeleteTaskState(UUID courseId, UUID taskId) {
         return new DeleteCourseTaskState(this, courseService, courseId, taskId);
+    }
+
+    /**
+     * Factory method to create timer view state
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task to view timer for
+     * @param message  Optional success/error message to display
+     * @return New timer view state
+     */
+    private TimerViewState createTimerViewState(UUID courseId, UUID taskId, String message) {
+        return new TimerViewState(this, timerService, currentUser, courseId, taskId, message);
     }
 }

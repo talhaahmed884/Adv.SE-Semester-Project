@@ -2,6 +2,7 @@ package com.cpp.project.ui.screen;
 
 import com.cpp.project.calendar.service.CalendarService;
 import com.cpp.project.course.service.CourseService;
+import com.cpp.project.timer.service.TimerService;
 import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.component.menu.MenuItem;
@@ -30,6 +31,7 @@ public class MainMenuScreen extends UIScreen {
     private final CalendarService calendarService;
     private final UserService userService;
     private final UserCredentialService credentialService;
+    private final TimerService timerService;
     private final SelectionList<MenuItem> menuList;
 
     public MainMenuScreen(
@@ -39,7 +41,8 @@ public class MainMenuScreen extends UIScreen {
             ToDoListService toDoListService,
             CalendarService calendarService,
             UserService userService,
-            UserCredentialService credentialService) {
+            UserCredentialService credentialService,
+            TimerService timerService) {
         super(screen);
         this.currentUser = currentUser;
         this.courseService = courseService;
@@ -47,6 +50,7 @@ public class MainMenuScreen extends UIScreen {
         this.calendarService = calendarService;
         this.userService = userService;
         this.credentialService = credentialService;
+        this.timerService = timerService;
 
         // Create menu items
         this.menuList = new SelectionList<>("Main Menu", MenuItem::getLabel);
@@ -102,7 +106,7 @@ public class MainMenuScreen extends UIScreen {
     private void openCourseManagement() {
         try {
             CourseManagementScreen courseScreen = new CourseManagementScreen(
-                    screen, currentUser, courseService
+                    screen, currentUser, courseService, timerService
             );
             courseScreen.display();
         } catch (IOException e) {
