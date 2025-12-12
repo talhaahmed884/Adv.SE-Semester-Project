@@ -148,6 +148,7 @@ public class MainMenuScreen extends UIScreen {
     }
 
     private void logout() {
+        timerService.stopAllActiveTimersForUser(currentUser.getId());
         close();
     }
 }
