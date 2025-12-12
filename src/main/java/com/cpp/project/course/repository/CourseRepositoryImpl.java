@@ -164,4 +164,21 @@ public class CourseRepositoryImpl implements CourseRepository {
             return 0;
         }
     }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Optional<Course> findByCourseTaskId(UUID taskId) {
+        try {
+            TypedQuery<Course> query = entityManager.createQuery(
+                    "SELECT c FROM Course c JOIN c.tasks t WHERE t.id = :taskId", Course.class);
+            query.setParameter("taskId", taskId);
+            return Optional.ofNullable(query.getSingleResult());
+        } catch (NoResultException e) {
+            logger.debug("Course not found with task id: {}", taskId);
+            return Optional.empty();
+        } catch (Exception e) {
+            logger.error("Error finding course by task id: {}", taskId, e);
+            return Optional.empty();
+        }
+    }
 }

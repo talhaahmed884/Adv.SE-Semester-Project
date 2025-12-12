@@ -3,7 +3,9 @@ package com.cpp.project.common.controller.service;
 import com.cpp.project.authentication.dto.AuthResponseDTO;
 import com.cpp.project.authentication.service.AuthenticationService;
 import com.cpp.project.common.controller.dto.ApiSuccessResponse;
+import com.cpp.project.timer.service.TimerService;
 import com.cpp.project.user.dto.LoginRequestDTO;
+import com.cpp.project.user.dto.LogoutRequestDTO;
 import com.cpp.project.user.dto.SignUpRequestDTO;
 import com.cpp.project.user.dto.UserDTO;
 import com.cpp.project.user.entity.AuthenticationErrorCode;
@@ -19,9 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthController {
     private final AuthenticationService authenticationService;
+    private final TimerService timerService;
 
-    public AuthController(AuthenticationService authenticationService) {
+    public AuthController(AuthenticationService authenticationService, TimerService timerService) {
         this.authenticationService = authenticationService;
+        this.timerService = timerService;
     }
 
     @PostMapping("/signup")
@@ -63,6 +67,32 @@ public class AuthController {
         ApiSuccessResponse<AuthResponseDTO> response = ApiSuccessResponse.<AuthResponseDTO>builder()
                 .data(authResponse)
                 .message("Login successful")
+                .statusCode(HttpStatus.OK.value())
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Logout endpoint - stops all active timers for user
+     * POST /api/auth/logout
+     */
+    @PostMapping("/logout")
+    public ResponseEntity<ApiSuccessResponse<String>> logout(@RequestBody LogoutRequestDTO request) {
+
+        if (request.isEmpty()) {
+            throw new AuthenticationException(
+                    AuthenticationErrorCode.AUTHENTICATION_FAILED,
+                    "Invalid logout request: User ID is required"
+            );
+        }
+
+        // Stop all active timers for the user
+        timerService.stopAllActiveTimersForUser(request.getUserId());
+
+        ApiSuccessResponse<String> response = ApiSuccessResponse.<String>builder()
+                .data("Logout successful")
+                .message("All active timers stopped")
                 .statusCode(HttpStatus.OK.value())
                 .build();
 

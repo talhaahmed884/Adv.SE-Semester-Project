@@ -60,4 +60,12 @@ public interface CourseRepository {
      * Count total number of courses
      */
     long count();
+
+    /**
+     * Find a course that contains a specific task
+     *
+     * @param taskId the UUID of the course task
+     * @return Optional containing the course if found, empty otherwise
+     */
+    Optional<Course> findByCourseTaskId(UUID taskId);
 }
