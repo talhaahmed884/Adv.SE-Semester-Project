@@ -1,10 +1,7 @@
 package com.cpp.project.common;
 
 import com.cpp.project.authentication.service.AuthenticationService;
-import com.cpp.project.course.dto.AddTaskRequestDTO;
-import com.cpp.project.course.dto.CreateCourseRequestDTO;
-import com.cpp.project.course.dto.UpdateCourseRequestDTO;
-import com.cpp.project.course.dto.UpdateTaskProgressRequestDTO;
+import com.cpp.project.course.dto.*;
 import com.cpp.project.entity.BaseIntegrationTest;
 import com.cpp.project.user.dto.SignUpRequestDTO;
 import com.cpp.project.user.dto.UserDTO;
@@ -399,5 +396,272 @@ public class CourseControllerIntegrationTest extends BaseIntegrationTest {
                 .andExpect(jsonPath("$.data.progress").value(100))
                 .andExpect(jsonPath("$.message").value("Task marked as complete"))
                 .andExpect(jsonPath("$.statusCode").value(200));
+    }
+
+    @Test
+    @DisplayName("PUT /api/courses/{courseId}/tasks/{taskId} - Update Task Success (200 OK)")
+    public void testUpdateTaskSuccess() throws Exception {
+        // Create a course and add a task
+        CreateCourseRequestDTO createRequest = new CreateCourseRequestDTO(
+                "CS1108",
+                "Web Development",
+                testUserId
+        );
+
+        MvcResult createResult = mockMvc.perform(post("/api/courses")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String courseId = objectMapper.readTree(createResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        Instant originalDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(5).toInstant();
+
+        AddTaskRequestDTO taskRequest = new AddTaskRequestDTO(
+                "Original Task Name",
+                originalDeadline,
+                "Original description"
+        );
+
+        MvcResult taskResult = mockMvc.perform(post("/api/courses/" + courseId + "/tasks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(taskRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String taskId = objectMapper.readTree(taskResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        // Update the task
+        Instant newDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(10).toInstant();
+
+        UpdateTaskRequestDTO updateRequest = new UpdateTaskRequestDTO(
+                "Updated Task Name",
+                newDeadline,
+                "Updated description with more details"
+        );
+
+        mockMvc.perform(put("/api/courses/" + courseId + "/tasks/" + taskId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequest)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.name").value("Updated Task Name"))
+                .andExpect(jsonPath("$.data.description").value("Updated description with more details"))
+                .andExpect(jsonPath("$.message").value("Task updated successfully"))
+                .andExpect(jsonPath("$.statusCode").value(200));
+    }
+
+    @Test
+    @DisplayName("PUT /api/courses/{courseId}/tasks/{taskId} - Update Task Not Found (404)")
+    public void testUpdateTaskNotFound() throws Exception {
+        // Create a course
+        CreateCourseRequestDTO createRequest = new CreateCourseRequestDTO(
+                "CS1209",
+                "Mobile Development",
+                testUserId
+        );
+
+        MvcResult createResult = mockMvc.perform(post("/api/courses")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String courseId = objectMapper.readTree(createResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        // Try to update non-existent task
+        UUID nonExistentTaskId = UUID.randomUUID();
+        Instant deadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(5).toInstant();
+
+        UpdateTaskRequestDTO updateRequest = new UpdateTaskRequestDTO(
+                "Updated Name",
+                deadline,
+                "Updated description"
+        );
+
+        mockMvc.perform(put("/api/courses/" + courseId + "/tasks/" + nonExistentTaskId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequest)))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code").value("COURSE_TASK_001"))
+                .andExpect(jsonPath("$.statusCode").value(404));
+    }
+
+    @Test
+    @DisplayName("PUT /api/courses/{courseId}/tasks/{taskId} - Validation Error (400)")
+    public void testUpdateTaskValidationError() throws Exception {
+        // Create a course and add a task
+        CreateCourseRequestDTO createRequest = new CreateCourseRequestDTO(
+                "CS1310",
+                "Cloud Computing",
+                testUserId
+        );
+
+        MvcResult createResult = mockMvc.perform(post("/api/courses")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String courseId = objectMapper.readTree(createResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        Instant deadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(5).toInstant();
+
+        AddTaskRequestDTO taskRequest = new AddTaskRequestDTO(
+                "Task to Update",
+                deadline,
+                "Description"
+        );
+
+        MvcResult taskResult = mockMvc.perform(post("/api/courses/" + courseId + "/tasks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(taskRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String taskId = objectMapper.readTree(taskResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        // Try to update with empty request
+        UpdateTaskRequestDTO updateRequest = new UpdateTaskRequestDTO(
+                null,
+                null,
+                null
+        );
+
+        mockMvc.perform(put("/api/courses/" + courseId + "/tasks/" + taskId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(updateRequest)))
+                .andExpect(status().isBadRequest())
+                .andExpect(jsonPath("$.code").value("COURSE_VAL_002"))
+                .andExpect(jsonPath("$.statusCode").value(400));
+    }
+
+    @Test
+    @DisplayName("DELETE /api/courses/{courseId}/tasks/{taskId} - Delete Task Success (200 OK)")
+    public void testDeleteTaskSuccess() throws Exception {
+        // Create a course and add a task
+        CreateCourseRequestDTO createRequest = new CreateCourseRequestDTO(
+                "CS1411",
+                "Cybersecurity",
+                testUserId
+        );
+
+        MvcResult createResult = mockMvc.perform(post("/api/courses")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String courseId = objectMapper.readTree(createResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        Instant deadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(5).toInstant();
+
+        AddTaskRequestDTO taskRequest = new AddTaskRequestDTO(
+                "Task to Delete",
+                deadline,
+                "This task will be deleted"
+        );
+
+        MvcResult taskResult = mockMvc.perform(post("/api/courses/" + courseId + "/tasks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(taskRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String taskId = objectMapper.readTree(taskResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        // Delete the task
+        mockMvc.perform(delete("/api/courses/" + courseId + "/tasks/" + taskId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data").value("Task deleted successfully"))
+                .andExpect(jsonPath("$.message").value("Deletion successful"))
+                .andExpect(jsonPath("$.statusCode").value(200));
+
+        // Verify task is deleted by trying to get the course
+        mockMvc.perform(get("/api/courses/" + courseId))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.tasks").isEmpty());
+    }
+
+    @Test
+    @DisplayName("DELETE /api/courses/{courseId}/tasks/{taskId} - Delete Task Not Found (404)")
+    public void testDeleteTaskNotFound() throws Exception {
+        // Create a course
+        CreateCourseRequestDTO createRequest = new CreateCourseRequestDTO(
+                "CS1512",
+                "Blockchain",
+                testUserId
+        );
+
+        MvcResult createResult = mockMvc.perform(post("/api/courses")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String courseId = objectMapper.readTree(createResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        // Try to delete non-existent task
+        UUID nonExistentTaskId = UUID.randomUUID();
+
+        mockMvc.perform(delete("/api/courses/" + courseId + "/tasks/" + nonExistentTaskId))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code").value("COURSE_TASK_001"))
+                .andExpect(jsonPath("$.statusCode").value(404));
+    }
+
+    @Test
+    @DisplayName("DELETE /api/courses/{courseId}/tasks/{taskId} - Delete Task Twice (404)")
+    public void testDeleteTaskTwice() throws Exception {
+        // Create a course and add a task
+        CreateCourseRequestDTO createRequest = new CreateCourseRequestDTO(
+                "CS1613",
+                "IoT Systems",
+                testUserId
+        );
+
+        MvcResult createResult = mockMvc.perform(post("/api/courses")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String courseId = objectMapper.readTree(createResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        Instant deadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(5).toInstant();
+
+        AddTaskRequestDTO taskRequest = new AddTaskRequestDTO(
+                "Task to Delete Twice",
+                deadline,
+                "Test double deletion"
+        );
+
+        MvcResult taskResult = mockMvc.perform(post("/api/courses/" + courseId + "/tasks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(taskRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String taskId = objectMapper.readTree(taskResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        // Delete the task first time - success
+        mockMvc.perform(delete("/api/courses/" + courseId + "/tasks/" + taskId))
+                .andExpect(status().isOk());
+
+        // Try to delete again - should fail
+        mockMvc.perform(delete("/api/courses/" + courseId + "/tasks/" + taskId))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code").value("COURSE_TASK_001"))
+                .andExpect(jsonPath("$.statusCode").value(404));
     }
 }

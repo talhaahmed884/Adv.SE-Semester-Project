@@ -91,4 +91,24 @@ public interface CourseService {
      * @return Updated task DTO
      */
     CourseTaskDTO markTaskComplete(UUID courseId, UUID taskId);
+
+    /**
+     * Update a task
+     *
+     * @param courseId    Course ID
+     * @param taskId      Task ID
+     * @param name        New task name
+     * @param deadline    New task deadline
+     * @param description New task description
+     * @return Updated task DTO
+     */
+    CourseTaskDTO updateTask(UUID courseId, UUID taskId, String name, Instant deadline, String description);
+
+    /**
+     * Delete a task
+     *
+     * @param courseId Course ID
+     * @param taskId   Task ID
+     */
+    void deleteTask(UUID courseId, UUID taskId);
 }

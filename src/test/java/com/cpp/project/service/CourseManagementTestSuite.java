@@ -22,7 +22,9 @@ import org.junit.platform.suite.api.SuiteDisplayName;
         "com.cpp.project.uc_3_get_course_progress",
         "com.cpp.project.uc_4_add_course_task",
         "com.cpp.project.uc_5_update_course_progress",
-        "com.cpp.project.uc_6_mark_course_task_complete"
+        "com.cpp.project.uc_6_mark_course_task_complete",
+        "com.cpp.project.uc_11_update_course_task",
+        "com.cpp.project.uc_12_delete_course_task"
 })
 @SelectClasses({
         CourseControllerIntegrationTest.class

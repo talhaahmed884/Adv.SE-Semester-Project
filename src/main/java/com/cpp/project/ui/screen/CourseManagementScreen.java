@@ -105,6 +105,54 @@ public class CourseManagementScreen extends StatefulScreen implements CourseMedi
         transitionTo(createUpdateProgressState(courseId, taskId));
     }
 
+    @Override
+    public void onEditCourse(UUID courseId) {
+        // User wants to edit course, show edit form
+        transitionTo(createEditCourseState(courseId));
+    }
+
+    @Override
+    public void onCourseUpdated(UUID courseId) {
+        // Course was updated, refresh details view with success message
+        transitionTo(createCourseDetailsState(courseId, "Course updated successfully!"));
+    }
+
+    @Override
+    public void onDeleteCourse(UUID courseId) {
+        // User wants to delete course, show confirmation dialog
+        transitionTo(createDeleteCourseState(courseId));
+    }
+
+    @Override
+    public void onCourseDeleted() {
+        // Course was deleted, return to course list with success message
+        transitionTo(createCourseListState("Course deleted successfully!"));
+    }
+
+    @Override
+    public void onEditTask(UUID courseId, UUID taskId) {
+        // User wants to edit task, show edit form
+        transitionTo(createEditTaskState(courseId, taskId));
+    }
+
+    @Override
+    public void onTaskUpdated(UUID courseId) {
+        // Task was updated, refresh details view with success message
+        transitionTo(createCourseDetailsState(courseId, "Task updated successfully!"));
+    }
+
+    @Override
+    public void onDeleteTask(UUID courseId, UUID taskId) {
+        // User wants to delete task, show confirmation dialog
+        transitionTo(createDeleteTaskState(courseId, taskId));
+    }
+
+    @Override
+    public void onTaskDeleted(UUID courseId) {
+        // Task was deleted, refresh details view with success message
+        transitionTo(createCourseDetailsState(courseId, "Task deleted successfully!"));
+    }
+
     // ========== ScreenMediator: Core Methods ==========
 
     @Override
@@ -168,5 +216,47 @@ public class CourseManagementScreen extends StatefulScreen implements CourseMedi
      */
     private UpdateProgressState createUpdateProgressState(UUID courseId, UUID taskId) {
         return new UpdateProgressState(this, courseService, courseId, taskId);
+    }
+
+    /**
+     * Factory method to create edit course state
+     *
+     * @param courseId The course to edit
+     * @return New edit course state
+     */
+    private EditCourseState createEditCourseState(UUID courseId) {
+        return new EditCourseState(this, courseService, courseId);
+    }
+
+    /**
+     * Factory method to create delete course state
+     *
+     * @param courseId The course to delete
+     * @return New delete course confirmation state
+     */
+    private DeleteCourseState createDeleteCourseState(UUID courseId) {
+        return new DeleteCourseState(this, courseService, courseId);
+    }
+
+    /**
+     * Factory method to create edit task state
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task to edit
+     * @return New edit task state
+     */
+    private EditCourseTaskState createEditTaskState(UUID courseId, UUID taskId) {
+        return new EditCourseTaskState(this, courseService, courseId, taskId);
+    }
+
+    /**
+     * Factory method to create delete task state
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task to delete
+     * @return New delete task confirmation state
+     */
+    private DeleteCourseTaskState createDeleteTaskState(UUID courseId, UUID taskId) {
+        return new DeleteCourseTaskState(this, courseService, courseId, taskId);
     }
 }

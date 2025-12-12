@@ -73,16 +73,17 @@ public class CourseDetailsState implements ScreenState {
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "F2: Add Task | F3: Update Progress | ESC: Back");
+        graphics.putString(3, 3, "F2: Add Task | F3: Update Progress | F4: Edit Course | F5: Delete Course");
+        graphics.putString(3, 4, "F6: Edit Task | F7: Delete Task | ESC: Back");
 
         // Course info
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         String courseTitle = course.getCode() + " - " + course.getName() +
                 " [" + course.getProgress() + "% complete]";
-        graphics.putString(3, 5, "Course: " + courseTitle);
+        graphics.putString(3, 6, "Course: " + courseTitle);
 
         // Task list
-        taskList.render(graphics, 3, 7);
+        taskList.render(graphics, 3, 8);
 
         // Messages
         messagePanel.render(graphics, 3, size.getRows() - 2);
@@ -104,6 +105,32 @@ public class CourseDetailsState implements ScreenState {
             // Notify mediator to show update progress form
             CourseTaskDTO selectedTask = taskList.getSelectedItem();
             mediator.onUpdateTaskProgress(courseId, selectedTask.getId());
+            return null; // Mediator handles transition
+        } else if (keyStroke.getKeyType() == KeyType.F4) {
+            // Notify mediator to show edit course form
+            mediator.onEditCourse(courseId);
+            return null; // Mediator handles transition
+        } else if (keyStroke.getKeyType() == KeyType.F5) {
+            // Notify mediator to show delete course confirmation
+            mediator.onDeleteCourse(courseId);
+            return null; // Mediator handles transition
+        } else if (keyStroke.getKeyType() == KeyType.F6) {
+            if (taskList.isEmpty()) {
+                messagePanel.setError("No tasks available to edit");
+                return this;
+            }
+            // Notify mediator to show edit task form
+            CourseTaskDTO selectedTask = taskList.getSelectedItem();
+            mediator.onEditTask(courseId, selectedTask.getId());
+            return null; // Mediator handles transition
+        } else if (keyStroke.getKeyType() == KeyType.F7) {
+            if (taskList.isEmpty()) {
+                messagePanel.setError("No tasks available to delete");
+                return this;
+            }
+            // Notify mediator to show delete task confirmation
+            CourseTaskDTO selectedTask = taskList.getSelectedItem();
+            mediator.onDeleteTask(courseId, selectedTask.getId());
             return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.Escape) {
             // Notify mediator to return to course list
