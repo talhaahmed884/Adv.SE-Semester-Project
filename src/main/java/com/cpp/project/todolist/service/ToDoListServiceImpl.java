@@ -226,4 +226,79 @@ public class ToDoListServiceImpl implements ToDoListService {
 
         return todoList.getAggregatedDeadlines();
     }
+
+    @Override
+    @Transactional
+    public ToDoListTaskDTO updateTask(UUID todoListId, UUID taskId, String description, Instant deadline) {
+        logger.info("Updating task: {} in todo list: {}", taskId, todoListId);
+
+        try {
+            // Step 1: Sanitize input
+            String sanitizedDescription = taskSanitizer.sanitizeDescription(description);
+
+            // Step 2: Validate sanitized input
+            ValidationResult descriptionValidation = validationService.validateTaskDescription(sanitizedDescription);
+            if (!descriptionValidation.isValid()) {
+                throw new ToDoListException(ToDoListErrorCode.INVALID_TASK_DESCRIPTION, descriptionValidation.getFirstError());
+            }
+
+            ValidationResult deadlineValidation = validationService.validateTaskDeadline(deadline);
+            if (!deadlineValidation.isValid()) {
+                throw new ToDoListException(ToDoListErrorCode.INVALID_TASK_DEADLINE, deadlineValidation.getFirstError());
+            }
+
+            // Step 3: Find list and task
+            ToDoList todoList = todoListRepository.findById(todoListId)
+                    .orElseThrow(() -> new ToDoListException(ToDoListErrorCode.TODO_LIST_NOT_FOUND, "id", todoListId));
+
+            ToDoListTask task = todoList.getTasks().stream()
+                    .filter(t -> t.getId().equals(taskId))
+                    .findFirst()
+                    .orElseThrow(() -> new ToDoListException(ToDoListErrorCode.TASK_NOT_FOUND, taskId));
+
+            // Step 4: Update task fields
+            task.setDescription(sanitizedDescription);
+            task.setDeadline(deadline);
+
+            // Step 5: Save changes
+            todoListRepository.save(todoList);
+            logger.info("Task updated successfully");
+
+            return ToDoListTaskAdapter.toDTO(task);
+        } catch (ToDoListException e) {
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error updating task: {}", taskId, e);
+            throw new ToDoListException(ToDoListErrorCode.TASK_UPDATE_FAILED, e, e.getMessage());
+        }
+    }
+
+    @Override
+    @Transactional
+    public void deleteTask(UUID todoListId, UUID taskId) {
+        logger.info("Deleting task: {} from todo list: {}", taskId, todoListId);
+
+        try {
+            // Step 1: Find list
+            ToDoList todoList = todoListRepository.findById(todoListId)
+                    .orElseThrow(() -> new ToDoListException(ToDoListErrorCode.TODO_LIST_NOT_FOUND, "id", todoListId));
+
+            // Step 2: Find and remove task
+            ToDoListTask task = todoList.getTasks().stream()
+                    .filter(t -> t.getId().equals(taskId))
+                    .findFirst()
+                    .orElseThrow(() -> new ToDoListException(ToDoListErrorCode.TASK_NOT_FOUND, taskId));
+
+            todoList.getTasks().remove(task);
+
+            // Step 3: Save changes
+            todoListRepository.save(todoList);
+            logger.info("Task deleted successfully");
+        } catch (ToDoListException e) {
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error deleting task: {}", taskId, e);
+            throw new ToDoListException(ToDoListErrorCode.TASK_DELETE_FAILED, e, e.getMessage());
+        }
+    }
 }

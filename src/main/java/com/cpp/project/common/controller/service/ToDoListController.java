@@ -205,4 +205,56 @@ public class ToDoListController {
 
         return ResponseEntity.ok(response);
     }
+
+    /**
+     * Update a task
+     * PUT /api/todolists/{todoListId}/tasks/{taskId}
+     */
+    @PutMapping("/{todoListId}/tasks/{taskId}")
+    public ResponseEntity<ApiSuccessResponse<ToDoListTaskDTO>> updateTask(
+            @PathVariable UUID todoListId,
+            @PathVariable UUID taskId,
+            @RequestBody UpdateToDoListTaskRequestDTO request) {
+
+        // Validate request
+        if (request.isEmpty()) {
+            throw new ToDoListException(ToDoListErrorCode.INVALID_TASK_DATA,
+                    "At least one field (description or deadline) must be provided");
+        }
+
+        ToDoListTaskDTO task = todoListService.updateTask(
+                todoListId,
+                taskId,
+                request.getDescription(),
+                request.getDeadline()
+        );
+
+        ApiSuccessResponse<ToDoListTaskDTO> response = ApiSuccessResponse.<ToDoListTaskDTO>builder()
+                .data(task)
+                .message("Task updated successfully")
+                .statusCode(HttpStatus.OK.value())
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    /**
+     * Delete a task
+     * DELETE /api/todolists/{todoListId}/tasks/{taskId}
+     */
+    @DeleteMapping("/{todoListId}/tasks/{taskId}")
+    public ResponseEntity<ApiSuccessResponse<String>> deleteTask(
+            @PathVariable UUID todoListId,
+            @PathVariable UUID taskId) {
+
+        todoListService.deleteTask(todoListId, taskId);
+
+        ApiSuccessResponse<String> response = ApiSuccessResponse.<String>builder()
+                .data("Task deleted successfully")
+                .message("Deletion successful")
+                .statusCode(HttpStatus.OK.value())
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
 }

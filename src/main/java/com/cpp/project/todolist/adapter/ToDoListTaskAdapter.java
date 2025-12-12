@@ -17,6 +17,7 @@ public class ToDoListTaskAdapter {
 
         return ToDoListTaskDTO.builder()
                 .id(task.getId())
+                .todoListId(task.getTodoListId())
                 .description(task.getDescription())
                 .deadline(task.getDeadline())
                 .status(task.getStatus())

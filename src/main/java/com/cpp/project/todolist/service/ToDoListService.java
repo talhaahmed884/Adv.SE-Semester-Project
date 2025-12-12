@@ -80,4 +80,23 @@ public interface ToDoListService {
      * @return List of deadlines
      */
     List<Instant> getAggregatedDeadlines(UUID todoListId);
+
+    /**
+     * Update a task
+     *
+     * @param todoListId  Todo list ID
+     * @param taskId      Task ID
+     * @param description New task description
+     * @param deadline    New task deadline
+     * @return Updated task DTO
+     */
+    ToDoListTaskDTO updateTask(UUID todoListId, UUID taskId, String description, Instant deadline);
+
+    /**
+     * Delete a task
+     *
+     * @param todoListId Todo list ID
+     * @param taskId     Task ID
+     */
+    void deleteTask(UUID todoListId, UUID taskId);
 }

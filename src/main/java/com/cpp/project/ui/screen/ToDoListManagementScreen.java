@@ -5,10 +5,7 @@ import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.core.StatefulScreen;
 import com.cpp.project.ui.mediator.ToDoListMediator;
-import com.cpp.project.ui.state.todolist.AddListState;
-import com.cpp.project.ui.state.todolist.AddTaskState;
-import com.cpp.project.ui.state.todolist.ListDetailsState;
-import com.cpp.project.ui.state.todolist.ListViewState;
+import com.cpp.project.ui.state.todolist.*;
 import com.cpp.project.user.dto.UserDTO;
 import com.googlecode.lanterna.screen.Screen;
 
@@ -101,6 +98,54 @@ public class ToDoListManagementScreen extends StatefulScreen implements ToDoList
         transitionTo(createAddTaskState(listId));
     }
 
+    @Override
+    public void onEditList(UUID listId) {
+        // User wants to edit list, show edit form
+        transitionTo(createEditListState(listId));
+    }
+
+    @Override
+    public void onListUpdated(UUID listId) {
+        // List was updated, refresh details view with success message
+        transitionTo(createListDetailsState(listId, "To-Do List updated successfully!"));
+    }
+
+    @Override
+    public void onDeleteList(UUID listId) {
+        // User wants to delete list, show confirmation dialog
+        transitionTo(createDeleteListState(listId));
+    }
+
+    @Override
+    public void onListDeleted() {
+        // List was deleted, return to list view with success message
+        transitionTo(createListViewState("To-Do List deleted successfully!"));
+    }
+
+    @Override
+    public void onEditTask(UUID listId, UUID taskId) {
+        // User wants to edit task, show edit form
+        transitionTo(createEditTaskState(listId, taskId));
+    }
+
+    @Override
+    public void onTaskUpdated(UUID listId) {
+        // Task was updated, refresh details view with success message
+        transitionTo(createListDetailsState(listId, "Task updated successfully!"));
+    }
+
+    @Override
+    public void onDeleteTask(UUID listId, UUID taskId) {
+        // User wants to delete task, show confirmation dialog
+        transitionTo(createDeleteTaskState(listId, taskId));
+    }
+
+    @Override
+    public void onTaskDeleted(UUID listId) {
+        // Task was deleted, refresh details view with success message
+        transitionTo(createListDetailsState(listId, "Task deleted successfully!"));
+    }
+
     // ========== ScreenMediator: Core Methods ==========
 
     @Override
@@ -153,5 +198,47 @@ public class ToDoListManagementScreen extends StatefulScreen implements ToDoList
      */
     private AddTaskState createAddTaskState(UUID listId) {
         return new AddTaskState(this, toDoListService, listId);
+    }
+
+    /**
+     * Factory method to create edit list state
+     *
+     * @param listId The list to edit
+     * @return New edit list state
+     */
+    private EditListState createEditListState(UUID listId) {
+        return new EditListState(this, toDoListService, listId);
+    }
+
+    /**
+     * Factory method to create delete list state
+     *
+     * @param listId The list to delete
+     * @return New delete list confirmation state
+     */
+    private DeleteListState createDeleteListState(UUID listId) {
+        return new DeleteListState(this, toDoListService, listId);
+    }
+
+    /**
+     * Factory method to create edit task state
+     *
+     * @param listId The list containing the task
+     * @param taskId The task to edit
+     * @return New edit task state
+     */
+    private com.cpp.project.ui.state.todolist.EditTaskState createEditTaskState(UUID listId, UUID taskId) {
+        return new com.cpp.project.ui.state.todolist.EditTaskState(this, toDoListService, listId, taskId);
+    }
+
+    /**
+     * Factory method to create delete task state
+     *
+     * @param listId The list containing the task
+     * @param taskId The task to delete
+     * @return New delete task confirmation state
+     */
+    private com.cpp.project.ui.state.todolist.DeleteTaskState createDeleteTaskState(UUID listId, UUID taskId) {
+        return new com.cpp.project.ui.state.todolist.DeleteTaskState(this, toDoListService, listId, taskId);
     }
 }
