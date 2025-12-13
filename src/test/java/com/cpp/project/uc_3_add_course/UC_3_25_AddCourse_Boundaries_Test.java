@@ -77,9 +77,7 @@ public class UC_3_25_AddCourse_Boundaries_Test extends BaseIntegrationTest {
         String code = "ABCDEFGHIJ12345678901"; // 21 characters - exceeds maximum
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.createCourse(code, "Course Name", userId);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.createCourse(code, "Course Name", userId));
 
         assertEquals(CourseErrorCode.INVALID_COURSE_CODE.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("exceed") ||
@@ -121,9 +119,7 @@ public class UC_3_25_AddCourse_Boundaries_Test extends BaseIntegrationTest {
         String name = "A".repeat(256); // 256 characters - exceeds maximum
 
         // Act & Assert
-        CourseException exception = assertThrows(CourseException.class, () -> {
-            courseService.createCourse("CS103", name, userId);
-        });
+        CourseException exception = assertThrows(CourseException.class, () -> courseService.createCourse("CS103", name, userId));
 
         assertEquals(CourseErrorCode.INVALID_COURSE_NAME.getCode(), exception.getCode());
         assertTrue(exception.getMessage().toLowerCase().contains("exceed") ||

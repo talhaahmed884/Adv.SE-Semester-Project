@@ -2,6 +2,7 @@ package com.cpp.project.ui.screen;
 
 import com.cpp.project.calendar.service.CalendarService;
 import com.cpp.project.course.service.CourseService;
+import com.cpp.project.dashboard.service.DashboardService;
 import com.cpp.project.timer.service.TimerService;
 import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.component.SelectionList;
@@ -29,6 +30,7 @@ public class MainMenuScreen extends UIScreen {
     private final CourseService courseService;
     private final ToDoListService toDoListService;
     private final CalendarService calendarService;
+    private final DashboardService dashboardService;
     private final UserService userService;
     private final UserCredentialService credentialService;
     private final TimerService timerService;
@@ -40,6 +42,7 @@ public class MainMenuScreen extends UIScreen {
             CourseService courseService,
             ToDoListService toDoListService,
             CalendarService calendarService,
+            DashboardService dashboardService,
             UserService userService,
             UserCredentialService credentialService,
             TimerService timerService) {
@@ -48,6 +51,7 @@ public class MainMenuScreen extends UIScreen {
         this.courseService = courseService;
         this.toDoListService = toDoListService;
         this.calendarService = calendarService;
+        this.dashboardService = dashboardService;
         this.userService = userService;
         this.credentialService = credentialService;
         this.timerService = timerService;
@@ -55,11 +59,12 @@ public class MainMenuScreen extends UIScreen {
         // Create menu items
         this.menuList = new SelectionList<>("Main Menu", MenuItem::getLabel);
         this.menuList.setItems(java.util.Arrays.asList(
-                new MenuItem("1. Manage Courses", this::openCourseManagement),
-                new MenuItem("2. Manage To-Do Lists", this::openToDoManagement),
-                new MenuItem("3. View Calendar", this::openCalendar),
-                new MenuItem("4. My Profile", this::openUserProfile),
-                new MenuItem("5. Logout", this::logout)
+                new MenuItem("1. Dashboard", this::openDashboard),
+                new MenuItem("2. Manage Courses", this::openCourseManagement),
+                new MenuItem("3. Manage To-Do Lists", this::openToDoManagement),
+                new MenuItem("4. View Calendar", this::openCalendar),
+                new MenuItem("5. My Profile", this::openUserProfile),
+                new MenuItem("6. Logout", this::logout)
         ));
         this.menuList.setFocused(true);
     }
@@ -100,6 +105,17 @@ public class MainMenuScreen extends UIScreen {
             }
         } else {
             menuList.handleInput(keyStroke);
+        }
+    }
+
+    private void openDashboard() {
+        try {
+            DashboardScreen dashboardScreen = new DashboardScreen(
+                    screen, currentUser, dashboardService
+            );
+            dashboardScreen.display();
+        } catch (IOException e) {
+            // Handle error
         }
     }
 
