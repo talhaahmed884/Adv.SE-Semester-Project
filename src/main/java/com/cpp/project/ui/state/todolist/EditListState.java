@@ -7,7 +7,8 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
 import com.cpp.project.ui.mediator.ToDoListMediator;
-import com.cpp.project.ui.strategy.RequiredFieldStrategy;
+import com.cpp.project.ui.util.FormValidator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -31,6 +32,7 @@ public class EditListState implements ScreenState {
     private final UUID listId;
     private final FormField nameField;
     private final MessagePanel messagePanel;
+    private final FormValidator validator;
     private ToDoListDTO todoList; // Cached list data
 
     public EditListState(ToDoListMediator mediator, ToDoListService toDoListService, UUID listId) {
@@ -41,6 +43,7 @@ public class EditListState implements ScreenState {
         this.nameField = ComponentFactory.createTextField("List Name");
         this.nameField.setFocused(true);
         this.messagePanel = new MessagePanel();
+        this.validator = new FormValidator(messagePanel);
     }
 
     @Override
@@ -57,17 +60,17 @@ public class EditListState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== EDIT TO-DO LIST ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString((size.getColumns() - title.length()) / 2, UILayoutConstants.TITLE_ROW, title);
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Enter: Save | ESC: Cancel");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, "Enter: Save | ESC: Cancel");
 
         // Name field
-        nameField.render(graphics, 5, 5);
+        nameField.render(graphics, UILayoutConstants.FORM_LEFT_MARGIN, UILayoutConstants.CONTENT_START_ROW);
 
         // Messages
-        messagePanel.render(graphics, 5, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.FORM_LEFT_MARGIN, size.getRows() - UILayoutConstants.BOTTOM_MARGIN);
     }
 
     @Override
@@ -90,9 +93,7 @@ public class EditListState implements ScreenState {
         String name = nameField.getValue().trim();
 
         // Validation
-        String error = new RequiredFieldStrategy("List name").validate(name);
-        if (error != null) {
-            messagePanel.setError(error);
+        if (!validator.validateRequired("List name", name)) {
             return this;
         }
 

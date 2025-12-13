@@ -6,7 +6,8 @@ import com.cpp.project.ui.component.FormField;
 import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
-import com.cpp.project.ui.strategy.RequiredFieldStrategy;
+import com.cpp.project.ui.util.FormValidator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.cpp.project.user.dto.SignUpRequestDTO;
 import com.cpp.project.user.dto.UserDTO;
 import com.googlecode.lanterna.TerminalSize;
@@ -24,6 +25,7 @@ import java.util.function.Consumer;
 public class SignupState implements ScreenState {
     private final Form form;
     private final MessagePanel messagePanel;
+    private final FormValidator formValidator;
     private final FormField nameField;
     private final FormField emailField;
     private final FormField passwordField;
@@ -52,6 +54,7 @@ public class SignupState implements ScreenState {
                 .addField(passwordField);
 
         messagePanel = new MessagePanel();
+        formValidator = new FormValidator(messagePanel);
     }
 
     @Override
@@ -66,23 +69,23 @@ public class SignupState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== STUDENTLY - SIGN UP ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 2, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), 2, title);
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(5, 5, "F1: Switch to Login");
-        graphics.putString(5, 6, "Tab: Next field");
-        graphics.putString(5, 7, "ESC: Exit");
+        graphics.putString(UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW, "F1: Switch to Login");
+        graphics.putString(UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW + 1, "Tab: Next field");
+        graphics.putString(UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW + 2, "ESC: Exit");
 
         // Form
-        form.render(graphics, 5, 10);
+        form.render(graphics, UILayoutConstants.FORM_LEFT, 10);
 
         // Submit instruction
         graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
-        graphics.putString(5, 17, "Press ENTER to Sign Up");
+        graphics.putString(UILayoutConstants.FORM_LEFT, 17, "Press ENTER to Sign Up");
 
         // Messages
-        messagePanel.render(graphics, 5, 19);
+        messagePanel.render(graphics, UILayoutConstants.FORM_LEFT, 19);
     }
 
     @Override
@@ -108,22 +111,16 @@ public class SignupState implements ScreenState {
         String email = emailField.getValue().trim();
         String password = passwordField.getValue();
 
-        // Validation
-        String nameError = new RequiredFieldStrategy("Name").validate(name);
-        if (nameError != null) {
-            messagePanel.setError(nameError);
+        // Validation using FormValidator
+        if (!formValidator.validateRequired("Name", name)) {
             return;
         }
 
-        String emailError = new RequiredFieldStrategy("Email").validate(email);
-        if (emailError != null) {
-            messagePanel.setError(emailError);
+        if (!formValidator.validateRequired("Email", email)) {
             return;
         }
 
-        String passwordError = new RequiredFieldStrategy("Password").validate(password);
-        if (passwordError != null) {
-            messagePanel.setError(passwordError);
+        if (!formValidator.validateRequired("Password", password)) {
             return;
         }
 

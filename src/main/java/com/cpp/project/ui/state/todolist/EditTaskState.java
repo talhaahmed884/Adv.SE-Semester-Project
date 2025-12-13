@@ -10,7 +10,8 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
 import com.cpp.project.ui.mediator.ToDoListMediator;
-import com.cpp.project.ui.strategy.RequiredFieldStrategy;
+import com.cpp.project.ui.util.FormValidator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -39,6 +40,7 @@ public class EditTaskState implements ScreenState {
     private final FormField descriptionField;
     private final DateInput deadlineInput;
     private final MessagePanel messagePanel;
+    private final FormValidator validator;
     private ToDoListTaskDTO task; // Cached task data
 
     public EditTaskState(ToDoListMediator mediator, ToDoListService toDoListService, UUID listId, UUID taskId, boolean fromTaskDetails) {
@@ -56,6 +58,7 @@ public class EditTaskState implements ScreenState {
                 .addField(deadlineInput);
 
         messagePanel = new MessagePanel();
+        validator = new FormValidator(messagePanel);
     }
 
     @Override
@@ -83,17 +86,17 @@ public class EditTaskState implements ScreenState {
 
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== EDIT TASK ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString((size.getColumns() - title.length()) / 2, UILayoutConstants.TITLE_ROW, title);
 
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Tab: Next field | Enter: Save | ESC: Cancel");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, "Tab: Next field | Enter: Save | ESC: Cancel");
 
-        form.render(graphics, 5, 5);
+        form.render(graphics, UILayoutConstants.FORM_LEFT_MARGIN, UILayoutConstants.CONTENT_START_ROW);
 
         graphics.setForegroundColor(TextColor.ANSI.CYAN);
-        graphics.putString(5, 14, "Note: Deadline is optional");
+        graphics.putString(UILayoutConstants.FORM_LEFT_MARGIN, 14, "Note: Deadline is optional");
 
-        messagePanel.render(graphics, 5, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.FORM_LEFT_MARGIN, size.getRows() - UILayoutConstants.BOTTOM_MARGIN);
     }
 
     @Override
@@ -115,9 +118,7 @@ public class EditTaskState implements ScreenState {
     private ScreenState handleSave() {
         String description = descriptionField.getValue().trim();
 
-        String error = new RequiredFieldStrategy("Task description").validate(description);
-        if (error != null) {
-            messagePanel.setError(error);
+        if (!validator.validateRequired("Task description", description)) {
             return this;
         }
 

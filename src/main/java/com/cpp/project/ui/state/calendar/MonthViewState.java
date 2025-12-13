@@ -5,6 +5,8 @@ import com.cpp.project.ui.component.calendar.CalendarGridRenderer;
 import com.cpp.project.ui.component.calendar.TaskListRenderer;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.CalendarMediator;
+import com.cpp.project.ui.util.DateFormatUtils;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -12,7 +14,6 @@ import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
 import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -26,8 +27,6 @@ import java.util.List;
  */
 public class MonthViewState implements ScreenState {
     private final CalendarMediator mediator;
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm a")
-            .withZone(ZoneId.systemDefault());
 
     // Cached renderers - created once, reused for performance
     private CalendarGridRenderer gridRenderer;
@@ -52,7 +51,7 @@ public class MonthViewState implements ScreenState {
 
         // Create renderers once and cache them (performance optimization)
         gridRenderer = new CalendarGridRenderer(currentYear, currentMonth, calendarItems);
-        taskListRenderer = new TaskListRenderer(calendarItems, dateFormat);
+        taskListRenderer = new TaskListRenderer(calendarItems, DateFormatUtils.DEADLINE_FORMAT);
     }
 
     @Override
@@ -62,25 +61,27 @@ public class MonthViewState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== MONTHLY CALENDAR ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Navigation instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Arrow Left: Previous Month | Arrow Right: Next Month | ESC: Back");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW,
+                "Arrow Left: Previous Month | Arrow Right: Next Month | ESC: Back");
 
         // Current month/year
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         String[] monthNames = mediator.getMonthNames();
         String monthYear = monthNames[currentMonth - 1] + " " + currentYear;
-        graphics.putString((size.getColumns() - monthYear.length()) / 2, 5, monthYear);
+        graphics.putString(UILayoutConstants.centerX(size, monthYear.length()), UILayoutConstants.CONTENT_START_ROW,
+                monthYear);
 
         // Use cached renderers for performance
         if (gridRenderer != null) {
-            gridRenderer.render(graphics, 5, 7);
+            gridRenderer.render(graphics, UILayoutConstants.FORM_LEFT, UILayoutConstants.CONTENT_START_ROW + 2);
         }
 
         if (taskListRenderer != null) {
-            taskListRenderer.render(graphics, 3, 20);
+            taskListRenderer.render(graphics, UILayoutConstants.LEFT_MARGIN, 20);
         }
     }
 
@@ -118,6 +119,6 @@ public class MonthViewState implements ScreenState {
 
         // Update cached renderers with new data
         gridRenderer = new CalendarGridRenderer(currentYear, currentMonth, calendarItems);
-        taskListRenderer = new TaskListRenderer(calendarItems, dateFormat);
+        taskListRenderer = new TaskListRenderer(calendarItems, DateFormatUtils.DEADLINE_FORMAT);
     }
 }

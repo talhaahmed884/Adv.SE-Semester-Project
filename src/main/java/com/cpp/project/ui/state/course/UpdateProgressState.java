@@ -8,6 +8,7 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
 import com.cpp.project.ui.mediator.CourseMediator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -63,22 +64,22 @@ public class UpdateProgressState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== UPDATE TASK PROGRESS ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Enter: Save | ESC: Cancel");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, "Enter: Save | ESC: Cancel");
 
         // Task info
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(5, 5, "Task: " + task.getName());
-        graphics.putString(5, 6, "Current Progress: " + task.getProgress() + "%");
+        graphics.putString(UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW, "Task: " + task.getName());
+        graphics.putString(UILayoutConstants.FORM_LEFT, 6, "Current Progress: " + task.getProgress() + "%");
 
         // Progress input
-        progressField.render(graphics, 5, 8);
+        progressField.render(graphics, UILayoutConstants.FORM_LEFT, 8);
 
         // Messages
-        messagePanel.render(graphics, 5, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.FORM_LEFT, UILayoutConstants.messageRow(size));
     }
 
     @Override

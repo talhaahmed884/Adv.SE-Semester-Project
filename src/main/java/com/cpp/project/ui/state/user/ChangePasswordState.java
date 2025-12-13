@@ -6,7 +6,8 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
 import com.cpp.project.ui.mediator.UserMediator;
-import com.cpp.project.ui.strategy.RequiredFieldStrategy;
+import com.cpp.project.ui.util.FormValidator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.cpp.project.user.dto.UserDTO;
 import com.cpp.project.user_credential.service.UserCredentialService;
 import com.googlecode.lanterna.TerminalSize;
@@ -34,6 +35,7 @@ public class ChangePasswordState implements ScreenState {
     private final FormField newPasswordField;
     private final FormField confirmPasswordField;
     private final MessagePanel messagePanel;
+    private final FormValidator formValidator;
 
     private UserDTO currentUser;
 
@@ -51,6 +53,7 @@ public class ChangePasswordState implements ScreenState {
                 .addField(confirmPasswordField);
 
         messagePanel = new MessagePanel();
+        formValidator = new FormValidator(messagePanel);
     }
 
     @Override
@@ -74,26 +77,31 @@ public class ChangePasswordState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== CHANGE PASSWORD ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Tab: Next field | Enter: Save | ESC: Cancel");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW,
+                "Tab: Next field | Enter: Save | ESC: Cancel");
 
         // Password requirements
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(5, 5, "Password requirements:");
+        graphics.putString(UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW, "Password requirements:");
         graphics.setForegroundColor(TextColor.ANSI.CYAN);
-        graphics.putString(7, 6, "- At least 8 characters");
-        graphics.putString(7, 7, "- Contains uppercase and lowercase letters");
-        graphics.putString(7, 8, "- Contains at least one digit");
-        graphics.putString(7, 9, "- Contains at least one special character");
+        graphics.putString(UILayoutConstants.FORM_LEFT + 2, UILayoutConstants.FORM_START_ROW + 1,
+                "- At least 8 characters");
+        graphics.putString(UILayoutConstants.FORM_LEFT + 2, UILayoutConstants.FORM_START_ROW + 2,
+                "- Contains uppercase and lowercase letters");
+        graphics.putString(UILayoutConstants.FORM_LEFT + 2, UILayoutConstants.FORM_START_ROW + 3,
+                "- Contains at least one digit");
+        graphics.putString(UILayoutConstants.FORM_LEFT + 2, UILayoutConstants.FORM_START_ROW + 4,
+                "- Contains at least one special character");
 
         // Form
-        form.render(graphics, 5, 11);
+        form.render(graphics, UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW + 6);
 
         // Message panel
-        messagePanel.render(graphics, 5, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.FORM_LEFT, UILayoutConstants.messageRow(size));
     }
 
     @Override
@@ -117,22 +125,16 @@ public class ChangePasswordState implements ScreenState {
         String newPassword = newPasswordField.getValue();
         String confirmPassword = confirmPasswordField.getValue();
 
-        // Validation
-        String currentPasswordError = new RequiredFieldStrategy("Current Password").validate(currentPassword);
-        if (currentPasswordError != null) {
-            messagePanel.setError(currentPasswordError);
+        // Validation using FormValidator
+        if (!formValidator.validateRequired("Current Password", currentPassword)) {
             return this;
         }
 
-        String newPasswordError = new RequiredFieldStrategy("New Password").validate(newPassword);
-        if (newPasswordError != null) {
-            messagePanel.setError(newPasswordError);
+        if (!formValidator.validateRequired("New Password", newPassword)) {
             return this;
         }
 
-        String confirmPasswordError = new RequiredFieldStrategy("Confirm Password").validate(confirmPassword);
-        if (confirmPasswordError != null) {
-            messagePanel.setError(confirmPasswordError);
+        if (!formValidator.validateRequired("Confirm Password", confirmPassword)) {
             return this;
         }
 

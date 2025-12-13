@@ -2,6 +2,7 @@ package com.cpp.project.ui.state.user;
 
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.UserMediator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.cpp.project.user.service.UserService;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -35,37 +36,43 @@ public class DeleteConfirmationState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
         String title = "=== DELETE ACCOUNT ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Warning message
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(5, 5, "WARNING: This action cannot be undone!");
-        graphics.putString(5, 6, "All your data will be permanently deleted.");
+        graphics.putString(UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW,
+                "WARNING: This action cannot be undone!");
+        graphics.putString(UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW + 1,
+                "All your data will be permanently deleted.");
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(5, 9, "Are you sure you want to delete your account?");
+        graphics.putString(UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW + 4,
+                "Are you sure you want to delete your account?");
 
         // Options
         if (selectedOption == 0) {
             graphics.setForegroundColor(TextColor.ANSI.GREEN_BRIGHT);
-            graphics.putString(7, 12, "> Cancel");
+            graphics.putString(UILayoutConstants.FORM_LEFT + 2, UILayoutConstants.FORM_START_ROW + 7, "> Cancel");
         } else {
             graphics.setForegroundColor(TextColor.ANSI.WHITE);
-            graphics.putString(7, 12, "  Cancel");
+            graphics.putString(UILayoutConstants.FORM_LEFT + 2, UILayoutConstants.FORM_START_ROW + 7, "  Cancel");
         }
 
         if (selectedOption == 1) {
             graphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
-            graphics.putString(7, 13, "> Yes, Delete My Account");
+            graphics.putString(UILayoutConstants.FORM_LEFT + 2, UILayoutConstants.FORM_START_ROW + 8,
+                    "> Yes, Delete My Account");
         } else {
             graphics.setForegroundColor(TextColor.ANSI.WHITE);
-            graphics.putString(7, 13, "  Yes, Delete My Account");
+            graphics.putString(UILayoutConstants.FORM_LEFT + 2, UILayoutConstants.FORM_START_ROW + 8,
+                    "  Yes, Delete My Account");
         }
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(5, 16, "Arrow Keys: Navigate | Enter: Confirm | ESC: Cancel");
+        graphics.putString(UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW + 11,
+                "Arrow Keys: Navigate | Enter: Confirm | ESC: Cancel");
     }
 
     @Override

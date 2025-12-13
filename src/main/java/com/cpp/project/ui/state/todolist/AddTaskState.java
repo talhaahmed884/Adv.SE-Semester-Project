@@ -8,7 +8,8 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
 import com.cpp.project.ui.mediator.ToDoListMediator;
-import com.cpp.project.ui.strategy.RequiredFieldStrategy;
+import com.cpp.project.ui.util.FormValidator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -34,6 +35,7 @@ public class AddTaskState implements ScreenState {
     private final FormField descriptionField;
     private final DateInput deadlineInput;
     private final MessagePanel messagePanel;
+    private final FormValidator validator;
 
     public AddTaskState(ToDoListMediator mediator, ToDoListService toDoListService, UUID listId) {
         this.mediator = mediator;
@@ -48,6 +50,7 @@ public class AddTaskState implements ScreenState {
                 .addField(deadlineInput);
 
         messagePanel = new MessagePanel();
+        validator = new FormValidator(messagePanel);
     }
 
     @Override
@@ -59,19 +62,25 @@ public class AddTaskState implements ScreenState {
     public void render(TextGraphics graphics) {
         TerminalSize size = graphics.getSize();
 
+        // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== ADD NEW TASK ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
+        // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Tab: Next field | Enter: Save | ESC: Cancel");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW,
+                "Tab: Next field | Enter: Save | ESC: Cancel");
 
-        form.render(graphics, 5, 5);
+        // Form
+        form.render(graphics, UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW);
 
+        // Note
         graphics.setForegroundColor(TextColor.ANSI.CYAN);
-        graphics.putString(5, 14, "Note: Deadline is optional");
+        graphics.putString(UILayoutConstants.FORM_LEFT, UILayoutConstants.NOTE_ROW, "Note: Deadline is optional");
 
-        messagePanel.render(graphics, 5, size.getRows() - 2);
+        // Messages
+        messagePanel.render(graphics, UILayoutConstants.FORM_LEFT, UILayoutConstants.messageRow(size));
     }
 
     @Override
@@ -93,20 +102,17 @@ public class AddTaskState implements ScreenState {
     private ScreenState handleSave() {
         String description = descriptionField.getValue().trim();
 
-        String error = new RequiredFieldStrategy("Task description").validate(description);
-        if (error != null) {
-            messagePanel.setError(error);
+        // Validate using FormValidator
+        if (!validator.validateRequired("Task description", description)) {
             return this;
         }
 
-        Instant deadline = null;
-        if (!deadlineInput.isEmpty()) {
-            deadline = deadlineInput.getDate();
-            if (deadline == null) {
-                messagePanel.setError(deadlineInput.getErrorMessage());
-                return this;
-            }
+        // Validate optional date input
+        if (!validator.validateOptionalDateInput(deadlineInput)) {
+            return this;
         }
+
+        Instant deadline = deadlineInput.isEmpty() ? null : deadlineInput.getDate();
 
         try {
             toDoListService.addTaskToList(listId, description, deadline);

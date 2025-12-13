@@ -5,6 +5,7 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.CourseMediator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -54,22 +55,22 @@ public class CourseListState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== COURSE MANAGEMENT ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "F1: Add Course | ESC: Back to Main Menu");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, "F1: Add Course | ESC: Back to Main Menu");
 
         // Course list
-        courseList.render(graphics, 3, 5);
+        courseList.render(graphics, UILayoutConstants.LEFT_MARGIN, UILayoutConstants.CONTENT_START_ROW);
 
         if (!courseList.isEmpty()) {
             graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-            graphics.putString(3, 17, "Press ENTER to view course details");
+            graphics.putString(UILayoutConstants.LEFT_MARGIN, 17, "Press ENTER to view course details");
         }
 
         // Messages
-        messagePanel.render(graphics, 3, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.LEFT_MARGIN, UILayoutConstants.messageRow(size));
     }
 
     @Override

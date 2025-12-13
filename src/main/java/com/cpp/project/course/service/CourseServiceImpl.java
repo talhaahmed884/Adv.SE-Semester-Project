@@ -47,32 +47,136 @@ public class CourseServiceImpl implements CourseService {
         this.taskSanitizer = taskSanitizer;
     }
 
+    // ========== Helper Methods ==========
+
+    /**
+     * Find course by ID or throw exception
+     *
+     * @param courseId Course ID
+     * @return Course entity
+     * @throws CourseException if course not found
+     */
+    private Course findCourseOrThrow(UUID courseId) {
+        return courseRepository.findById(courseId)
+                .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", courseId));
+    }
+
+    /**
+     * Find task in course or throw exception
+     *
+     * @param course Course containing the task
+     * @param taskId Task ID
+     * @return CourseTask entity
+     * @throws CourseException if task not found
+     */
+    private CourseTask findTaskOrThrow(Course course, UUID taskId) {
+        return course.getTasks().stream()
+                .filter(t -> t.getId().equals(taskId))
+                .findFirst()
+                .orElseThrow(() -> new CourseException(CourseErrorCode.TASK_NOT_FOUND, taskId));
+    }
+
+    /**
+     * Sanitize and validate course code
+     *
+     * @param code Raw course code
+     * @return Sanitized and validated course code
+     * @throws CourseException if validation fails
+     */
+    private String sanitizeAndValidateCourseCode(String code) {
+        String sanitized = courseSanitizer.sanitizeCode(code);
+        ValidationResult validation = validationService.validateCourseCode(sanitized);
+        if (!validation.isValid()) {
+            throw new CourseException(CourseErrorCode.INVALID_COURSE_CODE, validation.getFirstError());
+        }
+        return sanitized;
+    }
+
+    /**
+     * Sanitize and validate course name
+     *
+     * @param name Raw course name
+     * @return Sanitized and validated course name
+     * @throws CourseException if validation fails
+     */
+    private String sanitizeAndValidateCourseName(String name) {
+        String sanitized = courseSanitizer.sanitizeName(name);
+        ValidationResult validation = validationService.validateCourseName(sanitized);
+        if (!validation.isValid()) {
+            throw new CourseException(CourseErrorCode.INVALID_COURSE_NAME, validation.getFirstError());
+        }
+        return sanitized;
+    }
+
+    /**
+     * Sanitize and validate task name
+     *
+     * @param name Raw task name
+     * @return Sanitized and validated task name
+     * @throws CourseException if validation fails
+     */
+    private String sanitizeAndValidateTaskName(String name) {
+        String sanitized = taskSanitizer.sanitizeName(name);
+        ValidationResult validation = validationService.validateTaskName(sanitized);
+        if (!validation.isValid()) {
+            throw new CourseException(CourseErrorCode.INVALID_TASK_NAME, validation.getFirstError());
+        }
+        return sanitized;
+    }
+
+    /**
+     * Sanitize task description
+     *
+     * @param description Raw task description
+     * @return Sanitized task description
+     */
+    private String sanitizeTaskDescription(String description) {
+        return taskSanitizer.sanitizeDescription(description);
+    }
+
+    /**
+     * Validate task deadline
+     *
+     * @param deadline Task deadline
+     * @throws CourseException if validation fails
+     */
+    private void validateTaskDeadline(Instant deadline) {
+        ValidationResult validation = validationService.validateTaskDeadline(deadline);
+        if (!validation.isValid()) {
+            throw new CourseException(CourseErrorCode.INVALID_TASK_DEADLINE, validation.getFirstError());
+        }
+    }
+
+    /**
+     * Validate task progress
+     *
+     * @param progress Task progress (0-100)
+     * @throws CourseException if validation fails
+     */
+    private void validateTaskProgress(int progress) {
+        ValidationResult validation = validationService.validateTaskProgress(progress);
+        if (!validation.isValid()) {
+            throw new CourseException(CourseErrorCode.INVALID_TASK_PROGRESS, progress);
+        }
+    }
+
+    // ========== Public Service Methods ==========
+
     @Override
     public CourseDTO createCourse(String code, String name, UUID userId) {
         logger.info("Creating course with code: {}", code);
 
         try {
-            // Step 1: Sanitize input
-            String sanitizedCode = courseSanitizer.sanitizeCode(code);
-            String sanitizedName = courseSanitizer.sanitizeName(name);
+            // Sanitize and validate input
+            String sanitizedCode = sanitizeAndValidateCourseCode(code);
+            String sanitizedName = sanitizeAndValidateCourseName(name);
 
-            // Step 2: Validate sanitized input
-            ValidationResult codeValidation = validationService.validateCourseCode(sanitizedCode);
-            if (!codeValidation.isValid()) {
-                throw new CourseException(CourseErrorCode.INVALID_COURSE_CODE, codeValidation.getFirstError());
-            }
-
-            ValidationResult nameValidation = validationService.validateCourseName(sanitizedName);
-            if (!nameValidation.isValid()) {
-                throw new CourseException(CourseErrorCode.INVALID_COURSE_NAME, nameValidation.getFirstError());
-            }
-
-            // Step 3: Check if course with code already exists for this user
+            // Check if course with code already exists for this user
             if (courseRepository.existsByCodeAndUserId(sanitizedCode, userId)) {
                 throw new CourseException(CourseErrorCode.COURSE_ALREADY_EXISTS, sanitizedCode);
             }
 
-            // Step 4: Create course
+            // Create course
             Course course = Course.builder()
                     .code(sanitizedCode)
                     .name(sanitizedName)
@@ -97,9 +201,7 @@ public class CourseServiceImpl implements CourseService {
         logger.debug("Getting course by id: {}", id);
 
         try {
-            Course course = courseRepository.findById(id)
-                    .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", id));
-
+            Course course = findCourseOrThrow(id);
             return CourseAdapter.toDTO(course);
         } catch (CourseException e) {
             throw e;
@@ -140,19 +242,11 @@ public class CourseServiceImpl implements CourseService {
         logger.info("Updating course: {}", id);
 
         try {
-            // Step 1: Sanitize input
-            String sanitizedName = courseSanitizer.sanitizeName(name);
+            // Sanitize and validate input
+            String sanitizedName = sanitizeAndValidateCourseName(name);
 
-            // Step 2: Validate sanitized input
-            ValidationResult nameValidation = validationService.validateCourseName(sanitizedName);
-            if (!nameValidation.isValid()) {
-                throw new CourseException(CourseErrorCode.INVALID_COURSE_NAME, nameValidation.getFirstError());
-            }
-
-            // Step 3: Update course
-            Course course = courseRepository.findById(id)
-                    .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", id));
-
+            // Update course
+            Course course = findCourseOrThrow(id);
             course.setName(sanitizedName);
             Course updatedCourse = courseRepository.save(course);
 
@@ -190,25 +284,13 @@ public class CourseServiceImpl implements CourseService {
         logger.info("Adding task to course: {}", courseId);
 
         try {
-            // Step 1: Sanitize input
-            String sanitizedName = taskSanitizer.sanitizeName(name);
-            String sanitizedDescription = taskSanitizer.sanitizeDescription(description);
+            // Sanitize and validate input
+            String sanitizedName = sanitizeAndValidateTaskName(name);
+            String sanitizedDescription = sanitizeTaskDescription(description);
+            validateTaskDeadline(deadline);
 
-            // Step 2: Validate sanitized input
-            ValidationResult nameValidation = validationService.validateTaskName(sanitizedName);
-            if (!nameValidation.isValid()) {
-                throw new CourseException(CourseErrorCode.INVALID_TASK_NAME, nameValidation.getFirstError());
-            }
-
-            ValidationResult deadlineValidation = validationService.validateTaskDeadline(deadline);
-            if (!deadlineValidation.isValid()) {
-                throw new CourseException(CourseErrorCode.INVALID_TASK_DEADLINE, deadlineValidation.getFirstError());
-            }
-
-            // Step 3: Find course and add task
-            Course course = courseRepository.findById(courseId)
-                    .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", courseId));
-
+            // Find course and add task
+            Course course = findCourseOrThrow(courseId);
             CourseTask task = course.addTask(sanitizedName, deadline, sanitizedDescription);
 
             courseRepository.save(course);
@@ -228,22 +310,14 @@ public class CourseServiceImpl implements CourseService {
         logger.info("Updating task progress: {} in course: {}", taskId, courseId);
 
         try {
-            // Step 1: Validate progress
-            ValidationResult progressValidation = validationService.validateTaskProgress(progress);
-            if (!progressValidation.isValid()) {
-                throw new CourseException(CourseErrorCode.INVALID_TASK_PROGRESS, progress);
-            }
+            // Validate progress
+            validateTaskProgress(progress);
 
-            // Step 2: Find course and task
-            Course course = courseRepository.findById(courseId)
-                    .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", courseId));
+            // Find course and task
+            Course course = findCourseOrThrow(courseId);
+            CourseTask task = findTaskOrThrow(course, taskId);
 
-            CourseTask task = course.getTasks().stream()
-                    .filter(t -> t.getId().equals(taskId))
-                    .findFirst()
-                    .orElseThrow(() -> new CourseException(CourseErrorCode.TASK_NOT_FOUND, taskId));
-
-            // Step 3: Update progress
+            // Update progress
             task.updateProgress(progress);
 
             courseRepository.save(course);
@@ -263,13 +337,8 @@ public class CourseServiceImpl implements CourseService {
         logger.info("Marking task complete: {} in course: {}", taskId, courseId);
 
         try {
-            Course course = courseRepository.findById(courseId)
-                    .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", courseId));
-
-            CourseTask task = course.getTasks().stream()
-                    .filter(t -> t.getId().equals(taskId))
-                    .findFirst()
-                    .orElseThrow(() -> new CourseException(CourseErrorCode.TASK_NOT_FOUND, taskId));
+            Course course = findCourseOrThrow(courseId);
+            CourseTask task = findTaskOrThrow(course, taskId);
 
             task.markComplete();
 
@@ -291,36 +360,21 @@ public class CourseServiceImpl implements CourseService {
         logger.info("Updating task: {} in course: {}", taskId, courseId);
 
         try {
-            // Step 1: Sanitize input
-            String sanitizedName = taskSanitizer.sanitizeName(name);
-            String sanitizedDescription = taskSanitizer.sanitizeDescription(description);
+            // Sanitize and validate input
+            String sanitizedName = sanitizeAndValidateTaskName(name);
+            String sanitizedDescription = sanitizeTaskDescription(description);
+            validateTaskDeadline(deadline);
 
-            // Step 2: Validate sanitized input
-            ValidationResult nameValidation = validationService.validateTaskName(sanitizedName);
-            if (!nameValidation.isValid()) {
-                throw new CourseException(CourseErrorCode.INVALID_TASK_NAME, nameValidation.getFirstError());
-            }
+            // Find course and task
+            Course course = findCourseOrThrow(courseId);
+            CourseTask task = findTaskOrThrow(course, taskId);
 
-            ValidationResult deadlineValidation = validationService.validateTaskDeadline(deadline);
-            if (!deadlineValidation.isValid()) {
-                throw new CourseException(CourseErrorCode.INVALID_TASK_DEADLINE, deadlineValidation.getFirstError());
-            }
-
-            // Step 3: Find course and task
-            Course course = courseRepository.findById(courseId)
-                    .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", courseId));
-
-            CourseTask task = course.getTasks().stream()
-                    .filter(t -> t.getId().equals(taskId))
-                    .findFirst()
-                    .orElseThrow(() -> new CourseException(CourseErrorCode.TASK_NOT_FOUND, taskId));
-
-            // Step 4: Update task fields
+            // Update task fields
             task.setName(sanitizedName);
             task.setDescription(sanitizedDescription);
             task.setDeadline(deadline);
 
-            // Step 5: Save changes
+            // Save changes
             courseRepository.save(course);
             logger.info("Task updated successfully");
 
@@ -339,19 +393,14 @@ public class CourseServiceImpl implements CourseService {
         logger.info("Deleting task: {} from course: {}", taskId, courseId);
 
         try {
-            // Step 1: Find course
-            Course course = courseRepository.findById(courseId)
-                    .orElseThrow(() -> new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", courseId));
+            // Find course
+            Course course = findCourseOrThrow(courseId);
 
-            // Step 2: Find and remove task
-            CourseTask task = course.getTasks().stream()
-                    .filter(t -> t.getId().equals(taskId))
-                    .findFirst()
-                    .orElseThrow(() -> new CourseException(CourseErrorCode.TASK_NOT_FOUND, taskId));
-
+            // Find and remove task
+            CourseTask task = findTaskOrThrow(course, taskId);
             course.getTasks().remove(task);
 
-            // Step 3: Save changes
+            // Save changes
             courseRepository.save(course);
             logger.info("Task deleted successfully");
         } catch (CourseException e) {

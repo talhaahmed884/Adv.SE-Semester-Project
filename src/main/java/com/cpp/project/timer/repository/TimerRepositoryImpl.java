@@ -1,10 +1,12 @@
 package com.cpp.project.timer.repository;
 
+import com.cpp.project.common.repository.BaseJpaRepository;
 import com.cpp.project.timer.entity.TaskTimer;
 import com.cpp.project.timer.entity.TimerErrorCode;
 import com.cpp.project.timer.entity.TimerException;
 import com.cpp.project.timer.entity.TimerStatus;
-import jakarta.persistence.*;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
@@ -19,41 +21,57 @@ import java.util.UUID;
  */
 @Repository
 @Transactional
-public class TimerRepositoryImpl implements TimerRepository {
+public class TimerRepositoryImpl extends BaseJpaRepository<TaskTimer, UUID> implements TimerRepository {
     private static final Logger logger = LoggerFactory.getLogger(TimerRepositoryImpl.class);
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    // ========== BaseJpaRepository Implementation ==========
 
     @Override
-    public TaskTimer save(TaskTimer timer) {
-        try {
-            if (timer.getId() == null || !entityManager.contains(timer)) {
-                entityManager.persist(timer);
-                logger.info("Timer created successfully with id: {}", timer.getId());
-                return timer;
-            } else {
-                TaskTimer updated = entityManager.merge(timer);
-                logger.info("Timer updated successfully with id: {}", timer.getId());
-                return updated;
-            }
-        } catch (PersistenceException e) {
-            logger.error("Failed to save timer: {}", timer.getId(), e);
-            throw new TimerException(TimerErrorCode.TIMER_START_FAILED, e, e.getMessage());
-        }
+    protected Class<TaskTimer> getEntityClass() {
+        return TaskTimer.class;
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Optional<TaskTimer> findById(UUID id) {
-        try {
-            TaskTimer timer = entityManager.find(TaskTimer.class, id);
-            return Optional.ofNullable(timer);
-        } catch (Exception e) {
-            logger.error("Error finding timer by id: {}", id, e);
-            throw new TimerException(TimerErrorCode.TIMER_NOT_FOUND, e, id);
-        }
+    protected Logger getLogger() {
+        return logger;
     }
+
+    @Override
+    protected String getEntityName() {
+        return "TaskTimer";
+    }
+
+    @Override
+    protected String getEntityIdentifier(TaskTimer entity) {
+        return entity.getId().toString();
+    }
+
+    @Override
+    protected boolean isNew(TaskTimer entity) {
+        return entity.getId() == null;
+    }
+
+    @Override
+    protected RuntimeException createNotFoundException(UUID uuid) {
+        return new TimerException(TimerErrorCode.TIMER_NOT_FOUND, "id", uuid);
+    }
+
+    @Override
+    protected RuntimeException createNotFoundException(String fieldName, Object value) {
+        return new TimerException(TimerErrorCode.TIMER_NOT_FOUND, fieldName, value);
+    }
+
+    @Override
+    protected RuntimeException createSaveException(Exception cause) {
+        return new TimerException(TimerErrorCode.TIMER_START_FAILED, cause, cause.getMessage());
+    }
+
+    @Override
+    protected RuntimeException createDeleteException(Object id) {
+        return new TimerException(TimerErrorCode.TIMER_QUERY_FAILED, "id", id.toString());
+    }
+
+    // ========== Domain-Specific Methods ==========
 
     @Override
     @Transactional(readOnly = true)
@@ -141,31 +159,6 @@ public class TimerRepositoryImpl implements TimerRepository {
         } catch (Exception e) {
             logger.error("Error finding active timers for user: {}", userId, e);
             return List.of();
-        }
-    }
-
-    @Override
-    public void delete(TaskTimer timer) {
-        try {
-            if (entityManager.contains(timer)) {
-                entityManager.remove(timer);
-            } else {
-                entityManager.remove(entityManager.merge(timer));
-            }
-            logger.info("Timer deleted successfully with id: {}", timer.getId());
-        } catch (Exception e) {
-            logger.error("Failed to delete timer with id: {}", timer.getId(), e);
-            throw new TimerException(TimerErrorCode.TIMER_QUERY_FAILED, e, timer.getId());
-        }
-    }
-
-    @Override
-    public void deleteById(UUID id) {
-        try {
-            findById(id).ifPresent(this::delete);
-        } catch (Exception e) {
-            logger.error("Failed to delete timer by id: {}", id, e);
-            throw new TimerException(TimerErrorCode.TIMER_QUERY_FAILED, e, id);
         }
     }
 }

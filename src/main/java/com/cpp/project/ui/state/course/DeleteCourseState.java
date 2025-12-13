@@ -6,6 +6,7 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.CourseMediator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -61,34 +62,34 @@ public class DeleteCourseState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
         String title = "=== DELETE COURSE - CONFIRMATION ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Warning
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "WARNING: This action cannot be undone!");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, "WARNING: This action cannot be undone!");
 
         // Course info
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(3, 5, "Course Code: " + course.getCode());
-        graphics.putString(3, 6, "Course Name: " + course.getName());
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.CONTENT_START_ROW, "Course Code: " + course.getCode());
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, 6, "Course Name: " + course.getName());
 
         int taskCount = course.getTasks() != null ? course.getTasks().size() : 0;
-        graphics.putString(3, 7, "Tasks in Course: " + taskCount);
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, 7, "Tasks in Course: " + taskCount);
 
         if (taskCount > 0) {
             graphics.setForegroundColor(TextColor.ANSI.RED);
-            graphics.putString(3, 8, "All tasks will also be deleted!");
+            graphics.putString(UILayoutConstants.LEFT_MARGIN, 8, "All tasks will also be deleted!");
         }
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 10, "Are you sure you want to delete this course?");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, 10, "Are you sure you want to delete this course?");
 
         // Options
-        optionsList.render(graphics, 3, 12);
+        optionsList.render(graphics, UILayoutConstants.LEFT_MARGIN, 12);
 
         // Messages
-        messagePanel.render(graphics, 3, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.LEFT_MARGIN, UILayoutConstants.messageRow(size));
     }
 
     @Override

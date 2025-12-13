@@ -6,6 +6,7 @@ import com.cpp.project.ui.component.dashboard.ImpendingDoomWidget;
 import com.cpp.project.ui.component.dashboard.NeglectDetectorWidget;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.DashboardMediator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -51,28 +52,29 @@ public class DashboardViewState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== STUDY DASHBOARD ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "F5: Refresh | ESC: Back to Main Menu");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW,
+                "F5: Refresh | ESC: Back to Main Menu");
 
-        int currentY = 5;
+        int currentY = UILayoutConstants.CONTENT_START_ROW;
 
         // Render Neglect Detector Widget (Composite Pattern)
         if (neglectDetectorWidget != null) {
-            neglectDetectorWidget.render(graphics, 3, currentY);
+            neglectDetectorWidget.render(graphics, UILayoutConstants.LEFT_MARGIN, currentY);
             currentY += neglectDetectorWidget.getHeight() + 2;  // Add spacing
         }
 
         // Render Impending Doom Widget (Composite Pattern)
         if (impendingDoomWidget != null) {
-            impendingDoomWidget.render(graphics, 3, currentY);
+            impendingDoomWidget.render(graphics, UILayoutConstants.LEFT_MARGIN, currentY);
             currentY += impendingDoomWidget.getHeight() + 2;  // Add spacing
         }
 
         // Messages
-        messagePanel.render(graphics, 3, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.LEFT_MARGIN, UILayoutConstants.messageRow(size));
     }
 
     @Override

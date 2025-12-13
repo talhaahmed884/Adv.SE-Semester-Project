@@ -8,15 +8,15 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.CourseMediator;
+import com.cpp.project.ui.util.DateFormatUtils;
 import com.cpp.project.ui.util.TimerFormatUtils;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -32,8 +32,6 @@ import java.util.UUID;
 public class CourseDetailsState implements ScreenState {
     private final CourseMediator mediator;
     private final UUID courseId;
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm a")
-            .withZone(ZoneId.systemDefault());
 
     private final SelectionList<CourseTaskDTO> taskList;
     private final MessagePanel messagePanel;
@@ -66,7 +64,7 @@ public class CourseDetailsState implements ScreenState {
                 task.getName(),
                 task.getStatus(),
                 task.getProgress(),
-                dateFormat.format(task.getDeadline())));
+                DateFormatUtils.formatDeadline(task.getDeadline())));
 
         // Add timer information if available
         TaskTimerSummaryDTO timerSummary = timerSummaries.get(task.getId());
@@ -126,23 +124,23 @@ public class CourseDetailsState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== COURSE DETAILS ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Enter: View Task Details | F2: Add Task | F4: Edit Course | F5: Delete Course | ESC: Back");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, "Enter: View Task Details | F2: Add Task | F4: Edit Course | F5: Delete Course | ESC: Back");
 
         // Course info
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         String courseTitle = course.getCode() + " - " + course.getName() +
                 " [" + course.getProgress() + "% complete]";
-        graphics.putString(3, 6, "Course: " + courseTitle);
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INFO_SECTION_ROW, "Course: " + courseTitle);
 
         // Task list
-        taskList.render(graphics, 3, 8);
+        taskList.render(graphics, UILayoutConstants.LEFT_MARGIN, UILayoutConstants.LIST_ROW);
 
         // Messages
-        messagePanel.render(graphics, 3, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.LEFT_MARGIN, UILayoutConstants.messageRow(size));
     }
 
     @Override
