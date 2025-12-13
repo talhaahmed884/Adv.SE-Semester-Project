@@ -93,8 +93,7 @@ public class ListDetailsState implements ScreenState {
         graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
 
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "F2: Add Task | F3: Mark Complete | F4: Edit List | F5: Delete List");
-        graphics.putString(3, 4, "F6: Edit Task | F7: Delete Task | ESC: Back");
+        graphics.putString(3, 3, "Enter: View Task Details | F2: Add Task | F4: Edit List | F5: Delete List | ESC: Back");
 
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         int completed = (int) todoList.getTasks().stream()
@@ -112,12 +111,19 @@ public class ListDetailsState implements ScreenState {
     public ScreenState handleInput(KeyStroke keyStroke) {
         messagePanel.clear();
 
-        if (keyStroke.getKeyType() == KeyType.F2) {
+        if (keyStroke.getKeyType() == KeyType.Enter) {
+            if (taskSelection.isEmpty()) {
+                messagePanel.setError("No tasks available");
+                return this;
+            }
+            // Notify mediator to show task details view
+            ToDoListTaskDTO selectedTask = taskSelection.getSelectedItem();
+            mediator.onViewTaskDetails(listId, selectedTask.getId());
+            return null; // Mediator handles transition
+        } else if (keyStroke.getKeyType() == KeyType.F2) {
             // Notify mediator to show add task form
             mediator.onAddTaskToList(listId);
             return null; // Mediator handles transition
-        } else if (keyStroke.getKeyType() == KeyType.F3) {
-            return handleMarkComplete();
         } else if (keyStroke.getKeyType() == KeyType.F4) {
             // Notify mediator to show edit list form
             mediator.onEditList(listId);
@@ -126,56 +132,12 @@ public class ListDetailsState implements ScreenState {
             // Notify mediator to show delete list confirmation
             mediator.onDeleteList(listId);
             return null; // Mediator handles transition
-        } else if (keyStroke.getKeyType() == KeyType.F6) {
-            if (taskSelection.isEmpty()) {
-                messagePanel.setError("No tasks available to edit");
-                return this;
-            }
-            // Notify mediator to show edit task form
-            ToDoListTaskDTO selectedTask = taskSelection.getSelectedItem();
-            mediator.onEditTask(listId, selectedTask.getId());
-            return null; // Mediator handles transition
-        } else if (keyStroke.getKeyType() == KeyType.F7) {
-            if (taskSelection.isEmpty()) {
-                messagePanel.setError("No tasks available to delete");
-                return this;
-            }
-            // Notify mediator to show delete task confirmation
-            ToDoListTaskDTO selectedTask = taskSelection.getSelectedItem();
-            mediator.onDeleteTask(listId, selectedTask.getId());
-            return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.Escape) {
             // Notify mediator to return to list view
             mediator.onReturnToListView();
             return null; // Mediator handles transition
         } else {
             taskSelection.handleInput(keyStroke);
-            return this;
-        }
-    }
-
-    private ScreenState handleMarkComplete() {
-        if (taskSelection.isEmpty()) {
-            messagePanel.setError("No tasks to mark as complete");
-            return this;
-        }
-
-        ToDoListTaskDTO task = taskSelection.getSelectedItem();
-        if (TaskStatus.COMPLETED.equals(task.getStatus())) {
-            messagePanel.setError("Task is already completed");
-            return this;
-        }
-
-        try {
-            // Use injected service if available, otherwise we need to add it to mediator
-            if (toDoListService != null) {
-                toDoListService.markTaskComplete(listId, task.getId());
-            }
-            // Notify mediator that task was completed - it will refresh the view
-            mediator.onTaskCompleted(listId);
-            return null; // Mediator handles transition
-        } catch (Exception e) {
-            messagePanel.setError(e.getMessage());
             return this;
         }
     }

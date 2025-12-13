@@ -130,8 +130,7 @@ public class CourseDetailsState implements ScreenState {
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "F2: Add Task | F3: Update Progress | F4: Edit Course | F5: Delete Course");
-        graphics.putString(3, 4, "F6: Edit Task | F7: Delete Task | F8: View Timer | ESC: Back");
+        graphics.putString(3, 3, "Enter: View Task Details | F2: Add Task | F4: Edit Course | F5: Delete Course | ESC: Back");
 
         // Course info
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
@@ -150,18 +149,18 @@ public class CourseDetailsState implements ScreenState {
     public ScreenState handleInput(KeyStroke keyStroke) {
         messagePanel.clear();
 
-        if (keyStroke.getKeyType() == KeyType.F2) {
-            // Notify mediator to show add task form
-            mediator.onAddTaskToCourse(courseId);
-            return null; // Mediator handles transition
-        } else if (keyStroke.getKeyType() == KeyType.F3) {
+        if (keyStroke.getKeyType() == KeyType.Enter) {
             if (taskList.isEmpty()) {
-                messagePanel.setError("No tasks available to update");
+                messagePanel.setError("No tasks available");
                 return this;
             }
-            // Notify mediator to show update progress form
+            // Notify mediator to show task details view
             CourseTaskDTO selectedTask = taskList.getSelectedItem();
-            mediator.onUpdateTaskProgress(courseId, selectedTask.getId());
+            mediator.onViewTaskDetails(courseId, selectedTask.getId());
+            return null; // Mediator handles transition
+        } else if (keyStroke.getKeyType() == KeyType.F2) {
+            // Notify mediator to show add task form
+            mediator.onAddTaskToCourse(courseId);
             return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.F4) {
             // Notify mediator to show edit course form
@@ -170,33 +169,6 @@ public class CourseDetailsState implements ScreenState {
         } else if (keyStroke.getKeyType() == KeyType.F5) {
             // Notify mediator to show delete course confirmation
             mediator.onDeleteCourse(courseId);
-            return null; // Mediator handles transition
-        } else if (keyStroke.getKeyType() == KeyType.F6) {
-            if (taskList.isEmpty()) {
-                messagePanel.setError("No tasks available to edit");
-                return this;
-            }
-            // Notify mediator to show edit task form
-            CourseTaskDTO selectedTask = taskList.getSelectedItem();
-            mediator.onEditTask(courseId, selectedTask.getId());
-            return null; // Mediator handles transition
-        } else if (keyStroke.getKeyType() == KeyType.F7) {
-            if (taskList.isEmpty()) {
-                messagePanel.setError("No tasks available to delete");
-                return this;
-            }
-            // Notify mediator to show delete task confirmation
-            CourseTaskDTO selectedTask = taskList.getSelectedItem();
-            mediator.onDeleteTask(courseId, selectedTask.getId());
-            return null; // Mediator handles transition
-        } else if (keyStroke.getKeyType() == KeyType.F8) {
-            if (taskList.isEmpty()) {
-                messagePanel.setError("No tasks available");
-                return this;
-            }
-            // Notify mediator to show timer view
-            CourseTaskDTO selectedTask = taskList.getSelectedItem();
-            mediator.onViewTimerDetails(courseId, selectedTask.getId());
             return null; // Mediator handles transition
         } else if (keyStroke.getKeyType() == KeyType.Escape) {
             // Notify mediator to return to course list

@@ -30,6 +30,7 @@ public class DeleteCourseTaskState implements ScreenState {
     private final CourseService courseService;
     private final UUID courseId;
     private final UUID taskId;
+    private final boolean fromTaskDetails;
     private final SelectionList<String> optionsList;
     private final MessagePanel messagePanel;
     private CourseTaskDTO task; // Cached task data
@@ -37,11 +38,12 @@ public class DeleteCourseTaskState implements ScreenState {
     private static final String CONFIRM = "Yes, Delete Task";
     private static final String CANCEL = "No, Cancel";
 
-    public DeleteCourseTaskState(CourseMediator mediator, CourseService courseService, UUID courseId, UUID taskId) {
+    public DeleteCourseTaskState(CourseMediator mediator, CourseService courseService, UUID courseId, UUID taskId, boolean fromTaskDetails) {
         this.mediator = mediator;
         this.courseService = courseService;
         this.courseId = courseId;
         this.taskId = taskId;
+        this.fromTaskDetails = fromTaskDetails;
 
         // Create options list with Cancel as default (first item)
         this.optionsList = new SelectionList<>("Select an option", option -> option);

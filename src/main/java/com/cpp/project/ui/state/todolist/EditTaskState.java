@@ -33,6 +33,7 @@ public class EditTaskState implements ScreenState {
     private final ToDoListService toDoListService;
     private final UUID listId;
     private final UUID taskId;
+    private final boolean fromTaskDetails;
 
     private final Form form;
     private final FormField descriptionField;
@@ -40,11 +41,12 @@ public class EditTaskState implements ScreenState {
     private final MessagePanel messagePanel;
     private ToDoListTaskDTO task; // Cached task data
 
-    public EditTaskState(ToDoListMediator mediator, ToDoListService toDoListService, UUID listId, UUID taskId) {
+    public EditTaskState(ToDoListMediator mediator, ToDoListService toDoListService, UUID listId, UUID taskId, boolean fromTaskDetails) {
         this.mediator = mediator;
         this.toDoListService = toDoListService;
         this.listId = listId;
         this.taskId = taskId;
+        this.fromTaskDetails = fromTaskDetails;
 
         descriptionField = ComponentFactory.createTextField("Description");
         deadlineInput = ComponentFactory.createDateInput("Deadline (optional)");
@@ -140,8 +142,12 @@ public class EditTaskState implements ScreenState {
 
         try {
             toDoListService.updateTask(listId, taskId, description, deadline);
-            // Notify mediator - it will transition to details view with success message
-            mediator.onTaskUpdated(listId);
+            // Notify mediator - it will transition based on context
+            if (fromTaskDetails) {
+                mediator.onTaskUpdatedReturnToTaskDetails(listId, taskId);
+            } else {
+                mediator.onTaskUpdated(listId);
+            }
             return null; // Mediator handles transition
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());

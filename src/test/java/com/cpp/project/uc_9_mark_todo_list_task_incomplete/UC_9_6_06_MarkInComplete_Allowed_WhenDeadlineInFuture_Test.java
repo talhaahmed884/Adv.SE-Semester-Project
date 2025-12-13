@@ -1,0 +1,71 @@
+package com.cpp.project.uc_9_mark_todo_list_task_incomplete;
+
+import com.cpp.project.authentication.service.AuthenticationService;
+import com.cpp.project.common.entity.TaskStatus;
+import com.cpp.project.entity.BaseIntegrationTest;
+import com.cpp.project.todolist.dto.ToDoListDTO;
+import com.cpp.project.todolist.dto.ToDoListTaskDTO;
+import com.cpp.project.todolist.service.ToDoListService;
+import com.cpp.project.user.dto.SignUpRequestDTO;
+import com.cpp.project.user.dto.UserDTO;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.util.UUID;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+/**
+ * UC-9.6.06: Completing ahead of the deadline is allowed
+ */
+public class UC_9_6_06_MarkInComplete_Allowed_WhenDeadlineInFuture_Test extends BaseIntegrationTest {
+    @Autowired
+    private ToDoListService toDoListService;
+
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    @Test
+    @DisplayName("UC-9.6.06: Allow marking complete when deadline is in future")
+    public void testMarkInCompleteAllowedWhenDeadlineInFuture() {
+        // Arrange - Create a test user
+        UserDTO user = authenticationService.signUp(new SignUpRequestDTO(
+                "Test User",
+                "test.user.complete.uc9606@test.com",
+                "Password123!"
+        ));
+        UUID userId = user.getId();
+
+        // Create a todo list
+        ToDoListDTO todoList = toDoListService.createToDoList("My Tasks", userId);
+
+        // Create a deadline 1 hour in the future
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusHours(1).toInstant();
+
+        // Add a task
+        ToDoListTaskDTO task = toDoListService.addTaskToList(
+                todoList.getId(),
+                "Buy groceries",
+                futureDeadline
+        );
+
+        // Act - Mark task as complete (before deadline)
+        ToDoListTaskDTO result = toDoListService.markTaskComplete(todoList.getId(), task.getId());
+
+        // Assert - Should complete successfully
+        assertNotNull(result);
+        assertEquals(TaskStatus.COMPLETED, result.getStatus());
+
+        // Act - Mark task as incomplete (before deadline)
+        result = toDoListService.markTaskInComplete(todoList.getId(), task.getId());
+
+        // Assert - Should incomplete successfully
+        assertNotNull(result);
+        assertEquals(TaskStatus.PENDING, result.getStatus());
+    }
+}

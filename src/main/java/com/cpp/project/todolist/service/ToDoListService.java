@@ -73,6 +73,15 @@ public interface ToDoListService {
     ToDoListTaskDTO markTaskComplete(UUID todoListId, UUID taskId);
 
     /**
+     * Mark a task as incomplete
+     *
+     * @param todoListId Todo list ID
+     * @param taskId     Task ID
+     * @return Updated task DTO
+     */
+    ToDoListTaskDTO markTaskInComplete(UUID todoListId, UUID taskId);
+
+    /**
      * Get aggregated deadlines from all tasks in a list
      * Useful for calendar view
      *

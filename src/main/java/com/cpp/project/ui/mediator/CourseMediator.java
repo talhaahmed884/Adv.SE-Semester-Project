@@ -206,4 +206,65 @@ public interface CourseMediator extends ScreenMediator {
      * @param errorMessage The error message to display
      */
     void onTimerError(String errorMessage);
+
+    // ========== Task Details View: Navigation Methods ==========
+
+    /**
+     * Called when user wants to view task details
+     * Mediator transitions to task details state
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task to view
+     */
+    void onViewTaskDetails(UUID courseId, UUID taskId);
+
+    // ========== Task Details View: Context-Aware Entry Points ==========
+
+    /**
+     * Called when user wants to update task progress from task details view
+     * Mediator transitions to update progress state with return context
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task to update
+     */
+    void onUpdateTaskProgressFromTaskDetails(UUID courseId, UUID taskId);
+
+    /**
+     * Called when user wants to edit a task from task details view
+     * Mediator transitions to edit task state with return context
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task to edit
+     */
+    void onEditTaskFromTaskDetails(UUID courseId, UUID taskId);
+
+    /**
+     * Called when user wants to delete a task from task details view
+     * Mediator transitions to delete task state with return context
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task to delete
+     */
+    void onDeleteTaskFromTaskDetails(UUID courseId, UUID taskId);
+
+    // ========== Task Details View: Callback Methods ==========
+
+    /**
+     * Called when a task is updated from task details view
+     * Mediator returns to task details view with success message
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task that was updated
+     */
+    void onTaskUpdatedReturnToTaskDetails(UUID courseId, UUID taskId);
+
+    /**
+     * Called when task progress is updated from task details view
+     * Mediator returns to task details view with success message
+     *
+     * @param courseId     The course containing the task
+     * @param taskId       The task that was updated
+     * @param wasCompleted Whether the task reached 100%
+     */
+    void onTaskProgressUpdatedReturnToTaskDetails(UUID courseId, UUID taskId, boolean wasCompleted);
 }

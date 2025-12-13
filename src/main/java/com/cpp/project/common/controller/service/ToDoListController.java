@@ -188,6 +188,26 @@ public class ToDoListController {
     }
 
     /**
+     * Mark a task as incomplete
+     * PUT /api/todolists/{todoListId}/tasks/{taskId}/incomplete
+     */
+    @PutMapping("/{todoListId}/tasks/{taskId}/incomplete")
+    public ResponseEntity<ApiSuccessResponse<ToDoListTaskDTO>> markTaskInComplete(
+            @PathVariable UUID todoListId,
+            @PathVariable UUID taskId) {
+
+        ToDoListTaskDTO task = todoListService.markTaskInComplete(todoListId, taskId);
+
+        ApiSuccessResponse<ToDoListTaskDTO> response = ApiSuccessResponse.<ToDoListTaskDTO>builder()
+                .data(task)
+                .message("Task marked as incomplete")
+                .statusCode(HttpStatus.OK.value())
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
+    /**
      * Get aggregated deadlines from all tasks
      * GET /api/todolists/{todoListId}/deadlines
      */

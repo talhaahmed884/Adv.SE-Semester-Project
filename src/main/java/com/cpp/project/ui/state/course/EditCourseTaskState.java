@@ -33,6 +33,7 @@ public class EditCourseTaskState implements ScreenState {
     private final CourseService courseService;
     private final UUID courseId;
     private final UUID taskId;
+    private final boolean fromTaskDetails;
     private final Form form;
     private final FormField nameField;
     private final FormField descriptionField;
@@ -40,11 +41,12 @@ public class EditCourseTaskState implements ScreenState {
     private final MessagePanel messagePanel;
     private CourseTaskDTO task; // Cached task data
 
-    public EditCourseTaskState(CourseMediator mediator, CourseService courseService, UUID courseId, UUID taskId) {
+    public EditCourseTaskState(CourseMediator mediator, CourseService courseService, UUID courseId, UUID taskId, boolean fromTaskDetails) {
         this.mediator = mediator;
         this.courseService = courseService;
         this.courseId = courseId;
         this.taskId = taskId;
+        this.fromTaskDetails = fromTaskDetails;
 
         nameField = ComponentFactory.createTextField("Task Name");
         descriptionField = ComponentFactory.createTextField("Description");
@@ -140,8 +142,12 @@ public class EditCourseTaskState implements ScreenState {
 
         try {
             courseService.updateTask(courseId, taskId, name, deadline, description);
-            // Notify mediator - it will transition to course details with success message
-            mediator.onTaskUpdated(courseId);
+            // Notify mediator - it will transition based on context
+            if (fromTaskDetails) {
+                mediator.onTaskUpdatedReturnToTaskDetails(courseId, taskId);
+            } else {
+                mediator.onTaskUpdated(courseId);
+            }
             return null; // Mediator handles transition
         } catch (Exception e) {
             messagePanel.setError(e.getMessage());

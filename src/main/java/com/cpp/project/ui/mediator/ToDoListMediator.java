@@ -147,4 +147,64 @@ public interface ToDoListMediator extends ScreenMediator {
      * @param listId The list that was modified
      */
     void onTaskDeleted(UUID listId);
+
+    // ========== Task Details View: Navigation Methods ==========
+
+    /**
+     * Called when user wants to view task details
+     * Mediator transitions to task details state
+     *
+     * @param listId The list containing the task
+     * @param taskId The task to view
+     */
+    void onViewTaskDetails(UUID listId, UUID taskId);
+
+    // ========== Task Details View: Context-Aware Entry Points ==========
+
+    /**
+     * Called when user wants to mark task complete from task details view
+     * Mediator may transition or handle inline
+     *
+     * @param listId The list containing the task
+     * @param taskId The task to mark complete
+     */
+    void onMarkCompleteFromTaskDetails(UUID listId, UUID taskId);
+
+    /**
+     * Called when user wants to edit a task from task details view
+     * Mediator transitions to edit task state with return context
+     *
+     * @param listId The list containing the task
+     * @param taskId The task to edit
+     */
+    void onEditTaskFromTaskDetails(UUID listId, UUID taskId);
+
+    /**
+     * Called when user wants to delete a task from task details view
+     * Mediator transitions to delete task state with return context
+     *
+     * @param listId The list containing the task
+     * @param taskId The task to delete
+     */
+    void onDeleteTaskFromTaskDetails(UUID listId, UUID taskId);
+
+    // ========== Task Details View: Callback Methods ==========
+
+    /**
+     * Called when a task is marked complete from task details view
+     * Mediator returns to task details view with success message
+     *
+     * @param listId The list containing the task
+     * @param taskId The task that was marked complete
+     */
+    void onTaskCompletedReturnToTaskDetails(UUID listId, UUID taskId);
+
+    /**
+     * Called when a task is updated from task details view
+     * Mediator returns to task details view with success message
+     *
+     * @param listId The list containing the task
+     * @param taskId The task that was updated
+     */
+    void onTaskUpdatedReturnToTaskDetails(UUID listId, UUID taskId);
 }

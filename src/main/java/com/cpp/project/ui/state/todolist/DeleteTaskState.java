@@ -32,15 +32,17 @@ public class DeleteTaskState implements ScreenState {
     private final ToDoListService toDoListService;
     private final UUID listId;
     private final UUID taskId;
+    private final boolean fromTaskDetails;
     private final SelectionList<String> optionsList;
     private final MessagePanel messagePanel;
     private ToDoListTaskDTO task; // Cached task data
 
-    public DeleteTaskState(ToDoListMediator mediator, ToDoListService toDoListService, UUID listId, UUID taskId) {
+    public DeleteTaskState(ToDoListMediator mediator, ToDoListService toDoListService, UUID listId, UUID taskId, boolean fromTaskDetails) {
         this.mediator = mediator;
         this.toDoListService = toDoListService;
         this.listId = listId;
         this.taskId = taskId;
+        this.fromTaskDetails = fromTaskDetails;
 
         // Create options list with Cancel as default (first item)
         this.optionsList = new SelectionList<>("Select an option", option -> option);
