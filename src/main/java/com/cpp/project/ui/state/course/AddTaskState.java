@@ -8,7 +8,8 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
 import com.cpp.project.ui.mediator.CourseMediator;
-import com.cpp.project.ui.strategy.RequiredFieldStrategy;
+import com.cpp.project.ui.util.FormValidator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -34,6 +35,7 @@ public class AddTaskState implements ScreenState {
     private final FormField descriptionField;
     private final DateInput deadlineInput;
     private final MessagePanel messagePanel;
+    private final FormValidator validator;
 
     public AddTaskState(CourseMediator mediator, CourseService courseService, UUID courseId) {
         this.mediator = mediator;
@@ -50,6 +52,7 @@ public class AddTaskState implements ScreenState {
                 .addField(deadlineInput);
 
         messagePanel = new MessagePanel();
+        validator = new FormValidator(messagePanel);
     }
 
     @Override
@@ -64,17 +67,17 @@ public class AddTaskState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== ADD NEW TASK ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Tab: Next field | Enter: Save | ESC: Cancel");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, "Tab: Next field | Enter: Save | ESC: Cancel");
 
         // Form
-        form.render(graphics, 5, 5);
+        form.render(graphics, UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW);
 
         // Messages
-        messagePanel.render(graphics, 5, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.FORM_LEFT, UILayoutConstants.messageRow(size));
     }
 
     @Override
@@ -99,17 +102,8 @@ public class AddTaskState implements ScreenState {
         Instant deadline = deadlineInput.getDate();
 
         // Validation
-        String nameError = new RequiredFieldStrategy("Task name").validate(name);
-        if (nameError != null) {
-            messagePanel.setError(nameError);
-            return this;
-        }
-
-        if (deadline == null) {
-            String error = deadlineInput.getErrorMessage();
-            messagePanel.setError(error.isEmpty() ? "All date fields are required" : error);
-            return this;
-        }
+        if (!validator.validateRequired("Task name", name)) return this;
+        if (!validator.validateDateInput(deadlineInput, "Deadline")) return this;
 
         try {
             courseService.addTaskToCourse(courseId, name, deadline, description);

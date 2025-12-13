@@ -1,58 +1,76 @@
 package com.cpp.project.course.repository;
 
+import com.cpp.project.common.repository.BaseJpaRepository;
 import com.cpp.project.course.entity.Course;
 import com.cpp.project.course.entity.CourseErrorCode;
 import com.cpp.project.course.entity.CourseException;
-import jakarta.persistence.*;
+import jakarta.persistence.NoResultException;
+import jakarta.persistence.TypedQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 /**
  * Repository implementation for Course entity using JPA EntityManager
+ * Extends BaseJpaRepository for common CRUD operations
  */
 @Repository
 @Transactional
-public class CourseRepositoryImpl implements CourseRepository {
+public class CourseRepositoryImpl extends BaseJpaRepository<Course, UUID> implements CourseRepository {
     private static final Logger logger = LoggerFactory.getLogger(CourseRepositoryImpl.class);
 
-    @PersistenceContext
-    private EntityManager entityManager;
+    // ========== BaseJpaRepository Implementation ==========
 
     @Override
-    public Course save(Course course) {
-        try {
-            if (course.getId() == null || !entityManager.contains(course)) {
-                entityManager.persist(course);
-                logger.info("Course created successfully with code: {}", course.getCode());
-                return course;
-            } else {
-                Course updated = entityManager.merge(course);
-                logger.info("Course updated successfully with code: {}", course.getCode());
-                return updated;
-            }
-        } catch (PersistenceException e) {
-            logger.error("Failed to save course with code: {}", course.getCode(), e);
-            throw new CourseException(CourseErrorCode.COURSE_CREATION_FAILED, e, e.getMessage());
-        }
+    protected Class<Course> getEntityClass() {
+        return Course.class;
     }
 
     @Override
-    @Transactional(readOnly = true)
-    public Optional<Course> findById(UUID id) {
-        try {
-            Course course = entityManager.find(Course.class, id);
-            return Optional.ofNullable(course);
-        } catch (Exception e) {
-            logger.error("Error finding course by id: {}", id, e);
-            throw new CourseException(CourseErrorCode.COURSE_NOT_FOUND, e, "id", id);
-        }
+    protected Logger getLogger() {
+        return logger;
     }
+
+    @Override
+    protected String getEntityName() {
+        return "Course";
+    }
+
+    @Override
+    protected String getEntityIdentifier(Course course) {
+        return course.getCode();
+    }
+
+    @Override
+    protected boolean isNew(Course course) {
+        return course.getId() == null;
+    }
+
+    @Override
+    protected RuntimeException createNotFoundException(UUID id) {
+        return new CourseException(CourseErrorCode.COURSE_NOT_FOUND, "id", id);
+    }
+
+    @Override
+    protected RuntimeException createNotFoundException(String fieldName, Object value) {
+        return new CourseException(CourseErrorCode.COURSE_NOT_FOUND, fieldName, value);
+    }
+
+    @Override
+    protected RuntimeException createSaveException(Exception cause) {
+        return new CourseException(CourseErrorCode.COURSE_CREATION_FAILED, cause, cause.getMessage());
+    }
+
+    @Override
+    protected RuntimeException createDeleteException(Object id) {
+        return new CourseException(CourseErrorCode.COURSE_DELETION_FAILED, id.toString());
+    }
+
+    // ========== Domain-Specific Methods ==========
 
     @Override
     @Transactional(readOnly = true)
@@ -73,7 +91,7 @@ public class CourseRepositoryImpl implements CourseRepository {
 
     @Override
     @Transactional(readOnly = true)
-    public List<Course> findByUserId(UUID userId) {
+    public java.util.List<Course> findByUserId(UUID userId) {
         try {
             TypedQuery<Course> query = entityManager.createQuery(
                     "SELECT c FROM Course c WHERE c.userId = :userId ORDER BY c.createdAt DESC", Course.class);
@@ -111,57 +129,6 @@ public class CourseRepositoryImpl implements CourseRepository {
         } catch (Exception e) {
             logger.error("Error checking course existence by code and userId: {} for user: {}", code, userId, e);
             return false;
-        }
-    }
-
-    @Override
-    public void deleteById(UUID id) {
-        try {
-            findById(id).ifPresent(this::delete);
-        } catch (Exception e) {
-            logger.error("Failed to delete course by id: {}", id, e);
-            throw new CourseException(CourseErrorCode.COURSE_DELETION_FAILED, e, id.toString());
-        }
-    }
-
-    @Override
-    public void delete(Course course) {
-        try {
-            if (entityManager.contains(course)) {
-                entityManager.remove(course);
-            } else {
-                entityManager.remove(entityManager.merge(course));
-            }
-            logger.info("Course deleted successfully with id: {}", course.getId());
-        } catch (Exception e) {
-            logger.error("Failed to delete course with id: {}", course.getId(), e);
-            throw new CourseException(CourseErrorCode.COURSE_DELETION_FAILED, e, e.getMessage());
-        }
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public List<Course> findAll() {
-        try {
-            TypedQuery<Course> query = entityManager.createQuery(
-                    "SELECT c FROM Course c ORDER BY c.createdAt DESC", Course.class);
-            return query.getResultList();
-        } catch (Exception e) {
-            logger.error("Error retrieving all courses", e);
-            throw new CourseException(CourseErrorCode.COURSE_NOT_FOUND, e, "all", "courses");
-        }
-    }
-
-    @Override
-    @Transactional(readOnly = true)
-    public long count() {
-        try {
-            TypedQuery<Long> query = entityManager.createQuery(
-                    "SELECT COUNT(c) FROM Course c", Long.class);
-            return query.getSingleResult();
-        } catch (Exception e) {
-            logger.error("Error counting courses", e);
-            return 0;
         }
     }
 

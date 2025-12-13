@@ -47,21 +47,91 @@ public class ToDoListServiceImpl implements ToDoListService {
         this.taskSanitizer = taskSanitizer;
     }
 
+    // ========== Helper Methods ==========
+
+    /**
+     * Find todo list by ID or throw exception
+     *
+     * @param todoListId Todo list ID
+     * @return ToDoList entity
+     * @throws ToDoListException if list not found
+     */
+    private ToDoList findToDoListOrThrow(UUID todoListId) {
+        return todoListRepository.findById(todoListId)
+                .orElseThrow(() -> new ToDoListException(ToDoListErrorCode.TODO_LIST_NOT_FOUND, "id", todoListId));
+    }
+
+    /**
+     * Find task in todo list or throw exception
+     *
+     * @param todoList Todo list containing the task
+     * @param taskId   Task ID
+     * @return ToDoListTask entity
+     * @throws ToDoListException if task not found
+     */
+    private ToDoListTask findTaskOrThrow(ToDoList todoList, UUID taskId) {
+        return todoList.getTasks().stream()
+                .filter(t -> t.getId().equals(taskId))
+                .findFirst()
+                .orElseThrow(() -> new ToDoListException(ToDoListErrorCode.TASK_NOT_FOUND, taskId));
+    }
+
+    /**
+     * Sanitize and validate list name
+     *
+     * @param name Raw list name
+     * @return Sanitized and validated list name
+     * @throws ToDoListException if validation fails
+     */
+    private String sanitizeAndValidateListName(String name) {
+        String sanitized = listSanitizer.sanitizeName(name);
+        ValidationResult validation = validationService.validateName(sanitized);
+        if (!validation.isValid()) {
+            throw new ToDoListException(ToDoListErrorCode.INVALID_TODO_LIST_NAME, validation.getFirstError());
+        }
+        return sanitized;
+    }
+
+    /**
+     * Sanitize and validate task description
+     *
+     * @param description Raw task description
+     * @return Sanitized and validated task description
+     * @throws ToDoListException if validation fails
+     */
+    private String sanitizeAndValidateTaskDescription(String description) {
+        String sanitized = taskSanitizer.sanitizeDescription(description);
+        ValidationResult validation = validationService.validateTaskDescription(sanitized);
+        if (!validation.isValid()) {
+            throw new ToDoListException(ToDoListErrorCode.INVALID_TASK_DESCRIPTION, validation.getFirstError());
+        }
+        return sanitized;
+    }
+
+    /**
+     * Validate task deadline
+     *
+     * @param deadline Task deadline
+     * @throws ToDoListException if validation fails
+     */
+    private void validateTaskDeadline(Instant deadline) {
+        ValidationResult validation = validationService.validateTaskDeadline(deadline);
+        if (!validation.isValid()) {
+            throw new ToDoListException(ToDoListErrorCode.INVALID_TASK_DEADLINE, validation.getFirstError());
+        }
+    }
+
+    // ========== Public Service Methods ==========
+
     @Override
     public ToDoListDTO createToDoList(String name, UUID userId) {
         logger.info("Creating todo list: {}", name);
 
         try {
-            // Step 1: Sanitize input
-            String sanitizedName = listSanitizer.sanitizeName(name);
+            // Sanitize and validate input
+            String sanitizedName = sanitizeAndValidateListName(name);
 
-            // Step 2: Validate sanitized input
-            ValidationResult nameValidation = validationService.validateName(sanitizedName);
-            if (!nameValidation.isValid()) {
-                throw new ToDoListException(ToDoListErrorCode.INVALID_TODO_LIST_NAME, nameValidation.getFirstError());
-            }
-
-            // Step 3: Create todo list
+            // Create todo list
             ToDoList todoList = ToDoList.builder()
                     .name(sanitizedName)
                     .userId(userId)

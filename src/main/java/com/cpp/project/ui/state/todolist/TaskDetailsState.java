@@ -7,14 +7,14 @@ import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.ToDoListMediator;
+import com.cpp.project.ui.util.DateFormatUtils;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 /**
@@ -30,9 +30,6 @@ public class TaskDetailsState implements ScreenState {
     private final ToDoListService toDoListService;
     private final UUID listId;
     private final UUID taskId;
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm a")
-            .withZone(ZoneId.systemDefault());
-    private final DateTimeFormatter timestampFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm:ss a");
 
     private final MessagePanel messagePanel;
     private ToDoListTaskDTO task;
@@ -76,7 +73,8 @@ public class TaskDetailsState implements ScreenState {
         if (task == null) {
             // Task not found - show error
             graphics.setForegroundColor(TextColor.ANSI.RED);
-            graphics.putString(3, 3, "Task not found. Press ESC to return.");
+            graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW,
+                    "Task not found. Press ESC to return.");
             return;
         }
 
@@ -89,19 +87,20 @@ public class TaskDetailsState implements ScreenState {
             description = description.substring(0, 47) + "...";
         }
         String title = "=== TASK DETAILS: " + description + " ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
         String instruction = TaskStatus.COMPLETED.equals(task.getStatus()) ?
                 "F3: Mark Incomplete | F4: Edit | F5: Delete | ESC: Back" :
                 "F3: Mark Complete | F4: Edit | F5: Delete | ESC: Back";
-        graphics.putString(3, 3, instruction);
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, instruction);
 
         // Section: Task Information
         graphics.setForegroundColor(TextColor.ANSI.WHITE_BRIGHT);
-        graphics.putString(3, 5, "Task Information");
-        graphics.putString(3, 6, "----------------------------------------");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.CONTENT_START_ROW, "Task Information");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INFO_SECTION_ROW,
+                "----------------------------------------");
 
         // Task details
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
@@ -109,31 +108,34 @@ public class TaskDetailsState implements ScreenState {
 
         // Description (full, with wrapping if needed)
         String fullDescription = task.getDescription();
-        graphics.putString(5, currentY++, "Description: " + wrapText(fullDescription, 65));
+        graphics.putString(UILayoutConstants.FORM_LEFT, currentY++,
+                "Description: " + wrapText(fullDescription, 65));
 
-        // Deadline
-        String deadlineStr = task.getDeadline() != null ?
-                dateFormat.format(task.getDeadline()) : "No deadline";
-        graphics.putString(5, currentY++, "Deadline: " + deadlineStr);
+        // Deadline - using DateFormatUtils
+        graphics.putString(UILayoutConstants.FORM_LEFT, currentY++,
+                "Deadline: " + DateFormatUtils.formatDeadline(task.getDeadline()));
 
         // Status with color
         TextColor statusColor = TaskStatus.COMPLETED.equals(task.getStatus()) ?
                 TextColor.ANSI.GREEN : TextColor.ANSI.YELLOW;
         graphics.setForegroundColor(statusColor);
-        graphics.putString(5, currentY++, "Status: " + task.getStatus());
+        graphics.putString(UILayoutConstants.FORM_LEFT, currentY++, "Status: " + task.getStatus());
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
 
-        // Timestamps
+        // Timestamps - using DateFormatUtils
         currentY++;
-        if (task.getCreatedAt() != null) {
-            graphics.putString(5, currentY++, "Created: " + timestampFormat.format(task.getCreatedAt()));
-        }
-        if (task.getUpdatedAt() != null) {
-            graphics.putString(5, currentY++, "Updated: " + timestampFormat.format(task.getUpdatedAt()));
+        String createdText = DateFormatUtils.formatTimestampWithLabel("Created", task.getCreatedAt());
+        if (!createdText.isEmpty()) {
+            graphics.putString(UILayoutConstants.FORM_LEFT, currentY++, createdText);
         }
 
-        // Messages at bottom
-        messagePanel.render(graphics, 3, size.getRows() - 2);
+        String updatedText = DateFormatUtils.formatTimestampWithLabel("Updated", task.getUpdatedAt());
+        if (!updatedText.isEmpty()) {
+            graphics.putString(UILayoutConstants.FORM_LEFT, currentY++, updatedText);
+        }
+
+        // Messages at bottom - using UILayoutConstants
+        messagePanel.render(graphics, UILayoutConstants.LEFT_MARGIN, UILayoutConstants.messageRow(size));
     }
 
     /**

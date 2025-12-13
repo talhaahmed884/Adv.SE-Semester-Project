@@ -7,6 +7,8 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.CourseMediator;
+import com.cpp.project.ui.util.DateFormatUtils;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -70,31 +72,31 @@ public class DeleteCourseTaskState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
         String title = "=== DELETE TASK - CONFIRMATION ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Warning
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "WARNING: This action cannot be undone!");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, "WARNING: This action cannot be undone!");
 
         if (task != null) {
             // Task info
             graphics.setForegroundColor(TextColor.ANSI.WHITE);
-            graphics.putString(3, 5, "Task Name: " + task.getName());
-            graphics.putString(3, 6, "Description: " + (task.getDescription() != null ? task.getDescription() : "N/A"));
-            graphics.putString(3, 7, "Deadline: " + task.getDeadline().toString());
-            graphics.putString(3, 8, "Progress: " + task.getProgress() + "%");
-            graphics.putString(3, 9, "Status: " + task.getStatus());
+            graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.CONTENT_START_ROW, "Task Name: " + task.getName());
+            graphics.putString(UILayoutConstants.LEFT_MARGIN, 6, "Description: " + (task.getDescription() != null ? task.getDescription() : "N/A"));
+            graphics.putString(UILayoutConstants.LEFT_MARGIN, 7, "Deadline: " + DateFormatUtils.formatDeadline(task.getDeadline()));
+            graphics.putString(UILayoutConstants.LEFT_MARGIN, 8, "Progress: " + task.getProgress() + "%");
+            graphics.putString(UILayoutConstants.LEFT_MARGIN, 9, "Status: " + task.getStatus());
         }
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 11, "Are you sure you want to delete this task?");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, 11, "Are you sure you want to delete this task?");
 
         // Options
-        optionsList.render(graphics, 3, 13);
+        optionsList.render(graphics, UILayoutConstants.LEFT_MARGIN, 13);
 
         // Messages
-        messagePanel.render(graphics, 3, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.LEFT_MARGIN, UILayoutConstants.messageRow(size));
     }
 
     @Override

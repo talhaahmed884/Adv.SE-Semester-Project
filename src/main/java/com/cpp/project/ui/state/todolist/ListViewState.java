@@ -6,6 +6,7 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.ToDoListMediator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -57,19 +58,19 @@ public class ListViewState implements ScreenState {
 
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== TO-DO LIST MANAGEMENT ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString((size.getColumns() - title.length()) / 2, UILayoutConstants.TITLE_ROW, title);
 
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "F1: Add List | ESC: Back to Main Menu");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, "F1: Add List | ESC: Back to Main Menu");
 
-        listSelection.render(graphics, 3, 5);
+        listSelection.render(graphics, UILayoutConstants.LEFT_MARGIN, UILayoutConstants.CONTENT_START_ROW);
 
         if (!listSelection.isEmpty()) {
             graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-            graphics.putString(3, 17, "Press ENTER to view list details");
+            graphics.putString(UILayoutConstants.LEFT_MARGIN, 17, "Press ENTER to view list details");
         }
 
-        messagePanel.render(graphics, 3, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.LEFT_MARGIN, size.getRows() - UILayoutConstants.BOTTOM_MARGIN);
     }
 
     @Override

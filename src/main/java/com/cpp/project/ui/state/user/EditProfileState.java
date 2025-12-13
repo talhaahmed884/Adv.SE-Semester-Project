@@ -6,7 +6,8 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
 import com.cpp.project.ui.mediator.UserMediator;
-import com.cpp.project.ui.strategy.RequiredFieldStrategy;
+import com.cpp.project.ui.util.FormValidator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.cpp.project.user.dto.UserDTO;
 import com.cpp.project.user.service.UserService;
 import com.googlecode.lanterna.TerminalSize;
@@ -32,6 +33,7 @@ public class EditProfileState implements ScreenState {
     private final FormField nameField;
     private final FormField emailField;
     private final MessagePanel messagePanel;
+    private final FormValidator formValidator;
 
     private UserDTO currentUser;
 
@@ -47,6 +49,7 @@ public class EditProfileState implements ScreenState {
                 .addField(emailField);
 
         messagePanel = new MessagePanel();
+        formValidator = new FormValidator(messagePanel);
     }
 
     @Override
@@ -67,17 +70,18 @@ public class EditProfileState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== EDIT PROFILE ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Tab: Next field | Enter: Save | ESC: Cancel");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW,
+                "Tab: Next field | Enter: Save | ESC: Cancel");
 
         // Form
-        form.render(graphics, 5, 5);
+        form.render(graphics, UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW);
 
         // Message panel
-        messagePanel.render(graphics, 5, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.FORM_LEFT, UILayoutConstants.messageRow(size));
     }
 
     @Override
@@ -100,16 +104,12 @@ public class EditProfileState implements ScreenState {
         String name = nameField.getValue().trim();
         String email = emailField.getValue().trim();
 
-        // Validation
-        String nameError = new RequiredFieldStrategy("Name").validate(name);
-        if (nameError != null) {
-            messagePanel.setError(nameError);
+        // Validation using FormValidator
+        if (!formValidator.validateRequired("Name", name)) {
             return this;
         }
 
-        String emailError = new RequiredFieldStrategy("Email").validate(email);
-        if (emailError != null) {
-            messagePanel.setError(emailError);
+        if (!formValidator.validateRequired("Email", email)) {
             return this;
         }
 

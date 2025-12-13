@@ -7,14 +7,14 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.component.TimerSummaryPanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.CourseMediator;
+import com.cpp.project.ui.util.DateFormatUtils;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 /**
@@ -30,8 +30,6 @@ public class TaskDetailsState implements ScreenState {
     private final CourseMediator mediator;
     private final UUID courseId;
     private final UUID taskId;
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm a")
-            .withZone(ZoneId.systemDefault());
 
     private final TimerSummaryPanel timerPanel;
     private final MessagePanel messagePanel;
@@ -93,7 +91,8 @@ public class TaskDetailsState implements ScreenState {
         if (task == null) {
             // Task not found - show error
             graphics.setForegroundColor(TextColor.ANSI.RED);
-            graphics.putString(3, 3, "Task not found. Press ESC to return.");
+            graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW,
+                    "Task not found. Press ESC to return.");
             return;
         }
 
@@ -106,50 +105,56 @@ public class TaskDetailsState implements ScreenState {
             taskName = taskName.substring(0, 57) + "...";
         }
         String title = "=== TASK DETAILS: " + taskName + " ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "F3: Update Progress | F4: Edit | F5: Delete | F6: Timer | ESC: Back");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW,
+                "F3: Update Progress | F4: Edit | F5: Delete | F6: Timer | ESC: Back");
 
         // Section: Task Information
         graphics.setForegroundColor(TextColor.ANSI.WHITE_BRIGHT);
-        graphics.putString(3, 5, "Task Information");
-        graphics.putString(3, 6, "----------------------------------------");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.CONTENT_START_ROW, "Task Information");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INFO_SECTION_ROW,
+                "----------------------------------------");
 
         // Task details
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         int currentY = 7;
 
-        graphics.putString(5, currentY++, "Name: " + task.getName());
+        graphics.putString(UILayoutConstants.FORM_LEFT, currentY++, "Name: " + task.getName());
 
         // Description (handle null and long text)
         String description = task.getDescription();
         if (description != null && !description.trim().isEmpty()) {
-            graphics.putString(5, currentY++, "Description: " + wrapText(description, 70));
+            graphics.putString(UILayoutConstants.FORM_LEFT, currentY++,
+                    "Description: " + wrapText(description, 70));
         } else {
-            graphics.putString(5, currentY++, "Description: (none)");
+            graphics.putString(UILayoutConstants.FORM_LEFT, currentY++, "Description: (none)");
         }
 
-        graphics.putString(5, currentY++, "Deadline: " + dateFormat.format(task.getDeadline()));
-        graphics.putString(5, currentY++, "Status: " + task.getStatus());
+        // Deadline - using DateFormatUtils
+        graphics.putString(UILayoutConstants.FORM_LEFT, currentY++,
+                "Deadline: " + DateFormatUtils.formatDeadline(task.getDeadline()));
+        graphics.putString(UILayoutConstants.FORM_LEFT, currentY++, "Status: " + task.getStatus());
 
         // Progress with visual indicator
         String progressBar = createProgressBar(task.getProgress());
-        graphics.putString(5, currentY++, "Progress: " + task.getProgress() + "% " + progressBar);
+        graphics.putString(UILayoutConstants.FORM_LEFT, currentY++,
+                "Progress: " + task.getProgress() + "% " + progressBar);
 
         currentY++; // Spacing
 
         // Section: Timer Summary
         graphics.setForegroundColor(TextColor.ANSI.WHITE_BRIGHT);
-        graphics.putString(3, currentY++, "Timer Summary");
-        graphics.putString(3, currentY++, "----------------------------------------");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, currentY++, "Timer Summary");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, currentY++, "----------------------------------------");
 
         // Render timer panel
-        timerPanel.render(graphics, 5, currentY);
+        timerPanel.render(graphics, UILayoutConstants.FORM_LEFT, currentY);
 
-        // Messages at bottom
-        messagePanel.render(graphics, 3, size.getRows() - 2);
+        // Messages at bottom - using UILayoutConstants
+        messagePanel.render(graphics, UILayoutConstants.LEFT_MARGIN, UILayoutConstants.messageRow(size));
     }
 
     /**

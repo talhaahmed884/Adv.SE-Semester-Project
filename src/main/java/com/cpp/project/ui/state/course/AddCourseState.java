@@ -7,7 +7,8 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.factory.ComponentFactory;
 import com.cpp.project.ui.mediator.CourseMediator;
-import com.cpp.project.ui.strategy.RequiredFieldStrategy;
+import com.cpp.project.ui.util.FormValidator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.cpp.project.user.dto.UserDTO;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
@@ -31,6 +32,7 @@ public class AddCourseState implements ScreenState {
     private final FormField codeField;
     private final FormField nameField;
     private final MessagePanel messagePanel;
+    private final FormValidator validator;
 
     public AddCourseState(CourseMediator mediator, UserDTO currentUser, CourseService courseService) {
         this.mediator = mediator;
@@ -45,6 +47,7 @@ public class AddCourseState implements ScreenState {
                 .addField(nameField);
 
         messagePanel = new MessagePanel();
+        validator = new FormValidator(messagePanel);
     }
 
     @Override
@@ -59,17 +62,17 @@ public class AddCourseState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== ADD NEW COURSE ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString(UILayoutConstants.centerX(size, title.length()), UILayoutConstants.TITLE_ROW, title);
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Tab: Next field | Enter: Save | ESC: Cancel");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, "Tab: Next field | Enter: Save | ESC: Cancel");
 
         // Form
-        form.render(graphics, 5, 5);
+        form.render(graphics, UILayoutConstants.FORM_LEFT, UILayoutConstants.FORM_START_ROW);
 
         // Messages
-        messagePanel.render(graphics, 5, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.FORM_LEFT, UILayoutConstants.messageRow(size));
     }
 
     @Override
@@ -93,17 +96,8 @@ public class AddCourseState implements ScreenState {
         String name = nameField.getValue().trim();
 
         // Validation
-        String codeError = new RequiredFieldStrategy("Course code").validate(code);
-        if (codeError != null) {
-            messagePanel.setError(codeError);
-            return this;
-        }
-
-        String nameError = new RequiredFieldStrategy("Course name").validate(name);
-        if (nameError != null) {
-            messagePanel.setError(nameError);
-            return this;
-        }
+        if (!validator.validateRequired("Course code", code)) return this;
+        if (!validator.validateRequired("Course name", name)) return this;
 
         try {
             courseService.createCourse(code, name, currentUser.getId());

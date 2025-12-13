@@ -6,6 +6,7 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.ToDoListMediator;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
@@ -60,33 +61,33 @@ public class DeleteListState implements ScreenState {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
         String title = "=== DELETE TO-DO LIST - CONFIRMATION ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString((size.getColumns() - title.length()) / 2, UILayoutConstants.TITLE_ROW, title);
 
         // Warning
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "WARNING: This action cannot be undone!");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, "WARNING: This action cannot be undone!");
 
         // List info
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
-        graphics.putString(3, 5, "List Name: " + todoList.getName());
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.CONTENT_START_ROW, "List Name: " + todoList.getName());
 
         int taskCount = todoList.getTasks() != null ? todoList.getTasks().size() : 0;
-        graphics.putString(3, 6, "Tasks in List: " + taskCount);
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, 6, "Tasks in List: " + taskCount);
 
         if (taskCount > 0) {
             graphics.setForegroundColor(TextColor.ANSI.RED);
-            graphics.putString(3, 7, "All tasks will also be deleted!");
+            graphics.putString(UILayoutConstants.LEFT_MARGIN, 7, "All tasks will also be deleted!");
         }
 
         // Instructions
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 9, "Are you sure you want to delete this to-do list?");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, 9, "Are you sure you want to delete this to-do list?");
 
         // Options
-        optionsList.render(graphics, 3, 11);
+        optionsList.render(graphics, UILayoutConstants.LEFT_MARGIN, 11);
 
         // Messages
-        messagePanel.render(graphics, 3, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.LEFT_MARGIN, size.getRows() - UILayoutConstants.BOTTOM_MARGIN);
     }
 
     @Override

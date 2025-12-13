@@ -8,14 +8,14 @@ import com.cpp.project.ui.component.MessagePanel;
 import com.cpp.project.ui.component.SelectionList;
 import com.cpp.project.ui.core.ScreenState;
 import com.cpp.project.ui.mediator.ToDoListMediator;
+import com.cpp.project.ui.util.DateFormatUtils;
+import com.cpp.project.ui.util.UILayoutConstants;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 /**
@@ -30,8 +30,6 @@ public class ListDetailsState implements ScreenState {
     private final ToDoListMediator mediator;
     private final ToDoListService toDoListService;
     private final UUID listId;
-    private final DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM dd, yyyy hh:mm a")
-            .withZone(ZoneId.systemDefault());
 
     private final SelectionList<ToDoListTaskDTO> taskSelection;
     private final MessagePanel messagePanel;
@@ -44,7 +42,7 @@ public class ListDetailsState implements ScreenState {
 
         this.taskSelection = new SelectionList<>("Tasks", task -> {
             String deadline = task.getDeadline() != null ?
-                    dateFormat.format(task.getDeadline()) : "No deadline";
+                    DateFormatUtils.formatDeadline(task.getDeadline()) : "No deadline";
             return String.format("%s - %s (%s)", task.getDescription(), task.getStatus(), deadline);
         });
         taskSelection.setFocused(true);
@@ -64,7 +62,7 @@ public class ListDetailsState implements ScreenState {
 
         this.taskSelection = new SelectionList<>("Tasks", task -> {
             String deadline = task.getDeadline() != null ?
-                    dateFormat.format(task.getDeadline()) : "No deadline";
+                    DateFormatUtils.formatDeadline(task.getDeadline()) : "No deadline";
             return String.format("%s - %s (%s)", task.getDescription(), task.getStatus(), deadline);
         });
         taskSelection.setFocused(true);
@@ -90,21 +88,21 @@ public class ListDetailsState implements ScreenState {
 
         graphics.setForegroundColor(TextColor.ANSI.CYAN_BRIGHT);
         String title = "=== TO-DO LIST DETAILS ===";
-        graphics.putString((size.getColumns() - title.length()) / 2, 1, title);
+        graphics.putString((size.getColumns() - title.length()) / 2, UILayoutConstants.TITLE_ROW, title);
 
         graphics.setForegroundColor(TextColor.ANSI.YELLOW);
-        graphics.putString(3, 3, "Enter: View Task Details | F2: Add Task | F4: Edit List | F5: Delete List | ESC: Back");
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, UILayoutConstants.INSTRUCTIONS_ROW, "Enter: View Task Details | F2: Add Task | F4: Edit List | F5: Delete List | ESC: Back");
 
         graphics.setForegroundColor(TextColor.ANSI.WHITE);
         int completed = (int) todoList.getTasks().stream()
                 .filter(t -> TaskStatus.COMPLETED.equals(t.getStatus()))
                 .count();
         String listTitle = todoList.getName() + " (" + completed + "/" + todoList.getTasks().size() + " completed)";
-        graphics.putString(3, 6, "List: " + listTitle);
+        graphics.putString(UILayoutConstants.LEFT_MARGIN, 6, "List: " + listTitle);
 
-        taskSelection.render(graphics, 3, 8);
+        taskSelection.render(graphics, UILayoutConstants.LEFT_MARGIN, 8);
 
-        messagePanel.render(graphics, 3, size.getRows() - 2);
+        messagePanel.render(graphics, UILayoutConstants.LEFT_MARGIN, size.getRows() - UILayoutConstants.BOTTOM_MARGIN);
     }
 
     @Override
