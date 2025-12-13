@@ -23,6 +23,13 @@ public abstract class BaseIntegrationTest {
         // Clean up test data after each test
         // Order matters due to foreign key constraints
 
+        // Clean up timer-related data (must be before course_tasks due to FK)
+        try {
+            jdbcTemplate.execute("DELETE FROM task_timers");
+        } catch (Exception e) {
+            // Tables might not exist yet, ignore
+        }
+
         // Clean up course-related data
         try {
             jdbcTemplate.execute("DELETE FROM course_tasks");

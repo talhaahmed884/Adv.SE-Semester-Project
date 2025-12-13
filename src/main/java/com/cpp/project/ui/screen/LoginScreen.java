@@ -3,6 +3,7 @@ package com.cpp.project.ui.screen;
 import com.cpp.project.authentication.service.AuthenticationService;
 import com.cpp.project.calendar.service.CalendarService;
 import com.cpp.project.course.service.CourseService;
+import com.cpp.project.timer.service.TimerService;
 import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.core.StatefulScreen;
 import com.cpp.project.ui.state.login.LoginState;
@@ -26,6 +27,7 @@ public class LoginScreen extends StatefulScreen {
     private final CalendarService calendarService;
     private final UserService userService;
     private final UserCredentialService credentialService;
+    private final TimerService timerService;
 
     public LoginScreen(
             Screen screen,
@@ -34,7 +36,8 @@ public class LoginScreen extends StatefulScreen {
             ToDoListService toDoListService,
             CalendarService calendarService,
             UserService userService,
-            UserCredentialService credentialService) {
+            UserCredentialService credentialService,
+            TimerService timerService) {
         super(screen);
         this.authenticationService = authenticationService;
         this.courseService = courseService;
@@ -42,6 +45,7 @@ public class LoginScreen extends StatefulScreen {
         this.calendarService = calendarService;
         this.userService = userService;
         this.credentialService = credentialService;
+        this.timerService = timerService;
 
         // Start with login state
         this.currentState = new LoginState(
@@ -63,7 +67,8 @@ public class LoginScreen extends StatefulScreen {
                     toDoListService,
                     calendarService,
                     userService,
-                    credentialService
+                    credentialService,
+                    timerService
             );
             mainMenu.display();
         } catch (IOException e) {
