@@ -1,0 +1,490 @@
+@startuml Controller Layer - REST API and Exception Handling
+!theme plain
+skinparam dpi 300
+skinparam linetype ortho
+skinparam groupInheritance 2
+skinparam nodesep 80
+skinparam ranksep 80
+
+title Studently - Controller Layer (REST API)\\n(Builder Pattern + Dependency Injection + Global Exception Handling)
+
+' ============================================
+' BUILDER PATTERN - Response Wrappers
+' ============================================
+package "Builder Pattern - API Response Wrappers" <<Rectangle>> #LightBlue {
+    class "ApiSuccessResponse<T>" as ApiSuccessResponse {
+        - data: T
+        - message: String
+        - statusCode: int
+        - timestamp: LocalDateTime
+        --
+        # ApiSuccessResponse(builder: ApiSuccessResponseBuilder<T>)
+        + {static} builder(): ApiSuccessResponseBuilder<T>
+        + getData(): T
+        + getMessage(): String
+        + getStatusCode(): int
+        + getTimestamp(): LocalDateTime
+    }
+
+    class "ApiSuccessResponseBuilder<T>" as ApiSuccessResponseBuilder {
+        # data: T
+        # message: String
+        # statusCode: int = 200
+        # timestamp: LocalDateTime = LocalDateTime.now()
+        --
+        + data(data: T): ApiSuccessResponseBuilder<T>
+        + message(message: String): ApiSuccessResponseBuilder<T>
+        + statusCode(statusCode: int): ApiSuccessResponseBuilder<T>
+        + timestamp(timestamp: LocalDateTime): ApiSuccessResponseBuilder<T>
+        + build(): ApiSuccessResponse<T>
+    }
+
+    class ErrorResponseDTO {
+        - code: String
+        - message: String
+        - statusCode: int
+        - path: String
+        - timestamp: LocalDateTime
+        - details: List<String>
+        - fieldErrors: Map<String, String>
+        --
+        # ErrorResponseDTO(builder: ErrorResponseDTOBuilder)
+        + {static} builder(): ErrorResponseDTOBuilder
+        + getCode(): String
+        + getMessage(): String
+        + getStatusCode(): int
+        + getPath(): String
+        + getTimestamp(): LocalDateTime
+        + getDetails(): List<String>
+        + getFieldErrors(): Map<String, String>
+    }
+
+    class ErrorResponseDTOBuilder {
+        - code: String
+        - message: String
+        - statusCode: int
+        - path: String
+        - timestamp: LocalDateTime = LocalDateTime.now()
+        - details: List<String>
+        - fieldErrors: Map<String, String>
+        --
+        + code(code: String): ErrorResponseDTOBuilder
+        + message(message: String): ErrorResponseDTOBuilder
+        + statusCode(statusCode: int): ErrorResponseDTOBuilder
+        + path(path: String): ErrorResponseDTOBuilder
+        + timestamp(timestamp: LocalDateTime): ErrorResponseDTOBuilder
+        + addDetail(detail: String): ErrorResponseDTOBuilder
+        + fieldErrors(fieldErrors: Map<String, String>): ErrorResponseDTOBuilder
+        + build(): ErrorResponseDTO
+    }
+
+    ApiSuccessResponse --> ApiSuccessResponseBuilder : creates
+    ApiSuccessResponseBuilder ..> ApiSuccessResponse : builds
+    ErrorResponseDTO --> ErrorResponseDTOBuilder : creates
+    ErrorResponseDTOBuilder ..> ErrorResponseDTO : builds
+
+    note right of ApiSuccessResponse
+        Builder Pattern:
+        Generic response wrapper <T>
+        Used by ALL controllers
+
+        Example:
+        ApiSuccessResponse.<UserDTO>builder()
+            .data(userDTO)
+            .message("User created")
+            .statusCode(201)
+            .build()
+    end note
+
+    note right of ErrorResponseDTO
+        Builder Pattern:
+        Structured error response
+        Supports field-level errors
+        Used by GlobalExceptionHandler
+    end note
+}
+
+' ============================================
+' AUTHENTICATION CONTROLLER
+' ============================================
+package "Authentication API" <<Rectangle>> #LightGreen {
+    class AuthController <<@RestController>> {
+        - authService: AuthenticationService
+        - timerService: TimerService
+        --
+        + AuthController(authService: AuthenticationService, timerService: TimerService)
+        --
+        + signUp(request: SignUpRequestDTO): ResponseEntity<ApiSuccessResponse<AuthResponseDTO>>
+        + login(request: LoginRequestDTO): ResponseEntity<ApiSuccessResponse<AuthResponseDTO>>
+        + logout(request: LogoutRequestDTO): ResponseEntity<ApiSuccessResponse<String>>
+    }
+
+    note right of AuthController
+        @RestController
+        @RequestMapping("/api/auth")
+
+        Endpoints:
+        POST /api/auth/signup
+        POST /api/auth/login
+        POST /api/auth/logout
+
+        Logout stops all active timers:
+        timerService.stopAllActiveTimersForUser()
+
+        102 LOC
+    end note
+}
+
+' ============================================
+' USER MANAGEMENT CONTROLLER
+' ============================================
+package "User Management API" <<Rectangle>> #LightYellow {
+    class UserController <<@RestController>> {
+        - userService: UserService
+        --
+        + UserController(userService: UserService)
+        --
+        + getUserById(id: UUID): ResponseEntity<ApiSuccessResponse<UserDTO>>
+        + getUserByEmail(email: String): ResponseEntity<ApiSuccessResponse<UserDTO>>
+        + updateUser(id: UUID, request: UpdateUserRequestDTO): ResponseEntity<ApiSuccessResponse<String>>
+        + deleteUser(id: UUID): ResponseEntity<ApiSuccessResponse<String>>
+    }
+
+    note right of UserController
+        @RestController
+        @RequestMapping("/api/users")
+
+        Endpoints:
+        GET /api/users/{id}
+        GET /api/users/email/{email}
+        PUT /api/users/{id}
+        DELETE /api/users/{id}
+
+        Validation pattern:
+        if (request.isEmpty()) {
+            throw UserException(...)
+        }
+
+        91 LOC
+    end note
+}
+
+' ============================================
+' COURSE MANAGEMENT CONTROLLER
+' ============================================
+package "Course Management API" <<Rectangle>> #Lavender {
+    class CourseController <<@RestController>> {
+        - courseService: CourseService
+        --
+        + CourseController(courseService: CourseService)
+        --
+        ' Course CRUD
+        + createCourse(request: CreateCourseRequestDTO): ResponseEntity<ApiSuccessResponse<CourseDTO>>
+        + getCourseById(id: UUID): ResponseEntity<ApiSuccessResponse<CourseDTO>>
+        + getCourseByCode(code: String): ResponseEntity<ApiSuccessResponse<CourseDTO>>
+        + getCoursesByUserId(userId: UUID): ResponseEntity<ApiSuccessResponse<List<CourseDTO>>>
+        + updateCourse(id: UUID, request: UpdateCourseRequestDTO): ResponseEntity<ApiSuccessResponse<CourseDTO>>
+        + deleteCourse(id: UUID): ResponseEntity<ApiSuccessResponse<String>>
+        --
+        ' Task Operations
+        + addTaskToCourse(courseId: UUID, request: AddTaskRequestDTO): ResponseEntity<ApiSuccessResponse<CourseTaskDTO>>
+        + updateTaskProgress(courseId: UUID, taskId: UUID, request: UpdateTaskProgressRequestDTO): ResponseEntity<ApiSuccessResponse<CourseTaskDTO>>
+        + markTaskComplete(courseId: UUID, taskId: UUID): ResponseEntity<ApiSuccessResponse<CourseTaskDTO>>
+        + updateTask(courseId: UUID, taskId: UUID, request: UpdateTaskRequestDTO): ResponseEntity<ApiSuccessResponse<CourseTaskDTO>>
+        + deleteTask(courseId: UUID, taskId: UUID): ResponseEntity<ApiSuccessResponse<String>>
+    }
+
+    note right of CourseController
+        @RestController
+        @RequestMapping("/api/courses")
+
+        Course Endpoints:
+        POST /api/courses
+        GET /api/courses/{id}
+        GET /api/courses/code/{code}
+        GET /api/courses/user/{userId}
+        PUT /api/courses/{id}
+        DELETE /api/courses/{id}
+
+        Nested Task Endpoints:
+        POST /api/courses/{courseId}/tasks
+        PUT /api/courses/{courseId}/tasks/{taskId}/progress
+        PUT /api/courses/{courseId}/tasks/{taskId}/complete
+        PUT /api/courses/{courseId}/tasks/{taskId}
+        DELETE /api/courses/{courseId}/tasks/{taskId}
+
+        288 LOC - Largest controller
+    end note
+}
+
+' ============================================
+' TODOLIST MANAGEMENT CONTROLLER
+' ============================================
+package "TodoList Management API" <<Rectangle>> #LightCoral {
+    class ToDoListController <<@RestController>> {
+        - toDoListService: ToDoListService
+        --
+        + ToDoListController(toDoListService: ToDoListService)
+        --
+        ' TodoList CRUD
+        + createToDoList(request: CreateToDoListRequestDTO): ResponseEntity<ApiSuccessResponse<ToDoListDTO>>
+        + getToDoListById(id: UUID): ResponseEntity<ApiSuccessResponse<ToDoListDTO>>
+        + getToDoListsByUserId(userId: UUID): ResponseEntity<ApiSuccessResponse<List<ToDoListDTO>>>
+        + updateToDoList(id: UUID, request: UpdateToDoListRequestDTO): ResponseEntity<ApiSuccessResponse<ToDoListDTO>>
+        + deleteToDoList(id: UUID): ResponseEntity<ApiSuccessResponse<String>>
+        --
+        ' Task Operations
+        + addTaskToList(todoListId: UUID, request: AddToDoListTaskRequestDTO): ResponseEntity<ApiSuccessResponse<ToDoListTaskDTO>>
+        + markTaskComplete(todoListId: UUID, taskId: UUID): ResponseEntity<ApiSuccessResponse<ToDoListTaskDTO>>
+        + markTaskInComplete(todoListId: UUID, taskId: UUID): ResponseEntity<ApiSuccessResponse<ToDoListTaskDTO>>
+        + updateTask(todoListId: UUID, taskId: UUID, request: UpdateToDoListTaskRequestDTO): ResponseEntity<ApiSuccessResponse<ToDoListTaskDTO>>
+        + deleteTask(todoListId: UUID, taskId: UUID): ResponseEntity<ApiSuccessResponse<String>>
+        + getAggregatedDeadlines(todoListId: UUID): ResponseEntity<ApiSuccessResponse<List<Instant>>>
+    }
+
+    note right of ToDoListController
+        @RestController
+        @RequestMapping("/api/todolists")
+
+        TodoList Endpoints:
+        POST /api/todolists
+        GET /api/todolists/{id}
+        GET /api/todolists/user/{userId}
+        PUT /api/todolists/{id}
+        DELETE /api/todolists/{id}
+
+        Nested Task Endpoints:
+        POST /api/todolists/{todoListId}/tasks
+        PUT /api/todolists/{todoListId}/tasks/{taskId}/complete
+        PUT /api/todolists/{todoListId}/tasks/{taskId}/incomplete
+        PUT /api/todolists/{todoListId}/tasks/{taskId}
+        DELETE /api/todolists/{todoListId}/tasks/{taskId}
+        GET /api/todolists/{todoListId}/deadlines
+
+        281 LOC - Similar to CourseController
+    end note
+}
+
+' ============================================
+' TIMER CONTROLLER
+' ============================================
+package "Timer Management API" <<Rectangle>> #LightSteelBlue {
+    class TimerController <<@RestController>> {
+        - timerService: TimerService
+        --
+        + TimerController(timerService: TimerService)
+        --
+        + startTimer(request: StartTimerRequestDTO): ResponseEntity<ApiSuccessResponse<TimerDTO>>
+        + stopTimer(request: StopTimerRequestDTO): ResponseEntity<ApiSuccessResponse<TimerDTO>>
+        + getTimersByTaskId(taskId: UUID): ResponseEntity<ApiSuccessResponse<List<TimerDTO>>>
+        + getTimerSummary(taskId: UUID): ResponseEntity<ApiSuccessResponse<TaskTimerSummaryDTO>>
+        + getTotalTimeForTask(taskId: UUID): ResponseEntity<ApiSuccessResponse<Long>>
+        + getTimerById(timerId: UUID): ResponseEntity<ApiSuccessResponse<TimerDTO>>
+    }
+
+    note right of TimerController
+        @RestController
+        @RequestMapping("/api/timers")
+
+        Endpoints:
+        POST /api/timers/start
+        POST /api/timers/stop
+        GET /api/timers/task/{taskId}
+        GET /api/timers/task/{taskId}/summary
+        GET /api/timers/task/{taskId}/total
+        GET /api/timers/{timerId}
+
+        164 LOC
+    end note
+}
+
+' ============================================
+' DASHBOARD & CALENDAR CONTROLLERS
+' ============================================
+package "Dashboard & Calendar API" <<Rectangle>> #PeachPuff {
+    class DashboardController <<@RestController>> {
+        - dashboardService: DashboardService
+        --
+        + DashboardController(dashboardService: DashboardService)
+        --
+        + getDashboardSummary(userId: UUID): ResponseEntity<ApiSuccessResponse<DashboardSummaryDTO>>
+    }
+
+    class CalendarController <<@RestController>> {
+        - calendarService: CalendarService
+        --
+        + CalendarController(calendarService: CalendarService)
+        --
+        + getCalendarItems(year: int, month: int, userId: UUID, timezone: String): ResponseEntity<ApiSuccessResponse<List<CalendarItemDTO>>>
+        + getCalendarItemsByUser(userId: UUID, year: int, month: int, timezone: String): ResponseEntity<ApiSuccessResponse<List<CalendarItemDTO>>>
+    }
+
+    note right of DashboardController
+        @RestController
+        @RequestMapping("/api/dashboard")
+
+        Endpoint:
+        GET /api/dashboard/user/{userId}
+
+        47 LOC - Simplest controller
+        Pure aggregation facade
+    end note
+
+    note right of CalendarController
+        @RestController
+        @RequestMapping("/api/calendar")
+
+        Endpoints:
+        GET /api/calendar/items?year&month&userId&timezone
+        GET /api/calendar/user/{userId}/items?year&month&timezone
+
+        Aggregates deadlines from:
+        - Course tasks
+        - TodoList tasks
+
+        83 LOC
+    end note
+}
+
+' ============================================
+' EXCEPTION HANDLING - GLOBAL
+' ============================================
+package "Global Exception Handling" <<Rectangle>> #LightPink {
+    class GlobalExceptionHandler <<@RestControllerAdvice>> {
+        - {static} logger: Logger
+        --
+        + handleBaseException(ex: BaseException, request: WebRequest): ResponseEntity<ErrorResponseDTO>
+        + handleValidationException(ex: MethodArgumentNotValidException, request: WebRequest): ResponseEntity<ErrorResponseDTO>
+        + handleHttpMessageNotReadable(ex: HttpMessageNotReadableException, request: WebRequest): ResponseEntity<ErrorResponseDTO>
+        + handleMethodNotSupported(ex: HttpRequestMethodNotSupportedException, request: WebRequest): ResponseEntity<ErrorResponseDTO>
+        + handleMissingParams(ex: MissingServletRequestParameterException, request: WebRequest): ResponseEntity<ErrorResponseDTO>
+        + handleGlobalException(ex: Exception, request: WebRequest): ResponseEntity<ErrorResponseDTO>
+        --
+        - getRequestPath(request: WebRequest): String
+    }
+
+    note right of GlobalExceptionHandler
+        @RestControllerAdvice
+        Catches ALL exceptions globally
+
+        Exception Hierarchy:
+        1. BaseException → Domain exceptions
+        2. MethodArgumentNotValidException
+        3. HttpMessageNotReadableException
+        4. HttpRequestMethodNotSupportedException
+        5. MissingServletRequestParameterException
+        6. Generic Exception → 500 error
+
+        Returns structured ErrorResponseDTO
+        with code, message, statusCode, path,
+        timestamp, details, fieldErrors
+
+        170 LOC
+    end note
+}
+
+' ============================================
+' EXCEPTION HANDLING - DOMAIN SPECIFIC
+' ============================================
+package "Domain Exception Handlers" <<Rectangle>> #MistyRose {
+    abstract class ExceptionHandler {
+        # {abstract} canHandle(exception: Exception): boolean
+        # {abstract} doHandle(exception: Exception): void
+    }
+
+    class AuthenticationExceptionHandler {
+        - {static} logger: Logger
+        --
+        # canHandle(exception: Exception): boolean
+        # doHandle(exception: Exception): void
+    }
+
+    class UserExceptionHandler {
+        - {static} logger: Logger
+        --
+        # canHandle(exception: Exception): boolean
+        # doHandle(exception: Exception): void
+    }
+
+    class CourseExceptionHandler {
+        - {static} logger: Logger
+        --
+        # canHandle(exception: Exception): boolean
+        # doHandle(exception: Exception): void
+    }
+
+    class ToDoListExceptionHandler {
+        - {static} logger: Logger
+        --
+        # canHandle(exception: Exception): boolean
+        # doHandle(exception: Exception): void
+    }
+
+    class TimerExceptionHandler {
+        - {static} logger: Logger
+        --
+        # canHandle(exception: Exception): boolean
+        # doHandle(exception: Exception): void
+    }
+
+    class CalendarExceptionHandler {
+        - {static} logger: Logger
+        --
+        # canHandle(exception: Exception): boolean
+        # doHandle(exception: Exception): void
+    }
+
+    class UserCredentialExceptionHandler {
+        - {static} logger: Logger
+        --
+        # canHandle(exception: Exception): boolean
+        # doHandle(exception: Exception): void
+    }
+
+    ExceptionHandler <|-- AuthenticationExceptionHandler
+    ExceptionHandler <|-- UserExceptionHandler
+    ExceptionHandler <|-- CourseExceptionHandler
+    ExceptionHandler <|-- ToDoListExceptionHandler
+    ExceptionHandler <|-- TimerExceptionHandler
+    ExceptionHandler <|-- CalendarExceptionHandler
+    ExceptionHandler <|-- UserCredentialExceptionHandler
+
+    note right of ExceptionHandler
+        Template Method Pattern:
+        Base class for domain-specific
+        exception logging
+
+        Subclasses implement:
+        - canHandle(): Check exception type
+        - doHandle(): Log exception details
+
+        Note: GlobalExceptionHandler
+        actually handles HTTP responses,
+        these handlers are for logging only
+    end note
+}
+
+' ============================================
+' CONTROLLER RELATIONSHIPS
+' ============================================
+AuthController ..> ApiSuccessResponse : returns
+UserController ..> ApiSuccessResponse : returns
+CourseController ..> ApiSuccessResponse : returns
+ToDoListController ..> ApiSuccessResponse : returns
+TimerController ..> ApiSuccessResponse : returns
+DashboardController ..> ApiSuccessResponse : returns
+CalendarController ..> ApiSuccessResponse : returns
+
+GlobalExceptionHandler ..> ErrorResponseDTO : returns
+
+' Layout hints
+ApiSuccessResponse -[hidden]down-> AuthController
+AuthController -[hidden]down-> UserController
+UserController -[hidden]down-> CourseController
+CourseController -[hidden]down-> ToDoListController
+ToDoListController -[hidden]down-> TimerController
+TimerController -[hidden]down-> DashboardController
+DashboardController -[hidden]down-> GlobalExceptionHandler
+GlobalExceptionHandler -[hidden]down-> ExceptionHandler
+
+@enduml

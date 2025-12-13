@@ -220,11 +220,24 @@ package "Template Method Pattern - Validation Framework" <<Rectangle>> #LightYel
         + validate(password: String): ValidationResult
     }
 
+    class CalendarDateValidator {
+        + validate(params: DateParams): ValidationResult
+    }
+
+    class DateParams <<utility>> {
+        + year: int
+        + month: int
+        + DateParams(year: int, month: int)
+    }
+
+    CalendarDateValidator --* DateParams : contains
+
     Validator --> ValidationResult : returns
     Validator o--> ValidationRule : uses
     Validator <|-- EmailValidator
     Validator <|-- UserNameValidator
     Validator <|-- PasswordValidator
+    Validator <|-- CalendarDateValidator
 
     ValidationRule <|.. NotNullRule
     ValidationRule <|.. EmailFormatRule
@@ -246,11 +259,13 @@ package "Factory Pattern - Validator Creation" <<Rectangle>> #LightCoral {
         + {static} createPasswordValidator(): PasswordValidator
         + {static} createCourseCodeValidator(): Validator
         + {static} createTaskNameValidator(): Validator
+        + {static} createCalendarDateValidator(): CalendarDateValidator
     }
 
     ValidatorFactory ..> EmailValidator : creates
     ValidatorFactory ..> UserNameValidator : creates
     ValidatorFactory ..> PasswordValidator : creates
+    ValidatorFactory ..> CalendarDateValidator : creates
 }
 
 ' ============================================
