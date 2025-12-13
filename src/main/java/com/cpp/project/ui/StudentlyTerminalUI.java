@@ -3,6 +3,7 @@ package com.cpp.project.ui;
 import com.cpp.project.authentication.service.AuthenticationService;
 import com.cpp.project.calendar.service.CalendarService;
 import com.cpp.project.course.service.CourseService;
+import com.cpp.project.dashboard.service.DashboardService;
 import com.cpp.project.timer.service.TimerService;
 import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.screen.LoginScreen;
@@ -55,6 +56,7 @@ public class StudentlyTerminalUI implements CommandLineRunner {
         CourseService courseService = applicationContext.getBean(CourseService.class);
         ToDoListService toDoListService = applicationContext.getBean(ToDoListService.class);
         CalendarService calendarService = applicationContext.getBean(CalendarService.class);
+        DashboardService dashboardService = applicationContext.getBean(DashboardService.class);
         UserService userService = applicationContext.getBean(UserService.class);
         UserCredentialService credentialService = applicationContext.getBean(UserCredentialService.class);
         TimerService timerService = applicationContext.getBean(TimerService.class);
@@ -72,6 +74,7 @@ public class StudentlyTerminalUI implements CommandLineRunner {
                     courseService,
                     toDoListService,
                     calendarService,
+                    dashboardService,
                     userService,
                     credentialService,
                     timerService

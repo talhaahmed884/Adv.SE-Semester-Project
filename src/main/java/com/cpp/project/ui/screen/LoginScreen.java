@@ -3,6 +3,7 @@ package com.cpp.project.ui.screen;
 import com.cpp.project.authentication.service.AuthenticationService;
 import com.cpp.project.calendar.service.CalendarService;
 import com.cpp.project.course.service.CourseService;
+import com.cpp.project.dashboard.service.DashboardService;
 import com.cpp.project.timer.service.TimerService;
 import com.cpp.project.todolist.service.ToDoListService;
 import com.cpp.project.ui.core.StatefulScreen;
@@ -25,6 +26,7 @@ public class LoginScreen extends StatefulScreen {
     private final CourseService courseService;
     private final ToDoListService toDoListService;
     private final CalendarService calendarService;
+    private final DashboardService dashboardService;
     private final UserService userService;
     private final UserCredentialService credentialService;
     private final TimerService timerService;
@@ -35,6 +37,7 @@ public class LoginScreen extends StatefulScreen {
             CourseService courseService,
             ToDoListService toDoListService,
             CalendarService calendarService,
+            DashboardService dashboardService,
             UserService userService,
             UserCredentialService credentialService,
             TimerService timerService) {
@@ -43,6 +46,7 @@ public class LoginScreen extends StatefulScreen {
         this.courseService = courseService;
         this.toDoListService = toDoListService;
         this.calendarService = calendarService;
+        this.dashboardService = dashboardService;
         this.userService = userService;
         this.credentialService = credentialService;
         this.timerService = timerService;
@@ -66,6 +70,7 @@ public class LoginScreen extends StatefulScreen {
                     courseService,
                     toDoListService,
                     calendarService,
+                    dashboardService,
                     userService,
                     credentialService,
                     timerService
