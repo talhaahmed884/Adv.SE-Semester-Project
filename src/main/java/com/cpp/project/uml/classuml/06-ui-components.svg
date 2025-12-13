@@ -1,0 +1,1647 @@
+<svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css"
+     data-diagram-type="CLASS" height="1712.5px" preserveAspectRatio="none"
+     style="width:8585px;height:1712px;background:#FFFFFF;" version="1.1" viewBox="0 0 8585 1712" width="8585px"
+     zoomAndPan="magnify">
+    <title>Studently - UI Component Layer</title>
+    <defs/>
+    <g>
+        <g class="title" data-source-line="8">
+            <text fill="#000000" font-family="Verdana" font-size="27.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="498.3838" x="4037.6831" y="46.3977">Studently - UI Component Layer
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="27.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="1085.2832" x="3744.2334" y="79.8193">(Reusable Lanterna Components with Strategy Pattern
+                for Rendering)
+            </text>
+        </g><!--cluster Strategy Pattern - Rendering Strategies-->
+        <g class="cluster" data-entity="Strategy Pattern - Rendering Strategies" data-source-line="13"
+           data-uid="ent0002" id="cluster_Strategy Pattern - Rendering Strategies">
+            <rect fill="#ADD8E6" height="657.5625" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="1647.5" x="15" y="255.3808"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="391.2122" x="643.1439" y="275.4748">Strategy Pattern - Rendering Strategies
+            </text>
+        </g><!--cluster Form Components-->
+        <g class="cluster" data-entity="Form Components" data-source-line="56" data-uid="ent0013"
+           id="cluster_Form Components">
+            <rect fill="#90EE90" height="889.9125" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="2517.5" x="1692.5" y="108.0933"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="178.9478" x="2861.7761" y="128.1873">Form Components
+            </text>
+        </g><!--cluster Selection & Display Components-->
+        <g class="cluster" data-entity="Selection . Display Components" data-source-line="150" data-uid="ent0026"
+           id="cluster_Selection . Display Components">
+            <rect fill="#FFFFE0" height="666.6" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="2646.25" x="5518.75" y="1038.6433"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="317.9651" x="6682.8925" y="1058.7373">Selection &amp; Display Components
+            </text>
+        </g><!--cluster Dashboard & Calendar Widgets-->
+        <g class="cluster" data-entity="Dashboard . Calendar Widgets" data-source-line="233" data-uid="ent0038"
+           id="cluster_Dashboard . Calendar Widgets">
+            <rect fill="#E6E6FA" height="311.4125" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="3568.75" x="4632.5" y="203.8058"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="306.1987" x="6263.7756" y="223.8998">Dashboard &amp; Calendar Widgets
+            </text>
+        </g><!--cluster Utility Classes - UI Helpers-->
+        <g class="cluster" data-entity="Utility Classes - UI Helpers" data-source-line="295" data-uid="ent0049"
+           id="cluster_Utility Classes - UI Helpers">
+            <rect fill="#F08080" height="375.2125" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="4337.5" x="4240" y="633.4308"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="263.8757" x="6276.8121" y="653.5248">Utility Classes - UI Helpers
+            </text>
+        </g><!--class RenderStrategy-->
+        <g class="entity" data-entity="RenderStrategy" data-source-line="14" data-uid="ent0003"
+           id="entity_RenderStrategy">
+            <rect fill="#FFFFFF" height="93.2666" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="476.9507" x="600.275" y="325.3808"/>
+            <ellipse cx="765.1438" cy="351.3799" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M760.0534,346.0863 L760.0534,343.3886 L769.2777,343.3886 L769.2777,346.0863 L766.196,346.0863 L766.196,356.1822 L769.2777,356.1822 L769.2777,358.8799 L760.0534,358.8799 L760.0534,356.1822 L763.1351,356.1822 L763.1351,346.0863 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="15" font-style="italic" lengthAdjust="spacing"
+                  textLength="85.2246" x="813.3255" y="346.7113">&#171;interface&#187;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-style="italic" lengthAdjust="spacing"
+                  textLength="137.8381" x="787.0188" y="367.4547">RenderStrategy
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="601.525" x2="1075.9757" y1="377.3791" y2="377.3791"/>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="601.525" x2="1075.9757" y1="387.3791" y2="387.3791"/>
+            <ellipse cx="614.025" cy="404.8882" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="622.775" y="409.973">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+        </g>
+        <polygon fill="none" points="838.7501,418.6474,847.5,443.6474,830,443.6473"
+                 style="stroke:#000000;stroke-width:1.25;"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="838.75" x2="838.75" y1="443.6474" y2="444.5058"/>
+        <polygon fill="none" points="1000.2002,418.6474,1026.6465,417.1784,1021.7903,433.9911"
+                 style="stroke:#000000;stroke-width:1.25;"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="1024.2184" x2="1089.725" y1="425.5848" y2="444.5058"/>
+        <polygon fill="none" points="677.3,418.6474,655.7099,433.9911,650.8538,417.1784"
+                 style="stroke:#000000;stroke-width:1.25;"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="653.2818" x2="587.775" y1="425.5848" y2="444.5058"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="1077.2257" x2="1102.825" y1="371.5437"
+              y2="371.4933"/><!--class TitleRenderingStrategy-->
+        <g class="entity" data-entity="TitleRenderingStrategy" data-source-line="18" data-uid="ent0004"
+           id="entity_TitleRenderingStrategy">
+            <rect fill="#FFFFFF" height="118.8049" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="476.9507" x="600.275" y="774.1308"/>
+            <ellipse cx="732.8781" cy="791.6308" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M736.5946,798.6846 Q735.8683,799.0581 735.0693,799.2449 Q734.2704,799.4317 733.3884,799.4317 Q730.2549,799.4317 728.6051,797.3668 Q726.9553,795.302 726.9553,791.4007 Q726.9553,787.4889 728.6051,785.4241 Q730.2549,783.3593 733.3884,783.3593 Q734.2704,783.3593 735.0797,783.546 Q735.889,783.7328 736.5946,784.1063 L736.5946,787.5097 Q735.806,786.7833 735.0641,786.4461 Q734.3222,786.1089 733.5337,786.1089 Q731.8528,786.1089 730.9967,787.4422 Q730.1407,788.7755 730.1407,791.4007 Q730.1407,794.0154 730.9967,795.3487 Q731.8528,796.682 733.5337,796.682 Q734.3222,796.682 735.0641,796.3448 Q735.806,796.0076 736.5946,795.2813 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="202.3694"
+                  x="754.7531" y="798.5906">TitleRenderingStrategy
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="601.525" x2="1075.9757" y1="809.1308" y2="809.1308"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="610.275"
+                  y="822.8899"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="101.0266"
+                  x="622.775" y="831.7248">title: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="610.275"
+                  y="844.1582"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="140.9229"
+                  x="622.775" y="852.9931">color: TextColor
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="601.525" x2="1075.9757" y1="861.6674" y2="861.6674"/>
+            <ellipse cx="614.025" cy="879.1765" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="622.775" y="884.2614">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+        </g><!--class TableRenderingStrategy-->
+        <g class="entity" data-entity="TableRenderingStrategy" data-source-line="25" data-uid="ent0005"
+           id="entity_TableRenderingStrategy">
+            <rect fill="#FFFFFF" height="118.8049" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="476.9507" x="1165.275" y="774.1308"/>
+            <ellipse cx="1293.0204" cy="791.6308" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M1296.7368,798.6846 Q1296.0105,799.0581 1295.2115,799.2449 Q1294.4126,799.4317 1293.5306,799.4317 Q1290.3971,799.4317 1288.7473,797.3668 Q1287.0975,795.302 1287.0975,791.4007 Q1287.0975,787.4889 1288.7473,785.4241 Q1290.3971,783.3593 1293.5306,783.3593 Q1294.4126,783.3593 1295.2219,783.546 Q1296.0312,783.7328 1296.7368,784.1063 L1296.7368,787.5097 Q1295.9482,786.7833 1295.2063,786.4461 Q1294.4645,786.1089 1293.6759,786.1089 Q1291.995,786.1089 1291.139,787.4422 Q1290.2829,788.7755 1290.2829,791.4007 Q1290.2829,794.0154 1291.139,795.3487 Q1291.995,796.682 1293.6759,796.682 Q1294.4645,796.682 1295.2063,796.3448 Q1295.9482,796.0076 1296.7368,795.2813 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="212.085"
+                  x="1314.8954" y="798.5906">TableRenderingStrategy
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="1166.525" x2="1640.9757" y1="809.1308" y2="809.1308"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="1175.275"
+                  y="822.8899"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="196.3281"
+                  x="1187.775" y="831.7248">headers: List&lt;String&gt;
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="1175.275"
+                  y="844.1582"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="227.1326"
+                  x="1187.775" y="852.9931">rows: List&lt;List&lt;String&gt;&gt;
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="1166.525" x2="1640.9757" y1="861.6674" y2="861.6674"/>
+            <ellipse cx="1179.025" cy="879.1765" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="1187.775" y="884.2614">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+        </g><!--class ListRenderingStrategy-->
+        <g class="entity" data-entity="ListRenderingStrategy" data-source-line="32" data-uid="ent0006"
+           id="entity_ListRenderingStrategy">
+            <rect fill="#FFFFFF" height="118.8049" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="476.9507" x="35.275" y="774.1308"/>
+            <ellipse cx="171.4542" cy="791.6308" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M175.1706,798.6846 Q174.4443,799.0581 173.6454,799.2449 Q172.8464,799.4317 171.9645,799.4317 Q168.8309,799.4317 167.1811,797.3668 Q165.5313,795.302 165.5313,791.4007 Q165.5313,787.4889 167.1811,785.4241 Q168.8309,783.3593 171.9645,783.3593 Q172.8464,783.3593 173.6557,783.546 Q174.4651,783.7328 175.1706,784.1063 L175.1706,787.5097 Q174.3821,786.7833 173.6402,786.4461 Q172.8983,786.1089 172.1097,786.1089 Q170.4288,786.1089 169.5728,787.4422 Q168.7168,788.7755 168.7168,791.4007 Q168.7168,794.0154 169.5728,795.3487 Q170.4288,796.682 172.1097,796.682 Q172.8983,796.682 173.6402,796.3448 Q174.3821,796.0076 175.1706,795.2813 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="195.2173"
+                  x="193.3292" y="798.5906">ListRenderingStrategy
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="36.525" x2="510.9757" y1="809.1308" y2="809.1308"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="45.275"
+                  y="822.8899"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="174.6667"
+                  x="57.775" y="831.7248">items: List&lt;String&gt;
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="45.275"
+                  y="844.1582"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="159.1064"
+                  x="57.775" y="852.9931">selectedIndex: int
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="36.525" x2="510.9757" y1="861.6674" y2="861.6674"/>
+            <ellipse cx="49.025" cy="879.1765" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="57.775" y="884.2614">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN10" data-source-line="44" data-uid="ent0011" id="entity_GMN10">
+            <path d="M1189.1875,306.5183 L1189.1875,366.4933 L1102.825,371.4933 L1189.1875,376.4933 L1189.1875,437.5131 A0,0 0 0 0 1189.1875,437.5131 L1463.3135,437.5131 A0,0 0 0 0 1463.3135,437.5131 L1463.3135,319.0183 L1450.8135,306.5183 L1189.1875,306.5183 A0,0 0 0 0 1189.1875,306.5183"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M1450.8135,306.5183 L1450.8135,319.0183 L1463.3135,319.0183 L1450.8135,306.5183" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="142.3859"
+                  x="1196.6875" y="329.1055">Strategy Pattern:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="247.876"
+                  x="1196.6875" y="348.8547">Different rendering algorithms
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="201.8317"
+                  x="1196.6875" y="368.6038">for different UI elements
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="1196.6875" y="388.353">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="218.2245"
+                  x="1196.6875" y="408.1021">Allows swapping rendering
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="245.4401"
+                  x="1196.6875" y="427.8513">without changing components
+            </text>
+        </g><!--class FormField-->
+        <g class="entity" data-entity="FormField" data-source-line="57" data-uid="ent0014" id="entity_FormField">
+            <rect fill="#FFFFFF" height="288.9514" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="476.9507" x="3695.275" y="689.0558"/>
+            <ellipse cx="3885.9836" cy="706.5558" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M3889.7,713.6096 Q3888.9737,713.9831 3888.1748,714.1699 Q3887.3758,714.3567 3886.4939,714.3567 Q3883.3603,714.3567 3881.7105,712.2918 Q3880.0608,710.227 3880.0608,706.3257 Q3880.0608,702.4139 3881.7105,700.3491 Q3883.3603,698.2843 3886.4939,698.2843 Q3887.3758,698.2843 3888.1852,698.471 Q3888.9945,698.6578 3889.7,699.0313 L3889.7,702.4347 Q3888.9115,701.7083 3888.1696,701.3711 Q3887.4277,701.0339 3886.6391,701.0339 Q3884.9582,701.0339 3884.1022,702.3672 Q3883.2462,703.7005 3883.2462,706.3257 Q3883.2462,708.9404 3884.1022,710.2737 Q3884.9582,711.607 3886.6391,711.607 Q3887.4277,711.607 3888.1696,711.2698 Q3888.9115,710.9326 3889.7,710.2063 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="86.1584"
+                  x="3907.8586" y="713.5156">FormField
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="3696.525" x2="4170.9757" y1="724.0558" y2="724.0558"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3705.275"
+                  y="737.8149"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="108.6487"
+                  x="3717.775" y="746.6498">label: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3705.275"
+                  y="759.0832"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="114.3738"
+                  x="3717.775" y="767.9181">value: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3705.275"
+                  y="780.3515"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="150.4675"
+                  x="3717.775" y="789.1864">focused: boolean
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3705.275"
+                  y="801.6198"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="134.873"
+                  x="3717.775" y="810.4547">maxLength: int
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="3696.525" x2="4170.9757" y1="819.129" y2="819.129"/>
+            <ellipse cx="3709.025" cy="836.6382" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="210.7007"
+                  x="3717.775" y="841.723">FormField(label: String)
+            </text>
+            <ellipse cx="3709.025" cy="857.9065" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="3717.775" y="862.9913">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <ellipse cx="3709.025" cy="879.1748" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="366.3806"
+                  x="3717.775" y="884.2596">handleInput(keyStroke: KeyStroke): void
+            </text>
+            <ellipse cx="3709.025" cy="900.4431" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="160.0977"
+                  x="3717.775" y="905.5279">getValue(): String
+            </text>
+            <ellipse cx="3709.025" cy="921.7114" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="256.2622"
+                  x="3717.775" y="926.7962">setValue(value: String): void
+            </text>
+            <ellipse cx="3709.025" cy="942.9797" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="314.8975"
+                  x="3717.775" y="948.0646">setFocused(focused: boolean): void
+            </text>
+            <ellipse cx="3709.025" cy="964.248" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="108.999"
+                  x="3717.775" y="969.3329">clear(): void
+            </text>
+        </g><!--class DateInput-->
+        <g class="entity" data-entity="DateInput" data-source-line="72" data-uid="ent0015" id="entity_DateInput">
+            <rect fill="#FFFFFF" height="437.8296" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="476.9507" x="3342.775" y="153.0933"/>
+            <ellipse cx="3532.2489" cy="170.5933" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M3535.9653,177.6471 Q3535.239,178.0206 3534.44,178.2074 Q3533.6411,178.3942 3532.7591,178.3942 Q3529.6256,178.3942 3527.9758,176.3293 Q3526.326,174.2645 3526.326,170.3632 Q3526.326,166.4514 3527.9758,164.3866 Q3529.6256,162.3218 3532.7591,162.3218 Q3533.6411,162.3218 3534.4504,162.5085 Q3535.2597,162.6953 3535.9653,163.0688 L3535.9653,166.4722 Q3535.1767,165.7458 3534.4349,165.4086 Q3533.693,165.0714 3532.9044,165.0714 Q3531.2235,165.0714 3530.3675,166.4047 Q3529.5115,167.738 3529.5115,170.3632 Q3529.5115,172.9779 3530.3675,174.3112 Q3531.2235,175.6445 3532.9044,175.6445 Q3533.693,175.6445 3534.4349,175.3073 Q3535.1767,174.9701 3535.9653,174.2438 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="88.6279"
+                  x="3554.1239" y="177.5531">DateInput
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="3344.025" x2="3818.4757" y1="188.0933" y2="188.0933"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3352.775"
+                  y="201.8524"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="108.6487"
+                  x="3365.275" y="210.6873">label: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3352.775"
+                  y="223.1207"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="180.0073"
+                  x="3365.275" y="231.9556">yearField: FormField
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3352.775"
+                  y="244.389"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="197.9346"
+                  x="3365.275" y="253.2239">monthField: FormField
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3352.775"
+                  y="265.6573"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="173.0176"
+                  x="3365.275" y="274.4922">dayField: FormField
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3352.775"
+                  y="286.9257"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="181.4856"
+                  x="3365.275" y="295.7605">hourField: FormField
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3352.775"
+                  y="308.194"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="202.5403"
+                  x="3365.275" y="317.0288">minuteField: FormField
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3352.775"
+                  y="329.4623"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="191.5088"
+                  x="3365.275" y="338.2971">currentFieldIndex: int
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3352.775"
+                  y="350.7306"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="185.9033"
+                  x="3365.275" y="359.5654">errorMessage: String
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="3344.025" x2="3818.4757" y1="368.2397" y2="368.2397"/>
+            <ellipse cx="3356.525" cy="385.7489" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="213.1702"
+                  x="3365.275" y="390.8337">DateInput(label: String)
+            </text>
+            <ellipse cx="3356.525" cy="407.0172" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="3365.275" y="412.1021">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <ellipse cx="3356.525" cy="428.2855" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="366.3806"
+                  x="3365.275" y="433.3704">handleInput(keyStroke: KeyStroke): void
+            </text>
+            <ellipse cx="3356.525" cy="449.5538" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="162.4646"
+                  x="3365.275" y="454.6387">getDate(): Instant
+            </text>
+            <ellipse cx="3356.525" cy="470.8221" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="250.1953"
+                  x="3365.275" y="475.907">setDate(date: Instant): void
+            </text>
+            <ellipse cx="3356.525" cy="492.0905" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="169.1125"
+                  x="3365.275" y="497.1753">isEmpty(): boolean
+            </text>
+            <ellipse cx="3356.525" cy="513.3588" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="230.6616"
+                  x="3365.275" y="518.4436">getErrorMessage(): String
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3352.775"
+                  y="530.8771"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="209.4702"
+                  x="3365.275" y="539.7119">validateDate(): boolean
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3352.775"
+                  y="552.1454"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="194.5166"
+                  x="3365.275" y="560.9802">focusNextField(): void
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="3352.775"
+                  y="573.4137"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="228.1665"
+                  x="3365.275" y="582.2485">focusPreviousField(): void
+            </text>
+        </g><!--class Form-->
+        <g class="entity" data-entity="Form" data-source-line="94" data-uid="ent0016" id="entity_Form">
+            <rect fill="#FFFFFF" height="310.2197" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="476.9507" x="1712.775" y="216.9058"/>
+            <ellipse cx="1923.9786" cy="234.4058" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M1927.695,241.4596 Q1926.9687,241.8331 1926.1698,242.0199 Q1925.3708,242.2067 1924.4889,242.2067 Q1921.3553,242.2067 1919.7055,240.1418 Q1918.0558,238.077 1918.0558,234.1757 Q1918.0558,230.2639 1919.7055,228.1991 Q1921.3553,226.1343 1924.4889,226.1343 Q1925.3708,226.1343 1926.1802,226.321 Q1926.9895,226.5078 1927.695,226.8813 L1927.695,230.2847 Q1926.9065,229.5583 1926.1646,229.2211 Q1925.4227,228.8839 1924.6341,228.8839 Q1922.9532,228.8839 1922.0972,230.2172 Q1921.2412,231.5505 1921.2412,234.1757 Q1921.2412,236.7904 1922.0972,238.1237 Q1922.9532,239.457 1924.6341,239.457 Q1925.4227,239.457 1926.1646,239.1198 Q1926.9065,238.7826 1927.695,238.0563 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="45.1685"
+                  x="1945.8536" y="241.3656">Form
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="1714.025" x2="2188.4757" y1="251.9058" y2="251.9058"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="1722.775"
+                  y="265.6649"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="205.6592"
+                  x="1735.275" y="274.4998">fields: List&lt;FormField&gt;
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="1722.775"
+                  y="286.9332"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="191.5088"
+                  x="1735.275" y="295.7681">currentFieldIndex: int
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="1722.775"
+                  y="308.2015"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="150.4675"
+                  x="1735.275" y="317.0364">focused: boolean
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="1714.025" x2="2188.4757" y1="325.7107" y2="325.7107"/>
+            <ellipse cx="1726.525" cy="343.2198" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="61.062"
+                  x="1735.275" y="348.3047">Form()
+            </text>
+            <ellipse cx="1726.525" cy="364.4882" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="285.8105"
+                  x="1735.275" y="369.573">addField(field: FormField): Form
+            </text>
+            <ellipse cx="1726.525" cy="385.7565" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="1735.275" y="390.8413">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <ellipse cx="1726.525" cy="407.0248" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="366.3806"
+                  x="1735.275" y="412.1096">handleInput(keyStroke: KeyStroke): void
+            </text>
+            <ellipse cx="1726.525" cy="428.2931" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="314.8975"
+                  x="1735.275" y="433.3779">setFocused(focused: boolean): void
+            </text>
+            <ellipse cx="1726.525" cy="449.5614" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="194.5166"
+                  x="1735.275" y="454.6462">focusNextField(): void
+            </text>
+            <ellipse cx="1726.525" cy="470.8297" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="228.1665"
+                  x="1735.275" y="475.9146">focusPreviousField(): void
+            </text>
+            <ellipse cx="1726.525" cy="492.098" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="321.2122"
+                  x="1735.275" y="497.1829">getAllValues(): Map&lt;String, String&gt;
+            </text>
+            <ellipse cx="1726.525" cy="513.3663" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="108.999"
+                  x="1735.275" y="518.4512">clear(): void
+            </text>
+        </g><!--class ProgressSlider-->
+        <g class="entity" data-entity="ProgressSlider" data-source-line="110" data-uid="ent0017"
+           id="entity_ProgressSlider">
+            <rect fill="#FFFFFF" height="331.488" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="582.6001" x="2672.45" y="206.2683"/>
+            <ellipse cx="2896.0438" cy="223.7683" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M2899.7602,230.8221 Q2899.0339,231.1956 2898.2349,231.3824 Q2897.436,231.5692 2896.554,231.5692 Q2893.4205,231.5692 2891.7707,229.5043 Q2890.1209,227.4395 2890.1209,223.5382 Q2890.1209,219.6264 2891.7707,217.5616 Q2893.4205,215.4968 2896.554,215.4968 Q2897.436,215.4968 2898.2453,215.6835 Q2899.0546,215.8703 2899.7602,216.2438 L2899.7602,219.6472 Q2898.9716,218.9208 2898.2297,218.5836 Q2897.4878,218.2464 2896.6993,218.2464 Q2895.0184,218.2464 2894.1623,219.5797 Q2893.3063,220.913 2893.3063,223.5382 Q2893.3063,226.1529 2894.1623,227.4862 Q2895.0184,228.8195 2896.6993,228.8195 Q2897.4878,228.8195 2898.2297,228.4823 Q2898.9716,228.1451 2899.7602,227.4188 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="126.0376"
+                  x="2917.9188" y="230.7281">ProgressSlider
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="2673.7" x2="3253.8001" y1="241.2683" y2="241.2683"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="2682.45"
+                  y="255.0274"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="108.6487"
+                  x="2694.95" y="263.8623">label: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="2682.45"
+                  y="276.2957"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="84.0393"
+                  x="2694.95" y="285.1306">value: int
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="2682.45"
+                  y="297.564"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="118.5437"
+                  x="2694.95" y="306.3989">minValue: int
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="2682.45"
+                  y="318.8323"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="123.5339"
+                  x="2694.95" y="327.6672">maxValue: int
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="2682.45"
+                  y="340.1007"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="74.2126"
+                  x="2694.95" y="348.9355">step: int
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="2673.7" x2="3253.8001" y1="357.6098" y2="357.6098"/>
+            <ellipse cx="2686.2" cy="375.119" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="396.4331"
+                  x="2694.95" y="380.2038">ProgressSlider(label: String, initialValue: int)
+            </text>
+            <ellipse cx="2686.2" cy="396.3873" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="2694.95" y="401.4721">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <ellipse cx="2686.2" cy="417.6556" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="366.3806"
+                  x="2694.95" y="422.7404">handleInput(keyStroke: KeyStroke): void
+            </text>
+            <ellipse cx="2686.2" cy="438.9239" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="129.7632"
+                  x="2694.95" y="444.0087">getValue(): int
+            </text>
+            <ellipse cx="2686.2" cy="460.1922" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="225.9277"
+                  x="2694.95" y="465.2771">setValue(value: int): void
+            </text>
+            <ellipse cx="2686.2" cy="481.4605" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="154.9792"
+                  x="2694.95" y="486.5454">increment(): void
+            </text>
+            <ellipse cx="2686.2" cy="502.7288" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="160.4309"
+                  x="2694.95" y="507.8137">decrement(): void
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="2682.45"
+                  y="520.2471"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="552.6001"
+                  x="2694.95" y="529.082">renderProgressBar(graphics: TextGraphics, x: int, y: int): void
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN20" data-source-line="131" data-uid="ent0021" id="entity_GMN20">
+            <path d="M2277.525,326.2683 L2277.525,366.4933 L2190.2,371.4933 L2277.525,376.4933 L2277.525,417.7648 A0,0 0 0 0 2277.525,417.7648 L2584.9841,417.7648 A0,0 0 0 0 2584.9841,417.7648 L2584.9841,338.7683 L2572.4841,326.2683 L2277.525,326.2683 A0,0 0 0 0 2277.525,326.2683"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M2572.4841,326.2683 L2572.4841,338.7683 L2584.9841,338.7683 L2572.4841,326.2683" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="158.3661"
+                  x="2285.025" y="348.8555">Composite Pattern:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="281.2091"
+                  x="2285.025" y="368.6047">Form contains multiple FormFields
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="258.4766"
+                  x="2285.025" y="388.3538">Delegates input to focused field
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="237.3865"
+                  x="2285.025" y="408.103">Tab/Shift+Tab for navigation
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN23" data-source-line="138" data-uid="ent0024" id="entity_GMN23">
+            <path d="M3907.025,306.5183 L3907.025,366.4933 L3820.1375,371.4933 L3907.025,376.4933 L3907.025,437.5131 A0,0 0 0 0 3907.025,437.5131 L4190.4662,437.5131 A0,0 0 0 0 4190.4662,437.5131 L4190.4662,319.0183 L4177.9662,306.5183 L3907.025,306.5183 A0,0 0 0 0 3907.025,306.5183"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M4177.9662,306.5183 L4177.9662,319.0183 L4190.4662,319.0183 L4177.9662,306.5183" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="174.7589"
+                  x="3914.525" y="329.1055">Complex component:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="252.2162"
+                  x="3914.525" y="348.8547">- 5 fields: YYYY MM DD HH MM
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="257.1912"
+                  x="3914.525" y="368.6038">- Tab navigation between fields
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="198.2135"
+                  x="3914.525" y="388.353">- Validates on getDate()
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="198.3008"
+                  x="3914.525" y="408.1021">- Returns Instant or null
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="82.9797"
+                  x="3914.525" y="427.8513">- 206 LOC
+            </text>
+        </g><!--class SelectionList-->
+        <g class="entity" data-entity="SelectionList" data-source-line="151" data-uid="ent0027"
+           id="entity_SelectionList">
+            <rect fill="#FFFFFF" height="374.0247" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="600.1001" x="6504.95" y="1083.6433"/>
+            <ellipse cx="6737.8498" cy="1101.1433" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M6741.5662,1108.1971 Q6740.8399,1108.5706 6740.0409,1108.7574 Q6739.242,1108.9442 6738.36,1108.9442 Q6735.2265,1108.9442 6733.5767,1106.8793 Q6731.9269,1104.8145 6731.9269,1100.9132 Q6731.9269,1097.0014 6733.5767,1094.9366 Q6735.2265,1092.8718 6738.36,1092.8718 Q6739.242,1092.8718 6740.0513,1093.0585 Q6740.8606,1093.2453 6741.5662,1093.6188 L6741.5662,1097.0222 Q6740.7776,1096.2958 6740.0358,1095.9586 Q6739.2939,1095.6214 6738.5053,1095.6214 Q6736.8244,1095.6214 6735.9684,1096.9547 Q6735.1124,1098.288 6735.1124,1100.9132 Q6735.1124,1103.5279 6735.9684,1104.8612 Q6736.8244,1106.1945 6738.5053,1106.1945 Q6739.2939,1106.1945 6740.0358,1105.8573 Q6740.7776,1105.5201 6741.5662,1104.7938 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="110.6824"
+                  x="6759.7248" y="1108.1031">SelectionList
+            </text>
+            <rect fill="#FFFFFF" height="20.73" style="stroke:#000000;stroke-width:1.25;stroke-dasharray:2.5,2.5;"
+                  width="11.7432" x="7097.0569" y="1079.8933"/>
+            <text fill="#000000" font-family="Verdana" font-size="15" font-style="italic" lengthAdjust="spacing"
+                  textLength="9.2432" x="7098.3069" y="1096.2238">T
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="6506.2" x2="7103.8001" y1="1118.6433" y2="1118.6433"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="6514.95"
+                  y="1132.4024"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="101.0266"
+                  x="6527.45" y="1141.2373">title: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="6514.95"
+                  y="1153.6707"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="132.3438"
+                  x="6527.45" y="1162.5056">items: List&lt;T&gt;
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="6514.95"
+                  y="1174.939"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="159.1064"
+                  x="6527.45" y="1183.7739">selectedIndex: int
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="6514.95"
+                  y="1196.2073"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="329.9792"
+                  x="6527.45" y="1205.0422">displayFunction: Function&lt;T, String&gt;
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="6514.95"
+                  y="1217.4757"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="150.4675"
+                  x="6527.45" y="1226.3105">focused: boolean
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="6506.2" x2="7103.8001" y1="1234.9848" y2="1234.9848"/>
+            <ellipse cx="6518.7" cy="1252.494" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="570.1001"
+                  x="6527.45" y="1257.5788">SelectionList(title: String, displayFunction: Function&lt;T, String&gt;)
+            </text>
+            <ellipse cx="6518.7" cy="1273.7623" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="6527.45" y="1278.8471">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <ellipse cx="6518.7" cy="1295.0306" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="366.3806"
+                  x="6527.45" y="1300.1154">handleInput(keyStroke: KeyStroke): void
+            </text>
+            <ellipse cx="6518.7" cy="1316.2989" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="276.283"
+                  x="6527.45" y="1321.3837">setItems(items: List&lt;T&gt;): void
+            </text>
+            <ellipse cx="6518.7" cy="1337.5672" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="185.6641"
+                  x="6527.45" y="1342.6521">getSelectedItem(): T
+            </text>
+            <ellipse cx="6518.7" cy="1358.8355" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="206.0693"
+                  x="6527.45" y="1363.9204">getSelectedIndex(): int
+            </text>
+            <ellipse cx="6518.7" cy="1380.1038" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="169.1125"
+                  x="6527.45" y="1385.1887">isEmpty(): boolean
+            </text>
+            <ellipse cx="6518.7" cy="1401.3721" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="138.8123"
+                  x="6527.45" y="1406.457">moveUp(): void
+            </text>
+            <ellipse cx="6518.7" cy="1422.6405" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="164.6008"
+                  x="6527.45" y="1427.7253">moveDown(): void
+            </text>
+            <ellipse cx="6518.7" cy="1443.9088" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="314.8975"
+                  x="6527.45" y="1448.9936">setFocused(focused: boolean): void
+            </text>
+        </g><!--class MessagePanel-->
+        <g class="entity" data-entity="MessagePanel" data-source-line="170" data-uid="ent0028" id="entity_MessagePanel">
+            <rect fill="#FFFFFF" height="288.9514" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="476.9507" x="5539.025" y="1126.1808"/>
+            <ellipse cx="5711.5073" cy="1143.6808" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M5715.2237,1150.7346 Q5714.4974,1151.1081 5713.6985,1151.2949 Q5712.8995,1151.4817 5712.0176,1151.4817 Q5708.884,1151.4817 5707.2342,1149.4168 Q5705.5844,1147.352 5705.5844,1143.4507 Q5705.5844,1139.5389 5707.2342,1137.4741 Q5708.884,1135.4093 5712.0176,1135.4093 Q5712.8995,1135.4093 5713.7088,1135.596 Q5714.5182,1135.7828 5715.2237,1136.1563 L5715.2237,1139.5597 Q5714.4352,1138.8333 5713.6933,1138.4961 Q5712.9514,1138.1589 5712.1628,1138.1589 Q5710.4819,1138.1589 5709.6259,1139.4922 Q5708.7699,1140.8255 5708.7699,1143.4507 Q5708.7699,1146.0654 5709.6259,1147.3987 Q5710.4819,1148.732 5712.1628,1148.732 Q5712.9514,1148.732 5713.6933,1148.3948 Q5714.4352,1148.0576 5715.2237,1147.3313 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="122.6111"
+                  x="5733.3823" y="1150.6406">MessagePanel
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="5540.275" x2="6014.7257" y1="1161.1808" y2="1161.1808"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="5549.025"
+                  y="1174.9399"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="144.7253"
+                  x="5561.525" y="1183.7748">message: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="5549.025"
+                  y="1196.2082"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="251.8018"
+                  x="5561.525" y="1205.0431">messageType: MessageType
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="5549.025"
+                  y="1217.4765"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="138.2654"
+                  x="5561.525" y="1226.3114">visible: boolean
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="5540.275" x2="6014.7257" y1="1234.9857" y2="1234.9857"/>
+            <ellipse cx="5552.775" cy="1252.4948" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="138.5046"
+                  x="5561.525" y="1257.5797">MessagePanel()
+            </text>
+            <ellipse cx="5552.775" cy="1273.7632" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="5561.525" y="1278.848">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <ellipse cx="5552.775" cy="1295.0315" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="307.771"
+                  x="5561.525" y="1300.1163">setSuccess(message: String): void
+            </text>
+            <ellipse cx="5552.775" cy="1316.2998" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="281.9312"
+                  x="5561.525" y="1321.3846">setError(message: String): void
+            </text>
+            <ellipse cx="5552.775" cy="1337.5681" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="273.053"
+                  x="5561.525" y="1342.6529">setInfo(message: String): void
+            </text>
+            <ellipse cx="5552.775" cy="1358.8364" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="310.9753"
+                  x="5561.525" y="1363.9212">setWarning(message: String): void
+            </text>
+            <ellipse cx="5552.775" cy="1380.1047" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="108.999"
+                  x="5561.525" y="1385.1896">clear(): void
+            </text>
+            <ellipse cx="5552.775" cy="1401.373" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="169.6851"
+                  x="5561.525" y="1406.4579">isVisible(): boolean
+            </text>
+        </g><!--class MessageType-->
+        <g class="entity" data-entity="MessageType" data-source-line="185" data-uid="ent0029" id="entity_MessageType">
+            <rect fill="#FFFFFF" height="140.0732" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="152.7148" x="5701.1375" y="1545.1683"/>
+            <ellipse cx="5717.3875" cy="1562.6683" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M5722.5303,1570.1683 L5712.8807,1570.1683 L5712.8807,1554.6769 L5722.5303,1554.6769 L5722.5303,1557.3747 L5715.9416,1557.3747 L5715.9416,1560.7157 L5721.9078,1560.7157 L5721.9078,1563.4135 L5715.9416,1563.4135 L5715.9416,1567.4705 L5722.5303,1567.4705 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="117.7148"
+                  x="5732.3875" y="1569.6281">MessageType
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="5702.3875" x2="5852.6023" y1="1580.1683"
+                  y2="1580.1683"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="84.2017"
+                  x="5708.6375" y="1602.7623">SUCCESS
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="61.344"
+                  x="5708.6375" y="1624.0306">ERROR
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="44.2883"
+                  x="5708.6375" y="1645.2989">INFO
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="88.551"
+                  x="5708.6375" y="1666.5672">WARNING
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="5702.3875" x2="5852.6023" y1="1675.2415"
+                  y2="1675.2415"/>
+        </g><!--class TimerSummaryPanel-->
+        <g class="entity" data-entity="TimerSummaryPanel" data-source-line="192" data-uid="ent0030"
+           id="entity_TimerSummaryPanel">
+            <rect fill="#FFFFFF" height="182.6099" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="574.6277" x="7570.1875" y="1179.3558"/>
+            <ellipse cx="7761.1738" cy="1196.8558" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M7764.8903,1203.9096 Q7764.1639,1204.2831 7763.365,1204.4699 Q7762.566,1204.6567 7761.6841,1204.6567 Q7758.5505,1204.6567 7756.9008,1202.5918 Q7755.251,1200.527 7755.251,1196.6257 Q7755.251,1192.7139 7756.9008,1190.6491 Q7758.5505,1188.5843 7761.6841,1188.5843 Q7762.566,1188.5843 7763.3754,1188.771 Q7764.1847,1188.9578 7764.8903,1189.3313 L7764.8903,1192.7347 Q7764.1017,1192.0083 7763.3598,1191.6711 Q7762.6179,1191.3339 7761.8293,1191.3339 Q7760.1484,1191.3339 7759.2924,1192.6672 Q7758.4364,1194.0005 7758.4364,1196.6257 Q7758.4364,1199.2404 7759.2924,1200.5737 Q7760.1484,1201.907 7761.8293,1201.907 Q7762.6179,1201.907 7763.3598,1201.5698 Q7764.1017,1201.2326 7764.8903,1200.5063 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="183.28"
+                  x="7783.0488" y="1203.8156">TimerSummaryPanel
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7571.4375" x2="8143.5652" y1="1214.3558"
+                  y2="1214.3558"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7580.1875"
+                  y="1228.1149"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="311.394"
+                  x="7592.6875" y="1236.9498">summary: TaskTimerSummaryDTO
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7571.4375" x2="8143.5652" y1="1245.6241"
+                  y2="1245.6241"/>
+            <ellipse cx="7583.9375" cy="1263.1332" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="510.5676"
+                  x="7592.6875" y="1268.2181">TimerSummaryPanel(summary: TaskTimerSummaryDTO)
+            </text>
+            <ellipse cx="7583.9375" cy="1284.4015" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="7592.6875" y="1289.4864">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <ellipse cx="7583.9375" cy="1305.6698" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="489.9231"
+                  x="7592.6875" y="1310.7547">setSummary(summary: TaskTimerSummaryDTO): void
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7580.1875"
+                  y="1323.1882"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="314.5471"
+                  x="7592.6875" y="1332.023">formatDuration(millis: long): String
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7580.1875"
+                  y="1344.4565"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="544.6277"
+                  x="7592.6875" y="1353.2913">renderSessionList(graphics: TextGraphics, x: int, y: int): void
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN32" data-source-line="205" data-uid="ent0033" id="entity_GMN32">
+            <path d="M7192.375,1145.9183 L7192.375,1265.2433 L7105.4875,1270.2433 L7192.375,1275.2433 L7192.375,1395.408 A0,0 0 0 0 7192.375,1395.408 L7482.624,1395.408 A0,0 0 0 0 7482.624,1395.408 L7482.624,1158.4183 L7470.124,1145.9183 L7192.375,1145.9183 A0,0 0 0 0 7192.375,1145.9183"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M7470.124,1145.9183 L7470.124,1158.4183 L7482.624,1158.4183 L7470.124,1145.9183" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="200.9113"
+                  x="7199.875" y="1168.5055">Generic component &lt;T&gt;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="233.1256"
+                  x="7199.875" y="1188.2547">Uses Function&lt;T, String&gt; to
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="257.326"
+                  x="7199.875" y="1208.0038">convert items to display strings
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="7199.875" y="1227.753">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="77.1002"
+                  x="7199.875" y="1247.5021">Example:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="261.5948"
+                  x="7199.875" y="1267.2513">new SelectionList&lt;&gt;("Courses",
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="241.1475"
+                  x="7222.7266" y="1287.0004">course -&gt; course.getName())
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="7199.875" y="1306.7496">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="72.3633"
+                  x="7199.875" y="1326.4987">Handles:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="231.6815"
+                  x="7199.875" y="1346.2479">- Up/Down arrow navigation
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="131.5155"
+                  x="7199.875" y="1365.997">- Enter to select
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="163.0872"
+                  x="7199.875" y="1385.7461">- Visual highlighting
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN35" data-source-line="220" data-uid="ent0036" id="entity_GMN35">
+            <path d="M6103.025,1195.2808 L6103.025,1265.2433 L6016.275,1270.2433 L6103.025,1275.2433 L6103.025,1346.0248 A0,0 0 0 0 6103.025,1346.0248 L6416.9746,1346.0248 A0,0 0 0 0 6416.9746,1346.0248 L6416.9746,1207.7808 L6404.4746,1195.2808 L6103.025,1195.2808 A0,0 0 0 0 6103.025,1195.2808"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M6404.4746,1195.2808 L6404.4746,1207.7808 L6416.9746,1207.7808 L6404.4746,1195.2808" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="196.0712"
+                  x="6110.525" y="1217.868">Singleton-like behavior:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="287.6996"
+                  x="6110.525" y="1237.6172">Only one message shown at a time
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="178.7976"
+                  x="6110.525" y="1257.3663">Auto-colored by type:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="153.5498"
+                  x="6110.525" y="1277.1155">- SUCCESS: Green
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="114.2499"
+                  x="6110.525" y="1296.8646">- ERROR: Red
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="160.1672"
+                  x="6110.525" y="1316.6138">- WARNING: Yellow
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="108.3148"
+                  x="6110.525" y="1336.3629">- INFO: Cyan
+            </text>
+        </g><!--class CalendarGridRenderer-->
+        <g class="entity" data-entity="CalendarGridRenderer" data-source-line="234" data-uid="ent0039"
+           id="entity_CalendarGridRenderer">
+            <rect fill="#FFFFFF" height="246.4148" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="714.3542" x="7466.575" y="248.8058"/>
+            <ellipse cx="7721.5585" cy="266.3058" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M7725.275,273.3596 Q7724.5486,273.7331 7723.7497,273.9199 Q7722.9507,274.1067 7722.0688,274.1067 Q7718.9352,274.1067 7717.2854,272.0418 Q7715.6357,269.977 7715.6357,266.0757 Q7715.6357,262.1639 7717.2854,260.0991 Q7718.9352,258.0343 7722.0688,258.0343 Q7722.9507,258.0343 7723.7601,258.221 Q7724.5694,258.4078 7725.275,258.7813 L7725.275,262.1847 Q7724.4864,261.4583 7723.7445,261.1211 Q7723.0026,260.7839 7722.214,260.7839 Q7720.5331,260.7839 7719.6771,262.1172 Q7718.8211,263.4505 7718.8211,266.0757 Q7718.8211,268.6904 7719.6771,270.0237 Q7720.5331,271.357 7722.214,271.357 Q7723.0026,271.357 7723.7445,271.0198 Q7724.4864,270.6826 7725.275,269.9563 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="195.0122"
+                  x="7743.4335" y="273.2656">CalendarGridRenderer
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7467.825" x2="8179.6792" y1="283.8058" y2="283.8058"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7476.575"
+                  y="297.5649"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="75.6311"
+                  x="7489.075" y="306.3998">year: int
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7476.575"
+                  y="318.8332"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="93.5583"
+                  x="7489.075" y="327.6681">month: int
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7476.575"
+                  y="340.1015"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="356.5967"
+                  x="7489.075" y="348.9364">calendarItems: List&lt;CalendarItemDTO&gt;
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7467.825" x2="8179.6792" y1="357.6107" y2="357.6107"/>
+            <ellipse cx="7480.325" cy="375.1198" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="684.3542"
+                  x="7489.075" y="380.2047">CalendarGridRenderer(year: int, month: int, items: List&lt;CalendarItemDTO&gt;)
+            </text>
+            <ellipse cx="7480.325" cy="396.3882" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="7489.075" y="401.473">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7476.575"
+                  y="413.9065"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="564.2468"
+                  x="7489.075" y="422.7413">renderMonthHeader(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7476.575"
+                  y="435.1748"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="553.3008"
+                  x="7489.075" y="444.0096">renderDayHeaders(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7476.575"
+                  y="456.4431"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="490.4187"
+                  x="7489.075" y="465.2779">renderDays(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7476.575"
+                  y="477.7114"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="598.9478"
+                  x="7489.075" y="486.5462">highlightDaysWithTasks(graphics: TextGraphics, x: int, y: int): void
+            </text>
+        </g><!--class TaskListRenderer-->
+        <g class="entity" data-entity="TaskListRenderer" data-source-line="247" data-uid="ent0040"
+           id="entity_TaskListRenderer">
+            <rect fill="#FFFFFF" height="161.3416" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="782.8503" x="6596.075" y="291.3433"/>
+            <ellipse cx="6906.9722" cy="308.8433" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M6910.6886,315.8971 Q6909.9623,316.2706 6909.1634,316.4574 Q6908.3644,316.6442 6907.4825,316.6442 Q6904.3489,316.6442 6902.6991,314.5793 Q6901.0494,312.5145 6901.0494,308.6132 Q6901.0494,304.7014 6902.6991,302.6366 Q6904.3489,300.5718 6907.4825,300.5718 Q6908.3644,300.5718 6909.1738,300.7585 Q6909.9831,300.9453 6910.6886,301.3188 L6910.6886,304.7222 Q6909.9001,303.9958 6909.1582,303.6586 Q6908.4163,303.3214 6907.6277,303.3214 Q6905.9468,303.3214 6905.0908,304.6547 Q6904.2348,305.988 6904.2348,308.6132 Q6904.2348,311.2279 6905.0908,312.5612 Q6905.9468,313.8945 6907.6277,313.8945 Q6908.4163,313.8945 6909.1582,313.5573 Q6909.9001,313.2201 6910.6886,312.4938 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="151.6809"
+                  x="6928.8472" y="315.8031">TaskListRenderer
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="6597.325" x2="7377.6753" y1="326.3433" y2="326.3433"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="6606.075"
+                  y="340.1024"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="279.2224"
+                  x="6618.575" y="348.9373">items: List&lt;CalendarItemDTO&gt;
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="6606.075"
+                  y="361.3707"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="287.1179"
+                  x="6618.575" y="370.2056">dateFormat: DateTimeFormatter
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="6597.325" x2="7377.6753" y1="378.8799" y2="378.8799"/>
+            <ellipse cx="6609.825" cy="396.389" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="703.7939"
+                  x="6618.575" y="401.4739">TaskListRenderer(items: List&lt;CalendarItemDTO&gt;, format:
+                DateTimeFormatter)
+            </text>
+            <ellipse cx="6609.825" cy="417.6573" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="6618.575" y="422.7422">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="6606.075"
+                  y="435.1757"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="752.8503"
+                  x="6618.575" y="444.0105">renderTaskItem(graphics: TextGraphics, item: CalendarItemDTO, x: int, y:
+                int): void
+            </text>
+        </g><!--class ImpendingDoomWidget-->
+        <g class="entity" data-entity="ImpendingDoomWidget" data-source-line="256" data-uid="ent0041"
+           id="entity_ImpendingDoomWidget">
+            <rect fill="#FFFFFF" height="161.3416" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="538.7048" x="4651.9" y="291.3433"/>
+            <ellipse cx="4812.8381" cy="308.8433" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M4816.5545,315.8971 Q4815.8282,316.2706 4815.0293,316.4574 Q4814.2303,316.6442 4813.3484,316.6442 Q4810.2148,316.6442 4808.565,314.5793 Q4806.9153,312.5145 4806.9153,308.6132 Q4806.9153,304.7014 4808.565,302.6366 Q4810.2148,300.5718 4813.3484,300.5718 Q4814.2303,300.5718 4815.0396,300.7585 Q4815.849,300.9453 4816.5545,301.3188 L4816.5545,304.7222 Q4815.766,303.9958 4815.0241,303.6586 Q4814.2822,303.3214 4813.4936,303.3214 Q4811.8127,303.3214 4810.9567,304.6547 Q4810.1007,305.988 4810.1007,308.6132 Q4810.1007,311.2279 4810.9567,312.5612 Q4811.8127,313.8945 4813.4936,313.8945 Q4814.2822,313.8945 4815.0241,313.5573 Q4815.766,313.2201 4816.5545,312.4938 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="207.4536"
+                  x="4834.7131" y="315.8031">ImpendingDoomWidget
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="4653.15" x2="5189.3548" y1="326.3433" y2="326.3433"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="4661.9"
+                  y="340.1024"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="374.7632"
+                  x="4674.4" y="348.9373">upcomingTasks: List&lt;UpcomingTaskDTO&gt;
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="4653.15" x2="5189.3548" y1="357.6116" y2="357.6116"/>
+            <ellipse cx="4665.65" cy="375.1207" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="508.7048"
+                  x="4674.4" y="380.2056">ImpendingDoomWidget(tasks: List&lt;UpcomingTaskDTO&gt;)
+            </text>
+            <ellipse cx="4665.65" cy="396.389" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="4674.4" y="401.4739">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="4661.9"
+                  y="413.9073"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="419.2139"
+                  x="4674.4" y="422.7422">calculateUrgency(task: UpcomingTaskDTO): int
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="4661.9"
+                  y="435.1757"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="367.5854"
+                  x="4674.4" y="444.0105">getUrgencyColor(urgency: int): TextColor
+            </text>
+        </g><!--class NeglectDetectorWidget-->
+        <g class="entity" data-entity="NeglectDetectorWidget" data-source-line="265" data-uid="ent0042"
+           id="entity_NeglectDetectorWidget">
+            <rect fill="#FFFFFF" height="140.0732" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="487.3242" x="5663.8375" y="301.9683"/>
+            <ellipse cx="5801.7" cy="319.4683" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M5805.4165,326.5221 Q5804.6902,326.8956 5803.8912,327.0824 Q5803.0923,327.2692 5802.2103,327.2692 Q5799.0768,327.2692 5797.427,325.2043 Q5795.7772,323.1395 5795.7772,319.2382 Q5795.7772,315.3264 5797.427,313.2616 Q5799.0768,311.1968 5802.2103,311.1968 Q5803.0923,311.1968 5803.9016,311.3835 Q5804.7109,311.5703 5805.4165,311.9438 L5805.4165,315.3472 Q5804.6279,314.6208 5803.886,314.2836 Q5803.1441,313.9464 5802.3556,313.9464 Q5800.6747,313.9464 5799.8186,315.2797 Q5798.9626,316.613 5798.9626,319.2382 Q5798.9626,321.8529 5799.8186,323.1862 Q5800.6747,324.5195 5802.3556,324.5195 Q5803.1441,324.5195 5803.886,324.1823 Q5804.6279,323.8451 5805.4165,323.1188 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="202.2241"
+                  x="5823.575" y="326.4281">NeglectDetectorWidget
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="5665.0875" x2="6149.9117" y1="336.9683" y2="336.9683"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="5673.8375"
+                  y="350.7274"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="327.2791"
+                  x="5686.3375" y="359.5623">neglectedCourses: List&lt;CourseDTO&gt;
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="5665.0875" x2="6149.9117" y1="368.2366" y2="368.2366"/>
+            <ellipse cx="5677.5875" cy="385.7457" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="457.3242"
+                  x="5686.3375" y="390.8306">NeglectDetectorWidget(courses: List&lt;CourseDTO&gt;)
+            </text>
+            <ellipse cx="5677.5875" cy="407.014" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="446.9507"
+                  x="5686.3375" y="412.0989">render(graphics: TextGraphics, x: int, y: int): void
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="5673.8375"
+                  y="424.5323"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="416.1633"
+                  x="5686.3375" y="433.3672">calculateNeglectScore(course: CourseDTO): int
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN43" data-source-line="274" data-uid="ent0044" id="entity_GMN43">
+            <path d="M5278.2375,306.5183 L5278.2375,366.4933 L5191.05,371.4933 L5278.2375,376.4933 L5278.2375,437.5131 A0,0 0 0 0 5278.2375,437.5131 L5576.7702,437.5131 A0,0 0 0 0 5576.7702,437.5131 L5576.7702,319.0183 L5564.2702,306.5183 L5278.2375,306.5183 A0,0 0 0 0 5278.2375,306.5183"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M5564.2702,306.5183 L5564.2702,319.0183 L5576.7702,319.0183 L5564.2702,306.5183" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="155.0177"
+                  x="5285.7375" y="329.1055">Dashboard widget:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="272.2827"
+                  x="5285.7375" y="348.8547">Shows tasks by deadline urgency
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="105.4822"
+                  x="5285.7375" y="368.6038">Color-coded:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="148.5034"
+                  x="5285.7375" y="388.353">- Red: &lt; 24 hours
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="178.1866"
+                  x="5285.7375" y="408.1021">- Yellow: 24-72 hours
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="138.9105"
+                  x="5285.7375" y="427.8513">- Cyan: 3-7 days
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN46" data-source-line="283" data-uid="ent0047" id="entity_GMN46">
+            <path d="M6239.25,306.5183 L6239.25,366.4933 L6151.55,371.4933 L6239.25,376.4933 L6239.25,437.5131 A0,0 0 0 0 6239.25,437.5131 L6508.2502,437.5131 A0,0 0 0 0 6508.2502,437.5131 L6508.2502,319.0183 L6495.7502,306.5183 L6239.25,306.5183 A0,0 0 0 0 6239.25,306.5183"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M6495.7502,306.5183 L6495.7502,319.0183 L6508.2502,319.0183 L6495.7502,306.5183" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="155.0177"
+                  x="6246.75" y="329.1055">Dashboard widget:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="168.4271"
+                  x="6246.75" y="348.8547">Shows courses with:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="149.0033"
+                  x="6246.75" y="368.6038">- No timer activity
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="121.6052"
+                  x="6246.75" y="388.353">- Low progress
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="176.8616"
+                  x="6246.75" y="408.1021">- Upcoming deadlines
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="242.7502"
+                  x="6246.75" y="427.8513">Encourages user engagement
+            </text>
+        </g><!--class UILayoutConstants-->
+        <g class="entity" data-entity="UILayoutConstants" data-source-line="296" data-uid="ent0050"
+           id="entity_UILayoutConstants">
+            <rect fill="#FFFFFF" height="310.2197" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="455.144" x="7734.925" y="678.4308"/>
+            <ellipse cx="7874.3598" cy="695.9308" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M7878.0762,702.9846 Q7877.3499,703.3581 7876.551,703.5449 Q7875.752,703.7317 7874.8701,703.7317 Q7871.7365,703.7317 7870.0867,701.6668 Q7868.437,699.602 7868.437,695.7007 Q7868.437,691.7889 7870.0867,689.7241 Q7871.7365,687.6593 7874.8701,687.6593 Q7875.752,687.6593 7876.5614,687.846 Q7877.3707,688.0328 7878.0762,688.4063 L7878.0762,691.8097 Q7877.2877,691.0833 7876.5458,690.7461 Q7875.8039,690.4089 7875.0153,690.4089 Q7873.3344,690.4089 7872.4784,691.7422 Q7871.6224,693.0755 7871.6224,695.7007 Q7871.6224,698.3154 7872.4784,699.6487 Q7873.3344,700.982 7875.0153,700.982 Q7875.8039,700.982 7876.5458,700.6448 Q7877.2877,700.3076 7878.0762,699.5813 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="166.8994"
+                  x="7896.2348" y="702.8906">UILayoutConstants
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7736.175" x2="8188.819" y1="713.4308" y2="713.4308"/>
+            <ellipse cx="7748.675" cy="730.9399" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="200.3015" x="7757.425" y="736.0248">LEFT_MARGIN: int = 3
+            </text>
+            <ellipse cx="7748.675" cy="752.2082" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="178.1445" x="7757.425" y="757.2931">FORM_LEFT: int = 5
+            </text>
+            <ellipse cx="7748.675" cy="773.4765" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="178.7341" x="7757.425" y="778.5614">TITLE_ROW: int = 1
+            </text>
+            <ellipse cx="7748.675" cy="794.7448" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="266.3708" x="7757.425" y="799.8297">INSTRUCTIONS_ROW: int = 3
+            </text>
+            <ellipse cx="7748.675" cy="816.0132" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="282.5891" x="7757.425" y="821.098">CONTENT_START_ROW: int = 5
+            </text>
+            <ellipse cx="7748.675" cy="837.2815" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="248.5291" x="7757.425" y="842.3663">FORM_START_ROW: int = 5
+            </text>
+            <ellipse cx="7748.675" cy="858.5498" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="264.6704" x="7757.425" y="863.6346">INFO_SECTION_ROW: int = 6
+            </text>
+            <ellipse cx="7748.675" cy="879.8181" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="168.8477" x="7757.425" y="884.9029">LIST_ROW: int = 8
+            </text>
+            <ellipse cx="7748.675" cy="901.0864" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="188.8342" x="7757.425" y="906.1712">NOTE_ROW: int = 18
+            </text>
+            <ellipse cx="7748.675" cy="922.3547" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="234.5154" x="7757.425" y="927.4396">BOTTOM_MARGIN: int = 2
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7736.175" x2="8188.819" y1="936.1139" y2="936.1139"/>
+            <ellipse cx="7748.675" cy="953.623" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="328.3044" x="7757.425" y="958.7079">messageRow(size:
+                TerminalSize): int
+            </text>
+            <ellipse cx="7748.675" cy="974.8913" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="425.144" x="7757.425" y="979.9762">centerX(size: TerminalSize,
+                textLength: int): int
+            </text>
+        </g><!--class DateFormatUtils-->
+        <g class="entity" data-entity="DateFormatUtils" data-source-line="312" data-uid="ent0051"
+           id="entity_DateFormatUtils">
+            <rect fill="#FFFFFF" height="310.2197" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="647.4988" x="6525" y="678.4308"/>
+            <ellipse cx="6772.9041" cy="695.9308" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M6776.6205,702.9846 Q6775.8942,703.3581 6775.0952,703.5449 Q6774.2963,703.7317 6773.4143,703.7317 Q6770.2808,703.7317 6768.631,701.6668 Q6766.9812,699.602 6766.9812,695.7007 Q6766.9812,691.7889 6768.631,689.7241 Q6770.2808,687.6593 6773.4143,687.6593 Q6774.2963,687.6593 6775.1056,687.846 Q6775.9149,688.0328 6776.6205,688.4063 L6776.6205,691.8097 Q6775.8319,691.0833 6775.09,690.7461 Q6774.3481,690.4089 6773.5596,690.4089 Q6771.8787,690.4089 6771.0226,691.7422 Q6770.1666,693.0755 6770.1666,695.7007 Q6770.1666,698.3154 6771.0226,699.6487 Q6771.8787,700.982 6773.5596,700.982 Q6774.3481,700.982 6775.09,700.6448 Q6775.8319,700.3076 6776.6205,699.5813 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="142.3157"
+                  x="6794.7791" y="702.8906">DateFormatUtils
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="6526.25" x2="7171.2488" y1="713.4308" y2="713.4308"/>
+            <ellipse cx="6538.75" cy="730.9399" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="361.6895" x="6547.5" y="736.0248">DEADLINE_FORMAT:
+                DateTimeFormatter
+            </text>
+            <ellipse cx="6538.75" cy="752.2082" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="374.4043" x="6547.5" y="757.2931">TIMESTAMP_FORMAT:
+                DateTimeFormatter
+            </text>
+            <ellipse cx="6538.75" cy="773.4765" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="376.2244" x="6547.5" y="778.5614">DATE_ONLY_FORMAT:
+                DateTimeFormatter
+            </text>
+            <ellipse cx="6538.75" cy="794.7448" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="372.8918" x="6547.5" y="799.8297">TIME_ONLY_FORMAT:
+                DateTimeFormatter
+            </text>
+            <ellipse cx="6538.75" cy="816.0132" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="430.2539" x="6547.5" y="821.098">LOCAL_DATETIME_FORMAT:
+                DateTimeFormatter
+            </text>
+            <ellipse cx="6538.75" cy="837.2815" fill="none" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="444.7888" x="6547.5" y="842.3663">LOCAL_DATE_ONLY_FORMAT:
+                DateTimeFormatter
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="6526.25" x2="7171.2488" y1="851.0406" y2="851.0406"/>
+            <ellipse cx="6538.75" cy="868.5498" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="369.0723" x="6547.5" y="873.6346">formatDeadline(deadline:
+                Instant): String
+            </text>
+            <ellipse cx="6538.75" cy="889.8181" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="435.2783" x="6547.5" y="894.9029">formatDeadline(deadline:
+                LocalDateTime): String
+            </text>
+            <ellipse cx="6538.75" cy="911.0864" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="409.8743" x="6547.5" y="916.1712">formatTimestamp(timestamp:
+                Instant): String
+            </text>
+            <ellipse cx="6538.75" cy="932.3547" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="360.4932" x="6547.5" y="937.4396">formatDateOnly(instant:
+                Instant): String
+            </text>
+            <ellipse cx="6538.75" cy="953.623" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="362.2107" x="6547.5" y="958.7079">formatTimeOnly(instant:
+                Instant): String
+            </text>
+            <ellipse cx="6538.75" cy="974.8913" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="617.4988" x="6547.5" y="979.9762">
+                formatTimestampWithLabel(label: String, timestamp: Instant): String
+            </text>
+        </g><!--class FormValidator-->
+        <g class="entity" data-entity="FormValidator" data-source-line="328" data-uid="ent0052"
+           id="entity_FormValidator">
+            <rect fill="#FFFFFF" height="246.4148" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="723.5059" x="4259.5" y="710.3308"/>
+            <ellipse cx="4554.7429" cy="727.8308" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M4558.4594,734.8846 Q4557.733,735.2581 4556.9341,735.4449 Q4556.1351,735.6317 4555.2532,735.6317 Q4552.1196,735.6317 4550.4698,733.5668 Q4548.8201,731.502 4548.8201,727.6007 Q4548.8201,723.6889 4550.4698,721.6241 Q4552.1196,719.5593 4555.2532,719.5593 Q4556.1351,719.5593 4556.9445,719.746 Q4557.7538,719.9328 4558.4594,720.3063 L4558.4594,723.7097 Q4557.6708,722.9833 4556.9289,722.6461 Q4556.187,722.3089 4555.3984,722.3089 Q4553.7175,722.3089 4552.8615,723.6422 Q4552.0055,724.9755 4552.0055,727.6007 Q4552.0055,730.2154 4552.8615,731.5487 Q4553.7175,732.882 4555.3984,732.882 Q4556.187,732.882 4556.9289,732.5448 Q4557.6708,732.2076 4558.4594,731.4813 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="123.645"
+                  x="4576.6179" y="734.7906">FormValidator
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="4260.75" x2="4981.7559" y1="745.3308" y2="745.3308"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="4269.5"
+                  y="759.0899"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="261.5942"
+                  x="4282" y="767.9248">messagePanel: MessagePanel
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="4260.75" x2="4981.7559" y1="776.5991" y2="776.5991"/>
+            <ellipse cx="4273.25" cy="794.1082" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="401.1328"
+                  x="4282" y="799.1931">FormValidator(messagePanel: MessagePanel)
+            </text>
+            <ellipse cx="4273.25" cy="815.3765" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="528.5547"
+                  x="4282" y="820.4614">validateRequired(fieldName: String, value: String): boolean
+            </text>
+            <ellipse cx="4273.25" cy="836.6448" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="613.4143"
+                  x="4282" y="841.7297">validateDateInput(dateInput: DateInput, fieldName: String): boolean
+            </text>
+            <ellipse cx="4273.25" cy="857.9132" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="518.9417"
+                  x="4282" y="862.998">validateOptionalDateInput(dateInput: DateInput): boolean
+            </text>
+            <ellipse cx="4273.25" cy="879.1815" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="537.2363"
+                  x="4282" y="884.2663">validateNotEmpty(fieldName: String, value: String): boolean
+            </text>
+            <ellipse cx="4273.25" cy="900.4498" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="683.5254"
+                  x="4282" y="905.5346">validateMinLength(fieldName: String, value: String, minLength: int): boolean
+            </text>
+            <ellipse cx="4273.25" cy="921.7181" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="693.5059"
+                  x="4282" y="926.8029">validateMaxLength(fieldName: String, value: String, maxLength: int): boolean
+            </text>
+            <ellipse cx="4273.25" cy="942.9864" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="162.2083"
+                  x="4282" y="948.0712">clearErrors(): void
+            </text>
+        </g><!--class ComponentFactory-->
+        <g class="entity" data-entity="ComponentFactory" data-source-line="341" data-uid="ent0053"
+           id="entity_ComponentFactory">
+            <rect fill="#FFFFFF" height="161.3416" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="621.4111" x="5466.8" y="752.8683"/>
+            <ellipse cx="5689.8768" cy="770.3683" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M5693.5932,777.4221 Q5692.8669,777.7956 5692.0679,777.9824 Q5691.269,778.1692 5690.387,778.1692 Q5687.2535,778.1692 5685.6037,776.1043 Q5683.9539,774.0395 5683.9539,770.1382 Q5683.9539,766.2264 5685.6037,764.1616 Q5687.2535,762.0968 5690.387,762.0968 Q5691.269,762.0968 5692.0783,762.2835 Q5692.8876,762.4703 5693.5932,762.8438 L5693.5932,766.2472 Q5692.8046,765.5208 5692.0628,765.1836 Q5691.3209,764.8464 5690.5323,764.8464 Q5688.8514,764.8464 5687.9954,766.1797 Q5687.1394,767.513 5687.1394,770.1382 Q5687.1394,772.7529 5687.9954,774.0862 Q5688.8514,775.4195 5690.5323,775.4195 Q5691.3209,775.4195 5692.0628,775.0823 Q5692.8046,774.7451 5693.5932,774.0188 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="165.8826"
+                  x="5711.7518" y="777.3281">ComponentFactory
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="5468.05" x2="6086.9611" y1="787.8683" y2="787.8683"/>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="5468.05" x2="6086.9611" y1="797.8683" y2="797.8683"/>
+            <ellipse cx="5480.55" cy="815.3774" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="359.0918" x="5489.3" y="820.4623">createTextField(label:
+                String): FormField
+            </text>
+            <ellipse cx="5480.55" cy="836.6457" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="370.7385" x="5489.3" y="841.7306">createDateInput(label:
+                String): DateInput
+            </text>
+            <ellipse cx="5480.55" cy="857.914" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="591.4111" x="5489.3" y="862.9989">createProgressSlider(label:
+                String, initialValue: int): ProgressSlider
+            </text>
+            <ellipse cx="5480.55" cy="879.1823" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="407.2253" x="5489.3" y="884.2672">createSelectionList(title:
+                String): SelectionList
+            </text>
+            <ellipse cx="5480.55" cy="900.4507" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="330.0562" x="5489.3" y="905.5355">createMessagePanel():
+                MessagePanel
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN60" data-source-line="357" data-uid="ent0061" id="entity_GMN60">
+            <path d="M8277.075,777.9183 L8277.075,828.9933 L8190.6625,833.9933 L8277.075,838.9933 L8277.075,889.164 A0,0 0 0 0 8277.075,889.164 L8557.9295,889.164 A0,0 0 0 0 8557.9295,889.164 L8557.9295,790.4183 L8545.4295,777.9183 L8277.075,777.9183 A0,0 0 0 0 8277.075,777.9183"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M8545.4295,777.9183 L8545.4295,790.4183 L8557.9295,790.4183 L8545.4295,777.9183" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="129.4843"
+                  x="8284.575" y="800.5055">Facade Pattern:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="254.6045"
+                  x="8284.575" y="820.2547">Centralizes all layout constants
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="215.6696"
+                  x="8284.575" y="840.0038">Eliminates magic numbers
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="230.0708"
+                  x="8284.575" y="859.753">Used by all 28 ScreenStates
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="175.2826"
+                  x="8284.575" y="879.5021">211 LOC of constants
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN63" data-source-line="365" data-uid="ent0064" id="entity_GMN63">
+            <path d="M7260.3375,777.9183 L7260.3375,828.9933 L7172.95,833.9933 L7260.3375,838.9933 L7260.3375,889.164 A0,0 0 0 0 7260.3375,889.164 L7647.1661,889.164 A0,0 0 0 0 7647.1661,889.164 L7647.1661,790.4183 L7634.6661,777.9183 L7260.3375,777.9183 A0,0 0 0 0 7260.3375,777.9183"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M7634.6661,777.9183 L7634.6661,790.4183 L7647.1661,790.4183 L7634.6661,777.9183" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="129.4843"
+                  x="7267.8375" y="800.5055">Facade Pattern:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="218.7958"
+                  x="7267.8375" y="820.2547">Consistent date formatting
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="360.5786"
+                  x="7267.8375" y="840.0038">Supports Instant, LocalDateTime, LocalDate
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="271.9891"
+                  x="7267.8375" y="859.753">Overloaded methods for all types
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="69.8877"
+                  x="7267.8375" y="879.5021">211 LOC
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN66" data-source-line="373" data-uid="ent0067" id="entity_GMN66">
+            <path d="M5070.975,777.9183 L5070.975,828.9933 L4983.35,833.9933 L5070.975,838.9933 L5070.975,889.164 A0,0 0 0 0 5070.975,889.164 L5379.0213,889.164 A0,0 0 0 0 5379.0213,889.164 L5379.0213,790.4183 L5366.5213,777.9183 L5070.975,777.9183 A0,0 0 0 0 5070.975,777.9183"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M5366.5213,777.9183 L5366.5213,790.4183 L5379.0213,790.4183 L5366.5213,777.9183" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="159.2627"
+                  x="5078.475" y="800.5055">Strategy + Facade:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="207.4811"
+                  x="5078.475" y="820.2547">Simplifies validation code
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="255.9375"
+                  x="5078.475" y="840.0038">from ~7 lines to 1 line per field
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="281.7963"
+                  x="5078.475" y="859.753">Automatically sets error messages
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="134.3085"
+                  x="5078.475" y="879.5021">in MessagePanel
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN69" data-source-line="381" data-uid="ent0070" id="entity_GMN69">
+            <path d="M6175.35,787.7933 L6175.35,828.9933 L6088.5125,833.9933 L6175.35,838.9933 L6175.35,879.2898 A0,0 0 0 0 6175.35,879.2898 L6437.1377,879.2898 A0,0 0 0 0 6437.1377,879.2898 L6437.1377,800.2933 L6424.6377,787.7933 L6175.35,787.7933 A0,0 0 0 0 6175.35,787.7933"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M6424.6377,787.7933 L6424.6377,800.2933 L6437.1377,800.2933 L6424.6377,787.7933" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="132.7374"
+                  x="6182.85" y="810.3805">Factory Pattern:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="191.6675"
+                  x="6182.85" y="830.1297">Creates UI components
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="235.5377"
+                  x="6182.85" y="849.8788">with consistent configuration
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="162.3969"
+                  x="6182.85" y="869.628">Reduces duplication
+            </text>
+        </g><!--reverse link RenderStrategy to TitleRenderingStrategy-->
+        <g class="link" data-entity-1="RenderStrategy" data-entity-2="TitleRenderingStrategy" data-source-line="39"
+           data-uid="lnk7" id="link_RenderStrategy_TitleRenderingStrategy">
+            <path codeLine="39" d="M838.75,444.5058 C838.75,444.5058 838.75,664.4808 838.75,773.6058" fill="none"
+                  id="RenderStrategy-backto-TitleRenderingStrategy" style="stroke:#000000;stroke-width:1.25;"/>
+        </g><!--reverse link RenderStrategy to TableRenderingStrategy-->
+        <g class="link" data-entity-1="RenderStrategy" data-entity-2="TableRenderingStrategy" data-source-line="40"
+           data-uid="lnk8" id="link_RenderStrategy_TableRenderingStrategy">
+            <path codeLine="40"
+                  d="M1089.725,444.5058 C1089.725,444.5058 1089.725,833.9933 1089.725,833.9933 C1089.725,833.9933 1121.55,833.9933 1164.9375,833.9933"
+                  fill="none" id="RenderStrategy-backto-TableRenderingStrategy"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+        </g><!--reverse link RenderStrategy to ListRenderingStrategy-->
+        <g class="link" data-entity-1="RenderStrategy" data-entity-2="ListRenderingStrategy" data-source-line="41"
+           data-uid="lnk9" id="link_RenderStrategy_ListRenderingStrategy">
+            <path codeLine="41"
+                  d="M587.775,444.5058 C587.775,444.5058 587.775,833.9933 587.775,833.9933 C587.775,833.9933 555.95,833.9933 512.5625,833.9933"
+                  fill="none" id="RenderStrategy-backto-ListRenderingStrategy"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+        </g><!--link Form to FormField-->
+        <g class="link" data-entity-1="Form" data-entity-2="FormField" data-source-line="127" data-uid="lnk18"
+           id="link_Form_FormField">
+            <path codeLine="127"
+                  d="M1951.25,542.5933 C1951.25,639.7433 1951.25,731.4933 1951.25,731.4933 C1951.25,731.4933 3160.5875,731.4933 3687.6125,731.4933"
+                  fill="none" id="Form-FormField" style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="none"
+                     points="1951.25,527.5933,1946.25,535.0933,1951.25,542.5933,1956.25,535.0933,1951.25,527.5933"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="3695.1125,731.4933,3683.8625,726.4933,3688.8625,731.4933,3683.8625,736.4933,3695.1125,731.4933"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="67.9834"
+                  x="2652.475" y="727.8305">contains
+            </text>
+        </g><!--link DateInput to FormField-->
+        <g class="link" data-entity-1="DateInput" data-entity-2="FormField" data-source-line="128" data-uid="lnk19"
+           id="link_DateInput_FormField">
+            <path codeLine="128" d="M3736.7625,606.2808 C3736.7625,639.3058 3736.7625,650.1558 3736.7625,681.0933"
+                  fill="none" id="DateInput-FormField" style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="3736.7625,591.2808,3731.7625,598.7808,3736.7625,606.2808,3741.7625,598.7808,3736.7625,591.2808"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="3736.7625,688.5933,3741.7625,677.3433,3736.7625,682.3433,3731.7625,677.3433,3736.7625,688.5933"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="106.5692"
+                  x="3629.2625" y="636.2805">owns 5 fields
+            </text>
+        </g><!--link MessagePanel to MessageType-->
+        <g class="link" data-entity-1="MessagePanel" data-entity-2="MessageType" data-source-line="202" data-uid="lnk31"
+           id="link_MessagePanel_MessageType">
+            <path codeLine="202" d="M5777.5,1415.2808 C5777.5,1460.0308 5777.5,1499.8433 5777.5,1537.1933" fill="none"
+                  id="MessagePanel-to-MessageType" style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="5777.5,1544.6933,5782.5,1533.4433,5777.5,1538.4433,5772.5,1533.4433,5777.5,1544.6933"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="36.8958"
+                  x="5740" y="1476.318">uses
+            </text>
+        </g><!--link FormValidator to MessagePanel-->
+        <g class="link" data-entity-1="FormValidator" data-entity-2="MessagePanel" data-source-line="349"
+           data-uid="lnk54" id="link_FormValidator_MessagePanel">
+            <path codeLine="349"
+                  d="M4998.5875,935.2433 C5297.6875,935.2433 5658.2625,935.2433 5658.2625,935.2433 C5658.2625,935.2433 5658.2625,1027.6933 5658.2625,1118.4808"
+                  fill="none" id="FormValidator-MessagePanel" style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="none"
+                     points="4983.5875,935.2433,4991.0875,940.2433,4998.5875,935.2433,4991.0875,930.2433,4983.5875,935.2433"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="5658.2625,1125.9808,5663.2625,1114.7308,5658.2625,1119.7308,5653.2625,1114.7308,5658.2625,1125.9808"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="36.8958"
+                  x="5378.7875" y="931.5805">uses
+            </text>
+        </g><!--link ComponentFactory to FormField-->
+        <g class="link" data-entity-1="ComponentFactory" data-entity-2="FormField" data-source-line="350"
+           data-uid="lnk55" id="link_ComponentFactory_FormField">
+            <path codeLine="350"
+                  d="M5502.9125,914.6683 C5502.9125,941.2058 5502.9125,963.9933 5502.9125,963.9933 C5502.9125,963.9933 4619.1125,963.9933 4180,963.9933"
+                  fill="none" id="ComponentFactory-to-FormField"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="4172.5,963.9933,4183.75,968.9933,4178.75,963.9933,4183.75,958.9933,4172.5,963.9933"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="59.3903"
+                  x="4802.3625" y="981.5805">creates
+            </text>
+        </g><!--link ComponentFactory to DateInput-->
+        <g class="link" data-entity-1="ComponentFactory" data-entity-2="DateInput" data-source-line="351"
+           data-uid="lnk56" id="link_ComponentFactory_DateInput">
+            <path codeLine="351"
+                  d="M5540.1125,752.5308 C5540.1125,666.4933 5540.1125,542.7433 5540.1125,542.7433 C5540.1125,542.7433 4349.775,542.7433 3827.475,542.7433"
+                  fill="none" id="ComponentFactory-to-DateInput"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="3819.975,542.7433,3831.225,547.7433,3826.225,542.7433,3831.225,537.7433,3819.975,542.7433"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="59.3903"
+                  x="4724.9375" y="539.0805">creates
+            </text>
+        </g><!--link ComponentFactory to ProgressSlider-->
+        <g class="link" data-entity-1="ComponentFactory" data-entity-2="ProgressSlider" data-source-line="352"
+           data-uid="lnk57" id="link_ComponentFactory_ProgressSlider">
+            <path codeLine="352"
+                  d="M5503.45,752.4433 C5503.45,717.8308 5503.45,685.2433 5503.45,685.2433 C5503.45,685.2433 2963.75,685.2433 2963.75,685.2433 C2963.75,685.2433 2963.75,620.7308 2963.75,545.7558"
+                  fill="none" id="ComponentFactory-to-ProgressSlider"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="2963.75,538.2558,2958.75,549.5058,2963.75,544.5058,2968.75,549.5058,2963.75,538.2558"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="59.3903"
+                  x="4133.7125" y="681.5805">creates
+            </text>
+        </g><!--link ComponentFactory to SelectionList-->
+        <g class="link" data-entity-1="ComponentFactory" data-entity-2="SelectionList" data-source-line="353"
+           data-uid="lnk58" id="link_ComponentFactory_SelectionList">
+            <path codeLine="353"
+                  d="M6088.375,896.4933 C6291.55,896.4933 6519.4125,896.4933 6519.4125,896.4933 C6519.4125,896.4933 6519.4125,982.1683 6519.4125,1075.5308"
+                  fill="none" id="ComponentFactory-to-SelectionList"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="6519.4125,1083.0308,6524.4125,1071.7808,6519.4125,1076.7808,6514.4125,1071.7808,6519.4125,1083.0308"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="59.3903"
+                  x="6337.1625" y="914.0805">creates
+            </text>
+        </g><!--link ComponentFactory to MessagePanel-->
+        <g class="link" data-entity-1="ComponentFactory" data-entity-2="MessagePanel" data-source-line="354"
+           data-uid="lnk59" id="link_ComponentFactory_MessagePanel">
+            <path codeLine="354" d="M5777.5,914.7308 C5777.5,973.8683 5777.5,1048.0558 5777.5,1118.2683" fill="none"
+                  id="ComponentFactory-to-MessagePanel"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="5777.5,1125.7683,5782.5,1114.5183,5777.5,1119.5183,5772.5,1114.5183,5777.5,1125.7683"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="59.3903"
+                  x="5717.5" y="1016.5805">creates
+            </text>
+        </g><!--link FormField to UILayoutConstants-->
+        <g class="link" data-entity-1="FormField" data-entity-2="UILayoutConstants" data-source-line="389"
+           data-uid="lnk72" id="link_FormField_UILayoutConstants">
+            <path codeLine="389"
+                  d="M4039.625,688.9058 C4039.625,658.4058 4039.625,635.2433 4039.625,635.2433 C4039.625,635.2433 7883.6,635.2433 7883.6,635.2433 C7883.6,635.2433 7883.6,645.6808 7883.6,670.7683"
+                  fill="none" id="FormField-to-UILayoutConstants" style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="7883.6,678.2683,7888.6,667.0183,7883.6,672.0183,7878.6,667.0183,7883.6,678.2683"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="36.8958"
+                  x="5918.7875" y="631.5805">uses
+            </text>
+        </g><!--link DateInput to DateFormatUtils-->
+        <g class="link" data-entity-1="DateInput" data-entity-2="DateFormatUtils" data-source-line="390"
+           data-uid="lnk73" id="link_DateInput_DateFormatUtils">
+            <path codeLine="390"
+                  d="M3778.2375,591.1433 C3778.2375,641.9558 3778.2375,681.4933 3778.2375,681.4933 C3778.2375,681.4933 5727.725,681.4933 6517.0125,681.4933"
+                  fill="none" id="DateInput-to-DateFormatUtils" style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="6524.5125,681.4933,6513.2625,676.4933,6518.2625,681.4933,6513.2625,686.4933,6524.5125,681.4933"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="36.8958"
+                  x="5068.7" y="677.8305">uses
+            </text>
+        </g><!--link MessagePanel to UILayoutConstants-->
+        <g class="link" data-entity-1="MessagePanel" data-entity-2="UILayoutConstants" data-source-line="391"
+           data-uid="lnk74" id="link_MessagePanel_UILayoutConstants">
+            <path codeLine="391"
+                  d="M5896.7375,1125.6933 C5896.7375,1077.7808 5896.7375,1036.4933 5896.7375,1036.4933 C5896.7375,1036.4933 7871.5625,1036.4933 7871.5625,1036.4933 C7871.5625,1036.4933 7871.5625,1023.9308 7871.5625,996.4058"
+                  fill="none" id="MessagePanel-to-UILayoutConstants" style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="7871.5625,988.9058,7866.5625,1000.1558,7871.5625,995.1558,7876.5625,1000.1558,7871.5625,988.9058"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="36.8958"
+                  x="6825.8375" y="1032.8305">uses
+            </text>
+        </g><!--link SelectionList to UILayoutConstants-->
+        <g class="link" data-entity-1="SelectionList" data-entity-2="UILayoutConstants" data-source-line="392"
+           data-uid="lnk75" id="link_SelectionList_UILayoutConstants">
+            <path codeLine="392"
+                  d="M7105.5125,1125.2433 C7461.8875,1125.2433 8008.1875,1125.2433 8008.1875,1125.2433 C8008.1875,1125.2433 8008.1875,1066.2183 8008.1875,996.7058"
+                  fill="none" id="SelectionList-to-UILayoutConstants" style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="8008.1875,989.2058,8003.1875,1000.4558,8008.1875,995.4558,8013.1875,1000.4558,8008.1875,989.2058"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="36.8958"
+                  x="7587.3625" y="1121.5805">uses
+            </text>
+        </g><!--link CalendarGridRenderer to DateFormatUtils-->
+        <g class="link" data-entity-1="CalendarGridRenderer" data-entity-2="DateFormatUtils" data-source-line="393"
+           data-uid="lnk76" id="link_CalendarGridRenderer_DateFormatUtils">
+            <path codeLine="393"
+                  d="M7556.8625,495.4308 C7556.8625,598.1683 7556.8625,727.7433 7556.8625,727.7433 C7556.8625,727.7433 7366.7125,727.7433 7180.2625,727.7433"
+                  fill="none" id="CalendarGridRenderer-to-DateFormatUtils" style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="7172.7625,727.7433,7184.0125,732.7433,7179.0125,727.7433,7184.0125,722.7433,7172.7625,727.7433"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="36.8958"
+                  x="7443.475" y="724.0805">uses
+            </text>
+        </g><!--link TaskListRenderer to DateFormatUtils-->
+        <g class="link" data-entity-1="TaskListRenderer" data-entity-2="DateFormatUtils" data-source-line="394"
+           data-uid="lnk77" id="link_TaskListRenderer_DateFormatUtils">
+            <path codeLine="394" d="M6884.2875,452.9308 C6884.2875,514.9808 6884.2875,594.9808 6884.2875,670.4433"
+                  fill="none" id="TaskListRenderer-to-DateFormatUtils" style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="6884.2875,677.9433,6889.2875,666.6933,6884.2875,671.6933,6879.2875,666.6933,6884.2875,677.9433"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="36.8958"
+                  x="6846.7875" y="561.7805">uses
+            </text>
+        </g><!--link FormField to SelectionList--><!--link SelectionList to CalendarGridRenderer--><!--link CalendarGridRenderer to UILayoutConstants--><!--SRC=[pLjjSzku4VxkNu6cCotToBcBhxdSQ7oUKIJPqLGl7f5Eccax7fY49On9WWL1E-er_UtT1Tz04fBbbvixVyXHn69tiLZiFjZb_K6jMSH84b8U7wItF4wef1494av- -Fvxuqt8OwOs2ID2ghKm1bPIPCaaNZF95OrzHewDmLW4B6K9UM-oaZI-BLuUAAv2HboL1InMuOOSaSi96Oee4J6y85EwOVAViRDaMKglWN9AOyLaJ6kQbDnpjGOMaYgssf0Bgf22t0X9bYmEGAzuTNXmy6VoyoF-WDprbWDlVFw5N0myRxoSWsuLlr8SP-bZ6IVKlwKhHbvrDBRpVqLEJfRC1zkkGdPwIluuvQkr-X1cZFnoGE2FeqLkA5W-drxnFJcfXc1UJen_hudKXCvAqcJD_RHFFFPLdHU_UkHh7vdso4R_zx1FxWGFzFHl1_e_VaZJb7YuTvNAbTXQq17Hszl7rG25yTuNeP2vs24-raD7BwycEivkDTUCmYW8cF9KdUJQdXhZKjoNWoR5wQ-fDWhQhJLNBDgkSyf2y1eMJ815BlBNqRRjTFzzysQBPsmdj-xGLdAhPN9bOg4OaNX0YBXfJQxMt3vu_Mfan6zkcCJ08wkJICELWD2sZjAA34DBK952m09JHnYA3YgIGHY2pv3qdYO9SgduLHGOjKIcYB-6auqaVXNHD0rCqCiv-FQ4sBKSNxg33zCnELiiPsIuc5qivkEvvpuvM9q96HanrnwKpYLZSU6YkHFZj3FEmg3Xk26zPg4bAjnHY6gMzpV2pr8MzCcr426ZiJ4KqQzJ5g_KUeU7Lqeu3S67Bt48ykcmXK789d6IAUUMRO2_k8M5_AryxCvOCVK9L-iSTjRx6evkCTWmI9S9q9tbfd7Q9keI-_1QEbl3pGYEX5x0NZkr0LxQfFtQkkQkY5YjTum7TBDZ58x5JkOypXJRGU1d4W-cVcsBVeH9AUICfIcuTdTnfkjKLlbzkGwgXLivYLCuWghf4demW7-gyIuFdewZH6sGH_jCQG5Zmq8M5zL7bQECKfFkoTGUEGTRv4UlhKD1S27P7HTPsYLgUASEFwPZtY1zcVmg9pXzZ1TiZohjuE6O-qs385VsfkM1X_dpR-aQZme83spGwuSsg78Mo7KwNAKuFAD90KPwf0rA7Wn25rAi97YT2yx5v6DoHdDh8KHyihwdNwtlKyMI7GcagLOp5FHW6bUSXZNZtqrYuUtGqCWgLe4yzgN6CfQj3jYsiQDYdQMXFj1d04fzriNHqQc17lg0Zc85TzGS6zN9wYzjEd4Vf-HT4HzieB1nHZMYIG58Tx6WLgEKIg8iL3o12sWbguQ38u1_Az0eXGMXJagKiILNeo84dFkTk-OtwZKyQHGPqpiEKxc8cvZFedUrveRo8VjQ0yU-iI7lgX3v1Vx8R4P68_Bn8pmOHAX6hGAvPkeU4TnDStr7v5CHxLC2L5N-CGYMJ6KIp5Ga789BoyBGe3Z-_aSoNGoV3stTyNGyz2QBEHdCHsGqSI-cWoyl0N5TVM52E_m9BW9f4jBDWuZt2qEStu2yDH-TcxpJLuIcfF5ohokoURlpzhtOmRL4AtwMnLeQfAJYwSJhnkDzSs13UQUXS6ylYOU_SLASe2sTfaMjeTCjRGka6EMyBSDe-cw4tOcg8d77BXDBMCM14OGjvydvl9532zHsGMCMDXmjsWPuon5lay3ehFvXfbcUyclSzfsEOifsNd3JmGvkvll0tMcjmaghqUjUb9FuHkn5-9dA6COUfkqYdD8tFkKcR7j7iNaipYBJziRMkPV3uTXrgz_ZvNAnh7vDvcUBwiVdmN8-cP_RQdKHasuMHLHkkgwHvWEmBJIzDKb7tiA-qnr-pYuUB-qAckzkYPRhXeoe6cLIvpeduc78GNeez2vspaIkfWiRKiQz9mEQneb4l69kSv_0iRO2bKRKhJGxPp6JtA-JFZ6pmoNmiWLWm2GL3M2QEoPLdc0Gh1GH750mqXf5hF5NYWYZXXKnks-gTNBgl1h2THt4lkfLPBaKV4jWjVdJ6mYVSng1-n_M0ZxgO9wQkEKo-Gw38Q5mXk_R-2Wd6MDL6nNFCw69KtYQqP2imOGXch7SqbsuojoT-iXnJFDAn4SXlsK0ZDQWY92reeiut00OOcNi9EbQQwq8XOmUrQ5pa2bnfClT00UlDmHxAEPwYyFT9xfuPguIJtaVa9NfnCNv1b2dWOSnWc6WJuOR6ZyVOWq7q_5yD5WY41gu7pyi1iiH-JmPdO-V0Qz6D5rV2oe3u3ga8IX89VdC0_0B2xYYT_hyDP1LEUjSyY0lxRRkY5YLwbpvi1JLVkaNd2O68XWQxo20RAdjstHmAhazGrolWU3Qt5yi8fQHQeQ2F-e-nZCvZUWcvvC-dz7JMLHd6BbyvcgDGJvzVYyelQtR1ottuNjv0y6Bq9bE9drzASFCa_-6iBGbMxR4Ehj4zOfKPU7-ubw3YccikuqDAjedBHNtDlSaIc0UnDAH455-rXiMpn98Op2izxOmnwNnRlivj71sr0ukBsWv21v-5iBMNCeLY_sDbjidBOc7xPW36XOJTCVJoV8VfP1cAxHXnJbROPuRCGN_2ccnOvnJiA38nQLdwL_RZMXbxFXRUFmQ9YmqS7r8ZuLWyBPIf673RxRKRN62kYXJfPjxFL3dN7UDdJdjB9YG0uXr-743AJR4AA_0Ra3g3k3MrIXrm2NiX1p_LVSfp2f9dfFxC7Jq_hWpYgcvJtuuUe_TZ_H1M6BTcxrNL-oXRZAQoi-5HYUIK81mTrnjZB4fuAsaAE0r05dkrvMXwi5nZ78WkwS8OYMiPmK_i4BuV0nowKsc4-yB6Ku7hZjsymz3Fh8mWRpqP0nogNW8YoP3F5UWjSdKNk0P2ad31Wgvd4pfHcGmajUwqiQN5R_0EyNzRsGwFlEkPeFb-MIklPZyJ7wmqM63zWg9IwftDYfluat7Lyl5vvBghOrgCdUzvQKkZhaciLNmS37tndFlolK6Iy-aVhTLpVr84ObUkNcDpYJ-qMgcYTlW-9EDQBxmcektKdrOUDvYrhBviJtoLPCA-BuKzqxA_yCma4dmTXgwyAjJuAcc-Gpl87-tpEaH1Q7Gw4btWrZTSCqJEthb5YyQZGUZwMG-laBx3xnTWAFXBRCnxDNiud7JHWCmys8-_V9uQK-ODbt0DUCAPMe6Jvoxhs3xxXSrWIAmEMM4CnkddURymvEd0l9RgSeUB90CtaI9eygdHsa0al0wwl1yocFcekZdpDNA8ZgVOa-itHbxQ3cT5c_HPn3ILhZKD_I-_RxUQTbMd9pjiqr0K_Qpb-pV6PUiwEvYmQ9UJljhZ6wDr-oAvoNge7pgrmsS7kamtybjaM0197UfxLntifWBbPUcdxMi6O_pmFOWcnwsO9j1S0VRyXkUVTWsllUnijKLM5q2JhTtcgl6pXb5UBMnXrzVCZp6LO-y-H68xUkJpkHjNv3qBGszpkJ7DfxxhLRrTiuxMZfuHgsbnmwJPhdVSZIDZcvzj8LH0irheaKDj6h8cllovash3wmbxo2kUyDx4BS-EDXZHhEHjyU4rafBUWlaxo3BkXTDVHfOUjH3a0Nu5617IcWOab3FnmflYy4uv8XGi8CRqHNtIPn5ryoudrocUNaIkHp_H5mVgv6kgfQ6VyTltsBcHLMR4XvgMnimv-4b0MUmB1QsCJOKkKQPcSZDaaH8LNMRUysCQ_oioxLtJ8O210QGJTHQ1Abkl-DgiI3RMUE3osguTFVBqjV5-enx6O-Ia4E0IykuXvrcl5tMdvLA4P7_lTUVskl2_5lzIE1sqlgG08lA4Pv4MC06Mo9f_arRcIhhzV2uUofthQljmkP-QPVkRbZkq7YJQdt1Mdxbghsbs5DulE6heWbJKS6TElE1Hv21ZNpBzn3w1bd_Rm6PBhbB5chITCsJzA0E4XXVkhUq8iZKuG79sY2y8EfqRBQoQuQ3dQJMylKE9JgroXsqO9rSAbbpDBzXZ7-iUH2m-5-1k8-FMl6hhNwBrgRnbcMqPdP3sVy1]-->
+    </g>
+</svg>

@@ -309,6 +309,60 @@ package "DTOs - Timer Domain" <<Rectangle>> #LightCoral {
 }
 
 ' ============================================
+' DTOs - Calendar Domain
+' ============================================
+package "DTOs - Calendar Domain" <<Rectangle>> #PeachPuff {
+    class CalendarItemDTO {
+        - date: Instant
+        - sourceType: String
+        - title: String
+        - status: String
+        - sourceId: String
+        - taskId: String
+        --
+        # CalendarItemDTO(builder: CalendarItemDTOBuilder)
+        + {static} builder(): CalendarItemDTOBuilder
+        + getDate(): Instant
+        + getSourceType(): String
+        + getTitle(): String
+        + getStatus(): String
+        + getSourceId(): String
+        + getTaskId(): String
+    }
+
+    class CalendarItemDTOBuilder {
+        - date: Instant
+        - sourceType: String
+        - title: String
+        - status: String
+        - sourceId: String
+        - taskId: String
+        --
+        + date(date: Instant): CalendarItemDTOBuilder
+        + sourceType(sourceType: String): CalendarItemDTOBuilder
+        + title(title: String): CalendarItemDTOBuilder
+        + status(status: String): CalendarItemDTOBuilder
+        + sourceId(sourceId: String): CalendarItemDTOBuilder
+        + taskId(taskId: String): CalendarItemDTOBuilder
+        + build(): CalendarItemDTO
+    }
+
+    CalendarItemDTO --> CalendarItemDTOBuilder : creates
+    CalendarItemDTOBuilder ..> CalendarItemDTO : builds
+
+    note right of CalendarItemDTO
+        Aggregation DTO:
+        Combines tasks from multiple sources
+        - sourceType: "COURSE" or "TODO_LIST"
+        - sourceId: Course/ToDoList UUID
+        - taskId: Task UUID
+
+        Used by CalendarService to aggregate
+        deadlines from different domains
+    end note
+}
+
+' ============================================
 ' ADAPTER PATTERN - Entity to DTO Conversion
 ' ============================================
 package "Adapter Pattern - Entity-DTO Conversion" <<Rectangle>> #Lavender {
@@ -442,6 +496,7 @@ package "Strategy Pattern - Data Sanitization" <<Rectangle>> #LightSteelBlue {
 UserDTO -[hidden]down-> CourseDTO
 CourseDTO -[hidden]down-> ToDoListDTO
 ToDoListDTO -[hidden]down-> TimerDTO
+TimerDTO -[hidden]down-> CalendarItemDTO
 UserAdapter -[hidden]down-> SanitizationStrategy
 
 @enduml

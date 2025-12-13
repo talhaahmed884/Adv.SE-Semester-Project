@@ -52,6 +52,10 @@ package "Template Method Pattern - Exception Hierarchy" <<Rectangle>> #LightBlue
         + AuthenticationException(errorCode: AuthenticationErrorCode, ...)
     }
 
+    class CalendarException {
+        + CalendarException(errorCode: CalendarErrorCode, ...)
+    }
+
     enum UserErrorCode {
         USER_NOT_FOUND
         USER_CREATION_FAILED
@@ -106,12 +110,23 @@ package "Template Method Pattern - Exception Hierarchy" <<Rectangle>> #LightBlue
         + getMessage(): String
     }
 
+    enum CalendarErrorCode {
+        INVALID_DATE
+        INVALID_MONTH
+        INVALID_YEAR
+        USER_NOT_FOUND
+        + getCode(): String
+        + getMessageTemplate(): String
+        + getHttpStatus(): HttpStatus
+    }
+
     BaseException <|-- UserException
     BaseException <|-- UserCredentialException
     BaseException <|-- CourseException
     BaseException <|-- ToDoListException
     BaseException <|-- TimerException
     BaseException <|-- AuthenticationException
+    BaseException <|-- CalendarException
 
     ErrorCode <|.. UserErrorCode
     ErrorCode <|.. UserCredentialErrorCode
@@ -119,6 +134,7 @@ package "Template Method Pattern - Exception Hierarchy" <<Rectangle>> #LightBlue
     ErrorCode <|.. ToDoListErrorCode
     ErrorCode <|.. TimerErrorCode
     ErrorCode <|.. AuthenticationErrorCode
+    ErrorCode <|.. CalendarErrorCode
 
     UserException --> UserErrorCode : uses
     UserCredentialException --> UserCredentialErrorCode : uses
@@ -126,6 +142,7 @@ package "Template Method Pattern - Exception Hierarchy" <<Rectangle>> #LightBlue
     ToDoListException --> ToDoListErrorCode : uses
     TimerException --> TimerErrorCode : uses
     AuthenticationException --> AuthenticationErrorCode : uses
+    CalendarException --> CalendarErrorCode : uses
 }
 
 ' ============================================
@@ -138,6 +155,7 @@ package "Factory Pattern - Exception Creation" <<Rectangle>> #LightGreen {
         + {static} createToDoListException(errorCode: ToDoListErrorCode, ...): ToDoListException
         + {static} createTimerException(errorCode: TimerErrorCode, ...): TimerException
         + {static} createAuthenticationException(errorCode: AuthenticationErrorCode, ...): AuthenticationException
+        + {static} createCalendarException(errorCode: CalendarErrorCode, ...): CalendarException
     }
 
     ExceptionFactory ..> UserException : creates
@@ -145,6 +163,7 @@ package "Factory Pattern - Exception Creation" <<Rectangle>> #LightGreen {
     ExceptionFactory ..> ToDoListException : creates
     ExceptionFactory ..> TimerException : creates
     ExceptionFactory ..> AuthenticationException : creates
+    ExceptionFactory ..> CalendarException : creates
 }
 
 ' ============================================

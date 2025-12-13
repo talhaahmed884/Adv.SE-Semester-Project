@@ -105,7 +105,12 @@ package "Mediator Pattern - State Coordination" <<Rectangle>> #LightGreen {
     }
 
     interface CalendarMediator <<interface>> {
-        + onMonthChanged(year: int, month: int): void
+        + getCurrentYear(): int
+        + getCurrentMonth(): int
+        + getMonthNames(): String[]
+        + getItemsForMonth(year: int, month: int, userId: UUID, timezoneId: String): List<CalendarItemDTO>
+        + onPreviousMonth(): void
+        + onNextMonth(): void
         + onReturnToMainMenu(): void
     }
 
@@ -195,10 +200,22 @@ package "Screen Implementations (Mediator + Context)" <<Rectangle>> #LightYellow
     class CalendarScreen {
         - currentUser: UserDTO
         - calendarService: CalendarService
+        - monthNames: String[]
+        - currentYear: int
+        - currentMonth: int
         --
-        + CalendarScreen(screen: Screen, currentUser: UserDTO, ...)
+        + CalendarScreen(screen: Screen, currentUser: UserDTO, calendarService: CalendarService)
         + display(): void
-        + onMonthChanged(year: int, month: int): void
+        --
+        + getCurrentYear(): int
+        + getCurrentMonth(): int
+        + getMonthNames(): String[]
+        + getItemsForMonth(...): List<CalendarItemDTO>
+        + onPreviousMonth(): void
+        + onNextMonth(): void
+        + onReturnToMainMenu(): void
+        --
+        - createMonthViewState(): MonthViewState
     }
 
     class DashboardScreen {
@@ -253,6 +270,15 @@ package "Screen Implementations (Mediator + Context)" <<Rectangle>> #LightYellow
         322 LOC
         Similar to CourseManagementScreen
         but simpler (no timer integration)
+    end note
+
+    note right of CalendarScreen
+        146 LOC
+        Simplest mediator:
+        - Only 1 state (MonthViewState)
+        - Manages current year/month
+        - Delegates to CalendarService
+        - Month navigation updates state in-place
     end note
 }
 
@@ -453,6 +479,51 @@ package "State Implementations - TodoList Management" <<Rectangle>> #LightCoral 
         F3: Mark Complete/Incomplete
         F4: Edit Task
         F5: Delete Task
+    end note
+}
+
+' ============================================
+' CONCRETE STATES - Calendar Management
+' ============================================
+package "State Implementations - Calendar Management" <<Rectangle>> #PeachPuff {
+    class MonthViewState {
+        - mediator: CalendarMediator
+        - gridRenderer: CalendarGridRenderer
+        - taskListRenderer: TaskListRenderer
+        - calendarItems: List<CalendarItemDTO>
+        - currentYear: int
+        - currentMonth: int
+        --
+        + MonthViewState(mediator: CalendarMediator)
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        + onEnter(): void
+        + updateMonth(): void
+    }
+
+    ScreenState <|.. MonthViewState
+    MonthViewState --> CalendarMediator : uses
+    MonthViewState o--> CalendarGridRenderer : caches
+    MonthViewState o--> TaskListRenderer : caches
+
+    note right of MonthViewState
+        125 LOC
+        Simple state with cached renderers
+
+        Navigation:
+        - Arrow Left: Previous month
+        - Arrow Right: Next month
+        - ESC: Return to main menu
+
+        Performance optimization:
+        - Caches renderers (created once in onEnter)
+        - updateMonth() recreates renderers with new data
+
+        Uses:
+        - CalendarGridRenderer for month grid
+        - TaskListRenderer for task list
+        - DateFormatUtils for formatting
+        - UILayoutConstants for layout
     end note
 }
 

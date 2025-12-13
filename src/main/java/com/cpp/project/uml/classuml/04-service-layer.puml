@@ -344,31 +344,39 @@ package "Facade Pattern - Dashboard Aggregation" <<Rectangle>> #PeachPuff {
 ' ============================================
 package "Facade Pattern - Calendar View" <<Rectangle>> #LightPink {
     interface CalendarService <<interface>> {
-        + getCalendarItemsForMonth(userId: UUID, year: int, month: int): List<CalendarItemDTO>
+        + getItemsForMonth(year: int, month: int, userId: UUID, timezoneId: String): List<CalendarItemDTO>
     }
 
     class CalendarServiceImpl <<@Service>> {
-        - courseService: CourseService
-        - todoListService: ToDoListService
+        - courseRepository: CourseRepository
+        - todoListRepository: ToDoListRepository
+        - dateValidator: CalendarDateValidator
         - logger: Logger
         --
-        + getCalendarItemsForMonth(...): List<CalendarItemDTO>
+        + getItemsForMonth(year: int, month: int, userId: UUID, timezoneId: String): List<CalendarItemDTO>
     }
 
     CalendarService <|.. CalendarServiceImpl
 
-    CalendarServiceImpl o--> CourseService : gets tasks from
-    CalendarServiceImpl o--> ToDoListService : gets tasks from
+    CalendarServiceImpl o--> CourseRepository : queries directly
+    CalendarServiceImpl o--> ToDoListRepository : queries directly
+    CalendarServiceImpl o--> CalendarDateValidator : validates dates
 
     note right of CalendarServiceImpl
-        @Transactional(readOnly = true)
+        @Transactional
 
-        Aggregates deadlines from:
-        - Course tasks
-        - TodoList tasks
+        Aggregates tasks from:
+        - Course tasks (via CourseRepository)
+        - TodoList tasks (via ToDoListRepository)
 
-        Filters by month/year
-        Returns unified CalendarItemDTO
+        Features:
+        - Validates year (1900-2100) and month (1-12)
+        - Timezone-aware date filtering
+        - Converts user timezone to UTC for DB queries
+        - Sorts results by date
+        - Returns unified CalendarItemDTO list
+
+        132 LOC
     end note
 }
 

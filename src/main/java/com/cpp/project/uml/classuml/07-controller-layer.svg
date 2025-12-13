@@ -1,0 +1,1808 @@
+<svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css"
+     data-diagram-type="CLASS" height="1503.75px" preserveAspectRatio="none"
+     style="width:14552px;height:1503px;background:#FFFFFF;" version="1.1" viewBox="0 0 14552 1503" width="14552.5px"
+     zoomAndPan="magnify">
+    <title>Studently - Controller Layer (REST API)\n(Builder Pattern + Dependency Injection + Global Exception
+        Handling)
+    </title>
+    <defs/>
+    <g>
+        <g class="title" data-source-line="8">
+            <text fill="#000000" font-family="Verdana" font-size="27.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="1747.0959" x="6397.077" y="46.3977">Studently - Controller Layer (REST API)\n(Builder
+                Pattern + Dependency Injection + Global Exception Handling)
+            </text>
+        </g><!--cluster Builder Pattern - API Response Wrappers-->
+        <g class="cluster" data-entity="Builder Pattern - API Response Wrappers" data-source-line="13"
+           data-uid="ent0002" id="cluster_Builder Pattern - API Response Wrappers">
+            <rect fill="#ADD8E6" height="934.3125" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="2101.25" x="6327.5" y="562.4091"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="407.5586" x="7174.3457" y="582.5031">Builder Pattern - API Response Wrappers
+            </text>
+        </g><!--cluster Authentication API-->
+        <g class="cluster" data-entity="Authentication API" data-source-line="109" data-uid="ent0017"
+           id="cluster_Authentication API">
+            <rect fill="#90EE90" height="314.4875" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="1421.25" x="15" y="143.7966"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="186.9031" x="632.1735" y="163.8906">Authentication API
+            </text>
+        </g><!--cluster User Management API-->
+        <g class="cluster" data-entity="User Management API" data-source-line="140" data-uid="ent0022"
+           id="cluster_User Management API">
+            <rect fill="#FFFFE0" height="373.7375" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="1397.5" x="1496.25" y="114.1716"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="219.707" x="2085.1465" y="134.2656">User Management API
+            </text>
+        </g><!--cluster Course Management API-->
+        <g class="cluster" data-entity="Course Management API" data-source-line="174" data-uid="ent0027"
+           id="cluster_Course Management API">
+            <rect fill="#E6E6FA" height="452.7375" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="2011.25" x="2952.5" y="74.6716"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="242.6416" x="3836.8042" y="94.7656">Course Management API
+            </text>
+        </g><!--cluster TodoList Management API-->
+        <g class="cluster" data-entity="TodoList Management API" data-source-line="222" data-uid="ent0032"
+           id="cluster_TodoList Management API">
+            <rect fill="#F08080" height="452.7375" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="1995" x="5023.75" y="74.6716"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="258.4753" x="5892.0123" y="94.7656">TodoList Management API
+            </text>
+        </g><!--cluster Timer Management API-->
+        <g class="cluster" data-entity="Timer Management API" data-source-line="270" data-uid="ent0037"
+           id="cluster_Timer Management API">
+            <rect fill="#B0C4DE" height="317.15" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="1428.75" x="7078.75" y="142.4591"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="231.5417" x="7677.3541" y="162.5531">Timer Management API
+            </text>
+        </g><!--cluster Dashboard & Calendar API-->
+        <g class="cluster" data-entity="Dashboard . Calendar API" data-source-line="303" data-uid="ent0042"
+           id="cluster_Dashboard . Calendar API">
+            <rect fill="#FFDAB9" height="314.4875" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="3533.75" x="8567.5" y="143.7966"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="261.9873" x="10203.3813" y="163.8906">Dashboard &amp; Calendar API
+            </text>
+        </g><!--cluster Global Exception Handling-->
+        <g class="cluster" data-entity="Global Exception Handling" data-source-line="351" data-uid="ent0051"
+           id="cluster_Global Exception Handling">
+            <rect fill="#FFB6C1" height="393.4875" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="1795" x="12161.25" y="104.2966"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="258.0225" x="12929.7388" y="124.3906">Global Exception Handling
+            </text>
+        </g><!--cluster Domain Exception Handlers-->
+        <g class="cluster" data-entity="Domain Exception Handlers" data-source-line="388" data-uid="ent0056"
+           id="cluster_Domain Exception Handlers">
+            <rect fill="#FFE4E1" height="723.925" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="3475" x="11070" y="645.1841"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-weight="bold" lengthAdjust="spacing"
+                  textLength="271.1389" x="12671.9305" y="665.2781">Domain Exception Handlers
+            </text>
+        </g><!--class ApiSuccessResponse-->
+        <g class="entity" data-entity="ApiSuccessResponse" data-source-line="14" data-uid="ent0003"
+           id="entity_ApiSuccessResponse">
+            <rect fill="#FFFFFF" height="267.6831" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="584.1724" x="6347.9125" y="671.2091"/>
+            <ellipse cx="6537.4639" cy="688.7091" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M6541.1803,695.763 Q6540.454,696.1365 6539.6551,696.3233 Q6538.8561,696.51 6537.9741,696.51 Q6534.8406,696.51 6533.1908,694.4452 Q6531.541,692.3804 6531.541,688.479 Q6531.541,684.5673 6533.1908,682.5025 Q6534.8406,680.4376 6537.9741,680.4376 Q6538.8561,680.4376 6539.6654,680.6244 Q6540.4748,680.8112 6541.1803,681.1847 L6541.1803,684.588 Q6540.3917,683.8617 6539.6499,683.5245 Q6538.908,683.1873 6538.1194,683.1873 Q6536.4385,683.1873 6535.5825,684.5206 Q6534.7265,685.8539 6534.7265,688.479 Q6534.7265,691.0938 6535.5825,692.4271 Q6536.4385,693.7604 6538.1194,693.7604 Q6538.908,693.7604 6539.6499,693.4232 Q6540.3917,693.086 6541.1803,692.3596 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="181.4514"
+                  x="6559.3389" y="695.669">ApiSuccessResponse
+            </text>
+            <rect fill="#FFFFFF" height="20.73" style="stroke:#000000;stroke-width:1.25;stroke-dasharray:2.5,2.5;"
+                  width="11.7432" x="6924.0917" y="667.4591"/>
+            <text fill="#000000" font-family="Verdana" font-size="15" font-style="italic" lengthAdjust="spacing"
+                  textLength="9.2432" x="6925.3417" y="683.7897">T
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="6349.1625" x2="6930.8349" y1="706.2091" y2="706.2091"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="6357.9125"
+                  y="719.9683"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="63.7024"
+                  x="6370.4125" y="728.8031">data: T
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="6357.9125"
+                  y="741.2366"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="144.7253"
+                  x="6370.4125" y="750.0714">message: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="6357.9125"
+                  y="762.5049"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="134.6509"
+                  x="6370.4125" y="771.3397">statusCode: int
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="6357.9125"
+                  y="783.7732"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="236.8311"
+                  x="6370.4125" y="792.6081">timestamp: LocalDateTime
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="6349.1625" x2="6930.8349" y1="801.2824" y2="801.2824"/>
+            <polygon fill="#FFFFFF" points="6361.6625,812.5415,6366.6625,817.5415,6361.6625,822.5415,6356.6625,817.5415"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="554.1724"
+                  x="6370.4125" y="823.8764">ApiSuccessResponse(builder: ApiSuccessResponseBuilder&lt;T&gt;)
+            </text>
+            <ellipse cx="6361.6625" cy="840.0598" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="372.7209" x="6370.4125" y="845.1447">builder():
+                ApiSuccessResponseBuilder&lt;T&gt;
+            </text>
+            <ellipse cx="6361.6625" cy="861.3281" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="110.4004"
+                  x="6370.4125" y="866.413">getData(): T
+            </text>
+            <ellipse cx="6361.6625" cy="882.5965" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="186.5698"
+                  x="6370.4125" y="887.6813">getMessage(): String
+            </text>
+            <ellipse cx="6361.6625" cy="903.8648" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="181.6138"
+                  x="6370.4125" y="908.9496">getStatusCode(): int
+            </text>
+            <ellipse cx="6361.6625" cy="925.1331" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="284.8364"
+                  x="6370.4125" y="930.2179">getTimestamp(): LocalDateTime
+            </text>
+        </g><!--class ApiSuccessResponseBuilder-->
+        <g class="entity" data-entity="ApiSuccessResponseBuilder" data-source-line="28" data-uid="ent0004"
+           id="entity_ApiSuccessResponseBuilder">
+            <rect fill="#FFFFFF" height="246.4148" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="672.7661" x="6347.3625" y="1166.4966"/>
+            <ellipse cx="6550.4747" cy="1183.9966" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M6554.1911,1191.0505 Q6553.4648,1191.424 6552.6658,1191.6108 Q6551.8669,1191.7975 6550.9849,1191.7975 Q6547.8514,1191.7975 6546.2016,1189.7327 Q6544.5518,1187.6679 6544.5518,1183.7665 Q6544.5518,1179.8548 6546.2016,1177.79 Q6547.8514,1175.7251 6550.9849,1175.7251 Q6551.8669,1175.7251 6552.6762,1175.9119 Q6553.4855,1176.0987 6554.1911,1176.4722 L6554.1911,1179.8755 Q6553.4025,1179.1492 6552.6607,1178.812 Q6551.9188,1178.4748 6551.1302,1178.4748 Q6549.4493,1178.4748 6548.5933,1179.8081 Q6547.7373,1181.1414 6547.7373,1183.7665 Q6547.7373,1186.3813 6548.5933,1187.7146 Q6549.4493,1189.0479 6551.1302,1189.0479 Q6551.9188,1189.0479 6552.6607,1188.7107 Q6553.4025,1188.3735 6554.1911,1187.6471 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="242.9236"
+                  x="6572.3497" y="1190.9565">ApiSuccessResponseBuilder
+            </text>
+            <rect fill="#FFFFFF" height="20.73" style="stroke:#000000;stroke-width:1.25;stroke-dasharray:2.5,2.5;"
+                  width="11.7432" x="7012.1354" y="1162.7466"/>
+            <text fill="#000000" font-family="Verdana" font-size="15" font-style="italic" lengthAdjust="spacing"
+                  textLength="9.2432" x="7013.3854" y="1179.0772">T
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="6348.6125" x2="7018.8786" y1="1201.4966"
+                  y2="1201.4966"/>
+            <polygon fill="none"
+                     points="6361.1125,1212.7558,6366.1125,1217.7558,6361.1125,1222.7558,6356.1125,1217.7558"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="63.7024"
+                  x="6369.8625" y="1224.0906">data: T
+            </text>
+            <polygon fill="none"
+                     points="6361.1125,1234.0241,6366.1125,1239.0241,6361.1125,1244.0241,6356.1125,1239.0241"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="144.7253"
+                  x="6369.8625" y="1245.3589">message: String
+            </text>
+            <polygon fill="none"
+                     points="6361.1125,1255.2924,6366.1125,1260.2924,6361.1125,1265.2924,6356.1125,1260.2924"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="194.6533"
+                  x="6369.8625" y="1266.6272">statusCode: int = 200
+            </text>
+            <polygon fill="#FFFFFF"
+                     points="6361.1125,1276.5607,6366.1125,1281.5607,6361.1125,1286.5607,6356.1125,1281.5607"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="450.8728"
+                  x="6369.8625" y="1287.8956">timestamp: LocalDateTime = LocalDateTime.now()
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="6348.6125" x2="7018.8786" y1="1296.5699"
+                  y2="1296.5699"/>
+            <ellipse cx="6361.1125" cy="1314.079" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="414.8645"
+                  x="6369.8625" y="1319.1639">data(data: T): ApiSuccessResponseBuilder&lt;T&gt;
+            </text>
+            <ellipse cx="6361.1125" cy="1335.3473" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="534.5874"
+                  x="6369.8625" y="1340.4322">message(message: String): ApiSuccessResponseBuilder&lt;T&gt;
+            </text>
+            <ellipse cx="6361.1125" cy="1356.6156" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="544.7729"
+                  x="6369.8625" y="1361.7005">statusCode(statusCode: int): ApiSuccessResponseBuilder&lt;T&gt;
+            </text>
+            <ellipse cx="6361.1125" cy="1377.884" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="642.7661"
+                  x="6369.8625" y="1382.9688">timestamp(timestamp: LocalDateTime): ApiSuccessResponseBuilder&lt;T&gt;
+            </text>
+            <ellipse cx="6361.1125" cy="1399.1523" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="293.3557"
+                  x="6369.8625" y="1404.2371">build(): ApiSuccessResponse&lt;T&gt;
+            </text>
+        </g><!--class ErrorResponseDTO-->
+        <g class="entity" data-entity="ErrorResponseDTO" data-source-line="41" data-uid="ent0005"
+           id="entity_ErrorResponseDTO">
+            <rect fill="#FFFFFF" height="395.293" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="513.8135" x="7503.0875" y="607.4091"/>
+            <ellipse cx="7672.3142" cy="624.9091" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M7676.0306,631.963 Q7675.3043,632.3365 7674.5053,632.5233 Q7673.7064,632.71 7672.8244,632.71 Q7669.6909,632.71 7668.0411,630.6452 Q7666.3913,628.5804 7666.3913,624.679 Q7666.3913,620.7673 7668.0411,618.7025 Q7669.6909,616.6376 7672.8244,616.6376 Q7673.7064,616.6376 7674.5157,616.8244 Q7675.325,617.0112 7676.0306,617.3847 L7676.0306,620.788 Q7675.242,620.0617 7674.5002,619.7245 Q7673.7583,619.3873 7672.9697,619.3873 Q7671.2888,619.3873 7670.4328,620.7206 Q7669.5768,622.0539 7669.5768,624.679 Q7669.5768,627.2938 7670.4328,628.6271 Q7671.2888,629.9604 7672.9697,629.9604 Q7673.7583,629.9604 7674.5002,629.6232 Q7675.242,629.286 7676.0306,628.5596 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="165.9851"
+                  x="7694.1892" y="631.869">ErrorResponseDTO
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7504.3375" x2="8015.651" y1="642.4091" y2="642.4091"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7513.0875"
+                  y="656.1683"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="108.2727"
+                  x="7525.5875" y="665.0031">code: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7513.0875"
+                  y="677.4366"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="144.7253"
+                  x="7525.5875" y="686.2714">message: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7513.0875"
+                  y="698.7049"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="134.6509"
+                  x="7525.5875" y="707.5397">statusCode: int
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7513.0875"
+                  y="719.9732"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="106.5894"
+                  x="7525.5875" y="728.8081">path: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7513.0875"
+                  y="741.2415"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="236.8311"
+                  x="7525.5875" y="750.0764">timestamp: LocalDateTime
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7513.0875"
+                  y="762.5098"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="183.8611"
+                  x="7525.5875" y="771.3447">details: List&lt;String&gt;
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7513.0875"
+                  y="783.7781"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="287.9297"
+                  x="7525.5875" y="792.613">fieldErrors: Map&lt;String, String&gt;
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7504.3375" x2="8015.651" y1="801.2873" y2="801.2873"/>
+            <polygon fill="#FFFFFF" points="7516.8375,812.5465,7521.8375,817.5465,7516.8375,822.5465,7511.8375,817.5465"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="483.8135"
+                  x="7525.5875" y="823.8813">ErrorResponseDTO(builder: ErrorResponseDTOBuilder)
+            </text>
+            <ellipse cx="7516.8375" cy="840.0648" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="317.8284" x="7525.5875" y="845.1496">builder():
+                ErrorResponseDTOBuilder
+            </text>
+            <ellipse cx="7516.8375" cy="861.3331" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="155.4919"
+                  x="7525.5875" y="866.4179">getCode(): String
+            </text>
+            <ellipse cx="7516.8375" cy="882.6014" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="186.5698"
+                  x="7525.5875" y="887.6862">getMessage(): String
+            </text>
+            <ellipse cx="7516.8375" cy="903.8697" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="181.6138"
+                  x="7525.5875" y="908.9545">getStatusCode(): int
+            </text>
+            <ellipse cx="7516.8375" cy="925.138" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="150.3564"
+                  x="7525.5875" y="930.2229">getPath(): String
+            </text>
+            <ellipse cx="7516.8375" cy="946.4063" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="284.8364"
+                  x="7525.5875" y="951.4912">getTimestamp(): LocalDateTime
+            </text>
+            <ellipse cx="7516.8375" cy="967.6746" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="230.5591"
+                  x="7525.5875" y="972.7595">getDetails(): List&lt;String&gt;
+            </text>
+            <ellipse cx="7516.8375" cy="988.9429" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="335.9521"
+                  x="7525.5875" y="994.0278">getFieldErrors(): Map&lt;String, String&gt;
+            </text>
+        </g><!--class ErrorResponseDTOBuilder-->
+        <g class="entity" data-entity="ErrorResponseDTOBuilder" data-source-line="61" data-uid="ent0006"
+           id="entity_ErrorResponseDTOBuilder">
+            <rect fill="#FFFFFF" height="374.0247" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="665.6738" x="7427.1625" y="1102.6966"/>
+            <ellipse cx="7641.5833" cy="1120.1966" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M7645.2997,1127.2505 Q7644.5734,1127.624 7643.7744,1127.8108 Q7642.9755,1127.9975 7642.0935,1127.9975 Q7638.96,1127.9975 7637.3102,1125.9327 Q7635.6604,1123.8679 7635.6604,1119.9665 Q7635.6604,1116.0548 7637.3102,1113.99 Q7638.96,1111.9251 7642.0935,1111.9251 Q7642.9755,1111.9251 7643.7848,1112.1119 Q7644.5941,1112.2987 7645.2997,1112.6722 L7645.2997,1116.0755 Q7644.5111,1115.3492 7643.7693,1115.012 Q7643.0274,1114.6748 7642.2388,1114.6748 Q7640.5579,1114.6748 7639.7019,1116.0081 Q7638.8458,1117.3414 7638.8458,1119.9665 Q7638.8458,1122.5813 7639.7019,1123.9146 Q7640.5579,1125.2479 7642.2388,1125.2479 Q7643.0274,1125.2479 7643.7693,1124.9107 Q7644.5111,1124.5735 7645.2997,1123.8471 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="227.4573"
+                  x="7663.4583" y="1127.1565">ErrorResponseDTOBuilder
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7428.4125" x2="8091.5863" y1="1137.6966"
+                  y2="1137.6966"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7437.1625"
+                  y="1151.4558"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="108.2727"
+                  x="7449.6625" y="1160.2906">code: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7437.1625"
+                  y="1172.7241"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="144.7253"
+                  x="7449.6625" y="1181.5589">message: String
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7437.1625"
+                  y="1193.9924"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="134.6509"
+                  x="7449.6625" y="1202.8272">statusCode: int
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7437.1625"
+                  y="1215.2607"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="106.5894"
+                  x="7449.6625" y="1224.0956">path: String
+            </text>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7437.1625"
+                  y="1236.529"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="450.8728"
+                  x="7449.6625" y="1245.3639">timestamp: LocalDateTime = LocalDateTime.now()
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7437.1625"
+                  y="1257.7973"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="183.8611"
+                  x="7449.6625" y="1266.6322">details: List&lt;String&gt;
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7437.1625"
+                  y="1279.0656"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="287.9297"
+                  x="7449.6625" y="1287.9005">fieldErrors: Map&lt;String, String&gt;
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7428.4125" x2="8091.5863" y1="1296.5748"
+                  y2="1296.5748"/>
+            <ellipse cx="7440.9125" cy="1314.084" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="406.7896"
+                  x="7449.6625" y="1319.1688">code(code: String): ErrorResponseDTOBuilder
+            </text>
+            <ellipse cx="7440.9125" cy="1335.3523" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="479.6948"
+                  x="7449.6625" y="1340.4371">message(message: String): ErrorResponseDTOBuilder
+            </text>
+            <ellipse cx="7440.9125" cy="1356.6206" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="489.8804"
+                  x="7449.6625" y="1361.7054">statusCode(statusCode: int): ErrorResponseDTOBuilder
+            </text>
+            <ellipse cx="7440.9125" cy="1377.8889" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="403.4229"
+                  x="7449.6625" y="1382.9737">path(path: String): ErrorResponseDTOBuilder
+            </text>
+            <ellipse cx="7440.9125" cy="1399.1572" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="587.8735"
+                  x="7449.6625" y="1404.242">timestamp(timestamp: LocalDateTime): ErrorResponseDTOBuilder
+            </text>
+            <ellipse cx="7440.9125" cy="1420.4255" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="456.2305"
+                  x="7449.6625" y="1425.5104">addDetail(detail: String): ErrorResponseDTOBuilder
+            </text>
+            <ellipse cx="7440.9125" cy="1441.6938" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="635.6738"
+                  x="7449.6625" y="1446.7787">fieldErrors(fieldErrors: Map&lt;String, String&gt;):
+                ErrorResponseDTOBuilder
+            </text>
+            <ellipse cx="7440.9125" cy="1462.9621" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="238.4631"
+                  x="7449.6625" y="1468.047">build(): ErrorResponseDTO
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN11" data-source-line="86" data-uid="ent0012" id="entity_GMN11">
+            <path d="M7032.3125,700.0591 L7032.3125,800.4716 L6932.5625,805.4716 L7032.3125,810.4716 L7032.3125,910.0506 A0,0 0 0 0 7032.3125,910.0506 L7402.6848,910.0506 A0,0 0 0 0 7402.6848,910.0506 L7402.6848,712.5591 L7390.1848,700.0591 L7032.3125,700.0591 A0,0 0 0 0 7032.3125,700.0591"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M7390.1848,700.0591 L7390.1848,712.5591 L7402.6848,712.5591 L7390.1848,700.0591" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="129.4366"
+                  x="7039.8125" y="722.6464">Builder Pattern:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="256.2073"
+                  x="7039.8125" y="742.3956">Generic response wrapper &lt;T&gt;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="192.0563"
+                  x="7039.8125" y="762.1447">Used by ALL controllers
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="7039.8125" y="781.8938">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="77.1002"
+                  x="7039.8125" y="801.643">Example:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="344.1223"
+                  x="7039.8125" y="821.3921">ApiSuccessResponse.&lt;UserDTO&gt;builder()
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="127.4054"
+                  x="7062.6641" y="841.1413">.data(userDTO)
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="211.3055"
+                  x="7062.6641" y="860.8904">.message("User created")
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="142.4573"
+                  x="7062.6641" y="880.6396">.statusCode(201)
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="60.1202"
+                  x="7062.6641" y="900.3887">.build()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN14" data-source-line="99" data-uid="ent0015" id="entity_GMN14">
+            <path d="M8116.7625,759.2966 L8116.7625,800.4716 L8017.5,805.4716 L8116.7625,810.4716 L8116.7625,850.7932 A0,0 0 0 0 8116.7625,850.7932 L8408.2334,850.7932 A0,0 0 0 0 8408.2334,850.7932 L8408.2334,771.7966 L8395.7334,759.2966 L8116.7625,759.2966 A0,0 0 0 0 8116.7625,759.2966"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M8395.7334,759.2966 L8395.7334,771.7966 L8408.2334,771.7966 L8395.7334,759.2966" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="129.4366"
+                  x="8124.2625" y="781.8839">Builder Pattern:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="211.8927"
+                  x="8124.2625" y="801.6331">Structured error response
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="213.2574"
+                  x="8124.2625" y="821.3822">Supports field-level errors
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="265.2209"
+                  x="8124.2625" y="841.1313">Used by GlobalExceptionHandler
+            </text>
+        </g><!--class AuthController-->
+        <g class="entity" data-entity="AuthController" data-source-line="110" data-uid="ent0018"
+           id="entity_AuthController">
+            <rect fill="#FFFFFF" height="209.6082" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="908.0933" x="34.7" y="208.7341"/>
+            <ellipse cx="415.8182" cy="234.7333" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M419.5346,241.7871 Q418.8083,242.1606 418.0093,242.3474 Q417.2104,242.5342 416.3284,242.5342 Q413.1949,242.5342 411.5451,240.4694 Q409.8953,238.4045 409.8953,234.5032 Q409.8953,230.5914 411.5451,228.5266 Q413.1949,226.4618 416.3284,226.4618 Q417.2104,226.4618 418.0197,226.6486 Q418.829,226.8353 419.5346,227.2089 L419.5346,230.6122 Q418.746,229.8859 418.0041,229.5486 Q417.2623,229.2114 416.4737,229.2114 Q414.7928,229.2114 413.9368,230.5447 Q413.0807,231.8781 413.0807,234.5032 Q413.0807,237.1179 413.9368,238.4512 Q414.7928,239.7845 416.4737,239.7845 Q417.2623,239.7845 418.0041,239.4473 Q418.746,239.1101 419.5346,238.3838 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="15" font-style="italic" lengthAdjust="spacing"
+                  textLength="141.4819" x="435.1932" y="230.0647">&#171;@RestController&#187;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="127.4048"
+                  x="442.2317" y="250.8081">AuthController
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="35.95" x2="941.5433" y1="260.7324" y2="260.7324"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="44.7" y="274.4916"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="309.9927"
+                  x="57.2" y="283.3264">authService: AuthenticationService
+            </text>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="44.7" y="295.7599"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="240.3259"
+                  x="57.2" y="304.5947">timerService: TimerService
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="35.95" x2="941.5433" y1="313.269" y2="313.269"/>
+            <ellipse cx="48.45" cy="330.7782" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="706.1353"
+                  x="57.2" y="335.863">AuthController(authService: AuthenticationService, timerService: TimerService)
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="35.95" x2="941.5433" y1="344.5374" y2="344.5374"/>
+            <ellipse cx="48.45" cy="362.0465" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="878.0933"
+                  x="57.2" y="367.1313">signUp(request: SignUpRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;AuthResponseDTO&gt;&gt;
+            </text>
+            <ellipse cx="48.45" cy="383.3148" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="845.3748"
+                  x="57.2" y="388.3997">login(request: LoginRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;AuthResponseDTO&gt;&gt;
+            </text>
+            <ellipse cx="48.45" cy="404.5831" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="761.0107"
+                  x="57.2" y="409.668">logout(request: LogoutRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;String&gt;&gt;
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN19" data-source-line="122" data-uid="ent0020" id="entity_GMN19">
+            <path d="M1043.3875,188.7966 L1043.3875,307.9716 L943.4125,312.9716 L1043.3875,317.9716 L1043.3875,438.2864 A0,0 0 0 0 1043.3875,438.2864 L1416.6242,438.2864 A0,0 0 0 0 1416.6242,438.2864 L1416.6242,201.2966 L1404.1242,188.7966 L1043.3875,188.7966 A0,0 0 0 0 1043.3875,188.7966"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M1404.1242,188.7966 L1404.1242,201.2966 L1416.6242,201.2966 L1404.1242,188.7966" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="132.3248"
+                  x="1050.8875" y="211.3839">@RestController
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="256.2628"
+                  x="1050.8875" y="231.1331">@RequestMapping("/api/auth")
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="1050.8875" y="250.8822">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="87.6611"
+                  x="1050.8875" y="270.6313">Endpoints:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="186.3751"
+                  x="1050.8875" y="290.3805">POST /api/auth/signup
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="171.8231"
+                  x="1050.8875" y="310.1296">POST /api/auth/login
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="183.6298"
+                  x="1050.8875" y="329.8788">POST /api/auth/logout
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="1050.8875" y="349.6279">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="247.9474"
+                  x="1050.8875" y="369.3771">Logout stops all active timers:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="346.9867"
+                  x="1050.8875" y="389.1262">timerService.stopAllActiveTimersForUser()
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="1050.8875" y="408.8754">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="69.8877"
+                  x="1050.8875" y="428.6245">102 LOC
+            </text>
+        </g><!--class UserController-->
+        <g class="entity" data-entity="UserController" data-source-line="141" data-uid="ent0023"
+           id="entity_UserController">
+            <rect fill="#FFFFFF" height="209.6082" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="967.8223" x="1516.0875" y="208.7341"/>
+            <ellipse cx="1927.0702" cy="234.7333" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M1930.7866,241.7871 Q1930.0603,242.1606 1929.2613,242.3474 Q1928.4624,242.5342 1927.5804,242.5342 Q1924.4469,242.5342 1922.7971,240.4694 Q1921.1473,238.4045 1921.1473,234.5032 Q1921.1473,230.5914 1922.7971,228.5266 Q1924.4469,226.4618 1927.5804,226.4618 Q1928.4624,226.4618 1929.2717,226.6486 Q1930.081,226.8353 1930.7866,227.2089 L1930.7866,230.6122 Q1929.998,229.8859 1929.2561,229.5486 Q1928.5143,229.2114 1927.7257,229.2114 Q1926.0448,229.2114 1925.1888,230.5447 Q1924.3327,231.8781 1924.3327,234.5032 Q1924.3327,237.1179 1925.1888,238.4512 Q1926.0448,239.7845 1927.7257,239.7845 Q1928.5143,239.7845 1929.2561,239.4473 Q1929.998,239.1101 1930.7866,238.3838 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="15" font-style="italic" lengthAdjust="spacing"
+                  textLength="141.4819" x="1946.4452" y="230.0647">&#171;@RestController&#187;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="126.217"
+                  x="1954.0776" y="250.8081">UserController
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="1517.3375" x2="2482.6598" y1="260.7324" y2="260.7324"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="1526.0875"
+                  y="274.4916"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="221.1169"
+                  x="1538.5875" y="283.3264">userService: UserService
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="1517.3375" x2="2482.6598" y1="292.0007" y2="292.0007"/>
+            <ellipse cx="1529.8375" cy="309.5099" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="363.2275"
+                  x="1538.5875" y="314.5947">UserController(userService: UserService)
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="1517.3375" x2="2482.6598" y1="323.269" y2="323.269"/>
+            <ellipse cx="1529.8375" cy="340.7782" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="666.4697"
+                  x="1538.5875" y="345.863">getUserById(id: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;UserDTO&gt;&gt;
+            </text>
+            <ellipse cx="1529.8375" cy="362.0465" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="734.8975"
+                  x="1538.5875" y="367.1313">getUserByEmail(email: String): ResponseEntity&lt;ApiSuccessResponse&lt;UserDTO&gt;&gt;
+            </text>
+            <ellipse cx="1529.8375" cy="383.3148" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="937.8223"
+                  x="1538.5875" y="388.3997">updateUser(id: UUID, request: UpdateUserRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;String&gt;&gt;
+            </text>
+            <ellipse cx="1529.8375" cy="404.5831" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="626.7444"
+                  x="1538.5875" y="409.668">deleteUser(id: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;String&gt;&gt;
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN24" data-source-line="153" data-uid="ent0025" id="entity_GMN24">
+            <path d="M2583.9375,159.1716 L2583.9375,307.9716 L2484.0625,312.9716 L2583.9375,317.9716 L2583.9375,467.9088 A0,0 0 0 0 2583.9375,467.9088 L2873.5518,467.9088 A0,0 0 0 0 2873.5518,467.9088 L2873.5518,171.6716 L2861.0518,159.1716 L2583.9375,159.1716 A0,0 0 0 0 2583.9375,159.1716"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M2861.0518,159.1716 L2861.0518,171.6716 L2873.5518,171.6716 L2861.0518,159.1716" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="132.3248"
+                  x="2591.4375" y="181.7589">@RestController
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="263.3643"
+                  x="2591.4375" y="201.5081">@RequestMapping("/api/users")
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="2591.4375" y="221.2572">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="87.6611"
+                  x="2591.4375" y="241.0063">Endpoints:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="164.1266"
+                  x="2591.4375" y="260.7555">GET /api/users/{id}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="245.2496"
+                  x="2591.4375" y="280.5046">GET /api/users/email/{email}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="162.9443"
+                  x="2591.4375" y="300.2538">PUT /api/users/{id}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="193.6432"
+                  x="2591.4375" y="320.0029">DELETE /api/users/{id}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="2591.4375" y="339.7521">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="153.3594"
+                  x="2591.4375" y="359.5012">Validation pattern:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="194.0637"
+                  x="2591.4375" y="379.2504">if (request.isEmpty()) {
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="201.1334"
+                  x="2614.2891" y="398.9995">throw UserException(...)
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="10.3149"
+                  x="2591.4375" y="418.7487">}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="2591.4375" y="438.4978">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="59.5569"
+                  x="2591.4375" y="458.2469">91 LOC
+            </text>
+        </g><!--class CourseController-->
+        <g class="entity" data-entity="CourseController" data-source-line="175" data-uid="ent0028"
+           id="entity_CourseController">
+            <rect fill="#FFFFFF" height="368.4863" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="1396.3159" x="2973.0875" y="129.2966"/>
+            <ellipse cx="3592.8965" cy="155.2958" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M3596.6129,162.3496 Q3595.8866,162.7231 3595.0876,162.9099 Q3594.2887,163.0967 3593.4067,163.0967 Q3590.2732,163.0967 3588.6234,161.0319 Q3586.9736,158.967 3586.9736,155.0657 Q3586.9736,151.1539 3588.6234,149.0891 Q3590.2732,147.0243 3593.4067,147.0243 Q3594.2887,147.0243 3595.098,147.2111 Q3595.9073,147.3978 3596.6129,147.7714 L3596.6129,151.1747 Q3595.8243,150.4484 3595.0824,150.1111 Q3594.3406,149.7739 3593.552,149.7739 Q3591.8711,149.7739 3591.0151,151.1072 Q3590.159,152.4406 3590.159,155.0657 Q3590.159,157.6804 3591.0151,159.0137 Q3591.8711,160.347 3593.552,160.347 Q3594.3406,160.347 3595.0824,160.0098 Q3595.8243,159.6726 3596.6129,158.9463 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="15" font-style="italic" lengthAdjust="spacing"
+                  textLength="141.4819" x="3617.692" y="150.6272">&#171;@RestController&#187;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="147.323"
+                  x="3614.7715" y="171.3706">CourseController
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="2974.3375" x2="4368.1534" y1="181.2949" y2="181.2949"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="2983.0875"
+                  y="195.0541"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="261.9617"
+                  x="2995.5875" y="203.8889">courseService: CourseService
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="2974.3375" x2="4368.1534" y1="212.5632" y2="212.5632"/>
+            <ellipse cx="2986.8375" cy="230.0724" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="425.1782"
+                  x="2995.5875" y="235.1572">CourseController(courseService: CourseService)
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="2974.3375" x2="4368.1534" y1="243.8315" y2="243.8315"/>
+            <ellipse cx="2986.8375" cy="261.3407" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="926.731"
+                  x="2995.5875" y="266.4255">createCourse(request: CreateCourseRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;CourseDTO&gt;&gt;
+            </text>
+            <ellipse cx="2986.8375" cy="282.609" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="708.6816"
+                  x="2995.5875" y="287.6938">getCourseById(id: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;CourseDTO&gt;&gt;
+            </text>
+            <ellipse cx="2986.8375" cy="303.8773" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="766.582"
+                  x="2995.5875" y="308.9622">getCourseByCode(code: String): ResponseEntity&lt;ApiSuccessResponse&lt;CourseDTO&gt;&gt;
+            </text>
+            <ellipse cx="2986.8375" cy="325.1456" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="857.4658"
+                  x="2995.5875" y="330.2305">getCoursesByUserId(userId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;List&lt;CourseDTO&gt;&gt;&gt;
+            </text>
+            <ellipse cx="2986.8375" cy="346.4139" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1025.8948"
+                  x="2995.5875" y="351.4988">updateCourse(id: UUID, request: UpdateCourseRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;CourseDTO&gt;&gt;
+            </text>
+            <ellipse cx="2986.8375" cy="367.6823" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="647.8503"
+                  x="2995.5875" y="372.7671">deleteCourse(id: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;String&gt;&gt;
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="2974.3375" x2="4368.1534" y1="381.4414" y2="381.4414"/>
+            <ellipse cx="2986.8375" cy="398.9506" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1111.9934"
+                  x="2995.5875" y="404.0354">addTaskToCourse(courseId: UUID, request: AddTaskRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;CourseTaskDTO&gt;&gt;
+            </text>
+            <ellipse cx="2986.8375" cy="420.2189" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1366.3159"
+                  x="2995.5875" y="425.3037">updateTaskProgress(courseId: UUID, taskId: UUID, request:
+                UpdateTaskProgressRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;CourseTaskDTO&gt;&gt;
+            </text>
+            <ellipse cx="2986.8375" cy="441.4872" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="977.7356"
+                  x="2995.5875" y="446.572">markTaskComplete(courseId: UUID, taskId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;CourseTaskDTO&gt;&gt;
+            </text>
+            <ellipse cx="2986.8375" cy="462.7555" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1214.9683"
+                  x="2995.5875" y="467.8403">updateTask(courseId: UUID, taskId: UUID, request: UpdateTaskRequestDTO):
+                ResponseEntity&lt;ApiSuccessResponse&lt;CourseTaskDTO&gt;&gt;
+            </text>
+            <ellipse cx="2986.8375" cy="484.0238" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="816.3135"
+                  x="2995.5875" y="489.1086">deleteTask(courseId: UUID, taskId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;String&gt;&gt;
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN29" data-source-line="197" data-uid="ent0030" id="entity_GMN29">
+            <path d="M4468.8625,119.6716 L4468.8625,307.9716 L4369.8625,312.9716 L4468.8625,317.9716 L4468.8625,507.4054 A0,0 0 0 0 4468.8625,507.4054 L4943.63,507.4054 A0,0 0 0 0 4943.63,507.4054 L4943.63,132.1716 L4931.13,119.6716 L4468.8625,119.6716 A0,0 0 0 0 4468.8625,119.6716"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M4931.13,119.6716 L4931.13,132.1716 L4943.63,132.1716 L4931.13,119.6716" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="132.3248"
+                  x="4476.3625" y="142.2589">@RestController
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="281.6931"
+                  x="4476.3625" y="162.0081">@RequestMapping("/api/courses")
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="4476.3625" y="181.7572">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="149.9475"
+                  x="4476.3625" y="201.5063">Course Endpoints:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="150.6854"
+                  x="4476.3625" y="221.2555">POST /api/courses
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="182.4554"
+                  x="4476.3625" y="241.0046">GET /api/courses/{id}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="251.5179"
+                  x="4476.3625" y="260.7538">GET /api/courses/code/{code}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="262.9437"
+                  x="4476.3625" y="280.5029">GET /api/courses/user/{userId}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="181.2732"
+                  x="4476.3625" y="300.2521">PUT /api/courses/{id}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="211.972"
+                  x="4476.3625" y="320.0012">DELETE /api/courses/{id}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="4476.3625" y="339.7504">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="193.4528"
+                  x="4476.3625" y="359.4995">Nested Task Endpoints:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="299.4427"
+                  x="4476.3625" y="379.2487">POST /api/courses/{courseId}/tasks
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="444.6295"
+                  x="4476.3625" y="398.9978">PUT /api/courses/{courseId}/tasks/{taskId}/progress
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="448.5175"
+                  x="4476.3625" y="418.7469">PUT /api/courses/{courseId}/tasks/{taskId}/complete
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="366.6565"
+                  x="4476.3625" y="438.4961">PUT /api/courses/{courseId}/tasks/{taskId}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="397.3553"
+                  x="4476.3625" y="458.2452">DELETE /api/courses/{courseId}/tasks/{taskId}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="4476.3625" y="477.9944">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="232.1655"
+                  x="4476.3625" y="497.7435">288 LOC - Largest controller
+            </text>
+        </g><!--class ToDoListController-->
+        <g class="entity" data-entity="ToDoListController" data-source-line="223" data-uid="ent0033"
+           id="entity_ToDoListController">
+            <rect fill="#FFFFFF" height="368.4863" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="1347.9517" x="5043.525" y="129.2966"/>
+            <ellipse cx="5631.581" cy="155.2958" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M5635.2975,162.3496 Q5634.5711,162.7231 5633.7722,162.9099 Q5632.9732,163.0967 5632.0913,163.0967 Q5628.9577,163.0967 5627.308,161.0319 Q5625.6582,158.967 5625.6582,155.0657 Q5625.6582,151.1539 5627.308,149.0891 Q5628.9577,147.0243 5632.0913,147.0243 Q5632.9732,147.0243 5633.7826,147.2111 Q5634.5919,147.3978 5635.2975,147.7714 L5635.2975,151.1747 Q5634.5089,150.4484 5633.767,150.1111 Q5633.0251,149.7739 5632.2365,149.7739 Q5630.5556,149.7739 5629.6996,151.1072 Q5628.8436,152.4406 5628.8436,155.0657 Q5628.8436,157.6804 5629.6996,159.0137 Q5630.5556,160.347 5632.2365,160.347 Q5633.0251,160.347 5633.767,160.0098 Q5634.5089,159.6726 5635.2975,158.9463 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="15" font-style="italic" lengthAdjust="spacing"
+                  textLength="141.4819" x="5663.9474" y="150.6272">&#171;@RestController&#187;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="162.4646"
+                  x="5653.456" y="171.3706">ToDoListController
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="5044.775" x2="6390.2267" y1="181.2949" y2="181.2949"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="5053.525"
+                  y="195.0541"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="291.4587"
+                  x="5066.025" y="203.8889">toDoListService: ToDoListService
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="5044.775" x2="6390.2267" y1="212.5632" y2="212.5632"/>
+            <ellipse cx="5057.275" cy="230.0724" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="469.8169"
+                  x="5066.025" y="235.1572">ToDoListController(toDoListService: ToDoListService)
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="5044.775" x2="6390.2267" y1="243.8315" y2="243.8315"/>
+            <ellipse cx="5057.275" cy="261.3407" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="972.1558"
+                  x="5066.025" y="266.4255">createToDoList(request: CreateToDoListRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;ToDoListDTO&gt;&gt;
+            </text>
+            <ellipse cx="5057.275" cy="282.609" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="738.9648"
+                  x="5066.025" y="287.6938">getToDoListById(id: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;ToDoListDTO&gt;&gt;
+            </text>
+            <ellipse cx="5057.275" cy="303.8773" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="887.749"
+                  x="5066.025" y="308.9622">getToDoListsByUserId(userId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;List&lt;ToDoListDTO&gt;&gt;&gt;
+            </text>
+            <ellipse cx="5057.275" cy="325.1456" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1071.3196"
+                  x="5066.025" y="330.2305">updateToDoList(id: UUID, request: UpdateToDoListRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;ToDoListDTO&gt;&gt;
+            </text>
+            <ellipse cx="5057.275" cy="346.4139" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="662.9919"
+                  x="5066.025" y="351.4988">deleteToDoList(id: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;String&gt;&gt;
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="5044.775" x2="6390.2267" y1="360.1731" y2="360.1731"/>
+            <ellipse cx="5057.275" cy="377.6823" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1184.6082"
+                  x="5066.025" y="382.7671">addTaskToList(todoListId: UUID, request: AddToDoListTaskRequestDTO):
+                ResponseEntity&lt;ApiSuccessResponse&lt;ToDoListTaskDTO&gt;&gt;
+            </text>
+            <ellipse cx="5057.275" cy="398.9506" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1004.6521"
+                  x="5066.025" y="404.0354">markTaskComplete(todoListId: UUID, taskId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;ToDoListTaskDTO&gt;&gt;
+            </text>
+            <ellipse cx="5057.275" cy="420.2189" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1023.092"
+                  x="5066.025" y="425.3037">markTaskInComplete(todoListId: UUID, taskId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;ToDoListTaskDTO&gt;&gt;
+            </text>
+            <ellipse cx="5057.275" cy="441.4872" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1317.9517"
+                  x="5066.025" y="446.572">updateTask(todoListId: UUID, taskId: UUID, request:
+                UpdateToDoListTaskRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;ToDoListTaskDTO&gt;&gt;
+            </text>
+            <ellipse cx="5057.275" cy="462.7555" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="828.0884"
+                  x="5066.025" y="467.8403">deleteTask(todoListId: UUID, taskId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;String&gt;&gt;
+            </text>
+            <ellipse cx="5057.275" cy="484.0238" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="889.3042"
+                  x="5066.025" y="489.1086">getAggregatedDeadlines(todoListId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;List&lt;Instant&gt;&gt;&gt;
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN34" data-source-line="245" data-uid="ent0035" id="entity_GMN34">
+            <path d="M6491.6,119.6716 L6491.6,307.9716 L6391.75,312.9716 L6491.6,317.9716 L6491.6,507.4054 A0,0 0 0 0 6491.6,507.4054 L6998.3914,507.4054 A0,0 0 0 0 6998.3914,507.4054 L6998.3914,132.1716 L6985.8914,119.6716 L6491.6,119.6716 A0,0 0 0 0 6491.6,119.6716"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M6985.8914,119.6716 L6985.8914,132.1716 L6998.3914,132.1716 L6985.8914,119.6716" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="132.3248"
+                  x="6499.1" y="142.2589">@RestController
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="288.0408"
+                  x="6499.1" y="162.0081">@RequestMapping("/api/todolists")
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="6499.1" y="181.7572">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="161.6113"
+                  x="6499.1" y="201.5063">TodoList Endpoints:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="157.0331"
+                  x="6499.1" y="221.2555">POST /api/todolists
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="188.8031"
+                  x="6499.1" y="241.0046">GET /api/todolists/{id}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="269.2914"
+                  x="6499.1" y="260.7538">GET /api/todolists/user/{userId}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="187.6208"
+                  x="6499.1" y="280.5029">PUT /api/todolists/{id}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="218.3197"
+                  x="6499.1" y="300.2521">DELETE /api/todolists/{id}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="6499.1" y="320.0012">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="193.4528"
+                  x="6499.1" y="339.7504">Nested Task Endpoints:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="316.7242"
+                  x="6499.1" y="359.4995">POST /api/todolists/{todoListId}/tasks
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="465.799"
+                  x="6499.1" y="379.2487">PUT /api/todolists/{todoListId}/tasks/{taskId}/complete
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="480.5414"
+                  x="6499.1" y="398.9978">PUT /api/todolists/{todoListId}/tasks/{taskId}/incomplete
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="383.938"
+                  x="6499.1" y="418.7469">PUT /api/todolists/{todoListId}/tasks/{taskId}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="414.6368"
+                  x="6499.1" y="438.4961">DELETE /api/todolists/{todoListId}/tasks/{taskId}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="340.2264"
+                  x="6499.1" y="458.2452">GET /api/todolists/{todoListId}/deadlines
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="6499.1" y="477.9944">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="310.1703"
+                  x="6499.1" y="497.7435">281 LOC - Similar to CourseController
+            </text>
+        </g><!--class TimerController-->
+        <g class="entity" data-entity="TimerController" data-source-line="271" data-uid="ent0038"
+           id="entity_TimerController">
+            <rect fill="#FFFFFF" height="252.1448" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="928.2507" x="7098.375" y="187.4591"/>
+            <ellipse cx="7489.3638" cy="213.4583" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M7493.0802,220.5121 Q7492.3539,220.8856 7491.5549,221.0724 Q7490.756,221.2592 7489.874,221.2592 Q7486.7405,221.2592 7485.0907,219.1944 Q7483.4409,217.1295 7483.4409,213.2282 Q7483.4409,209.3164 7485.0907,207.2516 Q7486.7405,205.1868 7489.874,205.1868 Q7490.756,205.1868 7491.5653,205.3736 Q7492.3746,205.5603 7493.0802,205.9339 L7493.0802,209.3372 Q7492.2916,208.6109 7491.5497,208.2736 Q7490.8079,207.9364 7490.0193,207.9364 Q7488.3384,207.9364 7487.4824,209.2697 Q7486.6263,210.6031 7486.6263,213.2282 Q7486.6263,215.8429 7487.4824,217.1762 Q7488.3384,218.5095 7490.0193,218.5095 Q7490.8079,218.5095 7491.5497,218.1723 Q7492.2916,217.8351 7493.0802,217.1088 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="15" font-style="italic" lengthAdjust="spacing"
+                  textLength="141.4819" x="7508.9469" y="208.7897">&#171;@RestController&#187;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="136.8982"
+                  x="7511.2388" y="229.5331">TimerController
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7099.625" x2="8025.3757" y1="239.4574" y2="239.4574"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="7108.375"
+                  y="253.2166"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="240.3259"
+                  x="7120.875" y="262.0514">timerService: TimerService
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7099.625" x2="8025.3757" y1="270.7257" y2="270.7257"/>
+            <ellipse cx="7112.125" cy="288.2349" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="393.1177"
+                  x="7120.875" y="293.3197">TimerController(timerService: TimerService)
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="7099.625" x2="8025.3757" y1="301.994" y2="301.994"/>
+            <ellipse cx="7112.125" cy="319.5032" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="867.2925"
+                  x="7120.875" y="324.588">startTimer(request: StartTimerRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;TimerDTO&gt;&gt;
+            </text>
+            <ellipse cx="7112.125" cy="340.7715" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="860.5933"
+                  x="7120.875" y="345.8563">stopTimer(request: StopTimerRequestDTO): ResponseEntity&lt;ApiSuccessResponse&lt;TimerDTO&gt;&gt;
+            </text>
+            <ellipse cx="7112.125" cy="362.0398" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="836.3599"
+                  x="7120.875" y="367.1247">getTimersByTaskId(taskId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;List&lt;TimerDTO&gt;&gt;&gt;
+            </text>
+            <ellipse cx="7112.125" cy="383.3081" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="898.2507"
+                  x="7120.875" y="388.393">getTimerSummary(taskId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;TaskTimerSummaryDTO&gt;&gt;
+            </text>
+            <ellipse cx="7112.125" cy="404.5764" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="745.5103"
+                  x="7120.875" y="409.6613">getTotalTimeForTask(taskId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;Long&gt;&gt;
+            </text>
+            <ellipse cx="7112.125" cy="425.8448" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="737.0081"
+                  x="7120.875" y="430.9296">getTimerById(timerId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;TimerDTO&gt;&gt;
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN39" data-source-line="285" data-uid="ent0040" id="entity_GMN39">
+            <path d="M8127.2,188.7966 L8127.2,307.9716 L8026.9125,312.9716 L8127.2,317.9716 L8127.2,438.2864 A0,0 0 0 0 8127.2,438.2864 L8487.7969,438.2864 A0,0 0 0 0 8487.7969,438.2864 L8487.7969,201.2966 L8475.2969,188.7966 L8127.2,188.7966 A0,0 0 0 0 8127.2,188.7966"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M8475.2969,188.7966 L8475.2969,201.2966 L8487.7969,201.2966 L8475.2969,188.7966" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="132.3248"
+                  x="8134.7" y="211.3839">@RestController
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="271.283"
+                  x="8134.7" y="231.1331">@RequestMapping("/api/timers")
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="8134.7" y="250.8822">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="87.6611"
+                  x="8134.7" y="270.6313">Endpoints:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="185.6213"
+                  x="8134.7" y="290.3805">POST /api/timers/start
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="182.511"
+                  x="8134.7" y="310.1296">POST /api/timers/stop
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="250.296"
+                  x="8134.7" y="329.8788">GET /api/timers/task/{taskId}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="334.3469"
+                  x="8134.7" y="349.6279">GET /api/timers/task/{taskId}/summary
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="294.563"
+                  x="8134.7" y="369.3771">GET /api/timers/task/{taskId}/total
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="217.7087"
+                  x="8134.7" y="389.1262">GET /api/timers/{timerId}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="8134.7" y="408.8754">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="69.8877"
+                  x="8134.7" y="428.6245">164 LOC
+            </text>
+        </g><!--class DashboardController-->
+        <g class="entity" data-entity="DashboardController" data-source-line="304" data-uid="ent0043"
+           id="entity_DashboardController">
+            <rect fill="#FFFFFF" height="145.8032" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="976.8713" x="8587.8125" y="240.6341"/>
+            <ellipse cx="8981.0657" cy="266.6333" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M8984.7821,273.6871 Q8984.0558,274.0606 8983.2568,274.2474 Q8982.4579,274.4342 8981.5759,274.4342 Q8978.4424,274.4342 8976.7926,272.3694 Q8975.1428,270.3045 8975.1428,266.4032 Q8975.1428,262.4914 8976.7926,260.4266 Q8978.4424,258.3618 8981.5759,258.3618 Q8982.4579,258.3618 8983.2672,258.5486 Q8984.0765,258.7353 8984.7821,259.1089 L8984.7821,262.5122 Q8983.9935,261.7859 8983.2516,261.4486 Q8982.5098,261.1114 8981.7212,261.1114 Q8980.0403,261.1114 8979.1843,262.4447 Q8978.3282,263.7781 8978.3282,266.4032 Q8978.3282,269.0179 8979.1843,270.3512 Q8980.0403,271.6845 8981.7212,271.6845 Q8982.5098,271.6845 8983.2516,271.3473 Q8983.9935,271.0101 8984.7821,270.2838 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="15" font-style="italic" lengthAdjust="spacing"
+                  textLength="141.4819" x="9022.6947" y="261.9647">&#171;@RestController&#187;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="180.99"
+                  x="9002.9407" y="282.7081">DashboardController
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="8589.0625" x2="9563.4338" y1="292.6324" y2="292.6324"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="8597.8125"
+                  y="306.3916"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="329.8169"
+                  x="8610.3125" y="315.2264">dashboardService: DashboardService
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="8589.0625" x2="9563.4338" y1="323.9007" y2="323.9007"/>
+            <ellipse cx="8601.5625" cy="341.4099" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="526.7004"
+                  x="8610.3125" y="346.4947">DashboardController(dashboardService: DashboardService)
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="8589.0625" x2="9563.4338" y1="355.169" y2="355.169"/>
+            <ellipse cx="8601.5625" cy="372.6782" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="946.8713"
+                  x="8610.3125" y="377.763">getDashboardSummary(userId: UUID): ResponseEntity&lt;ApiSuccessResponse&lt;DashboardSummaryDTO&gt;&gt;
+            </text>
+        </g><!--class CalendarController-->
+        <g class="entity" data-entity="CalendarController" data-source-line="312" data-uid="ent0044"
+           id="entity_CalendarController">
+            <rect fill="#FFFFFF" height="167.0715" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="1340.9961" x="10095.75" y="229.9966"/>
+            <ellipse cx="10679.4054" cy="255.9958" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M10683.1218,263.0496 Q10682.3955,263.4231 10681.5966,263.6099 Q10680.7976,263.7967 10679.9156,263.7967 Q10676.7821,263.7967 10675.1323,261.7319 Q10673.4825,259.667 10673.4825,255.7657 Q10673.4825,251.8539 10675.1323,249.7891 Q10676.7821,247.7243 10679.9156,247.7243 Q10680.7976,247.7243 10681.6069,247.9111 Q10682.4163,248.0978 10683.1218,248.4714 L10683.1218,251.8747 Q10682.3333,251.1484 10681.5914,250.8111 Q10680.8495,250.4739 10680.0609,250.4739 Q10678.38,250.4739 10677.524,251.8072 Q10676.668,253.1406 10676.668,255.7657 Q10676.668,258.3804 10677.524,259.7137 Q10678.38,261.047 10680.0609,261.047 Q10680.8495,261.047 10681.5914,260.7098 Q10682.3333,260.3726 10683.1218,259.6463 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="15" font-style="italic" lengthAdjust="spacing"
+                  textLength="141.4819" x="10712.6946" y="251.3272">&#171;@RestController&#187;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="164.3103"
+                  x="10701.2804" y="272.0706">CalendarController
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="10097" x2="11435.4961" y1="281.9949" y2="281.9949"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="10105.75"
+                  y="295.7541"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="295.9363"
+                  x="10118.25" y="304.5889">calendarService: CalendarService
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="10097" x2="11435.4961" y1="313.2632" y2="313.2632"/>
+            <ellipse cx="10109.5" cy="330.7724" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="476.1401"
+                  x="10118.25" y="335.8572">CalendarController(calendarService: CalendarService)
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="10097" x2="11435.4961" y1="344.5315" y2="344.5315"/>
+            <ellipse cx="10109.5" cy="362.0407" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1248.8232"
+                  x="10118.25" y="367.1255">getCalendarItems(year: int, month: int, userId: UUID, timezone: String):
+                ResponseEntity&lt;ApiSuccessResponse&lt;List&lt;CalendarItemDTO&gt;&gt;&gt;
+            </text>
+            <ellipse cx="10109.5" cy="383.309" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1310.9961"
+                  x="10118.25" y="388.3938">getCalendarItemsByUser(userId: UUID, year: int, month: int, timezone:
+                String): ResponseEntity&lt;ApiSuccessResponse&lt;List&lt;CalendarItemDTO&gt;&gt;&gt;
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN45" data-source-line="322" data-uid="ent0046" id="entity_GMN45">
+            <path d="M9664.3875,228.2966 L9664.3875,307.9716 L9564.7875,312.9716 L9664.3875,317.9716 L9664.3875,398.7898 A0,0 0 0 0 9664.3875,398.7898 L9995.6106,398.7898 A0,0 0 0 0 9995.6106,398.7898 L9995.6106,240.7966 L9983.1106,228.2966 L9664.3875,228.2966 A0,0 0 0 0 9664.3875,228.2966"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M9983.1106,228.2966 L9983.1106,240.7966 L9995.6106,240.7966 L9983.1106,228.2966" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="132.3248"
+                  x="9671.8875" y="250.8839">@RestController
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="304.9731"
+                  x="9671.8875" y="270.6331">@RequestMapping("/api/dashboard")
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="9671.8875" y="290.3822">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="79.1949"
+                  x="9671.8875" y="310.1313">Endpoint:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="286.2238"
+                  x="9671.8875" y="329.8805">GET /api/dashboard/user/{userId}
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="9671.8875" y="349.6296">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="231.9275"
+                  x="9671.8875" y="369.3788">47 LOC - Simplest controller
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="199.1418"
+                  x="9671.8875" y="389.1279">Pure aggregation facade
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN48" data-source-line="333" data-uid="ent0049" id="entity_GMN48">
+            <path d="M11536.5,188.7966 L11536.5,307.9716 L11437.1625,312.9716 L11536.5,317.9716 L11536.5,438.2864 A0,0 0 0 0 11536.5,438.2864 L12081.0123,438.2864 A0,0 0 0 0 12081.0123,438.2864 L12081.0123,201.2966 L12068.5123,188.7966 L11536.5,188.7966 A0,0 0 0 0 11536.5,188.7966"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M12068.5123,188.7966 L12068.5123,201.2966 L12081.0123,201.2966 L12068.5123,188.7966" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="132.3248"
+                  x="11544" y="211.3839">@RestController
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="289.0009"
+                  x="11544" y="231.1331">@RequestMapping("/api/calendar")
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="11544" y="250.8822">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="87.6611"
+                  x="11544" y="270.6313">Endpoints:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="459.3164"
+                  x="11544" y="290.3805">GET /api/calendar/items?year&amp;month&amp;userId&amp;timezone
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="518.2623"
+                  x="11544" y="310.1296">GET /api/calendar/user/{userId}/items?year&amp;month&amp;timezone
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="11544" y="329.8788">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="226.5637"
+                  x="11544" y="349.6279">Aggregates deadlines from:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="118.0902"
+                  x="11544" y="369.3771">- Course tasks
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="129.754"
+                  x="11544" y="389.1262">- TodoList tasks
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="11544" y="408.8754">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="59.5569"
+                  x="11544" y="428.6245">83 LOC
+            </text>
+        </g><!--class GlobalExceptionHandler-->
+        <g class="entity" data-entity="GlobalExceptionHandler" data-source-line="352" data-uid="ent0052"
+           id="entity_GlobalExceptionHandler">
+            <rect fill="#FFFFFF" height="252.1448" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="1252.7783" x="12181.1125" y="187.4591"/>
+            <ellipse cx="12698.4123" cy="213.4583" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M12702.1287,220.5121 Q12701.4024,220.8856 12700.6035,221.0724 Q12699.8045,221.2592 12698.9226,221.2592 Q12695.789,221.2592 12694.1392,219.1944 Q12692.4895,217.1295 12692.4895,213.2282 Q12692.4895,209.3164 12694.1392,207.2516 Q12695.789,205.1868 12698.9226,205.1868 Q12699.8045,205.1868 12700.6138,205.3736 Q12701.4232,205.5603 12702.1287,205.9339 L12702.1287,209.3372 Q12701.3402,208.6109 12700.5983,208.2736 Q12699.8564,207.9364 12699.0678,207.9364 Q12697.3869,207.9364 12696.5309,209.2697 Q12695.6749,210.6031 12695.6749,213.2282 Q12695.6749,215.8429 12696.5309,217.1762 Q12697.3869,218.5095 12699.0678,218.5095 Q12699.8564,218.5095 12700.5983,218.1723 Q12701.3402,217.8351 12702.1287,217.1088 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="15" font-style="italic" lengthAdjust="spacing"
+                  textLength="190.7959" x="12729.2912" y="208.7897">&#171;@RestControllerAdvice&#187;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="208.8037"
+                  x="12720.2873" y="229.5331">GlobalExceptionHandler
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="12182.3625" x2="13432.6408" y1="239.4574"
+                  y2="239.4574"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="12191.1125"
+                  y="253.2166"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="129.2847" x="12203.6125" y="262.0514">logger: Logger
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="12182.3625" x2="13432.6408" y1="270.7257"
+                  y2="270.7257"/>
+            <ellipse cx="12194.8625" cy="288.2349" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="910.4187"
+                  x="12203.6125" y="293.3197">handleBaseException(ex: BaseException, request: WebRequest):
+                ResponseEntity&lt;ErrorResponseDTO&gt;
+            </text>
+            <ellipse cx="12194.8625" cy="309.5032" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1138.2861"
+                  x="12203.6125" y="314.588">handleValidationException(ex: MethodArgumentNotValidException, request:
+                WebRequest): ResponseEntity&lt;ErrorResponseDTO&gt;
+            </text>
+            <ellipse cx="12194.8625" cy="330.7715" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1189.7522"
+                  x="12203.6125" y="335.8563">handleHttpMessageNotReadable(ex: HttpMessageNotReadableException, request:
+                WebRequest): ResponseEntity&lt;ErrorResponseDTO&gt;
+            </text>
+            <ellipse cx="12194.8625" cy="352.0398" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1222.7783"
+                  x="12203.6125" y="357.1247">handleMethodNotSupported(ex: HttpRequestMethodNotSupportedException,
+                request: WebRequest): ResponseEntity&lt;ErrorResponseDTO&gt;
+            </text>
+            <ellipse cx="12194.8625" cy="373.3081" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="1159.9902"
+                  x="12203.6125" y="378.393">handleMissingParams(ex: MissingServletRequestParameterException, request:
+                WebRequest): ResponseEntity&lt;ErrorResponseDTO&gt;
+            </text>
+            <ellipse cx="12194.8625" cy="394.5764" fill="#FFFFFF" rx="3.75" ry="3.75"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="881.5283"
+                  x="12203.6125" y="399.6613">handleGlobalException(ex: Exception, request: WebRequest): ResponseEntity&lt;ErrorResponseDTO&gt;
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="12182.3625" x2="13432.6408" y1="408.3356"
+                  y2="408.3356"/>
+            <rect fill="#FFFFFF" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="12191.1125"
+                  y="422.0948"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="411.4124"
+                  x="12203.6125" y="430.9296">getRequestPath(request: WebRequest): String
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN53" data-source-line="366" data-uid="ent0054" id="entity_GMN53">
+            <path d="M13534.2125,149.2966 L13534.2125,307.9716 L13434.5125,312.9716 L13534.2125,317.9716 L13534.2125,477.783 A0,0 0 0 0 13534.2125,477.783 L13935.7835,477.783 A0,0 0 0 0 13935.7835,477.783 L13935.7835,161.7966 L13923.2835,149.2966 L13534.2125,149.2966 A0,0 0 0 0 13534.2125,149.2966"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M13923.2835,149.2966 L13923.2835,161.7966 L13935.7835,161.7966 L13923.2835,149.2966" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="185.78"
+                  x="13541.7125" y="171.8839">@RestControllerAdvice
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="260.6506"
+                  x="13541.7125" y="191.6331">Catches ALL exceptions globally
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="13541.7125" y="211.3822">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="170.6091"
+                  x="13541.7125" y="231.1313">Exception Hierarchy:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="323.2941"
+                  x="13541.7125" y="250.8805">1. BaseException &#8594; Domain exceptions
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="310.1306"
+                  x="13541.7125" y="270.6296">2. MethodArgumentNotValidException
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="309.4482"
+                  x="13541.7125" y="290.3788">3. HttpMessageNotReadableException
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="375.321"
+                  x="13541.7125" y="310.1279">4. HttpRequestMethodNotSupportedException
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="369.6558"
+                  x="13541.7125" y="329.8771">5. MissingServletRequestParameterException
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="273.6713"
+                  x="13541.7125" y="349.6262">6. Generic Exception &#8594; 500 error
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="13541.7125" y="369.3754">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="312.8839"
+                  x="13541.7125" y="389.1245">Returns structured ErrorResponseDTO
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="318.4222"
+                  x="13541.7125" y="408.8737">with code, message, statusCode, path,
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="247.3523"
+                  x="13541.7125" y="428.6228">timestamp, details, fieldErrors
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="13541.7125" y="448.3719">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="69.8877"
+                  x="13541.7125" y="468.1211">170 LOC
+            </text>
+        </g><!--class ExceptionHandler-->
+        <g class="entity" data-entity="ExceptionHandler" data-source-line="389" data-uid="ent0057"
+           id="entity_ExceptionHandler">
+            <rect fill="#FFFFFF" height="97.5366" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="404.4983" x="12605.25" y="756.2841"/>
+            <ellipse cx="12726.0142" cy="773.7841" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M12726.1558,767.9693 L12724.7135,774.309 L12727.6084,774.309 Z M12724.2881,765.1678 L12728.0338,765.1678 L12732.2153,780.6591 L12729.1544,780.6591 L12728.1998,776.8304 L12724.1013,776.8304 L12723.1675,780.6591 L12720.1066,780.6591 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-style="italic" lengthAdjust="spacing"
+                  textLength="153.595" x="12747.8892" y="780.744">ExceptionHandler
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="12606.5" x2="13008.4983" y1="791.2841" y2="791.2841"/>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="12606.5" x2="13008.4983" y1="801.2841" y2="801.2841"/>
+            <polygon fill="#FFFFFF" points="12619,812.5433,12624,817.5433,12619,822.5433,12614,817.5433"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-style="italic" lengthAdjust="spacing"
+                  textLength="374.4983" x="12627.75" y="823.8781">canHandle(exception: Exception): boolean
+            </text>
+            <polygon fill="#FFFFFF" points="12619,833.8116,12624,838.8116,12619,843.8116,12614,838.8116"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" font-style="italic" lengthAdjust="spacing"
+                  textLength="333.0298" x="12627.75" y="845.1464">doHandle(exception: Exception): void
+            </text>
+        </g>
+        <polygon fill="none" points="12807.4998,853.8208,12816.2501,878.8206,12798.7501,878.8209"
+                 style="stroke:#000000;stroke-width:1.25;"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="12807.5001" x2="12807.5" y1="878.8208" y2="869.2216"/>
+        <polygon fill="none" points="12807.4997,853.8208,12816.25,878.8207,12798.75,878.8209"
+                 style="stroke:#000000;stroke-width:1.25;"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="12807.5" x2="12807.5" y1="878.8208" y2="878.7966"/>
+        <polygon fill="none" points="12945.3844,853.8208,12971.8713,853.9077,12966.036,870.4061"
+                 style="stroke:#000000;stroke-width:1.25;"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="12968.9536" x2="13016" y1="862.1569" y2="878.7966"/>
+        <polygon fill="none" points="12949.5176,853.8208,12976.0042,853.6646,12970.3205,870.2159"
+                 style="stroke:#000000;stroke-width:1.25;"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="12973.1624" x2="13022.25" y1="861.9402" y2="878.7966"/>
+        <polygon fill="none" points="12953.6508,853.8208,12980.135,853.4338,12974.5958,870.034"
+                 style="stroke:#000000;stroke-width:1.25;"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="12977.3654" x2="13028.5" y1="861.7339" y2="878.7966"/>
+        <polygon fill="none" points="12665.4818,853.8208,12644.6789,870.2159,12638.9952,853.6646"
+                 style="stroke:#000000;stroke-width:1.25;"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="12641.8371" x2="12592.75" y1="861.9403" y2="878.7966"/>
+        <polygon fill="none" points="12807.4999,853.8208,12816.2503,878.8206,12798.7503,878.8209"
+                 style="stroke:#000000;stroke-width:1.25;"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="12807.5003" x2="12807.5" y1="878.8208" y2="860.4716"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="13009.7483" x2="13035.15" y1="805.4249" y2="805.4716"/>
+        <line style="stroke:#000000;stroke-width:1.25;" x1="12807.4997" x2="12807.5" y1="756.2841"
+              y2="723.3466"/><!--class AuthenticationExceptionHandler-->
+        <g class="entity" data-entity="AuthenticationExceptionHandler" data-source-line="394" data-uid="ent0058"
+           id="entity_AuthenticationExceptionHandler">
+            <rect fill="#FFFFFF" height="118.8049" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="404.4983" x="11090.25" y="1230.3091"/>
+            <ellipse cx="11147.4015" cy="1247.8091" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M11151.1179,1254.863 Q11150.3916,1255.2365 11149.5927,1255.4233 Q11148.7937,1255.61 11147.9117,1255.61 Q11144.7782,1255.61 11143.1284,1253.5452 Q11141.4786,1251.4804 11141.4786,1247.579 Q11141.4786,1243.6673 11143.1284,1241.6025 Q11144.7782,1239.5376 11147.9117,1239.5376 Q11148.7937,1239.5376 11149.603,1239.7244 Q11150.4124,1239.9112 11151.1179,1240.2847 L11151.1179,1243.688 Q11150.3293,1242.9617 11149.5875,1242.6245 Q11148.8456,1242.2873 11148.057,1242.2873 Q11146.3761,1242.2873 11145.5201,1243.6206 Q11144.6641,1244.9539 11144.6641,1247.579 Q11144.6641,1250.1938 11145.5201,1251.5271 Q11146.3761,1252.8604 11148.057,1252.8604 Q11148.8456,1252.8604 11149.5875,1252.5232 Q11150.3293,1252.186 11151.1179,1251.4596 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="280.8203"
+                  x="11169.2765" y="1254.769">AuthenticationExceptionHandler
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="11091.5" x2="11493.4983" y1="1265.3091" y2="1265.3091"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="11100.25"
+                  y="1279.0683"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="129.2847" x="11112.75" y="1287.9031">logger: Logger
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="11091.5" x2="11493.4983" y1="1296.5774" y2="1296.5774"/>
+            <polygon fill="#FFFFFF" points="11104,1307.8366,11109,1312.8366,11104,1317.8366,11099,1312.8366"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="374.4983"
+                  x="11112.75" y="1319.1714">canHandle(exception: Exception): boolean
+            </text>
+            <polygon fill="#FFFFFF" points="11104,1329.1049,11109,1334.1049,11104,1339.1049,11099,1334.1049"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="333.0469"
+                  x="11112.75" y="1340.4397">doHandle(exception: Exception): void
+            </text>
+        </g><!--class UserExceptionHandler-->
+        <g class="entity" data-entity="UserExceptionHandler" data-source-line="401" data-uid="ent0059"
+           id="entity_UserExceptionHandler">
+            <rect fill="#FFFFFF" height="118.8049" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="404.4983" x="11595.25" y="1230.3091"/>
+            <ellipse cx="11696.1045" cy="1247.8091" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M11699.8209,1254.863 Q11699.0946,1255.2365 11698.2957,1255.4233 Q11697.4967,1255.61 11696.6147,1255.61 Q11693.4812,1255.61 11691.8314,1253.5452 Q11690.1816,1251.4804 11690.1816,1247.579 Q11690.1816,1243.6673 11691.8314,1241.6025 Q11693.4812,1239.5376 11696.6147,1239.5376 Q11697.4967,1239.5376 11698.306,1239.7244 Q11699.1154,1239.9112 11699.8209,1240.2847 L11699.8209,1243.688 Q11699.0323,1242.9617 11698.2905,1242.6245 Q11697.5486,1242.2873 11696.76,1242.2873 Q11695.0791,1242.2873 11694.2231,1243.6206 Q11693.3671,1244.9539 11693.3671,1247.579 Q11693.3671,1250.1938 11694.2231,1251.5271 Q11695.0791,1252.8604 11696.76,1252.8604 Q11697.5486,1252.8604 11698.2905,1252.5232 Q11699.0323,1252.186 11699.8209,1251.4596 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="193.4143"
+                  x="11717.9795" y="1254.769">UserExceptionHandler
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="11596.5" x2="11998.4983" y1="1265.3091" y2="1265.3091"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="11605.25"
+                  y="1279.0683"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="129.2847" x="11617.75" y="1287.9031">logger: Logger
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="11596.5" x2="11998.4983" y1="1296.5774" y2="1296.5774"/>
+            <polygon fill="#FFFFFF" points="11609,1307.8366,11614,1312.8366,11609,1317.8366,11604,1312.8366"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="374.4983"
+                  x="11617.75" y="1319.1714">canHandle(exception: Exception): boolean
+            </text>
+            <polygon fill="#FFFFFF" points="11609,1329.1049,11614,1334.1049,11609,1339.1049,11604,1334.1049"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="333.0469"
+                  x="11617.75" y="1340.4397">doHandle(exception: Exception): void
+            </text>
+        </g><!--class CourseExceptionHandler-->
+        <g class="entity" data-entity="CourseExceptionHandler" data-source-line="408" data-uid="ent0060"
+           id="entity_CourseExceptionHandler">
+            <rect fill="#FFFFFF" height="118.8049" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="404.4983" x="12100.25" y="1230.3091"/>
+            <ellipse cx="12190.5515" cy="1247.8091" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M12194.2679,1254.863 Q12193.5416,1255.2365 12192.7427,1255.4233 Q12191.9437,1255.61 12191.0618,1255.61 Q12187.9282,1255.61 12186.2784,1253.5452 Q12184.6287,1251.4804 12184.6287,1247.579 Q12184.6287,1243.6673 12186.2784,1241.6025 Q12187.9282,1239.5376 12191.0618,1239.5376 Q12191.9437,1239.5376 12192.7531,1239.7244 Q12193.5624,1239.9112 12194.2679,1240.2847 L12194.2679,1243.688 Q12193.4794,1242.9617 12192.7375,1242.6245 Q12191.9956,1242.2873 12191.207,1242.2873 Q12189.5261,1242.2873 12188.6701,1243.6206 Q12187.8141,1244.9539 12187.8141,1247.579 Q12187.8141,1250.1938 12188.6701,1251.5271 Q12189.5261,1252.8604 12191.207,1252.8604 Q12191.9956,1252.8604 12192.7375,1252.5232 Q12193.4794,1252.186 12194.2679,1251.4596 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="214.5203"
+                  x="12212.4265" y="1254.769">CourseExceptionHandler
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="12101.5" x2="12503.4983" y1="1265.3091" y2="1265.3091"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="12110.25"
+                  y="1279.0683"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="129.2847" x="12122.75" y="1287.9031">logger: Logger
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="12101.5" x2="12503.4983" y1="1296.5774" y2="1296.5774"/>
+            <polygon fill="#FFFFFF" points="12114,1307.8366,12119,1312.8366,12114,1317.8366,12109,1312.8366"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="374.4983"
+                  x="12122.75" y="1319.1714">canHandle(exception: Exception): boolean
+            </text>
+            <polygon fill="#FFFFFF" points="12114,1329.1049,12119,1334.1049,12114,1339.1049,12109,1334.1049"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="333.0469"
+                  x="12122.75" y="1340.4397">doHandle(exception: Exception): void
+            </text>
+        </g><!--class ToDoListExceptionHandler-->
+        <g class="entity" data-entity="ToDoListExceptionHandler" data-source-line="415" data-uid="ent0061"
+           id="entity_ToDoListExceptionHandler">
+            <rect fill="#FFFFFF" height="118.8049" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="404.4983" x="12605.25" y="1230.3091"/>
+            <ellipse cx="12687.9807" cy="1247.8091" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M12691.6971,1254.863 Q12690.9708,1255.2365 12690.1719,1255.4233 Q12689.3729,1255.61 12688.491,1255.61 Q12685.3574,1255.61 12683.7076,1253.5452 Q12682.0579,1251.4804 12682.0579,1247.579 Q12682.0579,1243.6673 12683.7076,1241.6025 Q12685.3574,1239.5376 12688.491,1239.5376 Q12689.3729,1239.5376 12690.1823,1239.7244 Q12690.9916,1239.9112 12691.6971,1240.2847 L12691.6971,1243.688 Q12690.9086,1242.9617 12690.1667,1242.6245 Q12689.4248,1242.2873 12688.6362,1242.2873 Q12686.9553,1242.2873 12686.0993,1243.6206 Q12685.2433,1244.9539 12685.2433,1247.579 Q12685.2433,1250.1938 12686.0993,1251.5271 Q12686.9553,1252.8604 12688.6362,1252.8604 Q12689.4248,1252.8604 12690.1667,1252.5232 Q12690.9086,1252.186 12691.6971,1251.4596 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="229.6619"
+                  x="12709.8557" y="1254.769">ToDoListExceptionHandler
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="12606.5" x2="13008.4983" y1="1265.3091" y2="1265.3091"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="12615.25"
+                  y="1279.0683"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="129.2847" x="12627.75" y="1287.9031">logger: Logger
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="12606.5" x2="13008.4983" y1="1296.5774" y2="1296.5774"/>
+            <polygon fill="#FFFFFF" points="12619,1307.8366,12624,1312.8366,12619,1317.8366,12614,1312.8366"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="374.4983"
+                  x="12627.75" y="1319.1714">canHandle(exception: Exception): boolean
+            </text>
+            <polygon fill="#FFFFFF" points="12619,1329.1049,12624,1334.1049,12619,1339.1049,12614,1334.1049"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="333.0469"
+                  x="12627.75" y="1340.4397">doHandle(exception: Exception): void
+            </text>
+        </g><!--class TimerExceptionHandler-->
+        <g class="entity" data-entity="TimerExceptionHandler" data-source-line="422" data-uid="ent0062"
+           id="entity_TimerExceptionHandler">
+            <rect fill="#FFFFFF" height="118.8049" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="404.4983" x="13110.25" y="1230.3091"/>
+            <ellipse cx="13205.7639" cy="1247.8091" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M13209.4803,1254.863 Q13208.754,1255.2365 13207.9551,1255.4233 Q13207.1561,1255.61 13206.2742,1255.61 Q13203.1406,1255.61 13201.4908,1253.5452 Q13199.8411,1251.4804 13199.8411,1247.579 Q13199.8411,1243.6673 13201.4908,1241.6025 Q13203.1406,1239.5376 13206.2742,1239.5376 Q13207.1561,1239.5376 13207.9655,1239.7244 Q13208.7748,1239.9112 13209.4803,1240.2847 L13209.4803,1243.688 Q13208.6918,1242.9617 13207.9499,1242.6245 Q13207.208,1242.2873 13206.4194,1242.2873 Q13204.7385,1242.2873 13203.8825,1243.6206 Q13203.0265,1244.9539 13203.0265,1247.579 Q13203.0265,1250.1938 13203.8825,1251.5271 Q13204.7385,1252.8604 13206.4194,1252.8604 Q13207.208,1252.8604 13207.9499,1252.5232 Q13208.6918,1252.186 13209.4803,1251.4596 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="204.0955"
+                  x="13227.6389" y="1254.769">TimerExceptionHandler
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="13111.5" x2="13513.4983" y1="1265.3091" y2="1265.3091"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="13120.25"
+                  y="1279.0683"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="129.2847" x="13132.75" y="1287.9031">logger: Logger
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="13111.5" x2="13513.4983" y1="1296.5774" y2="1296.5774"/>
+            <polygon fill="#FFFFFF" points="13124,1307.8366,13129,1312.8366,13124,1317.8366,13119,1312.8366"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="374.4983"
+                  x="13132.75" y="1319.1714">canHandle(exception: Exception): boolean
+            </text>
+            <polygon fill="#FFFFFF" points="13124,1329.1049,13129,1334.1049,13124,1339.1049,13119,1334.1049"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="333.0469"
+                  x="13132.75" y="1340.4397">doHandle(exception: Exception): void
+            </text>
+        </g><!--class CalendarExceptionHandler-->
+        <g class="entity" data-entity="CalendarExceptionHandler" data-source-line="429" data-uid="ent0063"
+           id="entity_CalendarExceptionHandler">
+            <rect fill="#FFFFFF" height="118.8049" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="404.4983" x="13615.25" y="1230.3091"/>
+            <ellipse cx="13697.0579" cy="1247.8091" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M13700.7743,1254.863 Q13700.048,1255.2365 13699.249,1255.4233 Q13698.4501,1255.61 13697.5681,1255.61 Q13694.4346,1255.61 13692.7848,1253.5452 Q13691.135,1251.4804 13691.135,1247.579 Q13691.135,1243.6673 13692.7848,1241.6025 Q13694.4346,1239.5376 13697.5681,1239.5376 Q13698.4501,1239.5376 13699.2594,1239.7244 Q13700.0687,1239.9112 13700.7743,1240.2847 L13700.7743,1243.688 Q13699.9857,1242.9617 13699.2438,1242.6245 Q13698.502,1242.2873 13697.7134,1242.2873 Q13696.0325,1242.2873 13695.1765,1243.6206 Q13694.3204,1244.9539 13694.3204,1247.579 Q13694.3204,1250.1938 13695.1765,1251.5271 Q13696.0325,1252.8604 13697.7134,1252.8604 Q13698.502,1252.8604 13699.2438,1252.5232 Q13699.9857,1252.186 13700.7743,1251.4596 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="231.5076"
+                  x="13718.9329" y="1254.769">CalendarExceptionHandler
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="13616.5" x2="14018.4983" y1="1265.3091" y2="1265.3091"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="13625.25"
+                  y="1279.0683"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="129.2847" x="13637.75" y="1287.9031">logger: Logger
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="13616.5" x2="14018.4983" y1="1296.5774" y2="1296.5774"/>
+            <polygon fill="#FFFFFF" points="13629,1307.8366,13634,1312.8366,13629,1317.8366,13624,1312.8366"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="374.4983"
+                  x="13637.75" y="1319.1714">canHandle(exception: Exception): boolean
+            </text>
+            <polygon fill="#FFFFFF" points="13629,1329.1049,13634,1334.1049,13629,1339.1049,13624,1334.1049"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="333.0469"
+                  x="13637.75" y="1340.4397">doHandle(exception: Exception): void
+            </text>
+        </g><!--class UserCredentialExceptionHandler-->
+        <g class="entity" data-entity="UserCredentialExceptionHandler" data-source-line="436" data-uid="ent0064"
+           id="entity_UserCredentialExceptionHandler">
+            <rect fill="#FFFFFF" height="118.8049" rx="3.125" ry="3.125" style="stroke:#000000;stroke-width:1.25;"
+                  width="404.4983" x="14120.25" y="1230.3091"/>
+            <ellipse cx="14176.3419" cy="1247.8091" fill="#FFFFFF" rx="11.25" ry="11.25"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M14180.0583,1254.863 Q14179.332,1255.2365 14178.5331,1255.4233 Q14177.7341,1255.61 14176.8522,1255.61 Q14173.7186,1255.61 14172.0688,1253.5452 Q14170.4191,1251.4804 14170.4191,1247.579 Q14170.4191,1243.6673 14172.0688,1241.6025 Q14173.7186,1239.5376 14176.8522,1239.5376 Q14177.7341,1239.5376 14178.5435,1239.7244 Q14179.3528,1239.9112 14180.0583,1240.2847 L14180.0583,1243.688 Q14179.2698,1242.9617 14178.5279,1242.6245 Q14177.786,1242.2873 14176.9974,1242.2873 Q14175.3165,1242.2873 14174.4605,1243.6206 Q14173.6045,1244.9539 14173.6045,1247.579 Q14173.6045,1250.1938 14174.4605,1251.5271 Q14175.3165,1252.8604 14176.9974,1252.8604 Q14177.786,1252.8604 14178.5279,1252.5232 Q14179.2698,1252.186 14180.0583,1251.4596 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="282.9395"
+                  x="14198.2169" y="1254.769">UserCredentialExceptionHandler
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="14121.5" x2="14523.4983" y1="1265.3091" y2="1265.3091"/>
+            <rect fill="none" height="7.5" style="stroke:#000000;stroke-width:1.25;" width="7.5" x="14130.25"
+                  y="1279.0683"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="129.2847" x="14142.75" y="1287.9031">logger: Logger
+            </text>
+            <line style="stroke:#000000;stroke-width:1.25;" x1="14121.5" x2="14523.4983" y1="1296.5774" y2="1296.5774"/>
+            <polygon fill="#FFFFFF" points="14134,1307.8366,14139,1312.8366,14134,1317.8366,14129,1312.8366"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="374.4983"
+                  x="14142.75" y="1319.1714">canHandle(exception: Exception): boolean
+            </text>
+            <polygon fill="#FFFFFF" points="14134,1329.1049,14139,1334.1049,14134,1339.1049,14129,1334.1049"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="17.5" lengthAdjust="spacing" textLength="333.0469"
+                  x="14142.75" y="1340.4397">doHandle(exception: Exception): void
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN72" data-source-line="452" data-uid="ent0073" id="entity_GMN72">
+            <path d="M13135.025,690.1841 L13135.025,800.4716 L13035.15,805.4716 L13135.025,810.4716 L13135.025,919.9247 A0,0 0 0 0 13135.025,919.9247 L13462.4634,919.9247 A0,0 0 0 0 13462.4634,919.9247 L13462.4634,702.6841 L13449.9634,690.1841 L13135.025,690.1841 A0,0 0 0 0 13135.025,690.1841"
+                  fill="#FFFFFF" style="stroke:#000000;stroke-width:1.25;"/>
+            <path d="M13449.9634,690.1841 L13449.9634,702.6841 L13462.4634,702.6841 L13449.9634,690.1841" fill="#FFFFFF"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="214.043"
+                  x="13142.525" y="712.7714">Template Method Pattern:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="245.8209"
+                  x="13142.525" y="732.5206">Base class for domain-specific
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="143.7268"
+                  x="13142.525" y="752.2697">exception logging
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="13142.525" y="772.0188">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="189.0729"
+                  x="13142.525" y="791.768">Subclasses implement:
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="301.1884"
+                  x="13142.525" y="811.5171">- canHandle(): Check exception type
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="289.834"
+                  x="13142.525" y="831.2663">- doHandle(): Log exception details
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="5.7129"
+                  x="13142.525" y="851.0154">&#160;
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="245.083"
+                  x="13142.525" y="870.7646">Note: GlobalExceptionHandler
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="273.3142"
+                  x="13142.525" y="890.5137">actually handles HTTP responses,
+            </text>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="285.6128"
+                  x="13142.525" y="910.2629">these handlers are for logging only
+            </text>
+        </g><!--link ApiSuccessResponse to ApiSuccessResponseBuilder-->
+        <g class="link" data-entity-1="ApiSuccessResponse" data-entity-2="ApiSuccessResponseBuilder"
+           data-source-line="80" data-uid="lnk7" id="link_ApiSuccessResponse_ApiSuccessResponseBuilder">
+            <path codeLine="80" d="M6737.3625,939.4091 C6737.3625,1010.2841 6737.3625,1089.1466 6737.3625,1158.3966"
+                  fill="none" id="ApiSuccessResponse-to-ApiSuccessResponseBuilder"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="6737.3625,1165.8966,6742.3625,1154.6466,6737.3625,1159.6466,6732.3625,1154.6466,6737.3625,1165.8966"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="59.3903"
+                  x="6677.3625" y="1048.9839">creates
+            </text>
+        </g><!--link ApiSuccessResponseBuilder to ApiSuccessResponse-->
+        <g class="link" data-entity-1="ApiSuccessResponseBuilder" data-entity-2="ApiSuccessResponse"
+           data-source-line="81" data-uid="lnk8" id="link_ApiSuccessResponseBuilder_ApiSuccessResponse">
+            <path codeLine="81" d="M6542.6375,1166.1591 C6542.6375,1096.8841 6542.6375,1017.9091 6542.6375,946.9466"
+                  fill="none" id="ApiSuccessResponseBuilder-to-ApiSuccessResponse"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="6542.6375,939.4466,6537.6375,950.6966,6542.6375,945.6966,6547.6375,950.6966,6542.6375,939.4466"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="47.9169"
+                  x="6493.8875" y="1049.1339">builds
+            </text>
+        </g><!--link ErrorResponseDTO to ErrorResponseDTOBuilder-->
+        <g class="link" data-entity-1="ErrorResponseDTO" data-entity-2="ErrorResponseDTOBuilder" data-source-line="82"
+           data-uid="lnk9" id="link_ErrorResponseDTO_ErrorResponseDTOBuilder">
+            <path codeLine="82" d="M7845.6375,1003.2341 C7845.6375,1035.9216 7845.6375,1062.2341 7845.6375,1094.6591"
+                  fill="none" id="ErrorResponseDTO-to-ErrorResponseDTOBuilder"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+            <polygon fill="#000000"
+                     points="7845.6375,1102.1591,7850.6375,1090.9091,7845.6375,1095.9091,7840.6375,1090.9091,7845.6375,1102.1591"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="59.3903"
+                  x="7785.6375" y="1049.0339">creates
+            </text>
+        </g><!--link ErrorResponseDTOBuilder to ErrorResponseDTO-->
+        <g class="link" data-entity-1="ErrorResponseDTOBuilder" data-entity-2="ErrorResponseDTO" data-source-line="83"
+           data-uid="lnk10" id="link_ErrorResponseDTOBuilder_ErrorResponseDTO">
+            <path codeLine="83" d="M7674.3625,1102.3216 C7674.3625,1069.8341 7674.3625,1043.4466 7674.3625,1010.6716"
+                  fill="none" id="ErrorResponseDTOBuilder-to-ErrorResponseDTO"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="7674.3625,1003.1716,7669.3625,1014.4216,7674.3625,1009.4216,7679.3625,1014.4216,7674.3625,1003.1716"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="47.9169"
+                  x="7625.6125" y="1049.0839">builds
+            </text>
+        </g><!--reverse link ExceptionHandler to AuthenticationExceptionHandler-->
+        <g class="link" data-entity-1="ExceptionHandler" data-entity-2="AuthenticationExceptionHandler"
+           data-source-line="443" data-uid="lnk65" id="link_ExceptionHandler_AuthenticationExceptionHandler">
+            <path codeLine="443"
+                  d="M12807.5,860.4716 C12807.5,860.4716 11465.75,860.4716 11465.75,860.4716 C11465.75,860.4716 11465.75,1112.0841 11465.75,1230.0216"
+                  fill="none" id="ExceptionHandler-backto-AuthenticationExceptionHandler"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+        </g><!--reverse link ExceptionHandler to UserExceptionHandler-->
+        <g class="link" data-entity-1="ExceptionHandler" data-entity-2="UserExceptionHandler" data-source-line="444"
+           data-uid="lnk66" id="link_ExceptionHandler_UserExceptionHandler">
+            <path codeLine="444"
+                  d="M12807.5,869.2216 C12807.5,869.2216 11797.5,869.2216 11797.5,869.2216 C11797.5,869.2216 11797.5,1113.8216 11797.5,1229.9091"
+                  fill="none" id="ExceptionHandler-backto-UserExceptionHandler"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+        </g><!--reverse link ExceptionHandler to CourseExceptionHandler-->
+        <g class="link" data-entity-1="ExceptionHandler" data-entity-2="CourseExceptionHandler" data-source-line="445"
+           data-uid="lnk67" id="link_ExceptionHandler_CourseExceptionHandler">
+            <path codeLine="445"
+                  d="M12592.75,878.7966 C12592.75,878.7966 12592.75,1289.2216 12592.75,1289.2216 C12592.75,1289.2216 12554.2375,1289.2216 12505.275,1289.2216"
+                  fill="none" id="ExceptionHandler-backto-CourseExceptionHandler"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+        </g><!--reverse link ExceptionHandler to ToDoListExceptionHandler-->
+        <g class="link" data-entity-1="ExceptionHandler" data-entity-2="ToDoListExceptionHandler" data-source-line="446"
+           data-uid="lnk68" id="link_ExceptionHandler_ToDoListExceptionHandler">
+            <path codeLine="446" d="M12807.5,878.7966 C12807.5,878.7966 12807.5,1115.9966 12807.5,1229.9591" fill="none"
+                  id="ExceptionHandler-backto-ToDoListExceptionHandler" style="stroke:#000000;stroke-width:1.25;"/>
+        </g><!--reverse link ExceptionHandler to TimerExceptionHandler-->
+        <g class="link" data-entity-1="ExceptionHandler" data-entity-2="TimerExceptionHandler" data-source-line="447"
+           data-uid="lnk69" id="link_ExceptionHandler_TimerExceptionHandler">
+            <path codeLine="447"
+                  d="M13016,878.7966 C13016,878.7966 13016,1289.2216 13016,1289.2216 C13016,1289.2216 13057.7,1289.2216 13109.8125,1289.2216"
+                  fill="none" id="ExceptionHandler-backto-TimerExceptionHandler"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+        </g><!--reverse link ExceptionHandler to CalendarExceptionHandler-->
+        <g class="link" data-entity-1="ExceptionHandler" data-entity-2="CalendarExceptionHandler" data-source-line="448"
+           data-uid="lnk70" id="link_ExceptionHandler_CalendarExceptionHandler">
+            <path codeLine="448"
+                  d="M13022.25,878.7966 C13022.25,878.7966 13022.25,975.4716 13022.25,975.4716 C13022.25,975.4716 13775.5125,975.4716 13775.5125,975.4716 C13775.5125,975.4716 13775.5125,1138.6966 13775.5125,1229.8591"
+                  fill="none" id="ExceptionHandler-backto-CalendarExceptionHandler"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+        </g><!--reverse link ExceptionHandler to UserCredentialExceptionHandler-->
+        <g class="link" data-entity-1="ExceptionHandler" data-entity-2="UserCredentialExceptionHandler"
+           data-source-line="449" data-uid="lnk71" id="link_ExceptionHandler_UserCredentialExceptionHandler">
+            <path codeLine="449"
+                  d="M13028.5,878.7966 C13028.5,878.7966 13028.5,947.9716 13028.5,947.9716 C13028.5,947.9716 14322.5,947.9716 14322.5,947.9716 C14322.5,947.9716 14322.5,1131.7841 14322.5,1229.7966"
+                  fill="none" id="ExceptionHandler-backto-UserCredentialExceptionHandler"
+                  style="stroke:#000000;stroke-width:1.25;"/>
+        </g><!--link AuthController to ApiSuccessResponse-->
+        <g class="link" data-entity-1="AuthController" data-entity-2="ApiSuccessResponse" data-source-line="469"
+           data-uid="lnk75" id="link_AuthController_ApiSuccessResponse">
+            <path codeLine="469"
+                  d="M488.75,418.7091 C488.75,570.1716 488.75,831.7216 488.75,831.7216 C488.75,831.7216 5117.5,831.7216 6339.95,831.7216"
+                  fill="none" id="AuthController-to-ApiSuccessResponse"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="6347.45,831.7216,6336.2,826.7216,6341.2,831.7216,6336.2,836.7216,6347.45,831.7216"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="58.9856"
+                  x="3151.6" y="828.0589">returns
+            </text>
+        </g><!--link ApiSuccessResponse to AuthController--><!--link UserController to ApiSuccessResponse-->
+        <g class="link" data-entity-1="UserController" data-entity-2="ApiSuccessResponse" data-source-line="470"
+           data-uid="lnk76" id="link_UserController_ApiSuccessResponse">
+            <path codeLine="470"
+                  d="M2161.3,418.9216 C2161.3,555.9466 2161.3,777.9716 2161.3,777.9716 C2161.3,777.9716 5345.025,777.9716 6339.9375,777.9716"
+                  fill="none" id="UserController-to-ApiSuccessResponse"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="6347.4375,777.9716,6336.1875,772.9716,6341.1875,777.9716,6336.1875,782.9716,6347.4375,777.9716"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="58.9856"
+                  x="4014.85" y="774.3089">returns
+            </text>
+        </g><!--link CourseController to ApiSuccessResponse-->
+        <g class="link" data-entity-1="CourseController" data-entity-2="ApiSuccessResponse" data-source-line="471"
+           data-uid="lnk77" id="link_CourseController_ApiSuccessResponse">
+            <path codeLine="471"
+                  d="M3671.25,497.8591 C3671.25,607.0341 3671.25,724.2216 3671.25,724.2216 C3671.25,724.2216 5591.3375,724.2216 6340.0625,724.2216"
+                  fill="none" id="CourseController-to-ApiSuccessResponse"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="6347.5625,724.2216,6336.3125,719.2216,6341.3125,724.2216,6336.3125,729.2216,6347.5625,724.2216"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="58.9856"
+                  x="4836.225" y="720.5589">returns
+            </text>
+        </g><!--link ToDoListController to ApiSuccessResponse-->
+        <g class="link" data-entity-1="ToDoListController" data-entity-2="ApiSuccessResponse" data-source-line="472"
+           data-uid="lnk78" id="link_ToDoListController_ApiSuccessResponse">
+            <path codeLine="472" d="M6362.4375,498.3091 C6362.4375,555.6216 6362.4375,610.1591 6362.4375,663.3466"
+                  fill="none" id="ToDoListController-to-ApiSuccessResponse"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="6362.4375,670.8466,6367.4375,659.5966,6362.4375,664.5966,6357.4375,659.5966,6362.4375,670.8466"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="58.9856"
+                  x="6302.4375" y="580.9089">returns
+            </text>
+        </g><!--link TimerController to ApiSuccessResponse-->
+        <g class="link" data-entity-1="TimerController" data-entity-2="ApiSuccessResponse" data-source-line="473"
+           data-uid="lnk79" id="link_TimerController_ApiSuccessResponse">
+            <path codeLine="473"
+                  d="M7301.25,439.9716 C7301.25,547.7966 7301.25,685.4716 7301.25,685.4716 C7301.25,685.4716 7116.95,685.4716 6939.9375,685.4716"
+                  fill="none" id="TimerController-to-ApiSuccessResponse"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="6932.4375,685.4716,6943.6875,690.4716,6938.6875,685.4716,6943.6875,680.4716,6932.4375,685.4716"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="58.9856"
+                  x="7179.5875" y="681.8089">returns
+            </text>
+        </g><!--link DashboardController to ApiSuccessResponse-->
+        <g class="link" data-entity-1="DashboardController" data-entity-2="ApiSuccessResponse" data-source-line="474"
+           data-uid="lnk80" id="link_DashboardController_ApiSuccessResponse">
+            <path codeLine="474"
+                  d="M9076.25,386.8716 C9076.25,458.8716 9076.25,557.9716 9076.25,557.9716 C9076.25,557.9716 6638.4375,557.9716 6638.4375,557.9716 C6638.4375,557.9716 6638.4375,605.2091 6638.4375,663.1716"
+                  fill="none" id="DashboardController-to-ApiSuccessResponse"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="6638.4375,670.6716,6643.4375,659.4216,6638.4375,664.4216,6633.4375,659.4216,6638.4375,670.6716"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="58.9856"
+                  x="7826.5375" y="554.3089">returns
+            </text>
+        </g><!--link CalendarController to ApiSuccessResponse-->
+        <g class="link" data-entity-1="CalendarController" data-entity-2="ApiSuccessResponse" data-source-line="475"
+           data-uid="lnk81" id="link_CalendarController_ApiSuccessResponse">
+            <path codeLine="475"
+                  d="M10593,397.6841 C10593,476.7341 10593,582.9716 10593,582.9716 C10593,582.9716 6785.2625,582.9716 6785.2625,582.9716 C6785.2625,582.9716 6785.2625,616.4716 6785.2625,663.2466"
+                  fill="none" id="CalendarController-to-ApiSuccessResponse"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="6785.2625,670.7466,6790.2625,659.4966,6785.2625,664.4966,6780.2625,659.4966,6785.2625,670.7466"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="58.9856"
+                  x="8677.8875" y="579.3089">returns
+            </text>
+        </g><!--link GlobalExceptionHandler to ErrorResponseDTO-->
+        <g class="link" data-entity-1="GlobalExceptionHandler" data-entity-2="ErrorResponseDTO" data-source-line="477"
+           data-uid="lnk82" id="link_GlobalExceptionHandler_ErrorResponseDTO">
+            <path codeLine="477"
+                  d="M12288.9875,439.9716 C12288.9875,535.1216 12288.9875,649.2216 12288.9875,649.2216 C12288.9875,649.2216 8983.95,649.2216 8024.8,649.2216"
+                  fill="none" id="GlobalExceptionHandler-to-ErrorResponseDTO"
+                  style="stroke:#000000;stroke-width:1.25;stroke-dasharray:8.75,8.75;"/>
+            <polygon fill="#000000"
+                     points="8017.3,649.2216,8028.55,654.2216,8023.55,649.2216,8028.55,644.2216,8017.3,649.2216"
+                     style="stroke:#000000;stroke-width:1.25;"/>
+            <text fill="#000000" font-family="Verdana" font-size="16.25" lengthAdjust="spacing" textLength="58.9856"
+                  x="10197.775" y="645.5589">returns
+            </text>
+        </g><!--link AuthController to UserController--><!--link UserController to CourseController--><!--link CourseController to ToDoListController--><!--link ToDoListController to TimerController--><!--link TimerController to DashboardController--><!--link DashboardController to GlobalExceptionHandler--><!--link GlobalExceptionHandler to ExceptionHandler--><!--SRC=[rLpTSjkw4RxtKw3EJ49FBCbEpa_gyN4hIugj6TdII79FEpszW4bOuZ55iY2KH7LzsmVe8_P9kW1142H1KfILqyONIGpiBXQBtMyN893ViILP4HHwsFKFeaVN3p75A-I4Bdf_SgArUAvFs2OaAA1i6MWT2ngimw6_9DHbsBS9UgTr-e538XAY3xeeYlr7sNZ0NEOHD6DhX_ZCsw0MwWK-eu7d4Of6U0D_MjF1R8wwa-7HBx_urkNQzHnedM362FNHMzGd8V61tTwWeVyhiPaRyEOhBxZ77XfyiKaecgwnxy0i5aS71s_GJmr-WFpoRZZg3wPeqftF1zDRK7DAeZ3m8u9-fZWC2OsQ2Wsn_OWN11tcPzJYSotAFqJdvrEO7VON7hcuGAz6xcB9BhqrGKy727vi3qSHEko6xcnjsoIA4X7dyuj3X2DKx96S_AU57Cpm6PfhBIiW1HNFO7qe64xhYHXcwwW7gtk6N9zfFSm5BePNuHaQ1JRs-fYHERIb92trprS6bQpxs1ndXZvfAPZFaPBn5ZrnPLpx6KbEwwYQLsDT40RwOSunppRVn5FdFRd9Y-wPcZ-dq2qWkkU94NXlqGpF1zKBbkfQicw9opnffimltwlIvNkLNpxq4te7mPxsboqY46P-R_l1P-l8jBHlXJwML6hx5P4wMpdTjnUGJitApN9x6MhwLfaXjfSbdDBiaWbXnXq6b0OqeUZFnvaGjSLS2j6uIvo6c2qD3FNXYnp2iEj5GE16x3oMSA7rFxZ4SyGqWEO6XvBa61L8TIJ8ppl5WNoFD7CT19ImPGCrYM1JZByC0W3DbsMiDV2GObDiQK5bihKW-fYQcnEM6RpIoOfuyh_qjJgK-IeU-5PCsD9dlPKJbGDMFMybLjMpSxDQkcstujeAtEh5OCU9tTEALwEH3je2MNMBjPL0XR9vKjtt3VLFgtLHaLxFa4q962KgOK_escsJ560NQiNS1LpdGvV5ONRWCYe-R46i6bIm-W4ZYF924GKF1XsL2ND5w9dgk28-LFOseiciFiVrADBJt5r477I_GTtH2C8egT-b3c8ANy3DF9AABQhIFWSf5APmeK1SKVEVjYWerZ5DhYi9maCkGjhEESmHQT7sxkGqroaTI3J2Ra8OpcH2etzL6X3SU6spDGKB4SwiB9bIhCCGTbLH71OjZtmYNamR5ImSxshKfaRiQMGaABMVTzZWTE_cruFR-R3NdG_7jwWtlfrFnwFHOBhpjgQxXgsb3raPYzqNx6dCEvWhIeYVsS9mJcqNU7x-Hp0uIrk0LKzK6CXdX7voRS3ExAYoEPTpgAAUQx-Paq9M5wj-hEEA8KegvSXT-7UXHSdVrp1F05Bn-pJ-bJlxcTeD3c0ujZatr99S6SqlB_GgmGiMhf_A7_5Vzoi-MBECVFYzuG0IxJF5IWwzCakXniyvXzuk582K4e9awx23GxV35n208GKctma3IBXH6h2JyMoE5767hyuwBEiLfgte14EaWyM6WRGVX172deUmpTnF9FOOJGFTWzgSkkjvNK4gl2dw650ET9OsZzEJTsWqxhqS2EvcWocwwTvshmOt00ZxG081oZVOXrzM42_bKF0Nudd1vmmMSDu6MC3JWmgzkwWckBF2hJBcah25sfiJNMw6ZkKwm74tx6_bwacUkp096wnuJKLMsP9gDw7h478c4QwIA7YCL9ZUgTwNXAhSx1EFv4RQKzHdrsZ7gESh6zM4_TL0XguWxZovpdDPdrYTpfFuAoMQt9KBw0z6W_cWqAtw_uGzruaJPPWl8Dm7b61hsuq6gv1jhACZpUq5P2mfH0utbgeDh7QxdRgkDjZlJ_S35RtntNGss3DOz88rXIgp3Yxm9txcIpDO4RCsG0jRCAYGx-c_ccC-FuHL9SA86sya3UfDx_hwxbCKhN5VcafxMcl3A8sP33WJTpI7hLg1FSC6-iLYeyiDzsfGTYt-Qg2mE1tGn1UXKPgx51ptQFWO8NC3xWQt6M-Qu-WHZM539j0ZokxGUUSya8F6hZeiphKR4-uqJSveJZkyPqA31MnteiBO33g7PLRNEVUcr0hJHzxU2_X6b95AbVPcWEOJtzk4OuUhLM9FQJeFZ3icwbZJJAgMS5bPg4ksOhwM7INPFEdbcDLvudzM477uwJp586H8-iQHzBIV8L0Kjs02sDcBADvcYbpDU36VEtmPemfDSfITftZTdpkX3AvTU6qPFplmLfkbb4knlVlmWHSkaBX7c2x0SDfPqykhcVcuFnuDmTpxhMVcWHFmHBJL1gWNKEnbQffvq1Vi3QeQ9bdI8uXiWxcoAGvarGaggM_KZ8qLJY8ZN-CaxGtnBs4pr0z9L_DAPmkXBorBCaCOSaTYfTBIPC_sajaYF-nlKw288Pbqcv82HMgsGuhKMMkhWg8MZPFbDkCD_TzgHAqMgHwfrCFsR7AjBjd3r0rd4H2btGNajmN_2D0dc5_w8L5XiErZTUX7WDFiegh-ASBdZXKGLzFZ0AFNG0fIAqi4nLeiObHNIIMKzjUKEIM2z8oU8sbUwcW2qaKhBNUggBSfMxRZT_qNIgWprHQSfjNKsPp4r_MIwLIMJ3DtvNgOGdLWhjLVLZiDRmRJlLHB_7nxgr9fnWZn2hVV17-JMgdXvw2SVAlvjnw6gRZ_GRNlFQgjASnodZo-yky5XG5aqpxao_ih52eWaSaSgp5ennMG4cwIFbkl85TkciiM5OKcmLZ3CUnncey1ZVDGuma4nPmZ1XMrfd2APafd3MtEC5dNspMzYANR-WjOJDuHNblL7OG6b8exkN6hiCn0rOdYjTkIcl7rBALzaikXPQBJ7xxRpmbulpkxlXntfttq6lMwey5jlwl3u6nd7EpZQ7aVOEfmmTW39G6wJLWu8TXUJjOF3naOLEmDeD19U1ISzNCjPaGpZ6NLooh_ffPIIWXelC7AIoW4blnS8EtQv8E1P4dF-xCD9HyD2WDPTOBApPCG3XbPHTQ6O2ekZ1sZ5KXVod_h9eil9FmZy9iToyU7vzfW9gZEA1FlYAtis2KAxbqb8sGQN7D7s5GERK9EmpT4HP-hfnNbTp-cTHcKbSMpB06qQqeGbdiP_ctm0TlO8RMNb8eEj-jnh1IqxQVJXBxZSeVu0r_yrsBPNyS6U9siUmLhnc15GKf2UfKisUn5I5N0w846gpCjSkKfSdOFqKetLd67wldmVZy9Ol3dtc0YRbHTTs_xe-7j5GnwDHfVTaSxvuRIXotcGddY-e-Pv62-GbR4lgx3aIY7WEgcjHSi5lnszaZyROQhfH1zYI6erKTfykKCPLgqSuUVoRrqmo8Uv2_UNHJ6IR-XPqUx8MmPE5swMFCTnMt01E7-nxzcB9Htnc6GARWYllU8KC7SjNyLugd24F9A8N7Ky4by5oY-WXPk584xJlXZhoXUWhY59pVOGalHeXysr7J_6kHSNEYmlr4q7s_nBAZcmvQMMRHszTsOg2fkTHf0EmxCz0CPPlOI88zVlYM9Y0WjX4nler_2LOZX4egflToa47dQpeOb-i-__etwmGgxlYOrFLXeryML8dtVhlF_D2ksj_HLnV5zUrldKYm_jDMbvknilpyvYQ_TfYQR4hQcOCmelSHRUWFuiykMuX71SV8eu5YxuNyihkiVP-xuYSltnybpXcFzMhosMVdnv2lcelxufZkyHRF9e3VyEEpjlc69FIMNb4pF5c6vs6OQgCU7-1wCYssMF4t9voNzZTjJGlmCfRYai9HtQZ4ECNSV11x1lfdR2QgPFmMkKzmnP2_yLcZQA4- -scKkkqqWSp_isr4xBjw-GSMJhmBVekhyrEHRz1MvZ_X6exC7AOP3ZA50_t-UG74tySzMgmOlAnXDE5L1RiQ72eQokAnYCSL3bKubVbWpw_BrDxv6AgiOvsGLUh0bbaLQyLKIh_Maspq45DQRf-zM51BRVN1jHQQMNpWQhs6rLqltWXygJt64mOl0iynPMU9ru2-z9R4VDMdyVvBGpnw3b1GyMIEKjP7s5H4CS5PNC4EEN_FQLsu78dGzdq_Kmwj8gyAWS2QIYaO8KoBC8IUB0j_RxEEUT78WZAQ3aNXWDRiUJXgV3kVUHPM-EgHnqNgGUpjHIr-uFrtBORYTLC-J-qHNos0wpAwVI_5mjvRdeEHafEITfM9xm_-Z4lwmPycFnGvCpqp_kdGTYEk_ES5ddpyvpJvboYridZht12Ath7dgmjVTmhBcEGnt5mmBM-3AVO_AhskUtdGOQrhQF5z9g9UiLPwxmFTV]-->
+    </g>
+</svg>
