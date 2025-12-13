@@ -1,0 +1,382 @@
+@startuml Service Layer - Facade Pattern and Business Logic
+!theme plain
+skinparam dpi 300
+skinparam linetype ortho
+skinparam groupInheritance 2
+skinparam nodesep 80
+skinparam ranksep 80
+
+title Studently - Service Layer (Facade Pattern)\n(Business Logic Orchestration with Transaction Management)
+
+' ============================================
+' FACADE PATTERN - User Service
+' ============================================
+package "Facade Pattern - User Management" <<Rectangle>> #LightBlue {
+    interface UserService <<interface>> {
+        + createUserWithoutCredential(name: String, email: String): User
+        + getUserById(id: UUID): UserDTO
+        + getUserByEmail(email: String): UserDTO
+        + updateUser(id: UUID, name: String, email: String): void
+        + deleteUser(id: UUID): void
+    }
+
+    class UserServiceImpl <<@Service>> {
+        - userRepository: UserRepository
+        - validationService: UserValidationService
+        - sanitizationService: DataSanitizationService
+        - logger: Logger
+        --
+        + createUserWithoutCredential(...): User
+        + getUserById(id: UUID): UserDTO
+        + getUserByEmail(email: String): UserDTO
+        + updateUser(...): void
+        + deleteUser(id: UUID): void
+    }
+
+    interface UserCredentialService <<interface>> {
+        + createCredential(userId: UUID, password: String): UserCredential
+        + verifyPassword(userId: UUID, password: String): boolean
+        + updatePassword(userId: UUID, oldPassword: String, newPassword: String): void
+        + deleteCredential(userId: UUID): void
+    }
+
+    class UserCredentialServiceImpl <<@Service>> {
+        - credentialRepository: UserCredentialRepository
+        - hashingStrategy: PasswordHashingStrategy
+        - validationService: UserValidationService
+        - logger: Logger
+        --
+        + createCredential(userId: UUID, password: String): UserCredential
+        + verifyPassword(userId: UUID, password: String): boolean
+        + updatePassword(...): void
+        + deleteCredential(userId: UUID): void
+    }
+
+    UserService <|.. UserServiceImpl
+    UserCredentialService <|.. UserCredentialServiceImpl
+
+    note right of UserServiceImpl
+        @Transactional
+        Orchestrates:
+        - Sanitization
+        - Validation
+        - Repository operations
+        - DTO conversion
+    end note
+
+    note right of UserCredentialServiceImpl
+        @Transactional
+        Uses Strategy Pattern for
+        password hashing (SHA512)
+    end note
+}
+
+' ============================================
+' FACADE PATTERN - Authentication Service
+' ============================================
+package "Facade Pattern - Authentication" <<Rectangle>> #LightGreen {
+    interface AuthenticationService <<interface>> {
+        + signUp(request: SignUpRequestDTO): UserDTO
+        + login(request: LoginRequestDTO): UserDTO
+        + logout(userId: UUID): void
+    }
+
+    class AuthenticationServiceImpl <<@Service>> {
+        - userService: UserService
+        - credentialService: UserCredentialService
+        - requestSanitizer: SignUpRequestSanitizer
+        - loginSanitizer: LoginRequestSanitizer
+        - validationService: UserValidationService
+        - logger: Logger
+        --
+        + signUp(request: SignUpRequestDTO): UserDTO
+        + login(request: LoginRequestDTO): UserDTO
+        + logout(userId: UUID): void
+    }
+
+    AuthenticationService <|.. AuthenticationServiceImpl
+
+    AuthenticationServiceImpl o--> UserService : delegates to
+    AuthenticationServiceImpl o--> UserCredentialService : delegates to
+
+    note right of AuthenticationServiceImpl
+        @Transactional
+        Facade orchestrating User + Credential
+        creation in single transaction
+
+        Flow:
+        1. Sanitize request
+        2. Validate input
+        3. Create User
+        4. Create Credential
+        5. Return UserDTO
+    end note
+}
+
+' ============================================
+' STRATEGY PATTERN - Password Hashing
+' ============================================
+package "Strategy Pattern - Password Hashing" <<Rectangle>> #Lavender {
+    interface PasswordHashingStrategy <<interface>> {
+        + hash(password: String, salt: String): String
+        + verify(password: String, salt: String, hash: String): boolean
+        + generateSalt(): String
+    }
+
+    class SHA512HashingStrategy {
+        + hash(password: String, salt: String): String
+        + verify(password: String, salt: String, hash: String): boolean
+        + generateSalt(): String
+    }
+
+    PasswordHashingStrategy <|.. SHA512HashingStrategy
+    UserCredentialServiceImpl o--> PasswordHashingStrategy : uses
+
+    note right of PasswordHashingStrategy
+        Strategy Pattern:
+        Allows swapping hashing algorithms
+        Currently: SHA512
+        Future: BCrypt, Argon2, etc.
+    end note
+}
+
+' ============================================
+' FACADE PATTERN - Course Service
+' ============================================
+package "Facade Pattern - Course Management" <<Rectangle>> #LightYellow {
+    interface CourseService <<interface>> {
+        + createCourse(userId: UUID, code: String, name: String): CourseDTO
+        + getCourseById(id: UUID): CourseDTO
+        + getCoursesByUserId(userId: UUID): List<CourseDTO>
+        + updateCourse(id: UUID, code: String, name: String): void
+        + deleteCourse(id: UUID): void
+        --
+        + addTaskToCourse(courseId: UUID, name: String, ...): CourseTaskDTO
+        + updateTaskProgress(courseId: UUID, taskId: UUID, progress: int): void
+        + markTaskComplete(courseId: UUID, taskId: UUID): void
+        + deleteTask(courseId: UUID, taskId: UUID): void
+    }
+
+    class CourseServiceImpl <<@Service>> {
+        - courseRepository: CourseRepository
+        - validationService: CourseValidationService
+        - courseSanitizer: CreateCourseRequestSanitizer
+        - taskSanitizer: CourseTaskSanitizer
+        - logger: Logger
+        --
+        + createCourse(...): CourseDTO
+        + getCourseById(id: UUID): CourseDTO
+        + getCoursesByUserId(userId: UUID): List<CourseDTO>
+        + updateCourse(...): void
+        + deleteCourse(id: UUID): void
+        + addTaskToCourse(...): CourseTaskDTO
+        + updateTaskProgress(...): void
+        + markTaskComplete(courseId: UUID, taskId: UUID): void
+        + deleteTask(courseId: UUID, taskId: UUID): void
+        --
+        - findCourseOrThrow(courseId: UUID): Course
+        - findTaskOrThrow(course: Course, taskId: UUID): CourseTask
+        - sanitizeAndValidateCourseCode(code: String): String
+        - sanitizeAndValidateCourseName(name: String): String
+    }
+
+    CourseService <|.. CourseServiceImpl
+
+    note right of CourseServiceImpl
+        @Transactional
+        413 LOC - Complex service
+
+        Responsibilities:
+        - Course CRUD operations
+        - Task management
+        - Progress tracking
+        - Validation pipeline
+
+        Helper methods for DRY:
+        - findCourseOrThrow
+        - sanitizeAndValidate*
+    end note
+}
+
+' ============================================
+' FACADE PATTERN - TodoList Service
+' ============================================
+package "Facade Pattern - TodoList Management" <<Rectangle>> #LightCoral {
+    interface ToDoListService <<interface>> {
+        + createToDoList(name: String, userId: UUID): ToDoListDTO
+        + getToDoListById(id: UUID): ToDoListDTO
+        + getToDoListsByUserId(userId: UUID): List<ToDoListDTO>
+        + updateToDoList(id: UUID, name: String): void
+        + deleteToDoList(id: UUID): void
+        --
+        + addTaskToList(listId: UUID, description: String, deadline: Instant): ToDoListTaskDTO
+        + markTaskComplete(listId: UUID, taskId: UUID): void
+        + markTaskInComplete(listId: UUID, taskId: UUID): void
+        + updateTask(listId: UUID, taskId: UUID, ...): void
+        + deleteTask(listId: UUID, taskId: UUID): void
+    }
+
+    class ToDoListServiceImpl <<@Service>> {
+        - todoListRepository: ToDoListRepository
+        - validationService: ToDoListValidationService
+        - listSanitizer: ToDoListSanitizer
+        - taskSanitizer: ToDoListTaskSanitizer
+        - logger: Logger
+        --
+        + createToDoList(...): ToDoListDTO
+        + getToDoListById(id: UUID): ToDoListDTO
+        + getToDoListsByUserId(userId: UUID): List<ToDoListDTO>
+        + updateToDoList(...): void
+        + deleteToDoList(id: UUID): void
+        + addTaskToList(...): ToDoListTaskDTO
+        + markTaskComplete(listId: UUID, taskId: UUID): void
+        + markTaskInComplete(listId: UUID, taskId: UUID): void
+        + updateTask(...): void
+        + deleteTask(listId: UUID, taskId: UUID): void
+        --
+        - findToDoListOrThrow(listId: UUID): ToDoList
+        - findTaskOrThrow(list: ToDoList, taskId: UUID): ToDoListTask
+    }
+
+    ToDoListService <|.. ToDoListServiceImpl
+
+    note right of ToDoListServiceImpl
+        @Transactional
+        401 LOC - Similar to CourseService
+
+        Pattern duplication:
+        - Same structure as CourseServiceImpl
+        - Opportunity for BaseEntityService
+          abstraction (not yet implemented)
+    end note
+}
+
+' ============================================
+' FACADE PATTERN - Timer Service
+' ============================================
+package "Facade Pattern - Timer Management" <<Rectangle>> #LightSteelBlue {
+    interface TimerService <<interface>> {
+        + startTimer(userId: UUID, courseTaskId: UUID): TimerDTO
+        + stopTimer(timerId: UUID, userId: UUID): TimerDTO
+        + getTimersByTaskId(courseTaskId: UUID): List<TimerDTO>
+        + getTimerSummaryByTaskId(courseTaskId: UUID): TaskTimerSummaryDTO
+        + getTotalTimeForTask(courseTaskId: UUID): long
+        + stopAllActiveTimersForUser(userId: UUID): void
+        + getTimerById(timerId: UUID): TimerDTO
+    }
+
+    class TimerServiceImpl <<@Service>> {
+        - timerRepository: TimerRepository
+        - courseRepository: CourseRepository
+        - validationService: TimerValidationService
+        - logger: Logger
+        --
+        + startTimer(...): TimerDTO
+        + stopTimer(...): TimerDTO
+        + getTimersByTaskId(courseTaskId: UUID): List<TimerDTO>
+        + getTimerSummaryByTaskId(courseTaskId: UUID): TaskTimerSummaryDTO
+        + getTotalTimeForTask(courseTaskId: UUID): long
+        + stopAllActiveTimersForUser(userId: UUID): void
+        + getTimerById(timerId: UUID): TimerDTO
+    }
+
+    TimerService <|.. TimerServiceImpl
+
+    TimerServiceImpl o--> CourseService : validates task exists
+
+    note right of TimerServiceImpl
+        @Transactional
+
+        Business Rules:
+        - Only one active timer per user+task
+        - Validates task exists before start
+        - Verifies ownership before stop
+        - Auto-stop on logout
+
+        Uses entity method:
+        timer.stop() for business logic
+    end note
+}
+
+' ============================================
+' FACADE PATTERN - Dashboard Service
+' ============================================
+package "Facade Pattern - Dashboard Aggregation" <<Rectangle>> #PeachPuff {
+    interface DashboardService <<interface>> {
+        + getDashboardSummary(userId: UUID): DashboardSummaryDTO
+        + getUpcomingTasks(userId: UUID): List<UpcomingTaskDTO>
+        + getNeglectedCourses(userId: UUID): List<CourseDTO>
+    }
+
+    class DashboardServiceImpl <<@Service>> {
+        - courseService: CourseService
+        - timerService: TimerService
+        - todoListService: ToDoListService
+        - logger: Logger
+        --
+        + getDashboardSummary(userId: UUID): DashboardSummaryDTO
+        + getUpcomingTasks(userId: UUID): List<UpcomingTaskDTO>
+        + getNeglectedCourses(userId: UUID): List<CourseDTO>
+    }
+
+    DashboardService <|.. DashboardServiceImpl
+
+    DashboardServiceImpl o--> CourseService : aggregates from
+    DashboardServiceImpl o--> TimerService : aggregates from
+    DashboardServiceImpl o--> ToDoListService : aggregates from
+
+    note right of DashboardServiceImpl
+        @Transactional(readOnly = true)
+
+        Facade Pattern:
+        Aggregates data from multiple services
+        - Courses with progress
+        - Active timers
+        - TodoList tasks
+        - Upcoming deadlines
+
+        No direct repository access
+    end note
+}
+
+' ============================================
+' FACADE PATTERN - Calendar Service
+' ============================================
+package "Facade Pattern - Calendar View" <<Rectangle>> #LightPink {
+    interface CalendarService <<interface>> {
+        + getCalendarItemsForMonth(userId: UUID, year: int, month: int): List<CalendarItemDTO>
+    }
+
+    class CalendarServiceImpl <<@Service>> {
+        - courseService: CourseService
+        - todoListService: ToDoListService
+        - logger: Logger
+        --
+        + getCalendarItemsForMonth(...): List<CalendarItemDTO>
+    }
+
+    CalendarService <|.. CalendarServiceImpl
+
+    CalendarServiceImpl o--> CourseService : gets tasks from
+    CalendarServiceImpl o--> ToDoListService : gets tasks from
+
+    note right of CalendarServiceImpl
+        @Transactional(readOnly = true)
+
+        Aggregates deadlines from:
+        - Course tasks
+        - TodoList tasks
+
+        Filters by month/year
+        Returns unified CalendarItemDTO
+    end note
+}
+
+' Cross-service dependencies
+AuthenticationServiceImpl -[hidden]down-> CourseServiceImpl
+CourseServiceImpl -[hidden]down-> ToDoListServiceImpl
+ToDoListServiceImpl -[hidden]down-> TimerServiceImpl
+TimerServiceImpl -[hidden]down-> DashboardServiceImpl
+DashboardServiceImpl -[hidden]down-> CalendarServiceImpl
+
+@enduml

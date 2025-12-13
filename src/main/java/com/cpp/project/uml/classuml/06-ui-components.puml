@@ -1,0 +1,402 @@
+@startuml UI Components - Reusable Terminal Components
+!theme plain
+skinparam dpi 300
+skinparam linetype ortho
+skinparam groupInheritance 2
+skinparam nodesep 70
+skinparam ranksep 70
+
+title Studently - UI Component Layer\n(Reusable Lanterna Components with Strategy Pattern for Rendering)
+
+' ============================================
+' STRATEGY PATTERN - Rendering Strategies
+' ============================================
+package "Strategy Pattern - Rendering Strategies" <<Rectangle>> #LightBlue {
+    interface RenderStrategy <<interface>> {
+        + render(graphics: TextGraphics, x: int, y: int): void
+    }
+
+    class TitleRenderingStrategy {
+        - title: String
+        - color: TextColor
+        --
+        + render(graphics: TextGraphics, x: int, y: int): void
+    }
+
+    class TableRenderingStrategy {
+        - headers: List<String>
+        - rows: List<List<String>>
+        --
+        + render(graphics: TextGraphics, x: int, y: int): void
+    }
+
+    class ListRenderingStrategy {
+        - items: List<String>
+        - selectedIndex: int
+        --
+        + render(graphics: TextGraphics, x: int, y: int): void
+    }
+
+    RenderStrategy <|.. TitleRenderingStrategy
+    RenderStrategy <|.. TableRenderingStrategy
+    RenderStrategy <|.. ListRenderingStrategy
+
+    note right of RenderStrategy
+        Strategy Pattern:
+        Different rendering algorithms
+        for different UI elements
+
+        Allows swapping rendering
+        without changing components
+    end note
+}
+
+' ============================================
+' REUSABLE FORM COMPONENTS
+' ============================================
+package "Form Components" <<Rectangle>> #LightGreen {
+    class FormField {
+        - label: String
+        - value: String
+        - focused: boolean
+        - maxLength: int
+        --
+        + FormField(label: String)
+        + render(graphics: TextGraphics, x: int, y: int): void
+        + handleInput(keyStroke: KeyStroke): void
+        + getValue(): String
+        + setValue(value: String): void
+        + setFocused(focused: boolean): void
+        + clear(): void
+    }
+
+    class DateInput {
+        - label: String
+        - yearField: FormField
+        - monthField: FormField
+        - dayField: FormField
+        - hourField: FormField
+        - minuteField: FormField
+        - currentFieldIndex: int
+        - errorMessage: String
+        --
+        + DateInput(label: String)
+        + render(graphics: TextGraphics, x: int, y: int): void
+        + handleInput(keyStroke: KeyStroke): void
+        + getDate(): Instant
+        + setDate(date: Instant): void
+        + isEmpty(): boolean
+        + getErrorMessage(): String
+        - validateDate(): boolean
+        - focusNextField(): void
+        - focusPreviousField(): void
+    }
+
+    class Form {
+        - fields: List<FormField>
+        - currentFieldIndex: int
+        - focused: boolean
+        --
+        + Form()
+        + addField(field: FormField): Form
+        + render(graphics: TextGraphics, x: int, y: int): void
+        + handleInput(keyStroke: KeyStroke): void
+        + setFocused(focused: boolean): void
+        + focusNextField(): void
+        + focusPreviousField(): void
+        + getAllValues(): Map<String, String>
+        + clear(): void
+    }
+
+    class ProgressSlider {
+        - label: String
+        - value: int
+        - minValue: int
+        - maxValue: int
+        - step: int
+        --
+        + ProgressSlider(label: String, initialValue: int)
+        + render(graphics: TextGraphics, x: int, y: int): void
+        + handleInput(keyStroke: KeyStroke): void
+        + getValue(): int
+        + setValue(value: int): void
+        + increment(): void
+        + decrement(): void
+        - renderProgressBar(graphics: TextGraphics, x: int, y: int): void
+    }
+
+    Form o--> FormField : contains
+    DateInput *--> FormField : owns 5 fields
+
+    note right of Form
+        Composite Pattern:
+        Form contains multiple FormFields
+        Delegates input to focused field
+        Tab/Shift+Tab for navigation
+    end note
+
+    note right of DateInput
+        Complex component:
+        - 5 fields: YYYY MM DD HH MM
+        - Tab navigation between fields
+        - Validates on getDate()
+        - Returns Instant or null
+        - 206 LOC
+    end note
+}
+
+' ============================================
+' SELECTION AND DISPLAY COMPONENTS
+' ============================================
+package "Selection & Display Components" <<Rectangle>> #LightYellow {
+    class "SelectionList<T>" as SelectionList {
+        - title: String
+        - items: List<T>
+        - selectedIndex: int
+        - displayFunction: Function<T, String>
+        - focused: boolean
+        --
+        + SelectionList(title: String, displayFunction: Function<T, String>)
+        + render(graphics: TextGraphics, x: int, y: int): void
+        + handleInput(keyStroke: KeyStroke): void
+        + setItems(items: List<T>): void
+        + getSelectedItem(): T
+        + getSelectedIndex(): int
+        + isEmpty(): boolean
+        + moveUp(): void
+        + moveDown(): void
+        + setFocused(focused: boolean): void
+    }
+
+    class MessagePanel {
+        - message: String
+        - messageType: MessageType
+        - visible: boolean
+        --
+        + MessagePanel()
+        + render(graphics: TextGraphics, x: int, y: int): void
+        + setSuccess(message: String): void
+        + setError(message: String): void
+        + setInfo(message: String): void
+        + setWarning(message: String): void
+        + clear(): void
+        + isVisible(): boolean
+    }
+
+    enum MessageType {
+        SUCCESS
+        ERROR
+        INFO
+        WARNING
+    }
+
+    class TimerSummaryPanel {
+        - summary: TaskTimerSummaryDTO
+        --
+        + TimerSummaryPanel(summary: TaskTimerSummaryDTO)
+        + render(graphics: TextGraphics, x: int, y: int): void
+        + setSummary(summary: TaskTimerSummaryDTO): void
+        - formatDuration(millis: long): String
+        - renderSessionList(graphics: TextGraphics, x: int, y: int): void
+    }
+
+    MessagePanel --> MessageType : uses
+
+    note right of SelectionList
+        Generic component <T>
+        Uses Function<T, String> to
+        convert items to display strings
+
+        Example:
+        new SelectionList<>("Courses",
+            course -> course.getName())
+
+        Handles:
+        - Up/Down arrow navigation
+        - Enter to select
+        - Visual highlighting
+    end note
+
+    note right of MessagePanel
+        Singleton-like behavior:
+        Only one message shown at a time
+        Auto-colored by type:
+        - SUCCESS: Green
+        - ERROR: Red
+        - WARNING: Yellow
+        - INFO: Cyan
+    end note
+}
+
+' ============================================
+' CALENDAR & DASHBOARD WIDGETS
+' ============================================
+package "Dashboard & Calendar Widgets" <<Rectangle>> #Lavender {
+    class CalendarGridRenderer {
+        - year: int
+        - month: int
+        - calendarItems: List<CalendarItemDTO>
+        --
+        + CalendarGridRenderer(year: int, month: int, items: List<CalendarItemDTO>)
+        + render(graphics: TextGraphics, x: int, y: int): void
+        - renderMonthHeader(graphics: TextGraphics, x: int, y: int): void
+        - renderDayHeaders(graphics: TextGraphics, x: int, y: int): void
+        - renderDays(graphics: TextGraphics, x: int, y: int): void
+        - highlightDaysWithTasks(graphics: TextGraphics, x: int, y: int): void
+    }
+
+    class TaskListRenderer {
+        - items: List<CalendarItemDTO>
+        - dateFormat: DateTimeFormatter
+        --
+        + TaskListRenderer(items: List<CalendarItemDTO>, format: DateTimeFormatter)
+        + render(graphics: TextGraphics, x: int, y: int): void
+        - renderTaskItem(graphics: TextGraphics, item: CalendarItemDTO, x: int, y: int): void
+    }
+
+    class ImpendingDoomWidget {
+        - upcomingTasks: List<UpcomingTaskDTO>
+        --
+        + ImpendingDoomWidget(tasks: List<UpcomingTaskDTO>)
+        + render(graphics: TextGraphics, x: int, y: int): void
+        - calculateUrgency(task: UpcomingTaskDTO): int
+        - getUrgencyColor(urgency: int): TextColor
+    }
+
+    class NeglectDetectorWidget {
+        - neglectedCourses: List<CourseDTO>
+        --
+        + NeglectDetectorWidget(courses: List<CourseDTO>)
+        + render(graphics: TextGraphics, x: int, y: int): void
+        - calculateNeglectScore(course: CourseDTO): int
+    }
+
+    note right of ImpendingDoomWidget
+        Dashboard widget:
+        Shows tasks by deadline urgency
+        Color-coded:
+        - Red: < 24 hours
+        - Yellow: 24-72 hours
+        - Cyan: 3-7 days
+    end note
+
+    note right of NeglectDetectorWidget
+        Dashboard widget:
+        Shows courses with:
+        - No timer activity
+        - Low progress
+        - Upcoming deadlines
+        Encourages user engagement
+    end note
+}
+
+' ============================================
+' UTILITY CLASSES - UI Helpers
+' ============================================
+package "Utility Classes - UI Helpers" <<Rectangle>> #LightCoral {
+    class UILayoutConstants {
+        + {static} LEFT_MARGIN: int = 3
+        + {static} FORM_LEFT: int = 5
+        + {static} TITLE_ROW: int = 1
+        + {static} INSTRUCTIONS_ROW: int = 3
+        + {static} CONTENT_START_ROW: int = 5
+        + {static} FORM_START_ROW: int = 5
+        + {static} INFO_SECTION_ROW: int = 6
+        + {static} LIST_ROW: int = 8
+        + {static} NOTE_ROW: int = 18
+        + {static} BOTTOM_MARGIN: int = 2
+        --
+        + {static} messageRow(size: TerminalSize): int
+        + {static} centerX(size: TerminalSize, textLength: int): int
+    }
+
+    class DateFormatUtils {
+        + {static} DEADLINE_FORMAT: DateTimeFormatter
+        + {static} TIMESTAMP_FORMAT: DateTimeFormatter
+        + {static} DATE_ONLY_FORMAT: DateTimeFormatter
+        + {static} TIME_ONLY_FORMAT: DateTimeFormatter
+        + {static} LOCAL_DATETIME_FORMAT: DateTimeFormatter
+        + {static} LOCAL_DATE_ONLY_FORMAT: DateTimeFormatter
+        --
+        + {static} formatDeadline(deadline: Instant): String
+        + {static} formatDeadline(deadline: LocalDateTime): String
+        + {static} formatTimestamp(timestamp: Instant): String
+        + {static} formatDateOnly(instant: Instant): String
+        + {static} formatTimeOnly(instant: Instant): String
+        + {static} formatTimestampWithLabel(label: String, timestamp: Instant): String
+    }
+
+    class FormValidator {
+        - messagePanel: MessagePanel
+        --
+        + FormValidator(messagePanel: MessagePanel)
+        + validateRequired(fieldName: String, value: String): boolean
+        + validateDateInput(dateInput: DateInput, fieldName: String): boolean
+        + validateOptionalDateInput(dateInput: DateInput): boolean
+        + validateNotEmpty(fieldName: String, value: String): boolean
+        + validateMinLength(fieldName: String, value: String, minLength: int): boolean
+        + validateMaxLength(fieldName: String, value: String, maxLength: int): boolean
+        + clearErrors(): void
+    }
+
+    class ComponentFactory {
+        + {static} createTextField(label: String): FormField
+        + {static} createDateInput(label: String): DateInput
+        + {static} createProgressSlider(label: String, initialValue: int): ProgressSlider
+        + {static} createSelectionList(title: String): SelectionList
+        + {static} createMessagePanel(): MessagePanel
+    }
+
+    FormValidator o--> MessagePanel : uses
+    ComponentFactory ..> FormField : creates
+    ComponentFactory ..> DateInput : creates
+    ComponentFactory ..> ProgressSlider : creates
+    ComponentFactory ..> SelectionList : creates
+    ComponentFactory ..> MessagePanel : creates
+
+    note right of UILayoutConstants
+        Facade Pattern:
+        Centralizes all layout constants
+        Eliminates magic numbers
+        Used by all 28 ScreenStates
+        211 LOC of constants
+    end note
+
+    note right of DateFormatUtils
+        Facade Pattern:
+        Consistent date formatting
+        Supports Instant, LocalDateTime, LocalDate
+        Overloaded methods for all types
+        211 LOC
+    end note
+
+    note right of FormValidator
+        Strategy + Facade:
+        Simplifies validation code
+        from ~7 lines to 1 line per field
+        Automatically sets error messages
+        in MessagePanel
+    end note
+
+    note right of ComponentFactory
+        Factory Pattern:
+        Creates UI components
+        with consistent configuration
+        Reduces duplication
+    end note
+}
+
+' Component usage relationships
+FormField --> UILayoutConstants : uses
+DateInput --> DateFormatUtils : uses
+MessagePanel --> UILayoutConstants : uses
+SelectionList --> UILayoutConstants : uses
+CalendarGridRenderer --> DateFormatUtils : uses
+TaskListRenderer --> DateFormatUtils : uses
+
+' Layout hints
+FormField -[hidden]down-> SelectionList
+SelectionList -[hidden]down-> CalendarGridRenderer
+CalendarGridRenderer -[hidden]down-> UILayoutConstants
+
+@enduml

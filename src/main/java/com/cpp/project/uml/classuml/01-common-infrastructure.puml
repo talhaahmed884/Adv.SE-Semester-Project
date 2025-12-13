@@ -1,0 +1,419 @@
+@startuml Common Infrastructure - Exception, Validation, Repository Patterns
+!theme plain
+skinparam dpi 300
+skinparam linetype ortho
+skinparam groupInheritance 2
+skinparam nodesep 80
+skinparam ranksep 80
+
+title Studently - Common Infrastructure Layer\n(Exception Hierarchy, Validation Framework, Repository Pattern)
+
+' ============================================
+' TEMPLATE METHOD PATTERN - Exception Hierarchy
+' ============================================
+package "Template Method Pattern - Exception Hierarchy" <<Rectangle>> #LightBlue {
+    abstract class BaseException {
+        - code: String
+        - message: String
+        - cause: Throwable
+        + BaseException(code: String, message: String)
+        + BaseException(code: String, cause: Throwable, message: String)
+        + getCode(): String
+        + getMessage(): String
+        + getCause(): Throwable
+    }
+
+    interface ErrorCode <<interface>> {
+        + getCode(): String
+        + getMessage(): String
+    }
+
+    class UserException {
+        + UserException(errorCode: UserErrorCode, ...)
+    }
+
+    class UserCredentialException {
+        + UserCredentialException(errorCode: UserCredentialErrorCode, ...)
+    }
+
+    class CourseException {
+        + CourseException(errorCode: CourseErrorCode, ...)
+    }
+
+    class ToDoListException {
+        + ToDoListException(errorCode: ToDoListErrorCode, ...)
+    }
+
+    class TimerException {
+        + TimerException(errorCode: TimerErrorCode, ...)
+    }
+
+    class AuthenticationException {
+        + AuthenticationException(errorCode: AuthenticationErrorCode, ...)
+    }
+
+    enum UserErrorCode {
+        USER_NOT_FOUND
+        USER_CREATION_FAILED
+        USER_DELETION_FAILED
+        INVALID_NAME
+        INVALID_EMAIL_FORMAT
+        + getCode(): String
+        + getMessage(): String
+    }
+
+    enum UserCredentialErrorCode {
+        CREDENTIAL_NOT_FOUND
+        CREDENTIAL_CREATION_FAILED
+        CREDENTIAL_UPDATE_FAILED
+        INVALID_PASSWORD
+        + getCode(): String
+        + getMessage(): String
+    }
+
+    enum CourseErrorCode {
+        COURSE_NOT_FOUND
+        TASK_NOT_FOUND
+        INVALID_COURSE_CODE
+        INVALID_COURSE_NAME
+        + getCode(): String
+        + getMessage(): String
+    }
+
+    enum ToDoListErrorCode {
+        TODO_LIST_NOT_FOUND
+        TASK_CREATION_FAILED
+        INVALID_LIST_NAME
+        + getCode(): String
+        + getMessage(): String
+    }
+
+    enum TimerErrorCode {
+        TIMER_NOT_FOUND
+        TIMER_ALREADY_RUNNING
+        TIMER_NOT_RUNNING
+        TIMER_START_FAILED
+        TIMER_STOP_FAILED
+        + getCode(): String
+        + getMessage(): String
+    }
+
+    enum AuthenticationErrorCode {
+        AUTHENTICATION_FAILED
+        INVALID_CREDENTIALS
+        USER_ALREADY_EXISTS
+        + getCode(): String
+        + getMessage(): String
+    }
+
+    BaseException <|-- UserException
+    BaseException <|-- UserCredentialException
+    BaseException <|-- CourseException
+    BaseException <|-- ToDoListException
+    BaseException <|-- TimerException
+    BaseException <|-- AuthenticationException
+
+    ErrorCode <|.. UserErrorCode
+    ErrorCode <|.. UserCredentialErrorCode
+    ErrorCode <|.. CourseErrorCode
+    ErrorCode <|.. ToDoListErrorCode
+    ErrorCode <|.. TimerErrorCode
+    ErrorCode <|.. AuthenticationErrorCode
+
+    UserException --> UserErrorCode : uses
+    UserCredentialException --> UserCredentialErrorCode : uses
+    CourseException --> CourseErrorCode : uses
+    ToDoListException --> ToDoListErrorCode : uses
+    TimerException --> TimerErrorCode : uses
+    AuthenticationException --> AuthenticationErrorCode : uses
+}
+
+' ============================================
+' FACTORY PATTERN - Exception Factory
+' ============================================
+package "Factory Pattern - Exception Creation" <<Rectangle>> #LightGreen {
+    class ExceptionFactory {
+        + {static} createUserException(errorCode: UserErrorCode, ...): UserException
+        + {static} createCourseException(errorCode: CourseErrorCode, ...): CourseException
+        + {static} createToDoListException(errorCode: ToDoListErrorCode, ...): ToDoListException
+        + {static} createTimerException(errorCode: TimerErrorCode, ...): TimerException
+        + {static} createAuthenticationException(errorCode: AuthenticationErrorCode, ...): AuthenticationException
+    }
+
+    ExceptionFactory ..> UserException : creates
+    ExceptionFactory ..> CourseException : creates
+    ExceptionFactory ..> ToDoListException : creates
+    ExceptionFactory ..> TimerException : creates
+    ExceptionFactory ..> AuthenticationException : creates
+}
+
+' ============================================
+' TEMPLATE METHOD PATTERN - Validation Framework
+' ============================================
+package "Template Method Pattern - Validation Framework" <<Rectangle>> #LightYellow {
+    abstract class "Validator<T>" as Validator {
+        # validationRules: List<ValidationRule>
+        + validate(value: T): ValidationResult
+        # {abstract} performValidation(value: T): ValidationResult
+        # addRule(rule: ValidationRule): void
+    }
+
+    class ValidationResult {
+        - valid: boolean
+        - errors: List<String>
+        + isValid(): boolean
+        + getErrors(): List<String>
+        + getFirstError(): String
+        + {static} success(): ValidationResult
+        + {static} failure(errors: List<String>): ValidationResult
+    }
+
+    interface ValidationRule <<interface>> {
+        + validate(value: Object): String
+        + getErrorMessage(): String
+    }
+
+    class NotNullRule {
+        - fieldName: String
+        + validate(value: Object): String
+        + getErrorMessage(): String
+    }
+
+    class EmailFormatRule {
+        + validate(value: Object): String
+        + getErrorMessage(): String
+    }
+
+    class PasswordStrengthRule {
+        - minLength: int
+        + validate(value: Object): String
+        + getErrorMessage(): String
+    }
+
+    class MinLengthRule {
+        - minLength: int
+        - fieldName: String
+        + validate(value: Object): String
+    }
+
+    class MaxLengthRule {
+        - maxLength: int
+        - fieldName: String
+        + validate(value: Object): String
+    }
+
+    class CompositeValidationRule {
+        - rules: List<ValidationRule>
+        + addRule(rule: ValidationRule): void
+        + validate(value: Object): String
+    }
+
+    class EmailValidator {
+        + validate(email: String): ValidationResult
+    }
+
+    class UserNameValidator {
+        + validate(name: String): ValidationResult
+    }
+
+    class PasswordValidator {
+        + validate(password: String): ValidationResult
+    }
+
+    Validator --> ValidationResult : returns
+    Validator o--> ValidationRule : uses
+    Validator <|-- EmailValidator
+    Validator <|-- UserNameValidator
+    Validator <|-- PasswordValidator
+
+    ValidationRule <|.. NotNullRule
+    ValidationRule <|.. EmailFormatRule
+    ValidationRule <|.. PasswordStrengthRule
+    ValidationRule <|.. MinLengthRule
+    ValidationRule <|.. MaxLengthRule
+    ValidationRule <|.. CompositeValidationRule
+
+    CompositeValidationRule o--> ValidationRule : aggregates
+}
+
+' ============================================
+' FACTORY PATTERN - Validator Factory
+' ============================================
+package "Factory Pattern - Validator Creation" <<Rectangle>> #LightCoral {
+    class ValidatorFactory {
+        + {static} createEmailValidator(): EmailValidator
+        + {static} createUserNameValidator(): UserNameValidator
+        + {static} createPasswordValidator(): PasswordValidator
+        + {static} createCourseCodeValidator(): Validator
+        + {static} createTaskNameValidator(): Validator
+    }
+
+    ValidatorFactory ..> EmailValidator : creates
+    ValidatorFactory ..> UserNameValidator : creates
+    ValidatorFactory ..> PasswordValidator : creates
+}
+
+' ============================================
+' SERVICE LAYER - Validation Services
+' ============================================
+package "Facade Pattern - Validation Services" <<Rectangle>> #Lavender {
+    class UserValidationService {
+        - emailValidator: EmailValidator
+        - nameValidator: UserNameValidator
+        + validateEmail(email: String): ValidationResult
+        + validateUserName(name: String): ValidationResult
+        + validateUserId(id: UUID): ValidationResult
+    }
+
+    class CourseValidationService {
+        + validateCourseCode(code: String): ValidationResult
+        + validateCourseName(name: String): ValidationResult
+        + validateTaskName(name: String): ValidationResult
+        + validateCourseTaskId(taskId: UUID): ValidationResult
+    }
+
+    class ToDoListValidationService {
+        + validateListName(name: String): ValidationResult
+        + validateTaskDescription(description: String): ValidationResult
+        + validateToDoListId(listId: UUID): ValidationResult
+    }
+
+    class TimerValidationService {
+        + validateTimerId(timerId: UUID): ValidationResult
+        + validateUserId(userId: UUID): ValidationResult
+        + validateCourseTaskId(taskId: UUID): ValidationResult
+    }
+
+    UserValidationService o--> EmailValidator : uses
+    UserValidationService o--> UserNameValidator : uses
+    CourseValidationService o--> Validator : uses
+    ToDoListValidationService o--> Validator : uses
+    TimerValidationService o--> Validator : uses
+}
+
+' ============================================
+' TEMPLATE METHOD PATTERN - Base Repository
+' ============================================
+package "Template Method Pattern - Repository Layer" <<Rectangle>> #LightSteelBlue {
+    abstract class "BaseJpaRepository<T, ID>" as BaseJpaRepository {
+        # entityManager: EntityManager
+        + save(entity: T): T
+        + findById(id: ID): Optional<T>
+        + findAll(): List<T>
+        + delete(entity: T): void
+        + deleteById(id: ID): void
+        + count(): long
+        # {abstract} getEntityClass(): Class<T>
+        # {abstract} getLogger(): Logger
+        # {abstract} getEntityName(): String
+        # {abstract} getEntityIdentifier(entity: T): String
+        # {abstract} isNew(entity: T): boolean
+        # {abstract} createNotFoundException(id: ID): RuntimeException
+        # {abstract} createNotFoundException(fieldName: String, value: Object): RuntimeException
+        # {abstract} createSaveException(cause: Exception): RuntimeException
+        # {abstract} createDeleteException(id: Object): RuntimeException
+    }
+
+    note right of BaseJpaRepository
+        Template Method Pattern:
+        - Defines skeleton for CRUD operations
+        - Subclasses implement domain-specific
+          exception creation and logging
+        - Eliminates ~200 LOC duplication
+          across 5 repository implementations
+    end note
+
+    interface "UserRepository" as UserRepository {
+        + save(user: User): User
+        + findById(id: UUID): Optional<User>
+        + findByEmail(email: String): Optional<User>
+        + existsByEmail(email: String): boolean
+        + delete(user: User): void
+        + deleteById(id: UUID): void
+    }
+
+    interface "CourseRepository" as CourseRepository {
+        + save(course: Course): Course
+        + findById(id: UUID): Optional<Course>
+        + findByUserId(userId: UUID): List<Course>
+        + findByUserIdAndCode(userId: UUID, code: String): Optional<Course>
+        + delete(course: Course): void
+    }
+
+    interface "ToDoListRepository" as ToDoListRepository {
+        + save(todoList: ToDoList): ToDoList
+        + findById(id: UUID): Optional<ToDoList>
+        + findByUserId(userId: UUID): List<ToDoList>
+        + delete(todoList: ToDoList): void
+    }
+
+    interface "TimerRepository" as TimerRepository {
+        + save(timer: TaskTimer): TaskTimer
+        + findById(id: UUID): Optional<TaskTimer>
+        + findActiveTimerByUserIdAndTaskId(userId: UUID, taskId: UUID): Optional<TaskTimer>
+        + findTimersByTaskId(taskId: UUID): List<TaskTimer>
+        + calculateTotalTimeByTaskId(taskId: UUID): long
+    }
+
+    interface "UserCredentialRepository" as UserCredentialRepository {
+        + save(credential: UserCredential): UserCredential
+        + findByUserId(userId: UUID): Optional<UserCredential>
+        + delete(credential: UserCredential): void
+    }
+
+    class UserRepositoryImpl {
+        - logger: Logger
+        + findByEmail(email: String): Optional<User>
+        + existsByEmail(email: String): boolean
+        # getEntityClass(): Class<User>
+        # createNotFoundException(id: UUID): UserException
+    }
+
+    class CourseRepositoryImpl {
+        - logger: Logger
+        + findByUserId(userId: UUID): List<Course>
+        + findByUserIdAndCode(...): Optional<Course>
+        # getEntityClass(): Class<Course>
+        # createNotFoundException(id: UUID): CourseException
+    }
+
+    class ToDoListRepositoryImpl {
+        - logger: Logger
+        + findByUserId(userId: UUID): List<ToDoList>
+        # getEntityClass(): Class<ToDoList>
+        # createNotFoundException(id: UUID): ToDoListException
+    }
+
+    class TimerRepositoryImpl {
+        - logger: Logger
+        + findActiveTimerByUserIdAndTaskId(...): Optional<TaskTimer>
+        + calculateTotalTimeByTaskId(taskId: UUID): long
+        # getEntityClass(): Class<TaskTimer>
+        # createNotFoundException(id: UUID): TimerException
+    }
+
+    class UserCredentialRepositoryImpl {
+        - logger: Logger
+        + findByUserId(userId: UUID): Optional<UserCredential>
+        # getEntityClass(): Class<UserCredential>
+        # createNotFoundException(id: UUID): UserCredentialException
+    }
+
+    BaseJpaRepository <|-- UserRepositoryImpl
+    BaseJpaRepository <|-- CourseRepositoryImpl
+    BaseJpaRepository <|-- ToDoListRepositoryImpl
+    BaseJpaRepository <|-- TimerRepositoryImpl
+    BaseJpaRepository <|-- UserCredentialRepositoryImpl
+
+    UserRepository <|.. UserRepositoryImpl
+    CourseRepository <|.. CourseRepositoryImpl
+    ToDoListRepository <|.. ToDoListRepositoryImpl
+    TimerRepository <|.. TimerRepositoryImpl
+    UserCredentialRepository <|.. UserCredentialRepositoryImpl
+}
+
+' Layout hints
+BaseException -[hidden]down-> Validator
+Validator -[hidden]down-> BaseJpaRepository
+
+@enduml

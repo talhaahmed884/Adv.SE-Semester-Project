@@ -1,0 +1,447 @@
+@startuml DTO and Adapter Pattern Layer
+!theme plain
+skinparam dpi 300
+skinparam linetype ortho
+skinparam groupInheritance 2
+skinparam nodesep 70
+skinparam ranksep 70
+
+title Studently - DTO & Adapter Pattern Layer\n(Entity-DTO Conversion with Builder Pattern)
+
+' ============================================
+' DTOs - User Domain
+' ============================================
+package "DTOs - User Domain" <<Rectangle>> #LightBlue {
+    class UserDTO {
+        - id: UUID
+        - name: String
+        - email: String
+        - createdAt: LocalDateTime
+        - updatedAt: LocalDateTime
+        --
+        # UserDTO(builder: UserDTOBuilder)
+        + {static} builder(): UserDTOBuilder
+        + getId(): UUID
+        + getName(): String
+        + getEmail(): String
+        + getCreatedAt(): LocalDateTime
+        + getUpdatedAt(): LocalDateTime
+    }
+
+    class UserDTOBuilder {
+        - id: UUID
+        - name: String
+        - email: String
+        - createdAt: LocalDateTime
+        - updatedAt: LocalDateTime
+        --
+        + id(id: UUID): UserDTOBuilder
+        + name(name: String): UserDTOBuilder
+        + email(email: String): UserDTOBuilder
+        + createdAt(createdAt: LocalDateTime): UserDTOBuilder
+        + updatedAt(updatedAt: LocalDateTime): UserDTOBuilder
+        + build(): UserDTO
+    }
+
+    class SignUpRequestDTO {
+        - name: String
+        - email: String
+        - password: String
+        --
+        + SignUpRequestDTO(name: String, email: String, password: String)
+        + getName(): String
+        + getEmail(): String
+        + getPassword(): String
+    }
+
+    class LoginRequestDTO {
+        - email: String
+        - password: String
+        --
+        + LoginRequestDTO(email: String, password: String)
+        + getEmail(): String
+        + getPassword(): String
+    }
+
+    UserDTO --> UserDTOBuilder : creates
+    UserDTOBuilder ..> UserDTO : builds
+}
+
+' ============================================
+' DTOs - Course Domain
+' ============================================
+package "DTOs - Course Domain" <<Rectangle>> #LightGreen {
+    class CourseDTO {
+        - id: UUID
+        - userId: UUID
+        - code: String
+        - name: String
+        - tasks: List<CourseTaskDTO>
+        - createdAt: Instant
+        - updatedAt: Instant
+        --
+        # CourseDTO(builder: CourseDTOBuilder)
+        + {static} builder(): CourseDTOBuilder
+        + getId(): UUID
+        + getUserId(): UUID
+        + getCode(): String
+        + getName(): String
+        + getTasks(): List<CourseTaskDTO>
+        + getProgress(): int
+    }
+
+    class CourseDTOBuilder {
+        - id: UUID
+        - userId: UUID
+        - code: String
+        - name: String
+        - tasks: List<CourseTaskDTO>
+        - createdAt: Instant
+        - updatedAt: Instant
+        --
+        + id(id: UUID): CourseDTOBuilder
+        + userId(userId: UUID): CourseDTOBuilder
+        + code(code: String): CourseDTOBuilder
+        + name(name: String): CourseDTOBuilder
+        + tasks(tasks: List<CourseTaskDTO>): CourseDTOBuilder
+        + createdAt(createdAt: Instant): CourseDTOBuilder
+        + updatedAt(updatedAt: Instant): CourseDTOBuilder
+        + build(): CourseDTO
+    }
+
+    class CourseTaskDTO {
+        - id: UUID
+        - name: String
+        - description: String
+        - deadline: Instant
+        - status: TaskStatus
+        - progress: int
+        - createdAt: Instant
+        - updatedAt: Instant
+        --
+        # CourseTaskDTO(builder: CourseTaskDTOBuilder)
+        + {static} builder(): CourseTaskDTOBuilder
+        + getId(): UUID
+        + getName(): String
+        + getDescription(): String
+        + getDeadline(): Instant
+        + getStatus(): TaskStatus
+        + getProgress(): int
+    }
+
+    class CourseTaskDTOBuilder {
+        - id: UUID
+        - name: String
+        - description: String
+        - deadline: Instant
+        - status: TaskStatus
+        - progress: int
+        --
+        + id(id: UUID): CourseTaskDTOBuilder
+        + name(name: String): CourseTaskDTOBuilder
+        + description(description: String): CourseTaskDTOBuilder
+        + deadline(deadline: Instant): CourseTaskDTOBuilder
+        + status(status: TaskStatus): CourseTaskDTOBuilder
+        + progress(progress: int): CourseTaskDTOBuilder
+        + build(): CourseTaskDTO
+    }
+
+    CourseDTO o--> CourseTaskDTO : contains
+    CourseDTO --> CourseDTOBuilder : creates
+    CourseTaskDTO --> CourseTaskDTOBuilder : creates
+    CourseDTOBuilder ..> CourseDTO : builds
+    CourseTaskDTOBuilder ..> CourseTaskDTO : builds
+}
+
+' ============================================
+' DTOs - TodoList Domain
+' ============================================
+package "DTOs - TodoList Domain" <<Rectangle>> #LightYellow {
+    class ToDoListDTO {
+        - id: UUID
+        - userId: UUID
+        - name: String
+        - tasks: List<ToDoListTaskDTO>
+        - createdAt: Instant
+        - updatedAt: Instant
+        --
+        # ToDoListDTO(builder: ToDoListDTOBuilder)
+        + {static} builder(): ToDoListDTOBuilder
+        + getId(): UUID
+        + getUserId(): UUID
+        + getName(): String
+        + getTasks(): List<ToDoListTaskDTO>
+        + getCompletionPercentage(): int
+    }
+
+    class ToDoListDTOBuilder {
+        - id: UUID
+        - userId: UUID
+        - name: String
+        - tasks: List<ToDoListTaskDTO>
+        --
+        + id(id: UUID): ToDoListDTOBuilder
+        + userId(userId: UUID): ToDoListDTOBuilder
+        + name(name: String): ToDoListDTOBuilder
+        + tasks(tasks: List<ToDoListTaskDTO>): ToDoListDTOBuilder
+        + build(): ToDoListDTO
+    }
+
+    class ToDoListTaskDTO {
+        - id: UUID
+        - description: String
+        - deadline: Instant
+        - status: TaskStatus
+        - createdAt: Instant
+        - updatedAt: Instant
+        --
+        # ToDoListTaskDTO(builder: ToDoListTaskDTOBuilder)
+        + {static} builder(): ToDoListTaskDTOBuilder
+        + getId(): UUID
+        + getDescription(): String
+        + getDeadline(): Instant
+        + getStatus(): TaskStatus
+        + isOverdue(): boolean
+    }
+
+    class ToDoListTaskDTOBuilder {
+        - id: UUID
+        - description: String
+        - deadline: Instant
+        - status: TaskStatus
+        --
+        + id(id: UUID): ToDoListTaskDTOBuilder
+        + description(description: String): ToDoListTaskDTOBuilder
+        + deadline(deadline: Instant): ToDoListTaskDTOBuilder
+        + status(status: TaskStatus): ToDoListTaskDTOBuilder
+        + build(): ToDoListTaskDTO
+    }
+
+    ToDoListDTO o--> ToDoListTaskDTO : contains
+    ToDoListDTO --> ToDoListDTOBuilder : creates
+    ToDoListTaskDTO --> ToDoListTaskDTOBuilder : creates
+    ToDoListDTOBuilder ..> ToDoListDTO : builds
+    ToDoListTaskDTOBuilder ..> ToDoListTaskDTO : builds
+}
+
+' ============================================
+' DTOs - Timer Domain
+' ============================================
+package "DTOs - Timer Domain" <<Rectangle>> #LightCoral {
+    class TimerDTO {
+        - id: UUID
+        - userId: UUID
+        - courseTaskId: UUID
+        - startTime: Instant
+        - endTime: Instant
+        - durationMillis: long
+        - status: TimerStatus
+        --
+        # TimerDTO(builder: TimerDTOBuilder)
+        + {static} builder(): TimerDTOBuilder
+        + getId(): UUID
+        + getUserId(): UUID
+        + getCourseTaskId(): UUID
+        + getStartTime(): Instant
+        + getEndTime(): Instant
+        + getDurationMillis(): long
+        + getStatus(): TimerStatus
+        + getDurationSeconds(): long
+    }
+
+    class TimerDTOBuilder {
+        - id: UUID
+        - userId: UUID
+        - courseTaskId: UUID
+        - startTime: Instant
+        - endTime: Instant
+        - durationMillis: long
+        - status: TimerStatus
+        --
+        + id(id: UUID): TimerDTOBuilder
+        + userId(userId: UUID): TimerDTOBuilder
+        + courseTaskId(taskId: UUID): TimerDTOBuilder
+        + startTime(time: Instant): TimerDTOBuilder
+        + endTime(time: Instant): TimerDTOBuilder
+        + durationMillis(millis: long): TimerDTOBuilder
+        + status(status: TimerStatus): TimerDTOBuilder
+        + build(): TimerDTO
+    }
+
+    class TaskTimerSummaryDTO {
+        - courseTaskId: UUID
+        - totalTimeMillis: long
+        - sessionCount: int
+        - sessions: List<TimerDTO>
+        - activeSession: TimerDTO
+        --
+        # TaskTimerSummaryDTO(builder: TaskTimerSummaryDTOBuilder)
+        + {static} builder(): TaskTimerSummaryDTOBuilder
+        + getCourseTaskId(): UUID
+        + getTotalTimeMillis(): long
+        + getTotalTimeSeconds(): long
+        + getSessionCount(): int
+        + getSessions(): List<TimerDTO>
+        + getActiveSession(): TimerDTO
+        + hasActiveSession(): boolean
+    }
+
+    class TaskTimerSummaryDTOBuilder {
+        - courseTaskId: UUID
+        - totalTimeMillis: long
+        - sessionCount: int
+        - sessions: List<TimerDTO>
+        - activeSession: TimerDTO
+        --
+        + courseTaskId(taskId: UUID): TaskTimerSummaryDTOBuilder
+        + totalTimeMillis(millis: long): TaskTimerSummaryDTOBuilder
+        + sessionCount(count: int): TaskTimerSummaryDTOBuilder
+        + sessions(sessions: List<TimerDTO>): TaskTimerSummaryDTOBuilder
+        + activeSession(session: TimerDTO): TaskTimerSummaryDTOBuilder
+        + build(): TaskTimerSummaryDTO
+    }
+
+    TimerDTO --> TimerDTOBuilder : creates
+    TaskTimerSummaryDTO o--> TimerDTO : contains
+    TaskTimerSummaryDTO --> TaskTimerSummaryDTOBuilder : creates
+    TimerDTOBuilder ..> TimerDTO : builds
+    TaskTimerSummaryDTOBuilder ..> TaskTimerSummaryDTO : builds
+}
+
+' ============================================
+' ADAPTER PATTERN - Entity to DTO Conversion
+' ============================================
+package "Adapter Pattern - Entity-DTO Conversion" <<Rectangle>> #Lavender {
+    class UserAdapter <<Adapter>> {
+        + {static} toDTO(entity: User): UserDTO
+        + {static} toDTOList(entities: List<User>): List<UserDTO>
+    }
+
+    class CourseAdapter <<Adapter>> {
+        + {static} toDTO(entity: Course): CourseDTO
+        + {static} toDTOList(entities: List<Course>): List<CourseDTO>
+    }
+
+    class CourseTaskAdapter <<Adapter>> {
+        + {static} toDTO(entity: CourseTask): CourseTaskDTO
+        + {static} toDTOList(entities: List<CourseTask>): List<CourseTaskDTO>
+    }
+
+    class ToDoListAdapter <<Adapter>> {
+        + {static} toDTO(entity: ToDoList): ToDoListDTO
+        + {static} toDTOList(entities: List<ToDoList>): List<ToDoListDTO>
+    }
+
+    class ToDoListTaskAdapter <<Adapter>> {
+        + {static} toDTO(entity: ToDoListTask): ToDoListTaskDTO
+        + {static} toDTOList(entities: List<ToDoListTask>): List<ToDoListTaskDTO>
+    }
+
+    class TimerAdapter <<Adapter>> {
+        + {static} toDTO(entity: TaskTimer): TimerDTO
+        + {static} toDTOList(entities: List<TaskTimer>): List<TimerDTO>
+    }
+
+    UserAdapter ..> UserDTO : creates
+    CourseAdapter ..> CourseDTO : creates
+    CourseAdapter ..> CourseTaskAdapter : uses
+    CourseTaskAdapter ..> CourseTaskDTO : creates
+    ToDoListAdapter ..> ToDoListDTO : creates
+    ToDoListAdapter ..> ToDoListTaskAdapter : uses
+    ToDoListTaskAdapter ..> ToDoListTaskDTO : creates
+    TimerAdapter ..> TimerDTO : creates
+    TimerAdapter ..> TaskTimerSummaryDTO : creates
+
+    note right of UserAdapter
+        Adapter Pattern:
+        - Converts User entity to UserDTO
+        - Isolates domain layer from presentation
+        - Static utility methods for conversion
+    end note
+
+    note right of CourseAdapter
+        Delegates to CourseTaskAdapter
+        for nested task conversion
+    end note
+}
+
+' ============================================
+' STRATEGY PATTERN - Sanitization
+' ============================================
+package "Strategy Pattern - Data Sanitization" <<Rectangle>> #LightSteelBlue {
+    interface SanitizationStrategy <<interface>> {
+        + sanitize(value: String): String
+    }
+
+    class EmailSanitizationStrategy {
+        + sanitize(value: String): String
+    }
+
+    class NameSanitizationStrategy {
+        + sanitize(value: String): String
+    }
+
+    class CodeSanitizationStrategy {
+        + sanitize(value: String): String
+    }
+
+    class TrimSanitizationStrategy {
+        + sanitize(value: String): String
+    }
+
+    class LowerCaseSanitizationStrategy {
+        + sanitize(value: String): String
+    }
+
+    class CompositeSanitizationStrategy {
+        - strategies: List<SanitizationStrategy>
+        + addStrategy(strategy: SanitizationStrategy): void
+        + sanitize(value: String): String
+    }
+
+    class SignUpRequestSanitizer <<Adapter>> {
+        - emailStrategy: EmailSanitizationStrategy
+        - nameStrategy: NameSanitizationStrategy
+        + sanitize(request: SignUpRequestDTO): SignUpRequestDTO
+        + sanitizeName(name: String): String
+        + sanitizeEmail(email: String): String
+    }
+
+    class CreateCourseRequestSanitizer <<Adapter>> {
+        - codeStrategy: CodeSanitizationStrategy
+        - nameStrategy: NameSanitizationStrategy
+        + sanitizeCode(code: String): String
+        + sanitizeName(name: String): String
+    }
+
+    SanitizationStrategy <|.. EmailSanitizationStrategy
+    SanitizationStrategy <|.. NameSanitizationStrategy
+    SanitizationStrategy <|.. CodeSanitizationStrategy
+    SanitizationStrategy <|.. TrimSanitizationStrategy
+    SanitizationStrategy <|.. LowerCaseSanitizationStrategy
+    SanitizationStrategy <|.. CompositeSanitizationStrategy
+
+    CompositeSanitizationStrategy o--> SanitizationStrategy : aggregates
+
+    SignUpRequestSanitizer o--> EmailSanitizationStrategy : uses
+    SignUpRequestSanitizer o--> NameSanitizationStrategy : uses
+    CreateCourseRequestSanitizer o--> CodeSanitizationStrategy : uses
+    CreateCourseRequestSanitizer o--> NameSanitizationStrategy : uses
+
+    SignUpRequestSanitizer ..> SignUpRequestDTO : sanitizes
+    CreateCourseRequestSanitizer --> CourseDTO : sanitizes
+
+    note right of CompositeSanitizationStrategy
+        Composite Pattern:
+        Chains multiple sanitization strategies
+        Example: Trim → LowerCase → Validate
+    end note
+}
+
+' Layout hints
+UserDTO -[hidden]down-> CourseDTO
+CourseDTO -[hidden]down-> ToDoListDTO
+ToDoListDTO -[hidden]down-> TimerDTO
+UserAdapter -[hidden]down-> SanitizationStrategy
+
+@enduml

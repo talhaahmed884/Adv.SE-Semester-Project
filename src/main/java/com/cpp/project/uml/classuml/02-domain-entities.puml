@@ -1,0 +1,386 @@
+@startuml Domain Entities - User, Course, TodoList, Timer
+!theme plain
+skinparam dpi 300
+skinparam linetype ortho
+skinparam groupInheritance 2
+skinparam nodesep 70
+skinparam ranksep 70
+
+title Studently - Domain Entity Layer\n(User, Course, TodoList, Timer with Builder Pattern)
+
+' ============================================
+' BUILDER PATTERN - User Domain
+' ============================================
+package "Builder Pattern - User Domain" <<Rectangle>> #LightBlue {
+    class User {
+        - id: UUID
+        - name: String
+        - email: String
+        - createdAt: LocalDateTime
+        - updatedAt: LocalDateTime
+        --
+        - credential: UserCredential
+        --
+        + User()
+        # User(builder: UserBuilder)
+        + {static} builder(): UserBuilder
+        + getId(): UUID
+        + getName(): String
+        + setName(name: String): void
+        + getEmail(): String
+        + setEmail(email: String): void
+        + getCreatedAt(): LocalDateTime
+        + getUpdatedAt(): LocalDateTime
+        + getCredential(): UserCredential
+        + setCredential(credential: UserCredential): void
+        + equals(o: Object): boolean
+        + hashCode(): int
+    }
+
+    class UserBuilder {
+        - name: String
+        - email: String
+        --
+        + name(name: String): UserBuilder
+        + email(email: String): UserBuilder
+        + build(): User
+    }
+
+    class UserCredential {
+        - userId: UUID <<PK>>
+        - passwordHash: String
+        - salt: String
+        - algorithm: String
+        - createdAt: LocalDateTime
+        - updatedAt: LocalDateTime
+        --
+        - user: User
+        --
+        + UserCredential()
+        # UserCredential(builder: UserCredentialBuilder)
+        + {static} builder(): UserCredentialBuilder
+        + getUserId(): UUID
+        + setUserId(userId: UUID): void
+        + getPasswordHash(): String
+        + setPasswordHash(hash: String): void
+        + getSalt(): String
+        + setSalt(salt: String): void
+        + getAlgorithm(): String
+        + setAlgorithm(algorithm: String): void
+        + getUser(): User
+        + setUser(user: User): void
+    }
+
+    class UserCredentialBuilder {
+        - userId: UUID
+        - passwordHash: String
+        - salt: String
+        - algorithm: String
+        --
+        + userId(userId: UUID): UserCredentialBuilder
+        + passwordHash(hash: String): UserCredentialBuilder
+        + salt(salt: String): UserCredentialBuilder
+        + algorithm(algorithm: String): UserCredentialBuilder
+        + build(): UserCredential
+    }
+
+    User *-- UserCredential : owns >
+    User --> UserBuilder : creates
+    UserCredential --> UserCredentialBuilder : creates
+    UserBuilder ..> User : builds
+    UserCredentialBuilder ..> UserCredential : builds
+
+    note right of User
+        JPA Entity: @Entity @Table(name="users")
+        One-to-One with UserCredential
+        @OneToOne(mappedBy="user", cascade=ALL)
+    end note
+
+    note right of UserCredential
+        JPA Entity: @Entity @Table(name="user_credentials")
+        userId is both PK and FK
+        @OneToOne with User
+    end note
+}
+
+' ============================================
+' BUILDER PATTERN - Course Domain
+' ============================================
+package "Builder Pattern - Course Domain" <<Rectangle>> #LightGreen {
+    class Course {
+        - id: UUID
+        - userId: UUID
+        - code: String
+        - name: String
+        - createdAt: Instant
+        - updatedAt: Instant
+        --
+        - tasks: List<CourseTask>
+        --
+        + Course()
+        # Course(builder: CourseBuilder)
+        + {static} builder(): CourseBuilder
+        + getId(): UUID
+        + getUserId(): UUID
+        + getCode(): String
+        + setCode(code: String): void
+        + getName(): String
+        + setName(name: String): void
+        + getTasks(): List<CourseTask>
+        + addTask(task: CourseTask): void
+        + removeTask(task: CourseTask): void
+        + getTaskById(taskId: UUID): Optional<CourseTask>
+        + getProgress(): int
+    }
+
+    class CourseBuilder {
+        - userId: UUID
+        - code: String
+        - name: String
+        --
+        + userId(userId: UUID): CourseBuilder
+        + code(code: String): CourseBuilder
+        + name(name: String): CourseBuilder
+        + build(): Course
+    }
+
+    class CourseTask {
+        - id: UUID
+        - name: String
+        - description: String
+        - deadline: Instant
+        - status: TaskStatus
+        - progress: int
+        - createdAt: Instant
+        - updatedAt: Instant
+        --
+        + CourseTask()
+        # CourseTask(builder: CourseTaskBuilder)
+        + {static} builder(): CourseTaskBuilder
+        + getId(): UUID
+        + getName(): String
+        + setName(name: String): void
+        + getDescription(): String
+        + setDescription(description: String): void
+        + getDeadline(): Instant
+        + setDeadline(deadline: Instant): void
+        + getStatus(): TaskStatus
+        + setStatus(status: TaskStatus): void
+        + getProgress(): int
+        + setProgress(progress: int): void
+        + markAsComplete(): void
+        + markAsIncomplete(): void
+        + updateProgress(progress: int): void
+    }
+
+    class CourseTaskBuilder {
+        - name: String
+        - description: String
+        - deadline: Instant
+        - progress: int
+        --
+        + name(name: String): CourseTaskBuilder
+        + description(description: String): CourseTaskBuilder
+        + deadline(deadline: Instant): CourseTaskBuilder
+        + progress(progress: int): CourseTaskBuilder
+        + build(): CourseTask
+    }
+
+    enum TaskStatus {
+        PENDING
+        IN_PROGRESS
+        COMPLETED
+        OVERDUE
+    }
+
+    Course *--> CourseTask : owns >
+    Course --> CourseBuilder : creates
+    CourseTask --> CourseTaskBuilder : creates
+    CourseTask --> TaskStatus : uses
+    CourseBuilder ..> Course : builds
+    CourseTaskBuilder ..> CourseTask : builds
+
+    note right of Course
+        JPA Entity: @Entity @Table(name="courses")
+        One-to-Many with CourseTask
+        @OneToMany(cascade=ALL, orphanRemoval=true)
+    end note
+
+    note right of CourseTask
+        JPA Embeddable: @ElementCollection
+        Embedded in Course entity
+        Lifecycle bound to Course
+    end note
+}
+
+' ============================================
+' BUILDER PATTERN - TodoList Domain
+' ============================================
+package "Builder Pattern - TodoList Domain" <<Rectangle>> #LightYellow {
+    class ToDoList {
+        - id: UUID
+        - userId: UUID
+        - name: String
+        - createdAt: Instant
+        - updatedAt: Instant
+        --
+        - tasks: List<ToDoListTask>
+        --
+        + ToDoList()
+        # ToDoList(builder: ToDoListBuilder)
+        + {static} builder(): ToDoListBuilder
+        + getId(): UUID
+        + getUserId(): UUID
+        + getName(): String
+        + setName(name: String): void
+        + getTasks(): List<ToDoListTask>
+        + addTask(task: ToDoListTask): void
+        + removeTask(task: ToDoListTask): void
+        + getTaskById(taskId: UUID): Optional<ToDoListTask>
+        + getCompletionPercentage(): int
+    }
+
+    class ToDoListBuilder {
+        - userId: UUID
+        - name: String
+        --
+        + userId(userId: UUID): ToDoListBuilder
+        + name(name: String): ToDoListBuilder
+        + build(): ToDoList
+    }
+
+    class ToDoListTask {
+        - id: UUID
+        - description: String
+        - deadline: Instant
+        - status: TaskStatus
+        - createdAt: Instant
+        - updatedAt: Instant
+        --
+        + ToDoListTask()
+        # ToDoListTask(builder: ToDoListTaskBuilder)
+        + {static} builder(): ToDoListTaskBuilder
+        + getId(): UUID
+        + getDescription(): String
+        + setDescription(description: String): void
+        + getDeadline(): Instant
+        + setDeadline(deadline: Instant): void
+        + getStatus(): TaskStatus
+        + setStatus(status: TaskStatus): void
+        + markAsComplete(): void
+        + markAsIncomplete(): void
+        + isOverdue(): boolean
+    }
+
+    class ToDoListTaskBuilder {
+        - description: String
+        - deadline: Instant
+        --
+        + description(description: String): ToDoListTaskBuilder
+        + deadline(deadline: Instant): ToDoListTaskBuilder
+        + build(): ToDoListTask
+    }
+
+    ToDoList *--> ToDoListTask : owns >
+    ToDoList --> ToDoListBuilder : creates
+    ToDoListTask --> ToDoListTaskBuilder : creates
+    ToDoListTask --> TaskStatus : uses
+    ToDoListBuilder ..> ToDoList : builds
+    ToDoListTaskBuilder ..> ToDoListTask : builds
+
+    note right of ToDoList
+        JPA Entity: @Entity @Table(name="todo_lists")
+        One-to-Many with ToDoListTask
+        @OneToMany(cascade=ALL, orphanRemoval=true)
+    end note
+}
+
+' ============================================
+' BUILDER PATTERN - Timer Domain
+' ============================================
+package "Builder Pattern - Timer Domain" <<Rectangle>> #LightCoral {
+    class TaskTimer {
+        - id: UUID
+        - userId: UUID
+        - courseTaskId: UUID
+        - startTime: Instant
+        - endTime: Instant
+        - durationMillis: long
+        - status: TimerStatus
+        --
+        + TaskTimer()
+        # TaskTimer(builder: TaskTimerBuilder)
+        + {static} builder(): TaskTimerBuilder
+        + getId(): UUID
+        + getUserId(): UUID
+        + getCourseTaskId(): UUID
+        + getStartTime(): Instant
+        + getEndTime(): Instant
+        + getDurationMillis(): long
+        + getStatus(): TimerStatus
+        + stop(): void
+        + isRunning(): boolean
+        + getDurationSeconds(): long
+    }
+
+    class TaskTimerBuilder {
+        - userId: UUID
+        - courseTaskId: UUID
+        - startTime: Instant
+        - endTime: Instant
+        - durationMillis: long
+        - status: TimerStatus
+        --
+        + userId(userId: UUID): TaskTimerBuilder
+        + courseTaskId(taskId: UUID): TaskTimerBuilder
+        + startTime(time: Instant): TaskTimerBuilder
+        + endTime(time: Instant): TaskTimerBuilder
+        + durationMillis(millis: long): TaskTimerBuilder
+        + status(status: TimerStatus): TaskTimerBuilder
+        + build(): TaskTimer
+    }
+
+    enum TimerStatus {
+        RUNNING
+        STOPPED
+    }
+
+    TaskTimer --> TaskTimerBuilder : creates
+    TaskTimer --> TimerStatus : uses
+    TaskTimerBuilder ..> TaskTimer : builds
+
+    note right of TaskTimer
+        JPA Entity: @Entity @Table(name="task_timers")
+        Independent entity, references CourseTask by ID
+        Contains business logic for timer operations
+    end note
+
+    note bottom of TaskTimer
+        Business Logic:
+        - Validates timer is RUNNING
+        - Calculates duration
+        - Sets status to STOPPED
+        - Throws TimerException if not running
+    end note
+}
+
+' ============================================
+' CROSS-DOMAIN RELATIONSHIPS
+' ============================================
+User "1" -- "0..*" Course : owns >
+User "1" -- "0..*" ToDoList : owns >
+User "1" -- "0..*" TaskTimer : owns >
+CourseTask "1" -- "0..*" TaskTimer : tracked by >
+
+note top of User
+    Central aggregate root
+    Owns all user-specific data
+    Cascade operations to UserCredential
+end note
+
+' Layout hints
+User -[hidden]down-> Course
+Course -[hidden]down-> ToDoList
+ToDoList -[hidden]down-> TaskTimer
+
+@enduml

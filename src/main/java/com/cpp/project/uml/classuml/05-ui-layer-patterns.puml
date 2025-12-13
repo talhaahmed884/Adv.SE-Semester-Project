@@ -1,0 +1,465 @@
+@startuml UI Layer - State and Mediator Patterns
+!theme plain
+skinparam dpi 300
+skinparam linetype ortho
+skinparam groupInheritance 3
+skinparam nodesep 90
+skinparam ranksep 90
+
+title Studently - UI Layer (Lanterna Terminal)\n(State Pattern + Mediator Pattern + Component Abstraction)
+
+' ============================================
+' STATE PATTERN - Screen State Interface
+' ============================================
+package "State Pattern - Screen State Management" <<Rectangle>> #LightBlue {
+    interface ScreenState <<interface>> {
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        + onEnter(): void
+        + getStateName(): String
+    }
+
+    abstract class StatefulScreen {
+        # currentState: ScreenState
+        # screen: Screen
+        # transitionTo(newState: ScreenState): void
+        + display(): void
+        + renderCurrentState(): void
+        + handleUserInput(): void
+    }
+
+    StatefulScreen o--> ScreenState : manages
+
+    note right of ScreenState
+        State Pattern:
+        Each screen state implements:
+        - render(): Draw UI
+        - handleInput(): Process keys
+        - onEnter(): Initialize state
+        - getStateName(): Debug info
+
+        Returns next state or null
+    end note
+
+    note right of StatefulScreen
+        Context in State Pattern:
+        - Maintains current state
+        - Delegates to state objects
+        - Handles state transitions
+    end note
+}
+
+' ============================================
+' MEDIATOR PATTERN - Screen Mediators
+' ============================================
+package "Mediator Pattern - State Coordination" <<Rectangle>> #LightGreen {
+    interface ScreenMediator <<interface>> {
+        + transitionTo(state: ScreenState): void
+    }
+
+    interface UserMediator <<interface>> {
+        + onViewProfile(): void
+        + onEditProfile(): void
+        + onChangePassword(): void
+        + onDeleteAccount(): void
+        + onReturnToMainMenu(): void
+    }
+
+    interface CourseMediator <<interface>> {
+        + onViewCourseList(): void
+        + onViewCourseDetails(courseId: UUID): void
+        + onAddCourse(): void
+        + onEditCourse(courseId: UUID): void
+        + onDeleteCourse(courseId: UUID): void
+        --
+        + onAddTaskToCourse(courseId: UUID): void
+        + onViewTaskDetails(courseId: UUID, taskId: UUID): void
+        + onEditTaskFromTaskDetails(courseId: UUID, taskId: UUID): void
+        + onDeleteTaskFromTaskDetails(courseId: UUID, taskId: UUID): void
+        + onUpdateTaskProgressFromTaskDetails(courseId: UUID, taskId: UUID): void
+        + onViewTimerDetails(courseId: UUID, taskId: UUID): void
+        --
+        + onCourseCreated(): void
+        + onCourseUpdated(courseId: UUID): void
+        + onCourseDeleted(): void
+        + onTaskAdded(courseId: UUID): void
+        + onTaskUpdated(courseId: UUID): void
+    }
+
+    interface ToDoListMediator <<interface>> {
+        + onViewListDetails(listId: UUID): void
+        + onAddList(): void
+        + onEditList(listId: UUID): void
+        + onDeleteList(listId: UUID): void
+        --
+        + onAddTaskToList(listId: UUID): void
+        + onViewTaskDetails(listId: UUID, taskId: UUID): void
+        + onEditTaskFromTaskDetails(listId: UUID, taskId: UUID): void
+        + onDeleteTaskFromTaskDetails(listId: UUID, taskId: UUID): void
+        + onMarkCompleteFromTaskDetails(listId: UUID, taskId: UUID): void
+        --
+        + onListCreated(): void
+        + onListUpdated(listId: UUID): void
+        + onTaskAdded(listId: UUID): void
+        + onTaskUpdatedReturnToTaskDetails(listId: UUID, taskId: UUID): void
+    }
+
+    interface CalendarMediator <<interface>> {
+        + onMonthChanged(year: int, month: int): void
+        + onReturnToMainMenu(): void
+    }
+
+    interface DashboardMediator <<interface>> {
+        + onViewCourse(courseId: UUID): void
+        + onViewToDoList(listId: UUID): void
+        + onReturnToMainMenu(): void
+    }
+
+    ScreenMediator <|-- UserMediator
+    ScreenMediator <|-- CourseMediator
+    ScreenMediator <|-- ToDoListMediator
+    ScreenMediator <|-- CalendarMediator
+    ScreenMediator <|-- DashboardMediator
+
+    note right of CourseMediator
+        Mediator Pattern:
+        - Coordinates state transitions
+        - Decouples states from each other
+        - States only know about mediator
+
+        Example flow:
+        CourseListState → mediator.onViewCourseDetails()
+        → mediator creates CourseDetailsState
+        → mediator.transitionTo(newState)
+    end note
+}
+
+' ============================================
+' CONCRETE SCREENS - Mediator Implementations
+' ============================================
+package "Screen Implementations (Mediator + Context)" <<Rectangle>> #LightYellow {
+    class UserScreen {
+        - currentUser: UserDTO
+        - userService: UserService
+        - credentialService: UserCredentialService
+        --
+        + UserScreen(screen: Screen, currentUser: UserDTO, ...)
+        + display(): void
+        --
+        + onViewProfile(): void
+        + onEditProfile(): void
+        + onChangePassword(): void
+        + onDeleteAccount(): void
+        --
+        - createUserProfileState(): UserProfileState
+        - createEditProfileState(): EditProfileState
+        - createChangePasswordState(): ChangePasswordState
+    }
+
+    class CourseManagementScreen {
+        - currentUser: UserDTO
+        - courseService: CourseService
+        - timerService: TimerService
+        --
+        + CourseManagementScreen(screen: Screen, currentUser: UserDTO, ...)
+        + display(): void
+        --
+        + onViewCourseDetails(courseId: UUID): void
+        + onAddCourse(): void
+        + onViewTaskDetails(courseId: UUID, taskId: UUID): void
+        + onViewTimerDetails(courseId: UUID, taskId: UUID): void
+        --
+        - createCourseListState(): CourseListState
+        - createCourseDetailsState(courseId: UUID): CourseDetailsState
+        - createTaskDetailsState(courseId: UUID, taskId: UUID): TaskDetailsState
+        - createTimerViewState(courseId: UUID, taskId: UUID): TimerViewState
+    }
+
+    class ToDoListManagementScreen {
+        - currentUser: UserDTO
+        - toDoListService: ToDoListService
+        --
+        + ToDoListManagementScreen(screen: Screen, currentUser: UserDTO, ...)
+        + display(): void
+        --
+        + onViewListDetails(listId: UUID): void
+        + onViewTaskDetails(listId: UUID, taskId: UUID): void
+        + onAddList(): void
+        + onEditList(listId: UUID): void
+        --
+        - createListViewState(): ListViewState
+        - createListDetailsState(listId: UUID): ListDetailsState
+        - createTaskDetailsState(listId: UUID, taskId: UUID): TaskDetailsState
+    }
+
+    class CalendarScreen {
+        - currentUser: UserDTO
+        - calendarService: CalendarService
+        --
+        + CalendarScreen(screen: Screen, currentUser: UserDTO, ...)
+        + display(): void
+        + onMonthChanged(year: int, month: int): void
+    }
+
+    class DashboardScreen {
+        - currentUser: UserDTO
+        - dashboardService: DashboardService
+        --
+        + DashboardScreen(screen: Screen, currentUser: UserDTO, ...)
+        + display(): void
+        + onViewCourse(courseId: UUID): void
+        + onViewToDoList(listId: UUID): void
+    }
+
+    class MainMenuScreen {
+        - currentUser: UserDTO
+        - courseService: CourseService
+        - todoListService: ToDoListService
+        - timerService: TimerService
+        - dashboardService: DashboardService
+        --
+        + MainMenuScreen(screen: Screen, currentUser: UserDTO, ...)
+        + display(): void
+        --
+        - openCourseManagement(): void
+        - openToDoManagement(): void
+        - openCalendar(): void
+        - openDashboard(): void
+        - openUserProfile(): void
+    }
+
+    StatefulScreen <|-- UserScreen
+    StatefulScreen <|-- CourseManagementScreen
+    StatefulScreen <|-- ToDoListManagementScreen
+    StatefulScreen <|-- CalendarScreen
+    StatefulScreen <|-- DashboardScreen
+    StatefulScreen <|-- MainMenuScreen
+
+    UserMediator <|.. UserScreen
+    CourseMediator <|.. CourseManagementScreen
+    ToDoListMediator <|.. ToDoListManagementScreen
+    CalendarMediator <|.. CalendarScreen
+    DashboardMediator <|.. DashboardScreen
+
+    note right of CourseManagementScreen
+        405 LOC
+        Complex mediator managing:
+        - 28 state transitions
+        - 10 different states
+        - Factory methods for state creation
+    end note
+
+    note right of ToDoListManagementScreen
+        322 LOC
+        Similar to CourseManagementScreen
+        but simpler (no timer integration)
+    end note
+}
+
+' ============================================
+' CONCRETE STATES - Course Management
+' ============================================
+package "State Implementations - Course Management" <<Rectangle>> #Lavender {
+    class CourseListState {
+        - mediator: CourseMediator
+        - courseList: SelectionList<CourseDTO>
+        - messagePanel: MessagePanel
+        --
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        + onEnter(): void
+    }
+
+    class CourseDetailsState {
+        - mediator: CourseMediator
+        - courseId: UUID
+        - taskSelection: SelectionList<CourseTaskDTO>
+        - course: CourseDTO
+        --
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        + onEnter(): void
+    }
+
+    class TaskDetailsState {
+        - mediator: CourseMediator
+        - courseId: UUID
+        - taskId: UUID
+        - task: CourseTaskDTO
+        - timerSummary: TaskTimerSummaryDTO
+        - timerPanel: TimerSummaryPanel
+        --
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        + onEnter(): void
+    }
+
+    class AddCourseState {
+        - mediator: CourseMediator
+        - form: Form
+        - codeField: FormField
+        - nameField: FormField
+        - validator: FormValidator
+        --
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        - handleSave(): ScreenState
+    }
+
+    class AddTaskState {
+        - mediator: CourseMediator
+        - courseId: UUID
+        - form: Form
+        - nameField: FormField
+        - deadlineInput: DateInput
+        - validator: FormValidator
+        --
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        - handleSave(): ScreenState
+    }
+
+    class UpdateProgressState {
+        - mediator: CourseMediator
+        - courseId: UUID
+        - taskId: UUID
+        - progressSlider: ProgressSlider
+        --
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        - handleSave(): ScreenState
+    }
+
+    class TimerViewState {
+        - mediator: CourseMediator
+        - courseId: UUID
+        - taskId: UUID
+        - timerService: TimerService
+        - activeTimer: TimerDTO
+        --
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        + onEnter(): void
+        - handleStartTimer(): ScreenState
+        - handleStopTimer(): ScreenState
+    }
+
+    class DeleteCourseState {
+        - mediator: CourseMediator
+        - courseId: UUID
+        - optionsList: SelectionList<String>
+        --
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        - handleConfirmation(): ScreenState
+    }
+
+    ScreenState <|.. CourseListState
+    ScreenState <|.. CourseDetailsState
+    ScreenState <|.. TaskDetailsState
+    ScreenState <|.. AddCourseState
+    ScreenState <|.. AddTaskState
+    ScreenState <|.. UpdateProgressState
+    ScreenState <|.. TimerViewState
+    ScreenState <|.. DeleteCourseState
+
+    CourseListState --> CourseMediator : uses
+    CourseDetailsState --> CourseMediator : uses
+    TaskDetailsState --> CourseMediator : uses
+    AddCourseState --> CourseMediator : uses
+    AddTaskState --> CourseMediator : uses
+    UpdateProgressState --> CourseMediator : uses
+    TimerViewState --> CourseMediator : uses
+    DeleteCourseState --> CourseMediator : uses
+
+    note right of TaskDetailsState
+        230 LOC
+        Complex state showing:
+        - Task information
+        - Progress bar
+        - Timer summary panel
+        - F3: Update Progress
+        - F4: Edit Task
+        - F5: Delete Task
+        - F6: View Timer Details
+
+        Uses composition:
+        - TimerSummaryPanel
+        - MessagePanel
+    end note
+}
+
+' ============================================
+' CONCRETE STATES - TodoList Management
+' ============================================
+package "State Implementations - TodoList Management" <<Rectangle>> #LightCoral {
+    class ListViewState {
+        - mediator: ToDoListMediator
+        - listSelection: SelectionList<ToDoListDTO>
+        - messagePanel: MessagePanel
+        --
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        + onEnter(): void
+    }
+
+    class ListDetailsState {
+        - mediator: ToDoListMediator
+        - listId: UUID
+        - taskSelection: SelectionList<ToDoListTaskDTO>
+        - todoList: ToDoListDTO
+        --
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        + onEnter(): void
+    }
+
+    class "TaskDetailsState\n(TodoList)" as TodoTaskDetailsState {
+        - mediator: ToDoListMediator
+        - listId: UUID
+        - taskId: UUID
+        - task: ToDoListTaskDTO
+        --
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        + onEnter(): void
+        - handleMarkComplete(): ScreenState
+    }
+
+    class AddListState {
+        - mediator: ToDoListMediator
+        - nameField: FormField
+        - validator: FormValidator
+        --
+        + render(graphics: TextGraphics): void
+        + handleInput(keyStroke: KeyStroke): ScreenState
+        - handleSave(): ScreenState
+    }
+
+    ScreenState <|.. ListViewState
+    ScreenState <|.. ListDetailsState
+    ScreenState <|.. TodoTaskDetailsState
+    ScreenState <|.. AddListState
+
+    ListViewState --> ToDoListMediator : uses
+    ListDetailsState --> ToDoListMediator : uses
+    TodoTaskDetailsState --> ToDoListMediator : uses
+    AddListState --> ToDoListMediator : uses
+
+    note right of TodoTaskDetailsState
+        215 LOC
+        Simpler than Course TaskDetailsState
+        No progress tracking or timer
+        F3: Mark Complete/Incomplete
+        F4: Edit Task
+        F5: Delete Task
+    end note
+}
+
+' Layout hints
+ScreenState -[hidden]down-> StatefulScreen
+StatefulScreen -[hidden]down-> ScreenMediator
+UserScreen -[hidden]down-> CourseListState
+CourseDetailsState -[hidden]down-> ListViewState
+
+@enduml
