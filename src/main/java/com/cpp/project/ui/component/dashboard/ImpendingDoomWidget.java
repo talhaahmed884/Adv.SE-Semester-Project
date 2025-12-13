@@ -59,7 +59,7 @@ public class ImpendingDoomWidget extends AbstractComponent {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.RED_BRIGHT);
         graphics.putString(x, y, "╔══════════════════════════════════════════════════════════════╗");
-        graphics.putString(x, y + 1, "║  IMPENDING DOOM - Tasks Due in Next 7 Days                  ║");
+        graphics.putString(x, y + 1, "║  IMPENDING DOOM - Tasks Due in Next 7 Days                   ║");
         graphics.putString(x, y + 2, "╚══════════════════════════════════════════════════════════════╝");
 
         int currentY = y + HEADER_HEIGHT;

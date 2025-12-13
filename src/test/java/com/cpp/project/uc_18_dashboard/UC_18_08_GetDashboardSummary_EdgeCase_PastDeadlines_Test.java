@@ -58,7 +58,7 @@ public class UC_18_08_GetDashboardSummary_EdgeCase_PastDeadlines_Test extends Ba
                 Instant.now().minus(1, ChronoUnit.DAYS), // Yesterday
                 "Already past deadline"
         ));
-        assertEquals(CourseErrorCode.INVALID_TASK_DEADLINE, exception.getCode());
+        assertEquals(CourseErrorCode.INVALID_TASK_DEADLINE.getCode(), exception.getCode());
 
         // Task with future deadline (should appear)
         courseService.addTaskToCourse(

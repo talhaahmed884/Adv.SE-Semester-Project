@@ -56,7 +56,7 @@ public class NeglectDetectorWidget extends AbstractComponent {
         // Title
         graphics.setForegroundColor(TextColor.ANSI.YELLOW_BRIGHT);
         graphics.putString(x, y, "╔══════════════════════════════════════════════════════════════╗");
-        graphics.putString(x, y + 1, "║  NEGLECT DETECTOR - Course Study Time Distribution          ║");
+        graphics.putString(x, y + 1, "║  NEGLECT DETECTOR - Course Study Time Distribution           ║");
         graphics.putString(x, y + 2, "╚══════════════════════════════════════════════════════════════╝");
 
         int currentY = y + HEADER_HEIGHT;
