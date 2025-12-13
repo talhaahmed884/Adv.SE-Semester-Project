@@ -1,0 +1,475 @@
+<svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css"
+     data-diagram-type="CLASS" height="1292px" preserveAspectRatio="none"
+     style="width:4044px;height:1292px;background:#FFFFFF;" version="1.1" viewBox="0 0 4044 1292" width="4044px"
+     zoomAndPan="magnify">
+    <title>Studently - Class (UML) Diagram</title>
+    <defs/>
+    <g>
+        <g class="title" data-source-line="2">
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing"
+                  textLength="473.4844" x="1772.0215" y="47.0703">Studently - Class (UML) Diagram
+            </text>
+        </g><!--class User-->
+        <g class="entity" data-entity="User" data-source-line="4" data-uid="ent0002" id="entity_User">
+            <rect fill="#F1F1F1" height="326.8359" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="809.9961"
+                  x="1094.08" y="88.9766"/>
+            <ellipse cx="1460.2128" cy="120.9766" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M1466.1591,132.2627 Q1464.997,132.8604 1463.7187,133.1592 Q1462.4404,133.458 1461.0292,133.458 Q1456.0155,133.458 1453.3759,130.1543 Q1450.7363,126.8506 1450.7363,120.6084 Q1450.7363,114.3496 1453.3759,111.0459 Q1456.0155,107.7422 1461.0292,107.7422 Q1462.4404,107.7422 1463.7353,108.041 Q1465.0302,108.3398 1466.1591,108.9375 L1466.1591,114.3828 Q1464.8974,113.2207 1463.7104,112.6812 Q1462.5234,112.1416 1461.2616,112.1416 Q1458.5722,112.1416 1457.2026,114.2749 Q1455.8329,116.4082 1455.8329,120.6084 Q1455.8329,124.792 1457.2026,126.9253 Q1458.5722,129.0586 1461.2616,129.0586 Q1462.5234,129.0586 1463.7104,128.519 Q1464.8974,127.9795 1466.1591,126.8174 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="60.7305"
+                  x="1501.2128" y="131.5586">User
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="1096.08" x2="1902.0761" y1="152.9766" y2="152.9766"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1110.08" y="174.4648"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="102.416"
+                  x="1134.08" y="188.0469">UUID id
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1110.08" y="207.4414"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="1134.08" y="221.0234">String name
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1110.08" y="240.418"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="162.1895"
+                  x="1134.08" y="254">String email
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="1096.08" x2="1902.0761" y1="267.9063" y2="267.9063"/>
+            <ellipse cx="1116.08" cy="295.3945" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="757.9961"
+                  x="1134.08" y="302.9766">void signUp(String name, String email, String password)
+            </text>
+            <ellipse cx="1116.08" cy="328.3711" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="602.041"
+                  x="1134.08" y="335.9531">boolean login(String email, String password)
+            </text>
+            <ellipse cx="1116.08" cy="361.3477" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="602.998"
+                  x="1134.08" y="368.9297">Course addCourse(String code, String name)
+            </text>
+            <ellipse cx="1116.08" cy="394.3242" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="515.0742"
+                  x="1134.08" y="401.9063">ToDoList createToDoList(String name)
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN3" data-source-line="16" data-uid="ent0004" id="entity_GMN3">
+            <path d="M1974.68,211.7766 L1974.68,244.3966 L1904.68,252.3966 L1974.68,260.3966 L1974.68,293.0187 A0,0 0 0 0 1974.68,293.0187 L2387.4593,293.0187 A0,0 0 0 0 2387.4593,293.0187 L2387.4593,231.7766 L2367.4593,211.7766 L1974.68,211.7766 A0,0 0 0 0 1974.68,211.7766"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M2367.4593,211.7766 L2367.4593,231.7766 L2387.4593,231.7766 L2367.4593,211.7766" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="370.7793"
+                  x="1986.68" y="246.9133">Owns courses and to-do lists
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="348.7402"
+                  x="1986.68" y="277.5344">Performs sign-up and login
+            </text>
+        </g><!--class UserCredential-->
+        <g class="entity" data-entity="UserCredential" data-source-line="20" data-uid="ent0006"
+           id="entity_UserCredential">
+            <rect fill="#F1F1F1" height="227.9063" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="590.1387"
+                  x="14" y="569.8166"/>
+            <ellipse cx="200.6279" cy="601.8166" fill="#ADD1B2" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M206.5742,613.1027 Q205.4121,613.7004 204.1338,613.9992 Q202.8555,614.298 201.4443,614.298 Q196.4307,614.298 193.791,610.9943 Q191.1514,607.6906 191.1514,601.4484 Q191.1514,595.1896 193.791,591.8859 Q196.4307,588.5822 201.4443,588.5822 Q202.8555,588.5822 204.1504,588.881 Q205.4453,589.1798 206.5742,589.7775 L206.5742,595.2228 Q205.3125,594.0607 204.1255,593.5212 Q202.9385,592.9816 201.6768,592.9816 Q198.9873,592.9816 197.6177,595.1149 Q196.248,597.2482 196.248,601.4484 Q196.248,605.632 197.6177,607.7653 Q198.9873,609.8986 201.6768,609.8986 Q202.9385,609.8986 204.1255,609.359 Q205.3125,608.8195 206.5742,607.6574 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="199.8828"
+                  x="241.6279" y="612.3986">UserCredential
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="16" x2="602.1387" y1="633.8166" y2="633.8166"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="30" y="655.3048"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="285.9746"
+                  x="54" y="668.8869">String passwordHash
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="30" y="688.2814"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="405.7402"
+                  x="54" y="701.8634">String algorithm = "SHA-512"
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="16" x2="602.1387" y1="715.7697" y2="715.7697"/>
+            <ellipse cx="36" cy="743.258" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="538.1387"
+                  x="54" y="750.84">void setPassword(String passwordHash)
+            </text>
+            <ellipse cx="36" cy="776.2345" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="496.166"
+                  x="54" y="783.8166">boolean verify(String passwordHash)
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN7" data-source-line="29" data-uid="ent0008" id="entity_GMN7">
+            <path d="M47.82,1074.5166 L47.82,1155.7588 A0,0 0 0 0 47.82,1155.7588 L570.2995,1155.7588 A0,0 0 0 0 570.2995,1155.7588 L570.2995,1094.5166 L550.2995,1074.5166 L317.06,1074.5166 L309.06,798.6166 L301.06,1074.5166 L47.82,1074.5166 A0,0 0 0 0 47.82,1074.5166"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M550.2995,1074.5166 L550.2995,1094.5166 L570.2995,1094.5166 L550.2995,1074.5166" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="480.4795"
+                  x="59.82" y="1109.6533">Stores password hash; verify on login.
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="373.5469"
+                  x="59.82" y="1140.2744">Algorithm per NFR: SHA-512.
+            </text>
+        </g><!--class Course-->
+        <g class="entity" data-entity="Course" data-source-line="35" data-uid="ent0011" id="entity_Course">
+            <rect fill="#F1F1F1" height="227.9063" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="979.2813"
+                  x="673.42" y="569.8166"/>
+            <ellipse cx="1106.921" cy="601.8166" fill="#ADD1B2" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M1112.8673,613.1027 Q1111.7052,613.7004 1110.4268,613.9992 Q1109.1485,614.298 1107.7374,614.298 Q1102.7237,614.298 1100.0841,610.9943 Q1097.4444,607.6906 1097.4444,601.4484 Q1097.4444,595.1896 1100.0841,591.8859 Q1102.7237,588.5822 1107.7374,588.5822 Q1109.1485,588.5822 1110.4434,588.881 Q1111.7384,589.1798 1112.8673,589.7775 L1112.8673,595.2228 Q1111.6055,594.0607 1110.4185,593.5212 Q1109.2315,592.9816 1107.9698,592.9816 Q1105.2804,592.9816 1103.9107,595.1149 Q1102.5411,597.2482 1102.5411,601.4484 Q1102.5411,605.632 1103.9107,607.7653 Q1105.2804,609.8986 1107.9698,609.8986 Q1109.2315,609.8986 1110.4185,609.359 Q1111.6055,608.8195 1112.8673,607.6574 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="95.2793"
+                  x="1147.921" y="612.3986">Course
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="675.42" x2="1650.7013" y1="633.8166" y2="633.8166"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="689.42" y="655.3048"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="153.5625"
+                  x="713.42" y="668.8869">String code
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="689.42" y="688.2814"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="713.42" y="701.8634">String name
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="675.42" x2="1650.7013" y1="715.7697" y2="715.7697"/>
+            <ellipse cx="695.42" cy="743.258" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="182.3555"
+                  x="713.42" y="750.84">int progress()
+            </text>
+            <ellipse cx="695.42" cy="776.2345" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="927.2813"
+                  x="713.42" y="783.8166">CourseTask addTask(String name, Date deadline, String description)
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN12" data-source-line="44" data-uid="ent0013" id="entity_GMN12">
+            <path d="M222.4,227.0766 L222.4,277.6977 A0,0 0 0 0 222.4,277.6977 L645.64,277.6977 L1020.66,569.0566 L661.64,277.6977 L1023.7193,277.6977 A0,0 0 0 0 1023.7193,277.6977 L1023.7193,247.0766 L1003.7193,227.0766 L222.4,227.0766 A0,0 0 0 0 222.4,227.0766"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M1003.7193,227.0766 L1003.7193,247.0766 L1023.7193,247.0766 L1003.7193,227.0766" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="759.3193"
+                  x="234.4" y="262.2133">Per-user uniqueness: code must be unique for a given User.
+            </text>
+        </g><!--class CourseTask-->
+        <g class="entity" data-entity="CourseTask" data-source-line="49" data-uid="ent0016" id="entity_CourseTask">
+            <rect fill="#F1F1F1" height="326.8359" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="463.6602"
+                  x="931.24" y="951.7166"/>
+            <ellipse cx="1075.0271" cy="983.7166" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M1080.9734,995.0027 Q1079.8113,995.6004 1078.533,995.8992 Q1077.2546,996.198 1075.8435,996.198 Q1070.8298,996.198 1068.1902,992.8943 Q1065.5505,989.5906 1065.5505,983.3484 Q1065.5505,977.0896 1068.1902,973.7859 Q1070.8298,970.4822 1075.8435,970.4822 Q1077.2546,970.4822 1078.5496,970.781 Q1079.8445,971.0798 1080.9734,971.6775 L1080.9734,977.1228 Q1079.7117,975.9607 1078.5247,975.4212 Q1077.3377,974.8816 1076.0759,974.8816 Q1073.3865,974.8816 1072.0169,977.0149 Q1070.6472,979.1482 1070.6472,983.3484 Q1070.6472,987.532 1072.0169,989.6653 Q1073.3865,991.7986 1076.0759,991.7986 Q1077.3377,991.7986 1078.5247,991.259 Q1079.7117,990.7195 1080.9734,989.5574 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="159.0859"
+                  x="1116.0271" y="994.2986">CourseTask
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="933.24" x2="1392.9002" y1="1015.7166" y2="1015.7166"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="947.24" y="1037.2048"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="971.24" y="1050.7869">String name
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="947.24" y="1070.1814"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="240.9531"
+                  x="971.24" y="1083.7634">String description
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="947.24" y="1103.158"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="186.8398"
+                  x="971.24" y="1116.74">Date deadline
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="947.24" y="1136.1345"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="164.1445"
+                  x="971.24" y="1149.7166">int progress
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="947.24" y="1169.1111"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="238.1367"
+                  x="971.24" y="1182.6931">TaskStatus status
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="933.24" x2="1392.9002" y1="1196.5994" y2="1196.5994"/>
+            <ellipse cx="953.24" cy="1224.0877" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="411.6602"
+                  x="971.24" y="1231.6697">void updateProgress(int value)
+            </text>
+            <ellipse cx="953.24" cy="1257.0642" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="284.0059"
+                  x="971.24" y="1264.6463">void markComplete()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN17" data-source-line="61" data-uid="ent0018" id="entity_GMN17">
+            <path d="M1465.54,1089.8366 L1465.54,1107.1366 L1395.56,1115.1366 L1465.54,1123.1366 L1465.54,1140.4577 A0,0 0 0 0 1465.54,1140.4577 L2396.5927,1140.4577 A0,0 0 0 0 2396.5927,1140.4577 L2396.5927,1109.8366 L2376.5927,1089.8366 L1465.54,1089.8366 A0,0 0 0 0 1465.54,1089.8366"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M2376.5927,1089.8366 L2376.5927,1109.8366 L2396.5927,1109.8366 L2376.5927,1089.8366" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="889.0527"
+                  x="1477.54" y="1124.9733">Deadline shown in calendar; progress update (0-100) and completion.
+            </text>
+        </g><!--class TaskStatus-->
+        <g class="entity" data-entity="TaskStatus" data-source-line="66" data-uid="ent0021" id="entity_TaskStatus">
+            <rect fill="#F1F1F1" height="161.9531" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="210.9453"
+                  x="2457.6" y="171.4166"/>
+            <ellipse cx="2487.6" cy="203.4166" fill="#EB937F" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M2495.8285,215.4166 L2480.3891,215.4166 L2480.3891,190.6304 L2495.8285,190.6304 L2495.8285,194.9468 L2485.2865,194.9468 L2485.2865,200.2925 L2494.8324,200.2925 L2494.8324,204.6089 L2485.2865,204.6089 L2485.2865,211.1002 L2495.8285,211.1002 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="146.9453"
+                  x="2515.6" y="213.9986">TaskStatus
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2459.6" x2="2666.5453" y1="235.4166" y2="235.4166"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="121.2969"
+                  x="2469.6" y="270.4869">PENDING
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="143.7051"
+                  x="2469.6" y="303.4634">COMPLETE
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2459.6" x2="2666.5453" y1="317.3697" y2="317.3697"/>
+        </g><!--class ToDoList-->
+        <g class="entity" data-entity="ToDoList" data-source-line="71" data-uid="ent0022" id="entity_ToDoList">
+            <rect fill="#F1F1F1" height="161.9531" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="898.877"
+                  x="1723.64" y="602.7966"/>
+            <ellipse cx="2104.1556" cy="634.7966" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M2110.1019,646.0827 Q2108.9398,646.6804 2107.6615,646.9792 Q2106.3832,647.278 2104.972,647.278 Q2099.9584,647.278 2097.3187,643.9743 Q2094.6791,640.6706 2094.6791,634.4284 Q2094.6791,628.1696 2097.3187,624.8659 Q2099.9584,621.5622 2104.972,621.5622 Q2106.3832,621.5622 2107.6781,621.861 Q2108.973,622.1598 2110.1019,622.7575 L2110.1019,628.2028 Q2108.8402,627.0407 2107.6532,626.5012 Q2106.4662,625.9616 2105.2045,625.9616 Q2102.515,625.9616 2101.1454,628.0949 Q2099.7757,630.2282 2099.7757,634.4284 Q2099.7757,638.612 2101.1454,640.7453 Q2102.515,642.8786 2105.2045,642.8786 Q2106.4662,642.8786 2107.6532,642.339 Q2108.8402,641.7995 2110.1019,640.6374 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="120.8457"
+                  x="2145.1556" y="645.3786">ToDoList
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="1725.64" x2="2620.517" y1="666.7966" y2="666.7966"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1739.64" y="688.2848"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="1763.64" y="701.8669">String name
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="1725.64" x2="2620.517" y1="715.7731" y2="715.7731"/>
+            <ellipse cx="1745.64" cy="743.2614" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="846.877"
+                  x="1763.64" y="750.8434">void addTask(String description, Date deadline): ToDoListTask
+            </text>
+        </g><!--class ToDoListTask-->
+        <g class="entity" data-entity="ToDoListTask" data-source-line="79" data-uid="ent0024" id="entity_ToDoListTask">
+            <rect fill="#F1F1F1" height="227.9063" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="336.0059"
+                  x="2467.06" y="1001.1766"/>
+            <ellipse cx="2536.3691" cy="1033.1766" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M2542.3154,1044.4627 Q2541.1533,1045.0604 2539.8749,1045.3592 Q2538.5966,1045.658 2537.1855,1045.658 Q2532.1718,1045.658 2529.5322,1042.3543 Q2526.8925,1039.0506 2526.8925,1032.8084 Q2526.8925,1026.5496 2529.5322,1023.2459 Q2532.1718,1019.9422 2537.1855,1019.9422 Q2538.5966,1019.9422 2539.8915,1020.241 Q2541.1865,1020.5398 2542.3154,1021.1375 L2542.3154,1026.5828 Q2541.0537,1025.4207 2539.8666,1024.8812 Q2538.6796,1024.3416 2537.4179,1024.3416 Q2534.7285,1024.3416 2533.3588,1026.4749 Q2531.9892,1028.6082 2531.9892,1032.8084 Q2531.9892,1036.992 2533.3588,1039.1253 Q2534.7285,1041.2586 2537.4179,1041.2586 Q2538.6796,1041.2586 2539.8666,1040.719 Q2541.0537,1040.1795 2542.3154,1039.0174 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="184.6523"
+                  x="2573.1044" y="1043.7586">ToDoListTask
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2469.06" x2="2801.0659" y1="1065.1766" y2="1065.1766"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="2483.06" y="1086.6648"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="240.9531"
+                  x="2507.06" y="1100.2469">String description
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="2483.06" y="1119.6414"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="186.8398"
+                  x="2507.06" y="1133.2234">Date deadline
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="2483.06" y="1152.618"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="238.1367"
+                  x="2507.06" y="1166.2">TaskStatus status
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2469.06" x2="2801.0659" y1="1180.1062" y2="1180.1062"/>
+            <ellipse cx="2489.06" cy="1207.5945" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="284.0059"
+                  x="2507.06" y="1215.1766">void markComplete()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN25" data-source-line="88" data-uid="ent0026" id="entity_GMN25">
+            <path d="M2873.78,1089.8366 L2873.78,1107.1366 L2803.56,1115.1366 L2873.78,1123.1366 L2873.78,1140.4577 A0,0 0 0 0 2873.78,1140.4577 L3624.3435,1140.4577 A0,0 0 0 0 3624.3435,1140.4577 L3624.3435,1109.8366 L3604.3435,1089.8366 L2873.78,1089.8366 A0,0 0 0 0 2873.78,1089.8366"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M3604.3435,1089.8366 L3604.3435,1109.8366 L3624.3435,1109.8366 L3604.3435,1089.8366" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="708.5635"
+                  x="2885.78" y="1124.9733">Optional deadline shown in calendar; can be completed.
+            </text>
+        </g><!--class Calendar-->
+        <g class="entity" data-entity="Calendar" data-source-line="93" data-uid="ent0029" id="entity_Calendar">
+            <rect fill="#F1F1F1" height="227.9063" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="685.1719"
+                  x="2692.48" y="569.8166"/>
+            <ellipse cx="2966.3413" cy="601.8166" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M2972.2876,613.1027 Q2971.1255,613.7004 2969.8472,613.9992 Q2968.5689,614.298 2967.1577,614.298 Q2962.1441,614.298 2959.5044,610.9943 Q2956.8648,607.6906 2956.8648,601.4484 Q2956.8648,595.1896 2959.5044,591.8859 Q2962.1441,588.5822 2967.1577,588.5822 Q2968.5689,588.5822 2969.8638,588.881 Q2971.1587,589.1798 2972.2876,589.7775 L2972.2876,595.2228 Q2971.0259,594.0607 2969.8389,593.5212 Q2968.6519,592.9816 2967.3902,592.9816 Q2964.7007,592.9816 2963.3311,595.1149 Q2961.9614,597.2482 2961.9614,601.4484 Q2961.9614,605.632 2963.3311,607.7653 Q2964.7007,609.8986 2967.3902,609.8986 Q2968.6519,609.8986 2969.8389,609.359 Q2971.0259,608.8195 2972.2876,607.6574 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="120.4492"
+                  x="3007.3413" y="612.3986">Calendar
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2694.48" x2="3375.6519" y1="633.8166" y2="633.8166"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="2708.48" y="655.3048"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="92.5176"
+                  x="2732.48" y="668.8869">int day
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="2708.48" y="688.2814"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="133.3691"
+                  x="2732.48" y="701.8634">int month
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="2708.48" y="721.258"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="101.9512"
+                  x="2732.48" y="734.84">int year
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2694.48" x2="3375.6519" y1="748.7462" y2="748.7462"/>
+            <ellipse cx="2714.48" cy="776.2345" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="633.1719"
+                  x="2732.48" y="783.8166">List&lt;CalendarItem&gt; itemsForMonth(User user)
+            </text>
+        </g><!--class CalendarItem-->
+        <g class="entity" data-entity="CalendarItem" data-source-line="104" data-uid="ent0032" id="entity_CalendarItem">
+            <rect fill="#F1F1F1" height="194.9297" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="296.6035"
+                  x="3694.76" y="1017.6766"/>
+            <ellipse cx="3748.1038" cy="1049.6766" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M3754.05,1060.9627 Q3752.8879,1061.5604 3751.6096,1061.8592 Q3750.3313,1062.158 3748.9202,1062.158 Q3743.9065,1062.158 3741.2668,1058.8543 Q3738.6272,1055.5506 3738.6272,1049.3084 Q3738.6272,1043.0496 3741.2668,1039.7459 Q3743.9065,1036.4422 3748.9202,1036.4422 Q3750.3313,1036.4422 3751.6262,1036.741 Q3752.9211,1037.0398 3754.05,1037.6375 L3754.05,1043.0828 Q3752.7883,1041.9207 3751.6013,1041.3812 Q3750.4143,1040.8416 3749.1526,1040.8416 Q3746.4631,1040.8416 3745.0935,1042.9749 Q3743.7239,1045.1082 3743.7239,1049.3084 Q3743.7239,1053.492 3745.0935,1055.6253 Q3746.4631,1057.7586 3749.1526,1057.7586 Q3750.4143,1057.7586 3751.6013,1057.219 Q3752.7883,1056.6795 3754.05,1055.5174 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="180.7285"
+                  x="3781.2913" y="1060.2586">CalendarItem
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="3696.76" x2="3989.3635" y1="1081.6766" y2="1081.6766"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3710.76" y="1103.1648"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="130.5254"
+                  x="3734.76" y="1116.7469">Date date
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3710.76" y="1136.1414"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="244.6035"
+                  x="3734.76" y="1149.7234">String sourceType
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3710.76" y="1169.118"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="141.5313"
+                  x="3734.76" y="1182.7">String title
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="3696.76" x2="3989.3635" y1="1196.6062" y2="1196.6062"/>
+        </g><!--class TaskType-->
+        <g class="entity" data-entity="TaskType" data-source-line="110" data-uid="ent0033" id="entity_TaskType">
+            <rect fill="#F1F1F1" height="161.9531" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="260.3457"
+                  x="2738.9" y="171.4166"/>
+            <ellipse cx="2799.0421" cy="203.4166" fill="#EB937F" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M2807.2706,215.4166 L2791.8312,215.4166 L2791.8312,190.6304 L2807.2706,190.6304 L2807.2706,194.9468 L2796.7286,194.9468 L2796.7286,200.2925 L2806.2745,200.2925 L2806.2745,204.6089 L2796.7286,204.6089 L2796.7286,211.1002 L2807.2706,211.1002 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="129.3633"
+                  x="2833.7403" y="213.9986">TaskType
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2740.9" x2="2997.2457" y1="235.4166" y2="235.4166"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="192.8691"
+                  x="2750.9" y="270.4869">COURSE_TASK
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="236.3457"
+                  x="2750.9" y="303.4634">TODO_LIST_TASK
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2740.9" x2="2997.2457" y1="317.3697" y2="317.3697"/>
+        </g><!--reverse link User to UserCredential-->
+        <g class="link" data-entity-1="User" data-entity-2="UserCredential" data-source-line="33" data-uid="lnk10"
+           id="link_User_UserCredential">
+            <path codeLine="33"
+                  d="M1070.7902,411.5776 C1059.2302,415.7576 1070.36,411.7366 1059.06,415.8166 C909.62,469.7166 743.1,528.8766 605,577.6566"
+                  fill="none" id="User-backto-UserCredential" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="none"
+                     points="1093.36,403.4166,1079.3547,399.9738,1070.7902,411.5776,1084.7954,415.0204,1093.36,403.4166"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="65.3936"
+                  x="876.12" y="502.9533">owns
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="1061.2077" y="403.8788">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="619.7323" y="566.9419">1
+            </text>
+        </g><!--reverse link User to Course-->
+        <g class="link" data-entity-1="User" data-entity-2="Course" data-source-line="47" data-uid="lnk15"
+           id="link_User_Course">
+            <path codeLine="47" d="M1356.7237,435.4415 C1316.8037,486.2015 1288.5,522.2366 1251.86,568.8366" fill="none"
+                  id="User-backto-Course" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="none"
+                     points="1371.56,416.5766,1357.8536,421.0636,1356.7237,435.4415,1370.4302,430.9544,1371.56,416.5766"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="189.4141"
+                  x="1323" y="502.9533">enrolls/creates
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="1343.9328" y="457.1384">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="45.4238"
+                  x="1216.0879" y="548.1755">0..*
+            </text>
+        </g><!--reverse link Course to CourseTask-->
+        <g class="link" data-entity-1="Course" data-entity-2="CourseTask" data-source-line="64" data-uid="lnk20"
+           id="link_Course_CourseTask">
+            <path codeLine="64" d="M1163.06,822.6166 C1163.06,869.3566 1163.06,900.4366 1163.06,951.3566" fill="none"
+                  id="Course-backto-CourseTask" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="none"
+                     points="1163.06,798.6166,1155.06,810.6166,1163.06,822.6166,1171.06,810.6166,1163.06,798.6166"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="106.4121"
+                  x="1165.06" y="884.8533">contains
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="1146.1604" y="838.8027">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="45.4238"
+                  x="1117.0966" y="930.0408">0..*
+            </text>
+        </g><!--reverse link User to ToDoList-->
+        <g class="link" data-entity-1="User" data-entity-2="ToDoList" data-source-line="77" data-uid="lnk23"
+           id="link_User_ToDoList">
+            <path codeLine="77" d="M1775.109,429.4283 C1875.289,492.9483 1965.38,550.0766 2047.56,602.1966" fill="none"
+                  id="User-backto-ToDoList" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="none"
+                     points="1754.84,416.5766,1760.6906,429.7588,1775.109,429.4283,1769.2584,416.2461,1754.84,416.5766"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="65.3936"
+                  x="1898.44" y="502.9533">owns
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="1760.151" y="457.1384">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="45.4238"
+                  x="1979.2452" y="581.3892">0..*
+            </text>
+        </g><!--reverse link ToDoList to ToDoListTask-->
+        <g class="link" data-entity-1="ToDoList" data-entity-2="ToDoListTask" data-source-line="91" data-uid="lnk28"
+           id="link_ToDoList_ToDoListTask">
+            <path codeLine="91"
+                  d="M2189.7927,788.7336 C2199.6927,831.3336 2212.72,858.3766 2247.06,891.7166 C2308.78,951.6366 2355.26,911.0566 2431.06,951.7166 C2456.74,965.4966 2482.42,982.5566 2506.48,1000.4166"
+                  fill="none" id="ToDoList-backto-ToDoListTask" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="none"
+                     points="2184.36,765.3566,2179.284,778.856,2189.7927,788.7336,2194.8687,775.2342,2184.36,765.3566"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="106.4121"
+                  x="2249.06" y="884.8533">contains
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="2168.9181" y="805.9358">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="45.4238"
+                  x="2444.2145" y="979.7823">0..*
+            </text>
+        </g><!--link Calendar to CourseTask-->
+        <g class="link" data-entity-1="Calendar" data-entity-2="CourseTask" data-source-line="101" data-uid="lnk30"
+           id="link_Calendar_CourseTask">
+            <path codeLine="101"
+                  d="M2721.88,798.6366 C2610.62,834.2966 2483.58,870.0166 2365.06,891.7166 C1955.92,966.6766 1828.08,827.5566 1431.06,951.7166 C1419.14,955.4566 1418.3104,955.2825 1406.4504,960.1225"
+                  fill="none" id="Calendar-to-CourseTask"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="1395.34,964.6566,1415.0284,965.2624,1404.5987,960.8781,1408.9829,950.4484,1395.34,964.6566"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="268.6455"
+                  x="2516.82" y="884.8533">aggregates deadlines
+            </text>
+        </g><!--link Calendar to ToDoListTask-->
+        <g class="link" data-entity-1="Calendar" data-entity-2="ToDoListTask" data-source-line="102" data-uid="lnk31"
+           id="link_Calendar_ToDoListTask">
+            <path codeLine="102" d="M2929.46,798.6166 C2871.12,860.9366 2807.1008,929.3361 2748.7808,991.6361"
+                  fill="none" id="Calendar-to-ToDoListTask"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="2740.58,1000.3966,2758.7216,992.723,2747.414,993.0961,2747.0409,981.7886,2740.58,1000.3966"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="268.6455"
+                  x="2872.9" y="884.8533">aggregates deadlines
+            </text>
+        </g><!--reverse link Calendar to CalendarItem-->
+        <g class="link" data-entity-1="Calendar" data-entity-2="CalendarItem" data-source-line="115" data-uid="lnk34"
+           id="link_Calendar_CalendarItem">
+            <path codeLine="115"
+                  d="M3375.6628,807.8375 C3476.7828,849.5975 3564.62,892.3166 3659.06,951.7166 C3688.92,970.4966 3718.76,994.0766 3745.46,1017.3566"
+                  fill="none" id="Calendar-backto-CalendarItem" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="none"
+                     points="3353.48,798.6766,3361.5178,810.6513,3375.6628,807.8375,3367.6251,795.8628,3353.48,798.6766"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="480.9873"
+                  x="3548.54" y="884.8533">aggregates CourseTask/ToDoListTask
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="3373.3971" y="838.8697">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="45.4238"
+                  x="3683.9981" y="995.9736">0..*
+            </text>
+        </g><!--SRC=[ZLPTRzem57tdLrpn5BQ5qabxeLkb2kYAHW4ry5oviHkiEdPcErIewd-VxJWXpkW73qbySx_EkUT6QAePWKINc73D3X33X26b8DhUBWOmfIYJAE_rKcVSAYBXfGVc5yDsEvy2nVwKQ4bv1Xpb9BIG757MSxQli1SKWw8PtnPHA-9RuDoS2bFpMKWyyD4FGZ22E32HKHvzAcGYIga888ohfpeg5VXOrRPG1sp4L2oeqf1AWZIfZr7W-jhhSQ49I9hjD8X7HunBi7hcoYItfHGWZa6B60jW9eLo3ciY7uNCbMCXBWldv03rY7coQTjiJoInWw68DRntaDuWjGlV89O9IVKkXr_GJswkuX_dt_lX18XU-_3eHBekttiYwUFXj6TDnOFGMkGr5yUsNQf42sdug2DXPq8lV5eGVg13vthLD5yOhIslxyRW8GnR13aXzi_x8EBOtJjSZK6OGTH4UX5q2BGIE25UZvro3OKKcUbRHQ6QDaWzMKNPUwZYgL4CO88me_meBqnKAccXgU17lhGeB5bLnbePSMbnbPp-BGatXSUkISXBeyS7ub-0qGyWoEYUS8VxRM96m-6NVWr_38HBmPWwgwJTeSUXUlbecrjO_8i0ixUroVCccpxHI9T6-UuM2B8ii4cphlcsyNl4ocOhdLEEvDD4v0KZcaGdbl28mqLDVK-WTaOCfYT84JDC8NdHDESBGpIApqUZWLl6j2fX4BQ9zIIUfDPHPsV5DQ9MTeINUHjnHUjwjfpEbx_TysHrkrxCDZEBeff2y-5vULkKZeQEybeJwGXmC6wIEb9UJykZAHmkJJkqszFdLF3-o3-QPj2w-xIwUcQvyJk3JStdocoAdo71xH4sGDyWuByn-lNmoHiIh3enEhHEkGdPjSu7WcGDrcR-MUUOQv9V0ZLNTItahGsBt4piuZiIcch3uMKeBvGPoMPsSHi6LEZU0N8oe0FADjG0guPeBk6qbUaY9Pj3qR5h-zV1zjp8tVhuR9FLzYwPtM-kaZ_kl5bDL_UBURAfJ6satPrgjnQWED9n5gZZ7m00]-->
+    </g>
+</svg>

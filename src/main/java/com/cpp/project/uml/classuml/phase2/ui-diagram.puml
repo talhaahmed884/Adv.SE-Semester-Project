@@ -1,0 +1,272 @@
+@startuml
+
+title Studently – Terminal UI Class Diagram
+
+' ==================== MAIN UI ENTRY POINT ====================
+
+class StudentlyTerminalUI {
+    - ApplicationContext applicationContext
+
+    + void main(String[] args)
+    + void run(String... args)
+}
+
+note right of StudentlyTerminalUI
+    Spring Boot CommandLineRunner
+    Initializes terminal and starts LoginScreen
+    Conditional on property: studently.ui.enabled=true
+    Sets system property for terminal mode
+end note
+
+' ==================== UI SCREENS ====================
+
+class LoginScreen {
+    - Screen screen
+    - AuthenticationService authenticationService
+    - CourseService courseService
+    - ToDoListService toDoListService
+    - CalendarService calendarService
+    - String name
+    - String email
+    - String password
+    - int selectedField
+    - boolean isSignupMode
+    - String errorMessage
+    - String successMessage
+
+    + void display()
+    - void render()
+    - void renderSignup()
+    - void renderLogin()
+    - void renderMessages()
+    - void handleCharacterInput(Character c)
+    - void handleBackspace()
+    - void handleTab()
+    - boolean handleEnter()
+    - void navigateToMainMenu(UserDTO user)
+    - void clearFields()
+}
+
+note bottom of LoginScreen
+    Entry screen for authentication
+    Handles both signup and login modes
+    Switches between fields with TAB
+    Creates MainMenuScreen after successful login
+end note
+
+class MainMenuScreen {
+    - Screen screen
+    - UserDTO currentUser
+    - CourseService courseService
+    - ToDoListService toDoListService
+    - CalendarService calendarService
+    - int selectedOption
+
+    + void display()
+    - void render()
+    - void handleArrowUp()
+    - void handleArrowDown()
+    - void handleEnter()
+}
+
+note right of MainMenuScreen
+    Shows 4 menu options:
+    1. Course Management
+    2. To-Do List Management
+    3. Calendar
+    4. Logout
+    Navigates to respective screens on selection
+end note
+
+class CourseManagementScreen {
+    - Screen screen
+    - UserDTO currentUser
+    - CourseService courseService
+    - SimpleDateFormat dateFormat
+    - List<CourseDTO> courses
+    - int selectedCourse
+    - int selectedTask
+    - int mode
+    - String errorMessage
+    - String successMessage
+    - String courseCode
+    - String courseName
+    - String taskName
+    - String taskDescription
+    - String taskDeadlineDay
+    - String taskDeadlineMonth
+    - String taskDeadlineYear
+    - int inputField
+
+    + void display()
+    - void render()
+    - void renderCourseList()
+    - void renderAddCourse()
+    - void renderCourseDetails()
+    - void renderAddTask()
+    - void renderMessages()
+    - void handleCharacterInput(Character c)
+    - void handleBackspace()
+    - void handleArrowUp()
+    - void handleArrowDown()
+    - void nextInputField()
+    - void handleEnter()
+    - void handleUpdateProgress()
+    - void handleMarkComplete()
+    - void loadCourses()
+    - void clearInputs()
+    - void clearMessages()
+}
+
+note bottom of CourseManagementScreen
+    4 modes: 0=list view, 1=add course, 2=details, 3=add task
+    F1: Add Course
+    F2: Add Task (in detail view)
+    F3: Update Progress (in detail view)
+    F4: Mark Complete (in detail view)
+    Shows course progress and task status
+    Date input with validation (YYYY/MM/DD)
+end note
+
+class ToDoListManagementScreen {
+    - Screen screen
+    - UserDTO currentUser
+    - ToDoListService toDoListService
+    - SimpleDateFormat dateFormat
+    - List<ToDoListDTO> todoLists
+    - int selectedList
+    - int selectedTask
+    - int mode
+    - String errorMessage
+    - String successMessage
+    - String listName
+    - String taskDescription
+    - String taskDeadlineDay
+    - String taskDeadlineMonth
+    - String taskDeadlineYear
+    - int inputField
+
+    + void display()
+    - void render()
+    - void renderListView()
+    - void renderAddList()
+    - void renderListDetails()
+    - void renderAddTask()
+    - void renderMessages()
+    - void handleCharacterInput(Character c)
+    - void handleBackspace()
+    - void handleArrowUp()
+    - void handleArrowDown()
+    - void nextInputField()
+    - void handleEnter()
+    - void handleMarkComplete()
+    - void loadToDoLists()
+    - void clearInputs()
+    - void clearMessages()
+}
+
+note bottom of ToDoListManagementScreen
+    4 modes: 0=list view, 1=add list, 2=details, 3=add task
+    F1: Add List
+    F2: Add Task (in detail view)
+    F3: Mark Complete (in detail view)
+    Shows task completion count (X/Y completed)
+    Optional deadline with validation
+end note
+
+class CalendarScreen {
+    - Screen screen
+    - UserDTO currentUser
+    - CalendarService calendarService
+    - int currentMonth
+    - int currentYear
+    - List<CalendarItemDTO> calendarItems
+    - String errorMessage
+
+    + void display()
+    - void render()
+    - void renderCalendar()
+    - void renderCalendarItems()
+    - void handleArrowLeft()
+    - void handleArrowRight()
+    - void loadCalendarItems()
+}
+
+note right of CalendarScreen
+    Shows monthly calendar view
+    Arrow keys navigate months
+    Displays aggregated tasks from:
+    - Course deadlines
+    - To-Do List deadlines
+    Color-coded by status
+end note
+
+' ==================== RELATIONSHIPS ====================
+
+StudentlyTerminalUI ..> LoginScreen : creates
+
+LoginScreen ..> MainMenuScreen : navigates to >
+LoginScreen ..> AuthenticationService : uses
+
+MainMenuScreen ..> CourseManagementScreen : navigates to >
+MainMenuScreen ..> ToDoListManagementScreen : navigates to >
+MainMenuScreen ..> CalendarScreen : navigates to >
+
+CourseManagementScreen ..> CourseService : uses
+CourseManagementScreen ..> CourseDTO : displays
+CourseManagementScreen ..> CourseTaskDTO : displays
+
+ToDoListManagementScreen ..> ToDoListService : uses
+ToDoListManagementScreen ..> ToDoListDTO : displays
+ToDoListManagementScreen ..> ToDoListTaskDTO : displays
+
+CalendarScreen ..> CalendarService : uses
+CalendarScreen ..> CalendarItemDTO : displays
+
+' ==================== EXTERNAL DEPENDENCIES ====================
+
+interface Screen {
+    + void clear()
+    + void refresh()
+    + KeyStroke readInput()
+    + TextGraphics newTextGraphics()
+    + TerminalSize getTerminalSize()
+    + void startScreen()
+    + void stopScreen()
+}
+
+note bottom of Screen
+    Lanterna framework interface
+    Provides terminal screen operations
+    Used by all UI screens
+end note
+
+LoginScreen --> Screen
+MainMenuScreen --> Screen
+CourseManagementScreen --> Screen
+ToDoListManagementScreen --> Screen
+CalendarScreen --> Screen
+
+interface AuthenticationService
+interface CourseService
+interface ToDoListService
+interface CalendarService
+
+note bottom of AuthenticationService
+    Service layer interfaces
+    See main class diagram for details
+end note
+
+class UserDTO
+class CourseDTO
+class CourseTaskDTO
+class ToDoListDTO
+class ToDoListTaskDTO
+class CalendarItemDTO
+
+note right of UserDTO
+    Data Transfer Objects
+    See main class diagram for details
+end note
+
+@enduml

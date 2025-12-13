@@ -1,0 +1,1835 @@
+<svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css"
+     data-diagram-type="CLASS" height="4548px" preserveAspectRatio="none"
+     style="width:12844px;height:4548px;background:#FFFFFF;" version="1.1" viewBox="0 0 12844 4548" width="12844px"
+     zoomAndPan="magnify">
+    <title>Studently - Class (UML) Diagram</title>
+    <defs>
+        <filter height="1" id="bjkmzzx88sg1u0" width="1" x="0" y="0">
+            <feFlood flood-color="#FFE6E6" result="flood"/>
+            <feComposite in="SourceGraphic" in2="flood" operator="over"/>
+        </filter>
+        <filter height="1" id="bjkmzzx88sg1u1" width="1" x="0" y="0">
+            <feFlood flood-color="#E6F3FF" result="flood"/>
+            <feComposite in="SourceGraphic" in2="flood" operator="over"/>
+        </filter>
+        <filter height="1" id="bjkmzzx88sg1u2" width="1" x="0" y="0">
+            <feFlood flood-color="#E6FFE6" result="flood"/>
+            <feComposite in="SourceGraphic" in2="flood" operator="over"/>
+        </filter>
+        <filter height="1" id="bjkmzzx88sg1u3" width="1" x="0" y="0">
+            <feFlood flood-color="#FFF9E6" result="flood"/>
+            <feComposite in="SourceGraphic" in2="flood" operator="over"/>
+        </filter>
+    </defs>
+    <g>
+        <g class="title" data-source-line="2">
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing"
+                  textLength="473.4844" x="6171.2578" y="47.0703">Studently - Class (UML) Diagram
+            </text>
+        </g>
+        <g class="legend" data-source-line="6">
+            <rect fill="#DDDDDD" height="390.7422" rx="15" ry="15" style="stroke:#000000;stroke-width:2;"
+                  width="553.8594" x="24" y="98.9766"/>
+            <text fill="#000000" filter="url(#bjkmzzx88sg1u0)" font-family="sans-serif" font-size="28"
+                  lengthAdjust="spacing" textLength="26.5781" x="34" y="140.0469">&#160;&#160;&#160;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="212.7344"
+                  x="69.4375" y="140.0469">Adapter Pattern
+            </text>
+            <text fill="#000000" filter="url(#bjkmzzx88sg1u1)" font-family="sans-serif" font-size="28"
+                  lengthAdjust="spacing" textLength="26.5781" x="34" y="173.0234">&#160;&#160;&#160;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="249.4297"
+                  x="69.4375" y="173.0234">Repository Pattern
+            </text>
+            <text fill="#000000" filter="url(#bjkmzzx88sg1u2)" font-family="sans-serif" font-size="28"
+                  lengthAdjust="spacing" textLength="26.5781" x="34" y="206">&#160;&#160;&#160;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="199.5273"
+                  x="69.4375" y="206">Builder Pattern
+            </text>
+            <text fill="#000000" filter="url(#bjkmzzx88sg1u3)" font-family="sans-serif" font-size="28"
+                  lengthAdjust="spacing" textLength="26.5781" x="34" y="238.9766">&#160;&#160;&#160;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="308.0273"
+                  x="69.4375" y="238.9766">Service/Facade Pattern
+            </text>
+            <line style="stroke:#000000;stroke-width:2;" x1="34" x2="386.3242" y1="112.9766" y2="112.9766"/>
+            <line style="stroke:#000000;stroke-width:2;" x1="34" x2="386.3242" y1="145.9531" y2="145.9531"/>
+            <line style="stroke:#000000;stroke-width:2;" x1="34" x2="386.3242" y1="178.9297" y2="178.9297"/>
+            <line style="stroke:#000000;stroke-width:2;" x1="34" x2="386.3242" y1="211.9063" y2="211.9063"/>
+            <line style="stroke:#000000;stroke-width:2;" x1="34" x2="386.3242" y1="244.8828" y2="244.8828"/>
+            <line style="stroke:#000000;stroke-width:2;" x1="34" x2="34" y1="112.9766" y2="244.8828"/>
+            <line style="stroke:#000000;stroke-width:2;" x1="60.5781" x2="60.5781" y1="112.9766" y2="244.8828"/>
+            <line style="stroke:#000000;stroke-width:2;" x1="386.3242" x2="386.3242" y1="112.9766" y2="244.8828"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="8.8594"
+                  x="34" y="275.9531">&#160;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing"
+                  textLength="202.6445" x="34" y="308.9297">Relationships:
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="260.9414"
+                  x="34" y="341.9063">&#9472;&#9472;&gt; : Association
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="494.9219"
+                  x="34" y="374.8828">&#9472;&#9472;|&gt; : Inheritance/Implementation
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="533.8594"
+                  x="34" y="407.8594">&#9472;&#9472;* : Composition (strong ownership)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="512.6406"
+                  x="34" y="440.8359">&#9472;&#9472;o : Aggregation (weak ownership)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="233.2969"
+                  x="34" y="473.8125">..&gt; : Dependency
+            </text>
+        </g><!--cluster Domain Entities-->
+        <g class="cluster" data-entity="Domain Entities" data-source-line="22" data-uid="ent0002"
+           id="cluster_Domain Entities">
+            <rect fill="none" height="2454.12" rx="5" ry="5" style="stroke:#181818;stroke-width:2;" width="3358"
+                  x="9474" y="2082.9788"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing"
+                  textLength="228.7715" x="11038.6143" y="2114.0491">Domain Entities
+            </text>
+        </g><!--cluster Data Transfer Objects-->
+        <g class="cluster" data-entity="Data Transfer Objects" data-source-line="170" data-uid="ent0038"
+           id="cluster_Data Transfer Objects">
+            <rect fill="none" height="1172" rx="5" ry="5" style="stroke:#181818;stroke-width:2;" width="3104" x="6322"
+                  y="2115.9588"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing"
+                  textLength="317.8164" x="7715.0918" y="2147.0291">Data Transfer Objects
+            </text>
+        </g><!--cluster Service Layer-->
+        <g class="cluster" data-entity="Service Layer" data-source-line="262" data-uid="ent0055"
+           id="cluster_Service Layer">
+            <rect fill="none" height="944.16" rx="5" ry="5" style="stroke:#181818;stroke-width:2;" width="4614" x="974"
+                  y="529.7188"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing"
+                  textLength="189.5879" x="3186.2061" y="560.7891">Service Layer
+            </text>
+        </g><!--cluster Repository Layer-->
+        <g class="cluster" data-entity="Repository Layer" data-source-line="323" data-uid="ent0067"
+           id="cluster_Repository Layer">
+            <rect fill="none" height="413.1" rx="5" ry="5" style="stroke:#181818;stroke-width:2;" width="3580" x="14"
+                  y="1571.8788"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing"
+                  textLength="242.8125" x="1682.5938" y="1602.9491">Repository Layer
+            </text>
+        </g><!--cluster Adapter Layer-->
+        <g class="cluster" data-entity="Adapter Layer" data-source-line="372" data-uid="ent0082"
+           id="cluster_Adapter Layer">
+            <rect fill="none" height="841.08" rx="5" ry="5" style="stroke:#181818;stroke-width:2;" width="2632" x="3642"
+                  y="1637.8188"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing"
+                  textLength="202.0977" x="4856.9512" y="1668.8891">Adapter Layer
+            </text>
+        </g><!--class User-->
+        <g class="entity" data-entity="User" data-source-line="23" data-uid="ent0003" id="entity_User">
+            <rect fill="#F1F1F1" height="475.9844" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="658.8398"
+                  x="10022.58" y="2152.9788"/>
+            <ellipse cx="10302.2597" cy="2193.5998" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M10308.206,2204.886 Q10307.0439,2205.4836 10305.7655,2205.7825 Q10304.4872,2206.0813 10303.0761,2206.0813 Q10298.0624,2206.0813 10295.4228,2202.7776 Q10292.7831,2199.4739 10292.7831,2193.2317 Q10292.7831,2186.9729 10295.4228,2183.6692 Q10298.0624,2180.3655 10303.0761,2180.3655 Q10304.4872,2180.3655 10305.7821,2180.6643 Q10307.0771,2180.9631 10308.206,2181.5608 L10308.206,2187.0061 Q10306.9443,2185.844 10305.7572,2185.3044 Q10304.5702,2184.7649 10303.3085,2184.7649 Q10300.6191,2184.7649 10299.2494,2186.8982 Q10297.8798,2189.0315 10297.8798,2193.2317 Q10297.8798,2197.4153 10299.2494,2199.5486 Q10300.6191,2201.6819 10303.3085,2201.6819 Q10304.5702,2201.6819 10305.7572,2201.1423 Q10306.9443,2200.6028 10308.206,2199.4407 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="90.4805" x="10339.2597" y="2186.1819">&#171;Entity&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="60.7305"
+                  x="10354.1347" y="2218.3147">User
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="10024.58" x2="10679.4198" y1="2234.2209" y2="2234.2209"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="10038.58" y="2255.7092"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="102.416"
+                  x="10062.58" y="2269.2913">UUID id
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="10038.58" y="2288.6858"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="10062.58" y="2302.2678">String name
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="10038.58" y="2321.6623"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="162.1895"
+                  x="10062.58" y="2335.2444">String email
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="10038.58" y="2354.6389"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="342.8633"
+                  x="10062.58" y="2368.2209">UserCredential credential
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="10024.58" x2="10679.4198" y1="2382.1272" y2="2382.1272"/>
+            <ellipse cx="10044.58" cy="2409.6155" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="164.1309"
+                  x="10062.58" y="2417.1975">UUID getId()
+            </text>
+            <ellipse cx="10044.58" cy="2442.592" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="228.4297"
+                  x="10062.58" y="2450.1741">String getName()
+            </text>
+            <ellipse cx="10044.58" cy="2475.5686" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="366.0918"
+                  x="10062.58" y="2483.1506">void setName(String name)
+            </text>
+            <ellipse cx="10044.58" cy="2508.5452" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="223.5078"
+                  x="10062.58" y="2516.1272">String getEmail()
+            </text>
+            <ellipse cx="10044.58" cy="2541.5217" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="359.9805"
+                  x="10062.58" y="2549.1038">void setEmail(String email)
+            </text>
+            <ellipse cx="10044.58" cy="2574.4983" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="409.6367"
+                  x="10062.58" y="2582.0803">UserCredential getCredential()
+            </text>
+            <ellipse cx="10044.58" cy="2607.4748" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="606.8398"
+                  x="10062.58" y="2615.0569">void setCredential(UserCredential credential)
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN4" data-source-line="39" data-uid="ent0005" id="entity_GMN4">
+            <path d="M10751.98,2319.7188 L10751.98,2382.9588 L10681.8,2390.9588 L10751.98,2398.9588 L10751.98,2462.2031 A0,0 0 0 0 10751.98,2462.2031 L11368.0239,2462.2031 A0,0 0 0 0 11368.0239,2462.2031 L11368.0239,2339.7188 L11348.0239,2319.7188 L10751.98,2319.7188 A0,0 0 0 0 10751.98,2319.7188"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M11348.0239,2319.7188 L11348.0239,2339.7188 L11368.0239,2339.7188 L11348.0239,2319.7188"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="131.917" x="10763.98" y="2354.8555">JPA Entity
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="391.9678"
+                  x="10763.98" y="2385.4766">Primary entity for system users
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="574.0439"
+                  x="10763.98" y="2416.0977">@OneToOne with UserCredential (cascade all)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="540.0713"
+                  x="10763.98" y="2446.7188">Owns courses and to-do lists via userId FK
+            </text>
+        </g><!--class UserCredential-->
+        <g class="entity" data-entity="UserCredential" data-source-line="45" data-uid="ent0007"
+           id="entity_UserCredential">
+            <rect fill="#F1F1F1" height="443.0078" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="525.1426"
+                  x="11225.42" y="2812.9588"/>
+            <ellipse cx="11379.5499" cy="2853.5798" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M11385.4962,2864.866 Q11384.3341,2865.4636 11383.0557,2865.7625 Q11381.7774,2866.0613 11380.3663,2866.0613 Q11375.3526,2866.0613 11372.713,2862.7576 Q11370.0733,2859.4539 11370.0733,2853.2117 Q11370.0733,2846.9529 11372.713,2843.6492 Q11375.3526,2840.3455 11380.3663,2840.3455 Q11381.7774,2840.3455 11383.0723,2840.6443 Q11384.3673,2840.9431 11385.4962,2841.5408 L11385.4962,2846.9861 Q11384.2345,2845.824 11383.0474,2845.2844 Q11381.8604,2844.7449 11380.5987,2844.7449 Q11377.9093,2844.7449 11376.5396,2846.8782 Q11375.17,2849.0115 11375.17,2853.2117 Q11375.17,2857.3953 11376.5396,2859.5286 Q11377.9093,2861.6619 11380.5987,2861.6619 Q11381.8604,2861.6619 11383.0474,2861.1223 Q11384.2345,2860.5828 11385.4962,2859.4207 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="90.4805" x="11475.2511" y="2846.1619">&#171;Entity&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="199.8828"
+                  x="11420.5499" y="2878.2947">UserCredential
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="11227.42" x2="11748.5626" y1="2894.2009" y2="2894.2009"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11241.42" y="2915.6892"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="161.0957"
+                  x="11265.42" y="2929.2713">UUID userId
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11241.42" y="2948.6658"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="128.2969"
+                  x="11265.42" y="2962.2478">User user
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11241.42" y="2981.6423"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="285.9746"
+                  x="11265.42" y="2995.2244">String passwordHash
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11241.42" y="3014.6189"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="220.5547"
+                  x="11265.42" y="3028.2009">String algorithm
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="11227.42" x2="11748.5626" y1="3042.1072" y2="3042.1072"/>
+            <ellipse cx="11247.42" cy="3069.5955" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="224.8613"
+                  x="11265.42" y="3077.1775">UUID getUserId()
+            </text>
+            <ellipse cx="11247.42" cy="3102.572" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="192.0625"
+                  x="11265.42" y="3110.1541">User getUser()
+            </text>
+            <ellipse cx="11247.42" cy="3135.5486" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="313.8516"
+                  x="11265.42" y="3143.1306">void setUser(User user)
+            </text>
+            <ellipse cx="11247.42" cy="3168.5252" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="345.5703"
+                  x="11265.42" y="3176.1072">String getPasswordHash()
+            </text>
+            <ellipse cx="11247.42" cy="3201.5017" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="473.1426"
+                  x="11265.42" y="3209.0838">void setPasswordHash(String hash)
+            </text>
+            <ellipse cx="11247.42" cy="3234.4783" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="286.1523"
+                  x="11265.42" y="3242.0603">String getAlgorithm()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN8" data-source-line="60" data-uid="ent0009" id="entity_GMN8">
+            <path d="M10867.12,3610.7188 L10867.12,3753.2031 A0,0 0 0 0 10867.12,3753.2031 L11464.8827,3753.2031 A0,0 0 0 0 11464.8827,3753.2031 L11464.8827,3630.7188 L11444.8827,3610.7188 L11209.12,3610.7188 L11378.08,3256.1188 L11193.12,3610.7188 L10867.12,3610.7188 A0,0 0 0 0 10867.12,3610.7188"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M11444.8827,3610.7188 L11444.8827,3630.7188 L11464.8827,3630.7188 L11444.8827,3610.7188"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="131.917" x="10879.12" y="3645.8555">JPA Entity
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="543.8545"
+                  x="10879.12" y="3676.4766">Stores salted password hash with SHA-512
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="555.7627"
+                  x="10879.12" y="3707.0977">@OneToOne with User (userId as PK and FK)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="313.8535"
+                  x="10879.12" y="3737.7188">Bidirectional relationship
+            </text>
+        </g><!--class Course-->
+        <g class="entity" data-entity="Course" data-source-line="66" data-uid="ent0011" id="entity_Course">
+            <rect fill="#F1F1F1" height="410.0313" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="979.2813"
+                  x="11820.36" y="2829.4388"/>
+            <ellipse cx="12253.861" cy="2870.0598" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M12259.8073,2881.346 Q12258.6452,2881.9436 12257.3668,2882.2425 Q12256.0885,2882.5413 12254.6774,2882.5413 Q12249.6637,2882.5413 12247.0241,2879.2376 Q12244.3844,2875.9339 12244.3844,2869.6917 Q12244.3844,2863.4329 12247.0241,2860.1292 Q12249.6637,2856.8255 12254.6774,2856.8255 Q12256.0885,2856.8255 12257.3834,2857.1243 Q12258.6784,2857.4231 12259.8073,2858.0208 L12259.8073,2863.4661 Q12258.5455,2862.304 12257.3585,2861.7644 Q12256.1715,2861.2249 12254.9098,2861.2249 Q12252.2204,2861.2249 12250.8507,2863.3582 Q12249.4811,2865.4915 12249.4811,2869.6917 Q12249.4811,2873.8753 12250.8507,2876.0086 Q12252.2204,2878.1419 12254.9098,2878.1419 Q12256.1715,2878.1419 12257.3585,2877.6023 Q12258.5455,2877.0628 12259.8073,2875.9007 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="90.4805" x="12297.2604" y="2862.6419">&#171;Entity&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="95.2793"
+                  x="12294.861" y="2894.7747">Course
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="11822.36" x2="12797.6413" y1="2910.6809" y2="2910.6809"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11836.36" y="2932.1692"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="102.416"
+                  x="11860.36" y="2945.7513">UUID id
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11836.36" y="2965.1458"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="153.5625"
+                  x="11860.36" y="2978.7278">String code
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11836.36" y="2998.1223"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="11860.36" y="3011.7044">String name
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11836.36" y="3031.0989"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="161.0957"
+                  x="11860.36" y="3044.6809">UUID userId
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11836.36" y="3064.0755"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="331.0781"
+                  x="11860.36" y="3077.6575">List&lt;CourseTask&gt; tasks
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11836.36" y="3097.052"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="339.2813"
+                  x="11860.36" y="3110.6341">LocalDateTime createdAt
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11836.36" y="3130.0286"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="350.5059"
+                  x="11860.36" y="3143.6106">LocalDateTime updatedAt
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="11822.36" x2="12797.6413" y1="3157.5169" y2="3157.5169"/>
+            <ellipse cx="11842.36" cy="3185.0052" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="182.3555"
+                  x="11860.36" y="3192.5872">int progress()
+            </text>
+            <ellipse cx="11842.36" cy="3217.9817" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="927.2813"
+                  x="11860.36" y="3225.5638">CourseTask addTask(String name, Date deadline, String description)
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN12" data-source-line="80" data-uid="ent0013" id="entity_GMN12">
+            <path d="M11437.96,2304.4188 L11437.96,2477.5242 A0,0 0 0 0 11437.96,2477.5242 L11863.2,2477.5242 L12148.68,2828.5988 L11879.2,2477.5242 L12170.0391,2477.5242 A0,0 0 0 0 12170.0391,2477.5242 L12170.0391,2324.4188 L12150.0391,2304.4188 L11437.96,2304.4188 A0,0 0 0 0 11437.96,2304.4188"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M12150.0391,2304.4188 L12150.0391,2324.4188 L12170.0391,2324.4188 L12150.0391,2304.4188"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="131.917" x="11449.96" y="2339.5555">JPA Entity
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="474.9824"
+                  x="11449.96" y="2370.1766">Course code must be unique per user
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="599.7646"
+                  x="11449.96" y="2400.7977">Progress calculated as average of task progress
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="690.0791"
+                  x="11449.96" y="2431.4188">@OneToMany with CourseTask (cascade all, lazy fetch)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="467.5684"
+                  x="11449.96" y="2462.0398">@ManyToOne with User via userId FK
+            </text>
+        </g><!--class CourseTask-->
+        <g class="entity" data-entity="CourseTask" data-source-line="87" data-uid="ent0015" id="entity_CourseTask">
+            <rect fill="#F1F1F1" height="475.9844" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="463.6602"
+                  x="11534.16" y="3443.9588"/>
+            <ellipse cx="11677.9471" cy="3484.5798" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M11683.8934,3495.866 Q11682.7313,3496.4636 11681.453,3496.7625 Q11680.1746,3497.0613 11678.7635,3497.0613 Q11673.7498,3497.0613 11671.1102,3493.7576 Q11668.4705,3490.4539 11668.4705,3484.2117 Q11668.4705,3477.9529 11671.1102,3474.6492 Q11673.7498,3471.3455 11678.7635,3471.3455 Q11680.1746,3471.3455 11681.4696,3471.6443 Q11682.7645,3471.9431 11683.8934,3472.5408 L11683.8934,3477.9861 Q11682.6317,3476.824 11681.4447,3476.2844 Q11680.2577,3475.7449 11678.9959,3475.7449 Q11676.3065,3475.7449 11674.9369,3477.8782 Q11673.5672,3480.0115 11673.5672,3484.2117 Q11673.5672,3488.3953 11674.9369,3490.5286 Q11676.3065,3492.6619 11678.9959,3492.6619 Q11680.2577,3492.6619 11681.4447,3492.1223 Q11682.6317,3491.5828 11683.8934,3490.4207 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="90.4805" x="11753.2498" y="3477.1619">&#171;Entity&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="159.0859"
+                  x="11718.9471" y="3509.2947">CourseTask
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="11536.16" x2="11995.8202" y1="3525.2009" y2="3525.2009"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11550.16" y="3546.6892"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="102.416"
+                  x="11574.16" y="3560.2713">UUID id
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11550.16" y="3579.6658"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="192.6367"
+                  x="11574.16" y="3593.2478">UUID courseId
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11550.16" y="3612.6423"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="11574.16" y="3626.2244">String name
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11550.16" y="3645.6189"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="240.9531"
+                  x="11574.16" y="3659.2009">String description
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11550.16" y="3678.5955"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="186.8398"
+                  x="11574.16" y="3692.1775">Date deadline
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11550.16" y="3711.572"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="164.1445"
+                  x="11574.16" y="3725.1541">int progress
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11550.16" y="3744.5486"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="238.1367"
+                  x="11574.16" y="3758.1306">TaskStatus status
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11550.16" y="3777.5252"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="339.2813"
+                  x="11574.16" y="3791.1072">LocalDateTime createdAt
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="11550.16" y="3810.5017"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="350.5059"
+                  x="11574.16" y="3824.0838">LocalDateTime updatedAt
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="11536.16" x2="11995.8202" y1="3837.99" y2="3837.99"/>
+            <ellipse cx="11556.16" cy="3865.4783" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="411.6602"
+                  x="11574.16" y="3873.0603">void updateProgress(int value)
+            </text>
+            <ellipse cx="11556.16" cy="3898.4548" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="284.0059"
+                  x="11574.16" y="3906.0369">void markComplete()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN16" data-source-line="103" data-uid="ent0017" id="entity_GMN16">
+            <path d="M12067.72,3610.7188 L12067.72,3673.9588 L11998.24,3681.9588 L12067.72,3689.9588 L12067.72,3753.2031 A0,0 0 0 0 12067.72,3753.2031 L12800.2815,3753.2031 A0,0 0 0 0 12800.2815,3753.2031 L12800.2815,3630.7188 L12780.2815,3610.7188 L12067.72,3610.7188 A0,0 0 0 0 12067.72,3610.7188"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M12780.2815,3610.7188 L12780.2815,3630.7188 L12800.2815,3630.7188 L12780.2815,3610.7188"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="131.917" x="12079.72" y="3645.8555">JPA Entity
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="426.7402"
+                  x="12079.72" y="3676.4766">Progress clamped to 0-100 range
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="690.5615"
+                  x="12079.72" y="3707.0977">Marking complete: progress=100, status=COMPLETED
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="528.9375"
+                  x="12079.72" y="3737.7188">@ManyToOne with Course via courseId FK
+            </text>
+        </g><!--class ToDoList-->
+        <g class="entity" data-entity="ToDoList" data-source-line="109" data-uid="ent0019" id="entity_ToDoList">
+            <rect fill="#F1F1F1" height="377.0547" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="823.75"
+                  x="9506.12" y="2845.9388"/>
+            <ellipse cx="9849.0721" cy="2886.5598" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M9855.0184,2897.846 Q9853.8563,2898.4436 9852.578,2898.7425 Q9851.2997,2899.0413 9849.8886,2899.0413 Q9844.8749,2899.0413 9842.2352,2895.7376 Q9839.5956,2892.4339 9839.5956,2886.1917 Q9839.5956,2879.9329 9842.2352,2876.6292 Q9844.8749,2873.3255 9849.8886,2873.3255 Q9851.2997,2873.3255 9852.5946,2873.6243 Q9853.8895,2873.9231 9855.0184,2874.5208 L9855.0184,2879.9661 Q9853.7567,2878.804 9852.5697,2878.2644 Q9851.3827,2877.7249 9850.121,2877.7249 Q9847.4315,2877.7249 9846.0619,2879.8582 Q9844.6923,2881.9915 9844.6923,2886.1917 Q9844.6923,2890.3753 9846.0619,2892.5086 Q9847.4315,2894.6419 9850.121,2894.6419 Q9851.3827,2894.6419 9852.5697,2894.1023 Q9853.7567,2893.5628 9855.0184,2892.4007 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="90.4805" x="9905.2548" y="2879.1419">&#171;Entity&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="120.8457"
+                  x="9890.0721" y="2911.2747">ToDoList
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="9508.12" x2="10327.87" y1="2927.1809" y2="2927.1809"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9522.12" y="2948.6692"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="102.416"
+                  x="9546.12" y="2962.2513">UUID id
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9522.12" y="2981.6458"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="9546.12" y="2995.2278">String name
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9522.12" y="3014.6223"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="161.0957"
+                  x="9546.12" y="3028.2044">UUID userId
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9522.12" y="3047.5989"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="356.6445"
+                  x="9546.12" y="3061.1809">List&lt;ToDoListTask&gt; tasks
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9522.12" y="3080.5755"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="339.2813"
+                  x="9546.12" y="3094.1575">LocalDateTime createdAt
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9522.12" y="3113.552"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="350.5059"
+                  x="9546.12" y="3127.1341">LocalDateTime updatedAt
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="9508.12" x2="10327.87" y1="3141.0403" y2="3141.0403"/>
+            <ellipse cx="9528.12" cy="3168.5286" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="771.75"
+                  x="9546.12" y="3176.1106">ToDoListTask addTask(String description, Date deadline)
+            </text>
+            <ellipse cx="9528.12" cy="3201.5052" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="516.4004"
+                  x="9546.12" y="3209.0872">List&lt;Date&gt; getAggregatedDeadlines()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN20" data-source-line="122" data-uid="ent0021" id="entity_GMN20">
+            <path d="M10400.1,2978.5388 L10400.1,3026.4588 L10330.36,3034.4588 L10400.1,3042.4588 L10400.1,3090.402 A0,0 0 0 0 10400.1,3090.402 L11155.9193,3090.402 A0,0 0 0 0 11155.9193,3090.402 L11155.9193,2998.5388 L11135.9193,2978.5388 L10400.1,2978.5388 A0,0 0 0 0 10400.1,2978.5388"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M11135.9193,2978.5388 L11135.9193,2998.5388 L11155.9193,2998.5388 L11135.9193,2978.5388"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="131.917" x="10412.1" y="3013.6755">JPA Entity
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="713.8193"
+                  x="10412.1" y="3044.2966">@OneToMany with ToDoListTask (cascade all, lazy fetch)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="467.5684"
+                  x="10412.1" y="3074.9177">@ManyToOne with User via userId FK
+            </text>
+        </g><!--class ToDoListTask-->
+        <g class="entity" data-entity="ToDoListTask" data-source-line="127" data-uid="ent0023" id="entity_ToDoListTask">
+            <rect fill="#F1F1F1" height="377.0547" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="402.5059"
+                  x="9658.74" y="3493.4388"/>
+            <ellipse cx="9759.1668" cy="3534.0598" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M9765.113,3545.346 Q9763.9509,3545.9436 9762.6726,3546.2425 Q9761.3943,3546.5413 9759.9832,3546.5413 Q9754.9695,3546.5413 9752.3298,3543.2376 Q9749.6902,3539.9339 9749.6902,3533.6917 Q9749.6902,3527.4329 9752.3298,3524.1292 Q9754.9695,3520.8255 9759.9832,3520.8255 Q9761.3943,3520.8255 9762.6892,3521.1243 Q9763.9841,3521.4231 9765.113,3522.0208 L9765.113,3527.4661 Q9763.8513,3526.304 9762.6643,3525.7644 Q9761.4773,3525.2249 9760.2156,3525.2249 Q9757.5261,3525.2249 9756.1565,3527.3582 Q9754.7869,3529.4915 9754.7869,3533.6917 Q9754.7869,3537.8753 9756.1565,3540.0086 Q9757.5261,3542.1419 9760.2156,3542.1419 Q9761.4773,3542.1419 9762.6643,3541.6023 Q9763.8513,3541.0628 9765.113,3539.9007 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="90.4805" x="9847.2527" y="3526.6419">&#171;Entity&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="184.6523"
+                  x="9800.1668" y="3558.7747">ToDoListTask
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="9660.74" x2="10059.2459" y1="3574.6809" y2="3574.6809"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9674.74" y="3596.1692"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="102.416"
+                  x="9698.74" y="3609.7513">UUID id
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9674.74" y="3629.1458"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="212.6523"
+                  x="9698.74" y="3642.7278">UUID todoListId
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9674.74" y="3662.1223"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="240.9531"
+                  x="9698.74" y="3675.7044">String description
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9674.74" y="3695.0989"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="186.8398"
+                  x="9698.74" y="3708.6809">Date deadline
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9674.74" y="3728.0755"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="238.1367"
+                  x="9698.74" y="3741.6575">TaskStatus status
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9674.74" y="3761.052"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="339.2813"
+                  x="9698.74" y="3774.6341">LocalDateTime createdAt
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="9674.74" y="3794.0286"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="350.5059"
+                  x="9698.74" y="3807.6106">LocalDateTime updatedAt
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="9660.74" x2="10059.2459" y1="3821.5169" y2="3821.5169"/>
+            <ellipse cx="9680.74" cy="3849.0052" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="284.0059"
+                  x="9698.74" y="3856.5872">void markComplete()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN24" data-source-line="140" data-uid="ent0025" id="entity_GMN24">
+            <path d="M10131.36,3626.0188 L10131.36,3673.9588 L10062.08,3681.9588 L10131.36,3689.9588 L10131.36,3737.882 A0,0 0 0 0 10131.36,3737.882 L10744.6237,3737.882 A0,0 0 0 0 10744.6237,3737.882 L10744.6237,3646.0188 L10724.6237,3626.0188 L10131.36,3626.0188 A0,0 0 0 0 10131.36,3626.0188"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M10724.6237,3626.0188 L10724.6237,3646.0188 L10744.6237,3646.0188 L10724.6237,3626.0188"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="131.917" x="10143.36" y="3661.1555">JPA Entity
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="251.1133"
+                  x="10143.36" y="3691.7766">Deadline is optional
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="571.2637"
+                  x="10143.36" y="3722.3977">@ManyToOne with ToDoList via todoListId FK
+            </text>
+        </g><!--class TaskStatus-->
+        <g class="entity" data-entity="TaskStatus" data-source-line="145" data-uid="ent0027" id="entity_TaskStatus">
+            <rect fill="#F1F1F1" height="227.9063" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="379.5781"
+                  x="9642.22" y="4073.9588"/>
+            <ellipse cx="9750.0364" cy="4105.9588" fill="#EB937F" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M9758.2649,4117.9588 L9742.8255,4117.9588 L9742.8255,4093.1726 L9758.2649,4093.1726 L9758.2649,4097.489 L9747.7229,4097.489 L9747.7229,4102.8347 L9757.2688,4102.8347 L9757.2688,4107.1511 L9747.7229,4107.1511 L9747.7229,4113.6423 L9758.2649,4113.6423 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="146.9453"
+                  x="9791.0364" y="4116.5408">TaskStatus
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="9644.22" x2="10019.7981" y1="4137.9588" y2="4137.9588"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="121.2969"
+                  x="9654.22" y="4173.0291">PENDING
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="180.9609"
+                  x="9654.22" y="4206.0056">IN_PROGRESS
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="164.6777"
+                  x="9654.22" y="4238.9822">COMPLETED
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="9644.22" x2="10019.7981" y1="4252.8884" y2="4252.8884"/>
+            <ellipse cx="9664.22" cy="4280.3767" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="327.5781"
+                  x="9682.22" y="4287.9588">String getDisplayName()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN28" data-source-line="154" data-uid="ent0029" id="entity_GMN28">
+            <path d="M9532.28,4423.8588 L9532.28,4505.1009 A0,0 0 0 0 9532.28,4505.1009 L10131.7185,4505.1009 A0,0 0 0 0 10131.7185,4505.1009 L10131.7185,4443.8588 L10111.7185,4423.8588 L9840,4423.8588 L9832,4302.3388 L9824,4423.8588 L9532.28,4423.8588 A0,0 0 0 0 9532.28,4423.8588"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M10111.7185,4423.8588 L10111.7185,4443.8588 L10131.7185,4443.8588 L10111.7185,4423.8588"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="355.0752"
+                  x="9544.28" y="4458.9955">Shared enum for task status
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="557.4385"
+                  x="9544.28" y="4489.6166">Used by both CourseTask and ToDoListTask
+            </text>
+        </g><!--class UserDTO-->
+        <g class="entity" data-entity="UserDTO" data-source-line="171" data-uid="ent0039" id="entity_UserDTO">
+            <rect fill="#E6FFE6" height="245.1484" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="390.4473"
+                  x="8600.78" y="2268.3988"/>
+            <ellipse cx="8726.9236" cy="2309.0198" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M8732.8698,2320.306 Q8731.7077,2320.9036 8730.4294,2321.2025 Q8729.1511,2321.5013 8727.74,2321.5013 Q8722.7263,2321.5013 8720.0866,2318.1976 Q8717.447,2314.8939 8717.447,2308.6517 Q8717.447,2302.3929 8720.0866,2299.0892 Q8722.7263,2295.7855 8727.74,2295.7855 Q8729.1511,2295.7855 8730.446,2296.0843 Q8731.7409,2296.3831 8732.8698,2296.9808 L8732.8698,2302.4261 Q8731.6081,2301.264 8730.4211,2300.7244 Q8729.2341,2300.1849 8727.9724,2300.1849 Q8725.2829,2300.1849 8723.9133,2302.3182 Q8722.5437,2304.4515 8722.5437,2308.6517 Q8722.5437,2312.8353 8723.9133,2314.9686 Q8725.2829,2317.1019 8727.9724,2317.1019 Q8729.2341,2317.1019 8730.4211,2316.5623 Q8731.6081,2316.0228 8732.8698,2314.8607 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="76.9453" x="8790.031" y="2301.6019">&#171;DTO&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="121.1602"
+                  x="8767.9236" y="2333.7347">UserDTO
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="8602.78" x2="8989.2273" y1="2349.6409" y2="2349.6409"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="8616.78" y="2371.1292"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="102.416"
+                  x="8640.78" y="2384.7113">UUID id
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="8616.78" y="2404.1058"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="8640.78" y="2417.6878">String name
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="8616.78" y="2437.0823"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="162.1895"
+                  x="8640.78" y="2450.6644">String email
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="8602.78" x2="8989.2273" y1="2464.5706" y2="2464.5706"/>
+            <ellipse cx="8622.78" cy="2492.0589" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="338.4473" x="8640.78" y="2499.6409">UserDTOBuilder builder()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN40" data-source-line="180" data-uid="ent0041" id="entity_GMN40">
+            <path d="M9061.7,2335.0388 L9061.7,2382.9588 L8991.76,2390.9588 L9061.7,2398.9588 L9061.7,2446.902 A0,0 0 0 0 9061.7,2446.902 L9394.3084,2446.902 A0,0 0 0 0 9394.3084,2446.902 L9394.3084,2355.0388 L9374.3084,2335.0388 L9061.7,2335.0388 A0,0 0 0 0 9061.7,2335.0388"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M9374.3084,2335.0388 L9374.3084,2355.0388 L9394.3084,2355.0388 L9374.3084,2335.0388" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="199.6465" x="9073.7" y="2370.1755">Builder Pattern
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="198.9609"
+                  x="9073.7" y="2400.7966">Immutable DTO
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="290.6084"
+                  x="9073.7" y="2431.4177">Used for API responses
+            </text>
+        </g><!--class CourseDTO-->
+        <g class="entity" data-entity="CourseDTO" data-source-line="185" data-uid="ent0043" id="entity_CourseDTO">
+            <rect fill="#E6FFE6" height="410.0313" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="443.5078"
+                  x="6892.24" y="2185.9588"/>
+            <ellipse cx="7027.6394" cy="2226.5798" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M7033.5857,2237.866 Q7032.4236,2238.4636 7031.1453,2238.7625 Q7029.867,2239.0613 7028.4558,2239.0613 Q7023.4421,2239.0613 7020.8025,2235.7576 Q7018.1629,2232.4539 7018.1629,2226.2117 Q7018.1629,2219.9529 7020.8025,2216.6492 Q7023.4421,2213.3455 7028.4558,2213.3455 Q7029.867,2213.3455 7031.1619,2213.6443 Q7032.4568,2213.9431 7033.5857,2214.5408 L7033.5857,2219.9861 Q7032.324,2218.824 7031.137,2218.2844 Q7029.95,2217.7449 7028.6882,2217.7449 Q7025.9988,2217.7449 7024.6292,2219.8782 Q7023.2595,2222.0115 7023.2595,2226.2117 Q7023.2595,2230.3953 7024.6292,2232.5286 Q7025.9988,2234.6619 7028.6882,2234.6619 Q7029.95,2234.6619 7031.137,2234.1223 Q7032.324,2233.5828 7033.5857,2232.4207 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="76.9453" x="7108.0213" y="2219.1619">&#171;DTO&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="155.709"
+                  x="7068.6394" y="2251.2947">CourseDTO
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="6894.24" x2="7333.7478" y1="2267.2009" y2="2267.2009"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6908.24" y="2288.6892"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="102.416"
+                  x="6932.24" y="2302.2713">UUID id
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6908.24" y="2321.6658"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="153.5625"
+                  x="6932.24" y="2335.2478">String code
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6908.24" y="2354.6423"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="6932.24" y="2368.2244">String name
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6908.24" y="2387.6189"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="161.0957"
+                  x="6932.24" y="2401.2009">UUID userId
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6908.24" y="2420.5955"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="164.1445"
+                  x="6932.24" y="2434.1775">int progress
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6908.24" y="2453.572"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="391.5078"
+                  x="6932.24" y="2467.1541">List&lt;CourseTaskDTO&gt; tasks
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6908.24" y="2486.5486"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="339.2813"
+                  x="6932.24" y="2500.1306">LocalDateTime createdAt
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6908.24" y="2519.5252"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="350.5059"
+                  x="6932.24" y="2533.1072">LocalDateTime updatedAt
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="6894.24" x2="7333.7478" y1="2547.0134" y2="2547.0134"/>
+            <ellipse cx="6914.24" cy="2574.5017" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="372.9961" x="6932.24" y="2582.0838">CourseDTOBuilder builder()
+            </text>
+        </g><!--class CourseTaskDTO-->
+        <g class="entity" data-entity="CourseTaskDTO" data-source-line="198" data-uid="ent0044"
+           id="entity_CourseTaskDTO">
+            <rect fill="#E6FFE6" height="443.0078" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="488.8027"
+                  x="8413.6" y="2812.9588"/>
+            <ellipse cx="8539.7436" cy="2853.5798" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M8545.6898,2864.866 Q8544.5277,2865.4636 8543.2494,2865.7625 Q8541.9711,2866.0613 8540.56,2866.0613 Q8535.5463,2866.0613 8532.9066,2862.7576 Q8530.267,2859.4539 8530.267,2853.2117 Q8530.267,2846.9529 8532.9066,2843.6492 Q8535.5463,2840.3455 8540.56,2840.3455 Q8541.9711,2840.3455 8543.266,2840.6443 Q8544.5609,2840.9431 8545.6898,2841.5408 L8545.6898,2846.9861 Q8544.4281,2845.824 8543.2411,2845.2844 Q8542.0541,2844.7449 8540.7924,2844.7449 Q8538.1029,2844.7449 8536.7333,2846.8782 Q8535.3637,2849.0115 8535.3637,2853.2117 Q8535.3637,2857.3953 8536.7333,2859.5286 Q8538.1029,2861.6619 8540.7924,2861.6619 Q8542.0541,2861.6619 8543.2411,2861.1223 Q8544.4281,2860.5828 8545.6898,2859.4207 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="76.9453" x="8652.0287" y="2846.1619">&#171;DTO&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="219.5156"
+                  x="8580.7436" y="2878.2947">CourseTaskDTO
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="8415.6" x2="8900.4027" y1="2894.2009" y2="2894.2009"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="8429.6" y="2915.6892"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="102.416"
+                  x="8453.6" y="2929.2713">UUID id
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="8429.6" y="2948.6658"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="8453.6" y="2962.2478">String name
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="8429.6" y="2981.6423"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="240.9531"
+                  x="8453.6" y="2995.2244">String description
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="8429.6" y="3014.6189"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="186.8398"
+                  x="8453.6" y="3028.2009">Date deadline
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="8429.6" y="3047.5955"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="164.1445"
+                  x="8453.6" y="3061.1775">int progress
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="8429.6" y="3080.572"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="238.1367"
+                  x="8453.6" y="3094.1541">TaskStatus status
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="8429.6" y="3113.5486"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="192.6367"
+                  x="8453.6" y="3127.1306">UUID courseId
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="8429.6" y="3146.5252"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="339.2813"
+                  x="8453.6" y="3160.1072">LocalDateTime createdAt
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="8429.6" y="3179.5017"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="350.5059"
+                  x="8453.6" y="3193.0838">LocalDateTime updatedAt
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="8415.6" x2="8900.4027" y1="3206.99" y2="3206.99"/>
+            <ellipse cx="8435.6" cy="3234.4783" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="436.8027" x="8453.6" y="3242.0603">CourseTaskDTOBuilder
+                builder()
+            </text>
+        </g><!--class ToDoListDTO-->
+        <g class="entity" data-entity="ToDoListDTO" data-source-line="212" data-uid="ent0045" id="entity_ToDoListDTO">
+            <rect fill="#E6FFE6" height="344.0781" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="469.0742"
+                  x="6353.46" y="2218.9188"/>
+            <ellipse cx="6488.8594" cy="2259.5398" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M6494.8057,2270.826 Q6493.6436,2271.4236 6492.3653,2271.7225 Q6491.087,2272.0213 6489.6758,2272.0213 Q6484.6621,2272.0213 6482.0225,2268.7176 Q6479.3829,2265.4139 6479.3829,2259.1717 Q6479.3829,2252.9129 6482.0225,2249.6092 Q6484.6621,2246.3055 6489.6758,2246.3055 Q6491.087,2246.3055 6492.3819,2246.6043 Q6493.6768,2246.9031 6494.8057,2247.5008 L6494.8057,2252.9461 Q6493.544,2251.784 6492.357,2251.2444 Q6491.17,2250.7049 6489.9082,2250.7049 Q6487.2188,2250.7049 6485.8492,2252.8382 Q6484.4795,2254.9715 6484.4795,2259.1717 Q6484.4795,2263.3553 6485.8492,2265.4886 Q6487.2188,2267.6219 6489.9082,2267.6219 Q6491.17,2267.6219 6492.357,2267.0823 Q6493.544,2266.5428 6494.8057,2265.3807 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="76.9453" x="6582.0245" y="2252.1219">&#171;DTO&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="181.2754"
+                  x="6529.8594" y="2284.2547">ToDoListDTO
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="6355.46" x2="6820.5342" y1="2300.1609" y2="2300.1609"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6369.46" y="2321.6492"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="102.416"
+                  x="6393.46" y="2335.2313">UUID id
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6369.46" y="2354.6258"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="6393.46" y="2368.2078">String name
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6369.46" y="2387.6023"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="161.0957"
+                  x="6393.46" y="2401.1844">UUID userId
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6369.46" y="2420.5789"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="417.0742"
+                  x="6393.46" y="2434.1609">List&lt;ToDoListTaskDTO&gt; tasks
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6369.46" y="2453.5555"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="339.2813"
+                  x="6393.46" y="2467.1375">LocalDateTime createdAt
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="6369.46" y="2486.532"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="350.5059"
+                  x="6393.46" y="2500.1141">LocalDateTime updatedAt
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="6355.46" x2="6820.5342" y1="2514.0203" y2="2514.0203"/>
+            <ellipse cx="6375.46" cy="2541.5086" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="398.5625" x="6393.46" y="2549.0906">ToDoListDTOBuilder
+                builder()
+            </text>
+        </g><!--class ToDoListTaskDTO-->
+        <g class="entity" data-entity="ToDoListTaskDTO" data-source-line="223" data-uid="ent0046"
+           id="entity_ToDoListTaskDTO">
+            <rect fill="#E6FFE6" height="377.0547" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="514.3691"
+                  x="7336.82" y="2845.9388"/>
+            <ellipse cx="7462.9636" cy="2886.5598" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M7468.9098,2897.846 Q7467.7477,2898.4436 7466.4694,2898.7425 Q7465.1911,2899.0413 7463.78,2899.0413 Q7458.7663,2899.0413 7456.1266,2895.7376 Q7453.487,2892.4339 7453.487,2886.1917 Q7453.487,2879.9329 7456.1266,2876.6292 Q7458.7663,2873.3255 7463.78,2873.3255 Q7465.1911,2873.3255 7466.486,2873.6243 Q7467.7809,2873.9231 7468.9098,2874.5208 L7468.9098,2879.9661 Q7467.6481,2878.804 7466.4611,2878.2644 Q7465.2741,2877.7249 7464.0124,2877.7249 Q7461.3229,2877.7249 7459.9533,2879.8582 Q7458.5837,2881.9915 7458.5837,2886.1917 Q7458.5837,2890.3753 7459.9533,2892.5086 Q7461.3229,2894.6419 7464.0124,2894.6419 Q7465.2741,2894.6419 7466.4611,2894.1023 Q7467.6481,2893.5628 7468.9098,2892.4007 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="76.9453" x="7588.0319" y="2879.1419">&#171;DTO&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="245.082"
+                  x="7503.9636" y="2911.2747">ToDoListTaskDTO
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="7338.82" x2="7849.1891" y1="2927.1809" y2="2927.1809"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7352.82" y="2948.6692"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="102.416"
+                  x="7376.82" y="2962.2513">UUID id
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7352.82" y="2981.6458"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="240.9531"
+                  x="7376.82" y="2995.2278">String description
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7352.82" y="3014.6223"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="186.8398"
+                  x="7376.82" y="3028.2044">Date deadline
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7352.82" y="3047.5989"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="238.1367"
+                  x="7376.82" y="3061.1809">TaskStatus status
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7352.82" y="3080.5755"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="212.6523"
+                  x="7376.82" y="3094.1575">UUID todoListId
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7352.82" y="3113.552"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="339.2813"
+                  x="7376.82" y="3127.1341">LocalDateTime createdAt
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7352.82" y="3146.5286"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="350.5059"
+                  x="7376.82" y="3160.1106">LocalDateTime updatedAt
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="7338.82" x2="7849.1891" y1="3174.0169" y2="3174.0169"/>
+            <ellipse cx="7358.82" cy="3201.5052" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="462.3691" x="7376.82" y="3209.0872">ToDoListTaskDTOBuilder
+                builder()
+            </text>
+        </g><!--class CalendarItemDTO-->
+        <g class="entity" data-entity="CalendarItemDTO" data-source-line="235" data-uid="ent0047"
+           id="entity_CalendarItemDTO">
+            <rect fill="#E6FFE6" height="344.0781" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="510.4453"
+                  x="7404.78" y="2218.9188"/>
+            <ellipse cx="7530.9236" cy="2259.5398" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M7536.8698,2270.826 Q7535.7077,2271.4236 7534.4294,2271.7225 Q7533.1511,2272.0213 7531.74,2272.0213 Q7526.7263,2272.0213 7524.0866,2268.7176 Q7521.447,2265.4139 7521.447,2259.1717 Q7521.447,2252.9129 7524.0866,2249.6092 Q7526.7263,2246.3055 7531.74,2246.3055 Q7533.1511,2246.3055 7534.446,2246.6043 Q7535.7409,2246.9031 7536.8698,2247.5008 L7536.8698,2252.9461 Q7535.6081,2251.784 7534.4211,2251.2444 Q7533.2341,2250.7049 7531.9724,2250.7049 Q7529.2829,2250.7049 7527.9133,2252.8382 Q7526.5437,2254.9715 7526.5437,2259.1717 Q7526.5437,2263.3553 7527.9133,2265.4886 Q7529.2829,2267.6219 7531.9724,2267.6219 Q7533.2341,2267.6219 7534.4211,2267.0823 Q7535.6081,2266.5428 7536.8698,2265.3807 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="76.9453" x="7654.03" y="2252.1219">&#171;DTO&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="241.1582"
+                  x="7571.9236" y="2284.2547">CalendarItemDTO
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="7406.78" x2="7913.2253" y1="2300.1609" y2="2300.1609"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7420.78" y="2321.6492"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="130.5254"
+                  x="7444.78" y="2335.2313">Date date
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7420.78" y="2354.6258"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="244.6035"
+                  x="7444.78" y="2368.2078">String sourceType
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7420.78" y="2387.6023"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="141.5313"
+                  x="7444.78" y="2401.1844">String title
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7420.78" y="2420.5789"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="171.1309"
+                  x="7444.78" y="2434.1609">String status
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7420.78" y="2453.5555"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="204.7363"
+                  x="7444.78" y="2467.1375">String sourceId
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="7420.78" y="2486.532"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="171.0625"
+                  x="7444.78" y="2500.1141">String taskId
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="7406.78" x2="7913.2253" y1="2514.0203" y2="2514.0203"/>
+            <ellipse cx="7426.78" cy="2541.5086" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="458.4453" x="7444.78" y="2549.0906">CalendarItemDTOBuilder
+                builder()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN48" data-source-line="247" data-uid="ent0049" id="entity_GMN48">
+            <path d="M7985.38,2319.7188 L7985.38,2382.9588 L7915.78,2390.9588 L7985.38,2398.9588 L7985.38,2462.2031 A0,0 0 0 0 7985.38,2462.2031 L8530.6222,2462.2031 A0,0 0 0 0 8530.6222,2462.2031 L8530.6222,2339.7188 L8510.6222,2319.7188 L7985.38,2319.7188 A0,0 0 0 0 7985.38,2319.7188"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M8510.6222,2319.7188 L8510.6222,2339.7188 L8530.6222,2339.7188 L8510.6222,2319.7188" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="199.6465" x="7997.38" y="2354.8555">Builder Pattern
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="503.2422"
+                  x="7997.38" y="2385.4766">Aggregates tasks from multiple sources
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="484.8848"
+                  x="7997.38" y="2416.0977">sourceType: "COURSE" or "TODO_LIST"
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="308.2676"
+                  x="7997.38" y="2446.7188">Used by CalendarService
+            </text>
+        </g><!--class AuthenticationService-->
+        <g class="entity" data-entity="AuthenticationService" data-source-line="263" data-uid="ent0056"
+           id="entity_AuthenticationService">
+            <rect fill="#FFF9E6" height="212.1719" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="669.832"
+                  x="2169.08" y="698.6388"/>
+            <ellipse cx="2348.6464" cy="739.2598" fill="#B4A7E5" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M2340.5019,730.7901 L2340.5019,726.4737 L2355.2607,726.4737 L2355.2607,730.7901 L2350.33,730.7901 L2350.33,746.9434 L2355.2607,746.9434 L2355.2607,751.2598 L2340.5019,751.2598 L2340.5019,746.9434 L2345.4325,746.9434 L2345.4325,730.7901 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="106.2891" x="2483.3515" y="731.8419">&#171;Service&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="293.6992" x="2389.6464" y="763.9747">AuthenticationService
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2171.08" x2="2836.912" y1="779.8809" y2="779.8809"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="2171.08" x2="2836.912" y1="795.8809" y2="795.8809"/>
+            <ellipse cx="2191.08" cy="823.3692" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="617.832"
+                  x="2209.08" y="830.9513">UserDTO signUp(SignUpRequestDTO request)
+            </text>
+            <ellipse cx="2191.08" cy="856.3458" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="559.248"
+                  x="2209.08" y="863.9278">boolean login(LoginRequestDTO request)
+            </text>
+            <ellipse cx="2191.08" cy="889.3223" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="518.3828"
+                  x="2209.08" y="896.9044">UserDTO getUserByEmail(String email)
+            </text>
+        </g><!--class UserService-->
+        <g class="entity" data-entity="UserService" data-source-line="269" data-uid="ent0057" id="entity_UserService">
+            <rect fill="#FFF9E6" height="278.125" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="870.8496"
+                  x="2976.58" y="1163.7388"/>
+            <ellipse cx="3325.8075" cy="1204.3598" fill="#B4A7E5" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M3317.663,1195.8901 L3317.663,1191.5737 L3332.4218,1191.5737 L3332.4218,1195.8901 L3327.4911,1195.8901 L3327.4911,1212.0434 L3332.4218,1212.0434 L3332.4218,1216.3598 L3317.663,1216.3598 L3317.663,1212.0434 L3322.5937,1212.0434 L3322.5937,1195.8901 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="106.2891" x="3391.3603" y="1196.9419">&#171;Service&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="155.3945" x="3366.8075" y="1229.0747">UserService
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2978.58" x2="3845.4296" y1="1244.9809" y2="1244.9809"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="2978.58" x2="3845.4296" y1="1260.9809" y2="1260.9809"/>
+            <ellipse cx="2998.58" cy="1288.4692" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="818.8496"
+                  x="3016.58" y="1296.0513">User createUserWithoutCredential(String name, String email)
+            </text>
+            <ellipse cx="2998.58" cy="1321.4458" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="411.332"
+                  x="3016.58" y="1329.0278">UserDTO getUserById(UUID id)
+            </text>
+            <ellipse cx="2998.58" cy="1354.4223" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="518.3828"
+                  x="3016.58" y="1362.0044">UserDTO getUserByEmail(String email)
+            </text>
+            <ellipse cx="2998.58" cy="1387.3989" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="702.7891"
+                  x="3016.58" y="1394.9809">void updateUser(UUID id, String name, String email)
+            </text>
+            <ellipse cx="2998.58" cy="1420.3755" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="330.6133"
+                  x="3016.58" y="1427.9575">void deleteUser(UUID id)
+            </text>
+        </g><!--class UserCredentialService-->
+        <g class="entity" data-entity="UserCredentialService" data-source-line="277" data-uid="ent0058"
+           id="entity_UserCredentialService">
+            <rect fill="#FFF9E6" height="212.1719" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="787.7246"
+                  x="2118.14" y="1196.7188"/>
+            <ellipse cx="2356.2289" cy="1237.3398" fill="#B4A7E5" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M2348.0843,1228.8701 L2348.0843,1224.5537 L2362.8431,1224.5537 L2362.8431,1228.8701 L2357.9125,1228.8701 L2357.9125,1245.0234 L2362.8431,1245.0234 L2362.8431,1249.3398 L2348.0843,1249.3398 L2348.0843,1245.0234 L2353.015,1245.0234 L2353.015,1228.8701 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="106.2891" x="2491.3578" y="1229.9219">&#171;Service&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="294.5469" x="2397.2289" y="1262.0547">UserCredentialService
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2120.14" x2="2903.8646" y1="1277.9609" y2="1277.9609"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="2120.14" x2="2903.8646" y1="1293.9609" y2="1293.9609"/>
+            <ellipse cx="2140.14" cy="1321.4492" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="703.6641"
+                  x="2158.14" y="1329.0313">void createCredential(UUID userId, String password)
+            </text>
+            <ellipse cx="2140.14" cy="1354.4258" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="702.7617"
+                  x="2158.14" y="1362.0078">void setPassword(String email, String newPassword)
+            </text>
+            <ellipse cx="2140.14" cy="1387.4023" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="735.7246"
+                  x="2158.14" y="1394.9844">boolean verifyPassword(String email, String password)
+            </text>
+        </g><!--class CourseService-->
+        <g class="entity" data-entity="CourseService" data-source-line="283" data-uid="ent0059"
+           id="entity_CourseService">
+            <rect fill="#FFF9E6" height="410.0313" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="1380.25"
+                  x="4175.88" y="599.7188"/>
+            <ellipse cx="4762.5333" cy="640.3398" fill="#B4A7E5" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M4754.3888,631.8701 L4754.3888,627.5537 L4769.1476,627.5537 L4769.1476,631.8701 L4764.2169,631.8701 L4764.2169,648.0234 L4769.1476,648.0234 L4769.1476,652.3398 L4754.3888,652.3398 L4754.3888,648.0234 L4759.3195,648.0234 L4759.3195,631.8701 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="106.2891" x="4845.3605" y="632.9219">&#171;Service&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="189.9434" x="4803.5333" y="665.0547">CourseService
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="4177.88" x2="5554.13" y1="680.9609" y2="680.9609"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="4177.88" x2="5554.13" y1="696.9609" y2="696.9609"/>
+            <ellipse cx="4197.88" cy="724.4492" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="874.4668"
+                  x="4215.88" y="732.0313">CourseDTO createCourse(String code, String name, UUID userId)
+            </text>
+            <ellipse cx="4197.88" cy="757.4258" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="480.4297"
+                  x="4215.88" y="765.0078">CourseDTO getCourseById(UUID id)
+            </text>
+            <ellipse cx="4197.88" cy="790.4023" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="575.6816"
+                  x="4215.88" y="797.9844">CourseDTO getCourseByCode(String code)
+            </text>
+            <ellipse cx="4197.88" cy="823.3789" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="706.3984"
+                  x="4215.88" y="830.9609">List&lt;CourseDTO&gt; getCoursesByUserId(UUID userId)
+            </text>
+            <ellipse cx="4197.88" cy="856.3555" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="655.7305"
+                  x="4215.88" y="863.9375">CourseDTO updateCourse(UUID id, String name)
+            </text>
+            <ellipse cx="4197.88" cy="889.332" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="365.1621"
+                  x="4215.88" y="896.9141">void deleteCourse(UUID id)
+            </text>
+            <ellipse cx="4197.88" cy="922.3086" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="1328.25"
+                  x="4215.88" y="929.8906">CourseTaskDTO addTaskToCourse(UUID courseId, String name, Date deadline,
+                String description)
+            </text>
+            <ellipse cx="4197.88" cy="955.2852" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="1072.9277"
+                  x="4215.88" y="962.8672">CourseTaskDTO updateTaskProgress(UUID courseId, UUID taskId, int progress)
+            </text>
+            <ellipse cx="4197.88" cy="988.2617" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="879.2383"
+                  x="4215.88" y="995.8438">CourseTaskDTO markTaskComplete(UUID courseId, UUID taskId)
+            </text>
+        </g><!--class ToDoListService-->
+        <g class="entity" data-entity="ToDoListService" data-source-line="295" data-uid="ent0060"
+           id="entity_ToDoListService">
+            <rect fill="#FFF9E6" height="377.0547" rx="5" ry="5" style="stroke:#181818;stroke-width:1;"
+                  width="1197.2246" x="2909.38" y="616.1988"/>
+            <ellipse cx="3391.7374" cy="656.8198" fill="#B4A7E5" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M3383.5929,648.3501 L3383.5929,644.0337 L3398.3517,644.0337 L3398.3517,648.3501 L3393.421,648.3501 L3393.421,664.5034 L3398.3517,664.5034 L3398.3517,668.8198 L3383.5929,668.8198 L3383.5929,664.5034 L3388.5236,664.5034 L3388.5236,648.3501 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="106.2891" x="3487.3478" y="649.4019">&#171;Service&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="215.5098" x="3432.7374" y="681.5347">ToDoListService
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2911.38" x2="4104.6046" y1="697.4409" y2="697.4409"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="2911.38" x2="4104.6046" y1="713.4409" y2="713.4409"/>
+            <ellipse cx="2931.38" cy="740.9292" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="754.3184"
+                  x="2949.38" y="748.5113">ToDoListDTO createToDoList(String name, UUID userId)
+            </text>
+            <ellipse cx="2931.38" cy="773.9058" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="531.5625"
+                  x="2949.38" y="781.4878">ToDoListDTO getToDoListById(UUID id)
+            </text>
+            <ellipse cx="2931.38" cy="806.8823" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="757.5313"
+                  x="2949.38" y="814.4644">List&lt;ToDoListDTO&gt; getToDoListsByUserId(UUID userId)
+            </text>
+            <ellipse cx="2931.38" cy="839.8589" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="706.8633"
+                  x="2949.38" y="847.4409">ToDoListDTO updateToDoList(UUID id, String name)
+            </text>
+            <ellipse cx="2931.38" cy="872.8355" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="390.7285"
+                  x="2949.38" y="880.4175">void deleteToDoList(UUID id)
+            </text>
+            <ellipse cx="2931.38" cy="905.812" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="1145.2246"
+                  x="2949.38" y="913.3941">ToDoListTaskDTO addTaskToList(UUID todoListId, String description, Date
+                deadline)
+            </text>
+            <ellipse cx="2931.38" cy="938.7886" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="924.8203"
+                  x="2949.38" y="946.3706">ToDoListTaskDTO markTaskComplete(UUID todoListId, UUID taskId)
+            </text>
+            <ellipse cx="2931.38" cy="971.7652" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="729.0527"
+                  x="2949.38" y="979.3472">List&lt;Date&gt; getAggregatedDeadlines(UUID todoListId)
+            </text>
+        </g><!--class CalendarService-->
+        <g class="entity" data-entity="CalendarService" data-source-line="306" data-uid="ent0061"
+           id="entity_CalendarService">
+            <rect fill="#FFF9E6" height="146.2188" rx="5" ry="5" style="stroke:#181818;stroke-width:1;"
+                  width="1092.6621" x="1005.66" y="731.6188"/>
+            <ellipse cx="1435.9344" cy="772.2398" fill="#B4A7E5" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M1427.7899,763.7701 L1427.7899,759.4537 L1442.5487,759.4537 L1442.5487,763.7701 L1437.618,763.7701 L1437.618,779.9234 L1442.5487,779.9234 L1442.5487,784.2398 L1427.7899,784.2398 L1427.7899,779.9234 L1432.7205,779.9234 L1432.7205,763.7701 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="106.2891" x="1531.3465" y="764.8219">&#171;Service&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="215.1133" x="1476.9344" y="796.9547">CalendarService
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="1007.66" x2="2096.3221" y1="812.8609" y2="812.8609"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="1007.66" x2="2096.3221" y1="828.8609" y2="828.8609"/>
+            <ellipse cx="1027.66" cy="856.3492" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="1040.6621"
+                  x="1045.66" y="863.9313">List&lt;CalendarItemDTO&gt; getItemsForMonth(int year, int month, UUID
+                userId)
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN62" data-source-line="311" data-uid="ent0063" id="entity_GMN62">
+            <path d="M1448.04,1246.8788 L1448.04,1358.742 A0,0 0 0 0 1448.04,1358.742 L2047.9736,1358.742 A0,0 0 0 0 2047.9736,1358.742 L2047.9736,1266.8788 L2027.9736,1246.8788 L1734.42,1246.8788 L1580.5,878.5788 L1718.42,1246.8788 L1448.04,1246.8788 A0,0 0 0 0 1448.04,1246.8788"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M2027.9736,1246.8788 L2027.9736,1266.8788 L2047.9736,1266.8788 L2027.9736,1246.8788" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="306.3633" x="1460.04" y="1282.0155">Service/Facade Pattern
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="557.9336"
+                  x="1460.04" y="1312.6366">Aggregates deadlines from multiple sources
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="471.1484"
+                  x="1460.04" y="1343.2577">Returns unified CalendarItemDTO list
+            </text>
+        </g><!--class UserRepository-->
+        <g class="entity" data-entity="UserRepository" data-source-line="324" data-uid="ent0068"
+           id="entity_UserRepository">
+            <rect fill="#E6F3FF" height="278.125" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="619.6699"
+                  x="2492.16" y="1658.3588"/>
+            <ellipse cx="2691.0038" cy="1698.9798" fill="#B4A7E5" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M2682.8592,1690.5101 L2682.8592,1686.1937 L2697.618,1686.1937 L2697.618,1690.5101 L2692.6873,1690.5101 L2692.6873,1706.6634 L2697.618,1706.6634 L2697.618,1710.9798 L2682.8592,1710.9798 L2682.8592,1706.6634 L2687.7899,1706.6634 L2687.7899,1690.5101 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="148.793" x="2760.0985" y="1691.5619">&#171;Repository&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="204.9824" x="2732.0038" y="1723.6947">UserRepository
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2494.16" x2="3109.8299" y1="1739.6009" y2="1739.6009"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="2494.16" x2="3109.8299" y1="1755.6009" y2="1755.6009"/>
+            <ellipse cx="2514.16" cy="1783.0892" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="275.9258"
+                  x="2532.16" y="1790.6713">User save(User user)
+            </text>
+            <ellipse cx="2514.16" cy="1816.0658" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="460.6191"
+                  x="2532.16" y="1823.6478">Optional&lt;User&gt; findById(UUID id)
+            </text>
+            <ellipse cx="2514.16" cy="1849.0423" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="567.6699"
+                  x="2532.16" y="1856.6244">Optional&lt;User&gt; findByEmail(String email)
+            </text>
+            <ellipse cx="2514.16" cy="1882.0189" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="481.4004"
+                  x="2532.16" y="1889.6009">boolean existsByEmail(String email)
+            </text>
+            <ellipse cx="2514.16" cy="1914.9955" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="326.3066"
+                  x="2532.16" y="1922.5775">void deleteById(UUID id)
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN69" data-source-line="333" data-uid="ent0070" id="entity_GMN69">
+            <path d="M3182.1,1741.4988 L3182.1,1789.4188 L3112.6,1797.4188 L3182.1,1805.4188 L3182.1,1853.362 A0,0 0 0 0 3182.1,1853.362 L3561.9096,1853.362 A0,0 0 0 0 3561.9096,1853.362 L3561.9096,1761.4988 L3541.9096,1741.4988 L3182.1,1741.4988 A0,0 0 0 0 3182.1,1741.4988"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M3541.9096,1741.4988 L3541.9096,1761.4988 L3561.9096,1761.4988 L3541.9096,1741.4988" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="249.2852" x="3194.1" y="1776.6355">Repository Pattern
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="337.8096"
+                  x="3194.1" y="1807.2566">Spring Data JPA Repository
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="280.9854"
+                  x="3194.1" y="1837.8777">Extends JpaRepository
+            </text>
+        </g><!--class UserCredentialRepository-->
+        <g class="entity" data-entity="UserCredentialRepository" data-source-line="338" data-uid="ent0072"
+           id="entity_UserCredentialRepository">
+            <rect fill="#E6F3FF" height="212.1719" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="771.1816"
+                  x="1650.4" y="1691.3388"/>
+            <ellipse cx="1855.4234" cy="1731.9598" fill="#B4A7E5" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M1847.2789,1723.4901 L1847.2789,1719.1737 L1862.0377,1719.1737 L1862.0377,1723.4901 L1857.107,1723.4901 L1857.107,1739.6434 L1862.0377,1739.6434 L1862.0377,1743.9598 L1847.2789,1743.9598 L1847.2789,1739.6434 L1852.2096,1739.6434 L1852.2096,1723.4901 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="148.793" x="1994.0943" y="1724.5419">&#171;Repository&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="344.1348" x="1896.4234" y="1756.6747">UserCredentialRepository
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="1652.4" x2="2419.5816" y1="1772.5809" y2="1772.5809"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="1652.4" x2="2419.5816" y1="1788.5809" y2="1788.5809"/>
+            <ellipse cx="1672.4" cy="1816.0692" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="629.6445"
+                  x="1690.4" y="1823.6513">UserCredential save(UserCredential credential)
+            </text>
+            <ellipse cx="1672.4" cy="1849.0458" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="719.1816"
+                  x="1690.4" y="1856.6278">Optional&lt;UserCredential&gt; findByUserId(UUID userId)
+            </text>
+            <ellipse cx="1672.4" cy="1882.0223" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="445.7168"
+                  x="1690.4" y="1889.6044">void deleteByUserId(UUID userId)
+            </text>
+        </g><!--class CourseRepository-->
+        <g class="entity" data-entity="CourseRepository" data-source-line="344" data-uid="ent0073"
+           id="entity_CourseRepository">
+            <rect fill="#E6F3FF" height="311.1016" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="841.1543"
+                  x="739.42" y="1641.8788"/>
+            <ellipse cx="1031.7315" cy="1682.4998" fill="#B4A7E5" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M1023.587,1674.0301 L1023.587,1669.7137 L1038.3458,1669.7137 L1038.3458,1674.0301 L1033.4151,1674.0301 L1033.4151,1690.1834 L1038.3458,1690.1834 L1038.3458,1694.4998 L1023.587,1694.4998 L1023.587,1690.1834 L1028.5177,1690.1834 L1028.5177,1674.0301 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="148.793" x="1118.1007" y="1675.0819">&#171;Repository&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="239.5313" x="1072.7315" y="1707.2147">CourseRepository
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="741.42" x2="1578.5743" y1="1723.1209" y2="1723.1209"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="741.42" x2="1578.5743" y1="1739.1209" y2="1739.1209"/>
+            <ellipse cx="761.42" cy="1766.6092" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="376.5645"
+                  x="779.42" y="1774.1913">Course save(Course course)
+            </text>
+            <ellipse cx="761.42" cy="1799.5858" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="495.168"
+                  x="779.42" y="1807.1678">Optional&lt;Course&gt; findById(UUID id)
+            </text>
+            <ellipse cx="761.42" cy="1832.5623" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="590.4199"
+                  x="779.42" y="1840.1444">Optional&lt;Course&gt; findByCode(String code)
+            </text>
+            <ellipse cx="761.42" cy="1865.5389" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="546.2734"
+                  x="779.42" y="1873.1209">List&lt;Course&gt; findByUserId(UUID userId)
+            </text>
+            <ellipse cx="761.42" cy="1898.5155" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="789.1543"
+                  x="779.42" y="1906.0975">boolean existsByCodeAndUserId(String code, UUID userId)
+            </text>
+            <ellipse cx="761.42" cy="1931.492" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="326.3066"
+                  x="779.42" y="1939.0741">void deleteById(UUID id)
+            </text>
+        </g><!--class ToDoListRepository-->
+        <g class="entity" data-entity="ToDoListRepository" data-source-line="353" data-uid="ent0074"
+           id="entity_ToDoListRepository">
+            <rect fill="#E6F3FF" height="245.1484" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="623.8398"
+                  x="46.08" y="1674.8588"/>
+            <ellipse cx="216.9511" cy="1715.4798" fill="#B4A7E5" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M208.8066,1707.0101 L208.8066,1702.6937 L223.5654,1702.6937 L223.5654,1707.0101 L218.6347,1707.0101 L218.6347,1723.1634 L223.5654,1723.1634 L223.5654,1727.4798 L208.8066,1727.4798 L208.8066,1723.1634 L213.7372,1723.1634 L213.7372,1707.0101 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="148.793" x="316.1034" y="1708.0619">&#171;Repository&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="265.0977" x="257.9511" y="1740.1947">ToDoListRepository
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="48.08" x2="667.9198" y1="1756.1009" y2="1756.1009"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="48.08" x2="667.9198" y1="1772.1009" y2="1772.1009"/>
+            <ellipse cx="68.08" cy="1799.5892" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="447.7129"
+                  x="86.08" y="1807.1713">ToDoList save(ToDoList todoList)
+            </text>
+            <ellipse cx="68.08" cy="1832.5658" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="520.7344"
+                  x="86.08" y="1840.1478">Optional&lt;ToDoList&gt; findById(UUID id)
+            </text>
+            <ellipse cx="68.08" cy="1865.5423" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="571.8398"
+                  x="86.08" y="1873.1244">List&lt;ToDoList&gt; findByUserId(UUID userId)
+            </text>
+            <ellipse cx="68.08" cy="1898.5189" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="326.3066"
+                  x="86.08" y="1906.1009">void deleteById(UUID id)
+            </text>
+        </g><!--class UserAdapter-->
+        <g class="entity" data-entity="UserAdapter" data-source-line="373" data-uid="ent0083" id="entity_UserAdapter">
+            <rect fill="#FFE6E6" height="179.1953" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="419.0078"
+                  x="5286.5" y="1707.8188"/>
+            <ellipse cx="5403.3604" cy="1748.4398" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M5409.3066,1759.726 Q5408.1445,1760.3236 5406.8662,1760.6225 Q5405.5879,1760.9213 5404.1768,1760.9213 Q5399.1631,1760.9213 5396.5234,1757.6176 Q5393.8838,1754.3139 5393.8838,1748.0717 Q5393.8838,1741.8129 5396.5234,1738.5092 Q5399.1631,1735.2055 5404.1768,1735.2055 Q5405.5879,1735.2055 5406.8828,1735.5043 Q5408.1777,1735.8031 5409.3066,1736.4008 L5409.3066,1741.8461 Q5408.0449,1740.684 5406.8579,1740.1444 Q5405.6709,1739.6049 5404.4092,1739.6049 Q5401.7197,1739.6049 5400.3501,1741.7382 Q5398.9805,1743.8715 5398.9805,1748.0717 Q5398.9805,1752.2553 5400.3501,1754.3886 Q5401.7197,1756.5219 5404.4092,1756.5219 Q5405.6709,1756.5219 5406.8579,1755.9823 Q5408.0449,1755.4428 5409.3066,1754.2807 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="117.3398" x="5469.834" y="1741.0219">&#171;Adapter&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="168.2871"
+                  x="5444.3604" y="1773.1547">UserAdapter
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="5288.5" x2="5703.5078" y1="1789.0609" y2="1789.0609"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="5288.5" x2="5703.5078" y1="1805.0609" y2="1805.0609"/>
+            <ellipse cx="5308.5" cy="1832.5492" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="364.6289" x="5326.5" y="1840.1313">UserDTO toDTO(User user)
+            </text>
+            <ellipse cx="5308.5" cy="1865.5258" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="367.0078" x="5326.5" y="1873.1078">User toEntity(UserDTO dto)
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN84" data-source-line="379" data-uid="ent0085" id="entity_GMN84">
+            <path d="M5774.98,1741.4988 L5774.98,1789.4188 L5706,1797.4188 L5774.98,1805.4188 L5774.98,1853.362 A0,0 0 0 0 5774.98,1853.362 L6241.0034,1853.362 A0,0 0 0 0 6241.0034,1853.362 L6241.0034,1761.4988 L6221.0034,1741.4988 L5774.98,1741.4988 A0,0 0 0 0 5774.98,1741.4988"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M6221.0034,1741.4988 L6221.0034,1761.4988 L6241.0034,1761.4988 L6221.0034,1741.4988" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="211.4785" x="5786.98" y="1776.6355">Adapter Pattern
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="424.0234"
+                  x="5786.98" y="1807.2566">Converts between Entity and DTO
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="267.0205"
+                  x="5786.98" y="1837.8777">Static utility methods
+            </text>
+        </g><!--class CourseAdapter-->
+        <g class="entity" data-entity="CourseAdapter" data-source-line="384" data-uid="ent0087"
+           id="entity_CourseAdapter">
+            <rect fill="#FFE6E6" height="179.1953" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="700.293"
+                  x="4515.86" y="1707.8188"/>
+            <ellipse cx="4756.0885" cy="1748.4398" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M4762.0348,1759.726 Q4760.8727,1760.3236 4759.5944,1760.6225 Q4758.3161,1760.9213 4756.9049,1760.9213 Q4751.8913,1760.9213 4749.2516,1757.6176 Q4746.612,1754.3139 4746.612,1748.0717 Q4746.612,1741.8129 4749.2516,1738.5092 Q4751.8913,1735.2055 4756.9049,1735.2055 Q4758.3161,1735.2055 4759.611,1735.5043 Q4760.9059,1735.8031 4762.0348,1736.4008 L4762.0348,1741.8461 Q4760.7731,1740.684 4759.5861,1740.1444 Q4758.3991,1739.6049 4757.1373,1739.6049 Q4754.4479,1739.6049 4753.0783,1741.7382 Q4751.7086,1743.8715 4751.7086,1748.0717 Q4751.7086,1752.2553 4753.0783,1754.3886 Q4754.4479,1756.5219 4757.1373,1756.5219 Q4758.3991,1756.5219 4759.5861,1755.9823 Q4760.7731,1755.4428 4762.0348,1754.2807 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="117.3398" x="4839.8366" y="1741.0219">&#171;Adapter&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="202.8359"
+                  x="4797.0885" y="1773.1547">CourseAdapter
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="4517.86" x2="5214.153" y1="1789.0609" y2="1789.0609"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="4517.86" x2="5214.153" y1="1805.0609" y2="1805.0609"/>
+            <ellipse cx="4537.86" cy="1832.5492" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="465.2676" x="4555.86" y="1840.1313">CourseDTO toDTO(Course
+                course)
+            </text>
+            <ellipse cx="4537.86" cy="1865.5258" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="648.293" x="4555.86" y="1873.1078">CourseDTO
+                toDTOWithoutTasks(Course course)
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN88" data-source-line="390" data-uid="ent0089" id="entity_GMN88">
+            <path d="M4622.74,2335.0388 L4622.74,2446.902 A0,0 0 0 0 4622.74,2446.902 L5109.241,2446.902 A0,0 0 0 0 5109.241,2446.902 L5109.241,2355.0388 L5089.241,2335.0388 L4874,2335.0388 L4866,1887.6788 L4858,2335.0388 L4622.74,2335.0388 A0,0 0 0 0 4622.74,2335.0388"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M5089.241,2335.0388 L5089.241,2355.0388 L5109.241,2355.0388 L5089.241,2335.0388" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="211.4785" x="4634.74" y="2370.1755">Adapter Pattern
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="419.5674"
+                  x="4634.74" y="2400.7966">toDTO(): includes nested task list
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="444.501"
+                  x="4634.74" y="2431.4177">toDTOWithoutTasks(): for list views
+            </text>
+        </g><!--class ToDoListAdapter-->
+        <g class="entity" data-entity="ToDoListAdapter" data-source-line="395" data-uid="ent0091"
+           id="entity_ToDoListAdapter">
+            <rect fill="#FFE6E6" height="179.1953" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="771.4414"
+                  x="3674.28" y="1707.8188"/>
+            <ellipse cx="3937.2995" cy="1748.4398" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M3943.2458,1759.726 Q3942.0837,1760.3236 3940.8054,1760.6225 Q3939.5271,1760.9213 3938.1159,1760.9213 Q3933.1023,1760.9213 3930.4626,1757.6176 Q3927.823,1754.3139 3927.823,1748.0717 Q3927.823,1741.8129 3930.4626,1738.5092 Q3933.1023,1735.2055 3938.1159,1735.2055 Q3939.5271,1735.2055 3940.822,1735.5043 Q3942.1169,1735.8031 3943.2458,1736.4008 L3943.2458,1741.8461 Q3941.9841,1740.684 3940.7971,1740.1444 Q3939.6101,1739.6049 3938.3484,1739.6049 Q3935.6589,1739.6049 3934.2893,1741.7382 Q3932.9196,1743.8715 3932.9196,1748.0717 Q3932.9196,1752.2553 3934.2893,1754.3886 Q3935.6589,1756.5219 3938.3484,1756.5219 Q3939.6101,1756.5219 3940.7971,1755.9823 Q3941.9841,1755.4428 3943.2458,1754.2807 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="24" font-style="italic" lengthAdjust="spacing"
+                  textLength="117.3398" x="4033.8308" y="1741.0219">&#171;Adapter&#187;
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="228.4023"
+                  x="3978.2995" y="1773.1547">ToDoListAdapter
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="3676.28" x2="4443.7214" y1="1789.0609" y2="1789.0609"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="3676.28" x2="4443.7214" y1="1805.0609" y2="1805.0609"/>
+            <ellipse cx="3696.28" cy="1832.5492" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="536.416" x="3714.28" y="1840.1313">ToDoListDTO toDTO(ToDoList
+                todoList)
+            </text>
+            <ellipse cx="3696.28" cy="1865.5258" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing"
+                  text-decoration="underline" textLength="719.4414" x="3714.28" y="1873.1078">ToDoListDTO
+                toDTOWithoutTasks(ToDoList todoList)
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN92" data-source-line="401" data-uid="ent0093" id="entity_GMN92">
+            <path d="M3816.74,2335.0388 L3816.74,2446.902 A0,0 0 0 0 3816.74,2446.902 L4303.241,2446.902 A0,0 0 0 0 4303.241,2446.902 L4303.241,2355.0388 L4283.241,2335.0388 L4068,2335.0388 L4060,1887.6788 L4052,2335.0388 L3816.74,2335.0388 A0,0 0 0 0 3816.74,2335.0388"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M4283.241,2335.0388 L4283.241,2355.0388 L4303.241,2355.0388 L4283.241,2335.0388" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" font-weight="bold" lengthAdjust="spacing"
+                  textLength="211.4785" x="3828.74" y="2370.1755">Adapter Pattern
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="419.5674"
+                  x="3828.74" y="2400.7966">toDTO(): includes nested task list
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="444.501"
+                  x="3828.74" y="2431.4177">toDTOWithoutTasks(): for list views
+            </text>
+        </g><!--reverse link User to UserCredential-->
+        <g class="link" data-entity-1="User" data-entity-2="UserCredential" data-source-line="160" data-uid="lnk31"
+           id="link_User_UserCredential">
+            <path codeLine="160"
+                  d="M10703.1581,2622.532 C10714.4981,2628.732 10704.76,2623.2188 10716,2628.9588 C10917.2,2731.8588 10991.96,2704.0988 11190,2812.9588 C11201.54,2819.2988 11213.14,2826.0388 11224.74,2833.0588"
+                  fill="none" id="User-backto-UserCredential" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#181818"
+                     points="10682.1,2611.0188,10688.7913,2623.7948,10703.1581,2622.532,10696.4668,2609.756,10682.1,2611.0188"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="156.0127"
+                  x="11058.14" y="2716.0955">composition
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="82.3037"
+                  x="11094.9945" y="2746.7166">(owns)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="10697.8284" y="2626.3704">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="11193.071" y="2815.7026">1
+            </text>
+        </g><!--reverse link User to Course-->
+        <g class="link" data-entity-1="User" data-entity-2="Course" data-source-line="161" data-uid="lnk32"
+           id="link_User_Course">
+            <path codeLine="161"
+                  d="M10704.0815,2624.9881 C10715.3815,2629.8281 10704.66,2624.8788 10716,2628.9588 C10933.24,2707.1388 11004.38,2650.3588 11232,2688.9588 C11480.76,2731.1388 11545.6,2736.3588 11786,2812.9588 C11801.5,2817.8988 11817.2,2823.1188 11832.96,2828.5388"
+                  fill="none" id="User-backto-Course" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="none"
+                     points="10682.02,2615.5388,10689.901,2627.6173,10704.0815,2624.9881,10696.2005,2612.9096,10682.02,2615.5388"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="151.8232"
+                  x="11579.86" y="2716.0955">aggregation
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="107.1738"
+                  x="11602.1847" y="2746.7166">(creates)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="10697.7405" y="2631.3354">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="45.4238"
+                  x="11758.5931" y="2810.2323">0..*
+            </text>
+        </g><!--reverse link User to ToDoList-->
+        <g class="link" data-entity-1="User" data-entity-2="ToDoList" data-source-line="162" data-uid="lnk33"
+           id="link_User_ToDoList">
+            <path codeLine="162" d="M10178.1453,2649.1391 C10129.8653,2720.2991 10091.02,2777.5188 10045.2,2845.0388"
+                  fill="none" id="User-backto-ToDoList" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="none"
+                     points="10191.62,2629.2788,10178.2626,2634.7174,10178.1453,2649.1391,10191.5028,2643.7005,10191.62,2629.2788"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="151.8232"
+                  x="10150.02" y="2716.0955">aggregation
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="82.3037"
+                  x="10184.7798" y="2746.7166">(owns)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="10140.9371" y="2670.5368">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="45.4238"
+                  x="10009.3093" y="2824.5478">0..*
+            </text>
+        </g><!--reverse link Course to CourseTask-->
+        <g class="link" data-entity-1="Course" data-entity-2="CourseTask" data-source-line="163" data-uid="lnk34"
+           id="link_Course_CourseTask">
+            <path codeLine="163" d="M12122.3865,3258.3878 C12067.7465,3323.0278 12022.38,3376.6988 11965.96,3443.4188"
+                  fill="none" id="Course-backto-CourseTask" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#181818"
+                     points="12137.88,3240.0588,12124.0236,3244.0588,12122.3865,3258.3878,12136.2429,3254.3877,12137.88,3240.0588"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="156.0127"
+                  x="12056.32" y="3347.0955">composition
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="123.3223"
+                  x="12072.6652" y="3377.7166">(contains)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="12078.0293" y="3281.731">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="45.4238"
+                  x="11933.4068" y="3422.3335">0..*
+            </text>
+        </g><!--reverse link ToDoList to ToDoListTask-->
+        <g class="link" data-entity-1="ToDoList" data-entity-2="ToDoListTask" data-source-line="164" data-uid="lnk35"
+           id="link_ToDoList_ToDoListTask">
+            <path codeLine="164" d="M9898.987,3247.362 C9891.367,3331.962 9884.52,3407.8388 9876.9,3492.4988"
+                  fill="none" id="ToDoList-backto-ToDoListTask" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#181818"
+                     points="9901.14,3223.4588,9892.0958,3234.6927,9898.987,3247.362,9908.0313,3236.128,9901.14,3223.4588"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="156.0127"
+                  x="9892.74" y="3347.0955">composition
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="123.3223"
+                  x="9909.0852" y="3377.7166">(contains)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="9878.8273" y="3263.2607">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="45.4238"
+                  x="9832.5646" y="3472.0047">0..*
+            </text>
+        </g><!--link CourseTask to TaskStatus-->
+        <g class="link" data-entity-1="CourseTask" data-entity-2="TaskStatus" data-source-line="165" data-uid="lnk36"
+           id="link_CourseTask_TaskStatus">
+            <path codeLine="165"
+                  d="M11533.88,3901.9188 C11522.76,3908.4788 11511.44,3914.5388 11500,3919.9588 C11240.56,4042.6988 10414.5671,4132.0927 10034.5271,4167.9127"
+                  fill="none" id="CourseTask-to-TaskStatus" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#181818"
+                     points="10022.58,4169.0388,10041.2513,4175.3144,10032.5359,4168.1004,10039.7499,4159.385,10022.58,4169.0388"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="57.1289"
+                  x="11307.68" y="4007.0955">uses
+            </text>
+        </g><!--link ToDoListTask to TaskStatus-->
+        <g class="link" data-entity-1="ToDoListTask" data-entity-2="TaskStatus" data-source-line="166" data-uid="lnk37"
+           id="link_ToDoListTask_TaskStatus">
+            <path codeLine="166" d="M9849.58,3870.8588 C9845.78,3938.8788 9842.2914,4001.6375 9838.9514,4061.2375"
+                  fill="none" id="ToDoListTask-to-TaskStatus" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#181818"
+                     points="9838.28,4073.2188,9847.2746,4055.6946,9838.8395,4063.2344,9831.2997,4054.7993,9838.28,4073.2188"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="57.1289"
+                  x="9844.66" y="4007.0955">uses
+            </text>
+        </g><!--reverse link CourseDTO to CourseTaskDTO-->
+        <g class="link" data-entity-1="CourseDTO" data-entity-2="CourseTaskDTO" data-source-line="255" data-uid="lnk51"
+           id="link_CourseDTO_CourseTaskDTO">
+            <path codeLine="255"
+                  d="M7339.9569,2610.6849 C7356.1169,2622.4249 7353.26,2619.2788 7370,2628.9588 C7461.6,2681.9188 8065.14,2861.0188 8412.6,2961.8988"
+                  fill="none" id="CourseDTO-backto-CourseTaskDTO" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="none"
+                     points="7320.54,2596.5788,7325.5464,2610.1041,7339.9569,2610.6849,7334.9505,2597.1595,7320.54,2596.5788"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="106.4121"
+                  x="7707.46" y="2731.0955">contains
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="7352.9893" y="2638.251">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="45.4238"
+                  x="8352.3486" y="2951.7185">0..*
+            </text>
+        </g><!--reverse link ToDoListDTO to ToDoListTaskDTO-->
+        <g class="link" data-entity-1="ToDoListDTO" data-entity-2="ToDoListTaskDTO" data-source-line="256"
+           data-uid="lnk52" id="link_ToDoListDTO_ToDoListTaskDTO">
+            <path codeLine="256"
+                  d="M6791.0679,2578.7381 C6818.9279,2601.7381 6829.42,2608.9988 6858,2628.9588 C7009.4,2734.7588 7191.3,2834.6988 7336.38,2908.6588"
+                  fill="none" id="ToDoListDTO-backto-ToDoListTaskDTO" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="none"
+                     points="6772.56,2563.4588,6776.7208,2577.2677,6791.0679,2578.7381,6786.9071,2564.9291,6772.56,2563.4588"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="106.4121"
+                  x="7033.98" y="2731.0955">contains
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="16.4404"
+                  x="6808.49" y="2604.9526">1
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="45.4238"
+                  x="7275.3838" y="2895.2339">0..*
+            </text>
+        </g><!--link CourseTaskDTO to TaskStatus-->
+        <g class="link" data-entity-1="CourseTaskDTO" data-entity-2="TaskStatus" data-source-line="257" data-uid="lnk53"
+           id="link_CourseTaskDTO_TaskStatus">
+            <path codeLine="257" d="M8882.96,3256.7188 C9132.32,3500.8588 9516.0653,3876.5838 9708.8053,4065.2838"
+                  fill="none" id="CourseTaskDTO-to-TaskStatus" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#181818"
+                     points="9717.38,4073.6788,9710.1146,4055.3699,9710.2344,4066.683,9698.9214,4066.8028,9717.38,4073.6788"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="57.1289"
+                  x="9546.88" y="3692.0955">uses
+            </text>
+        </g><!--link ToDoListTaskDTO to TaskStatus-->
+        <g class="link" data-entity-1="ToDoListTaskDTO" data-entity-2="TaskStatus" data-source-line="258"
+           data-uid="lnk54" id="link_ToDoListTaskDTO_TaskStatus">
+            <path codeLine="258"
+                  d="M7852.06,3223.8388 C8128.66,3418.1188 8585.88,3720.7788 9014,3919.9588 C9221.16,4016.3188 9461.296,4089.3666 9630.316,4135.0666"
+                  fill="none" id="ToDoListTaskDTO-to-TaskStatus" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#181818"
+                     points="9641.9,4138.1988,9626.612,4125.7779,9632.2466,4135.5887,9622.4359,4141.2233,9641.9,4138.1988"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="57.1289"
+                  x="9016" y="3692.0955">uses
+            </text>
+        </g><!--link AuthenticationService to UserService-->
+        <g class="link" data-entity-1="AuthenticationService" data-entity-2="UserService" data-source-line="318"
+           data-uid="lnk65" id="link_AuthenticationService_UserService">
+            <path codeLine="318"
+                  d="M2694.96,911.7987 C2752.48,943.3588 2815.78,978.0188 2874,1009.7388 C2966.08,1059.9188 3056.6237,1108.9922 3146.0837,1157.3522"
+                  fill="none" id="AuthenticationService-to-UserService"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="3156.64,1163.0588,3144.6099,1147.4615,3147.8431,1158.3033,3137.0012,1161.5365,3156.64,1163.0588"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="147.7861"
+                  x="3038.52" y="1096.8755">depends on
+            </text>
+        </g><!--link AuthenticationService to UserCredentialService-->
+        <g class="link" data-entity-1="AuthenticationService" data-entity-2="UserCredentialService"
+           data-source-line="319" data-uid="lnk66" id="link_AuthenticationService_UserCredentialService">
+            <path codeLine="319" d="M2505.7,911.5188 C2507.06,995.3588 2508.7453,1100.3803 2510.1053,1184.1803"
+                  fill="none" id="AuthenticationService-to-UserCredentialService"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="2510.3,1196.1788,2518.0069,1178.0513,2510.1377,1186.1801,2502.009,1178.3109,2510.3,1196.1788"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="147.7861"
+                  x="2510.72" y="1096.8755">depends on
+            </text>
+        </g><!--link UserService to UserRepository-->
+        <g class="link" data-entity-1="UserService" data-entity-2="UserRepository" data-source-line="362"
+           data-uid="lnk75" id="link_UserService_UserRepository">
+            <path codeLine="362" d="M3240.46,1442.7788 C3156.94,1509.9588 3066.1509,1582.9781 2982.6709,1650.1181"
+                  fill="none" id="UserService-to-UserRepository"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="2973.32,1657.6388,2992.3602,1652.5918,2981.1125,1651.3716,2982.3327,1640.1238,2973.32,1657.6388"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="147.7861"
+                  x="3163.64" y="1533.0155">depends on
+            </text>
+        </g><!--link UserCredentialService to UserRepository-->
+        <g class="link" data-entity-1="UserCredentialService" data-entity-2="UserRepository" data-source-line="363"
+           data-uid="lnk76" id="link_UserCredentialService_UserRepository">
+            <path codeLine="363" d="M2573.86,1409.4588 C2616.6,1481.7788 2667.8134,1568.4087 2714.3134,1647.0687"
+                  fill="none" id="UserCredentialService-to-UserRepository"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="2720.42,1657.3988,2718.1468,1637.8326,2715.3312,1648.7904,2704.3734,1645.9748,2720.42,1657.3988"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="147.7861"
+                  x="2650.3" y="1533.0155">depends on
+            </text>
+        </g><!--link UserCredentialService to UserCredentialRepository-->
+        <g class="link" data-entity-1="UserCredentialService" data-entity-2="UserCredentialRepository"
+           data-source-line="364" data-uid="lnk77" id="link_UserCredentialService_UserCredentialRepository">
+            <path codeLine="364" d="M2410.46,1409.4588 C2329.92,1492.4788 2226.2356,1599.3457 2145.7356,1682.3257"
+                  fill="none" id="UserCredentialService-to-UserCredentialRepository"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="2137.38,1690.9388,2155.6554,1683.5896,2144.343,1683.7612,2144.1714,1672.4488,2137.38,1690.9388"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="147.7861"
+                  x="2318.64" y="1533.0155">depends on
+            </text>
+        </g><!--link CourseService to CourseRepository-->
+        <g class="link" data-entity-1="CourseService" data-entity-2="CourseRepository" data-source-line="365"
+           data-uid="lnk78" id="link_CourseService_CourseRepository">
+            <path codeLine="365"
+                  d="M4175.08,1004.2987 C4164,1006.2188 4152.96,1008.0388 4142,1009.7388 C3825.6,1059.1388 1500.04,947.3387 1264,1163.7388 C1195.7,1226.3588 1172.8204,1463.4328 1164.7804,1629.4728"
+                  fill="none" id="CourseService-to-CourseRepository"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="1164.2,1641.4588,1173.0612,1623.8667,1164.6837,1631.4705,1157.0799,1623.0929,1164.2,1641.4588"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="147.7861"
+                  x="1266" y="1312.9555">depends on
+            </text>
+        </g><!--link ToDoListService to ToDoListRepository-->
+        <g class="link" data-entity-1="ToDoListService" data-entity-2="ToDoListRepository" data-source-line="366"
+           data-uid="lnk79" id="link_ToDoListService_ToDoListRepository">
+            <path codeLine="366"
+                  d="M2951.76,994.1788 C2925.64,1000.0388 2899.62,1005.2788 2874,1009.7388 C2502.04,1074.5988 1541.48,974.9388 1176,1069.7388 C1087.12,1092.7988 1054.02,1096.0188 992,1163.7388 C886.38,1279.0588 969.7,1378.4388 860,1489.8788 C807.18,1543.5188 769.96,1519.5788 704,1555.8788 C640.94,1590.5588 584.9774,1627.0898 527.9374,1667.4298"
+                  fill="none" id="ToDoListService-to-ToDoListRepository"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="518.14,1674.3588,537.4554,1670.4969,526.3045,1668.5846,528.2168,1657.4337,518.14,1674.3588"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="147.7861"
+                  x="994" y="1312.9555">depends on
+            </text>
+        </g><!--link CalendarService to CourseRepository-->
+        <g class="link" data-entity-1="CalendarService" data-entity-2="CourseRepository" data-source-line="367"
+           data-uid="lnk80" id="link_CalendarService_CourseRepository">
+            <path codeLine="367"
+                  d="M1119.24,878.7188 C958,929.5388 792.34,1016.1388 702,1163.7388 C626.34,1287.3788 633.62,1362.0588 702,1489.8788 C734.02,1549.7188 773.9118,1592.6431 828.7118,1633.8831"
+                  fill="none" id="CalendarService-to-CourseRepository"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="838.3,1641.0988,828.7281,1623.8831,830.3098,1635.0857,819.1072,1636.6674,838.3,1641.0988"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="147.7861"
+                  x="704" y="1312.9555">depends on
+            </text>
+        </g><!--link CalendarService to ToDoListRepository-->
+        <g class="link" data-entity-1="CalendarService" data-entity-2="ToDoListRepository" data-source-line="368"
+           data-uid="lnk81" id="link_CalendarService_ToDoListRepository">
+            <path codeLine="368"
+                  d="M1004.9,871.3588 C813.16,921.2987 613.16,1009.2188 482,1163.7388 C360.32,1307.0988 344.6928,1522.8832 348.4928,1662.1832"
+                  fill="none" id="CalendarService-to-ToDoListRepository"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="348.82,1674.1788,356.3262,1655.9673,348.5473,1664.1825,340.3321,1656.4036,348.82,1674.1788"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="147.7861"
+                  x="484" y="1312.9555">depends on
+            </text>
+        </g><!--link UserService to UserAdapter-->
+        <g class="link" data-entity-1="UserService" data-entity-2="UserAdapter" data-source-line="408" data-uid="lnk95"
+           id="link_UserService_UserAdapter">
+            <path codeLine="408"
+                  d="M3759.64,1442.8388 C3818.38,1461.5988 3879.34,1478.3388 3938,1489.8788 C4224.86,1546.2988 4984.24,1438.4788 5252,1555.8788 C5325.4,1588.0588 5381.6763,1643.6026 5425.6163,1697.7226"
+                  fill="none" id="UserService-to-UserAdapter"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="5433.18,1707.0388,5428.0451,1688.0221,5426.8769,1699.2753,5415.6237,1698.1071,5433.18,1707.0388"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="57.1289"
+                  x="5200.7" y="1533.0155">uses
+            </text>
+        </g><!--link CourseService to CourseAdapter-->
+        <g class="link" data-entity-1="CourseService" data-entity-2="CourseAdapter" data-source-line="409"
+           data-uid="lnk96" id="link_CourseService_CourseAdapter">
+            <path codeLine="409" d="M4866,1010.3988 C4866,1224.6388 4866,1539.8588 4866,1695.3988" fill="none"
+                  id="CourseService-to-CourseAdapter" style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818" points="4866,1707.3988,4874,1689.3988,4866,1697.3988,4858,1689.3988,4866,1707.3988"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="57.1289"
+                  x="4868" y="1312.9555">uses
+            </text>
+        </g><!--link ToDoListService to ToDoListAdapter-->
+        <g class="link" data-entity-1="ToDoListService" data-entity-2="ToDoListAdapter" data-source-line="410"
+           data-uid="lnk97" id="link_ToDoListService_ToDoListAdapter">
+            <path codeLine="410"
+                  d="M3742.76,993.6988 C3794.58,1044.2788 3844.98,1102.2188 3882,1163.7388 C3987.44,1338.9988 4030.8886,1567.1502 4048.4286,1694.9702"
+                  fill="none" id="ToDoListService-to-ToDoListAdapter"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="4050.06,1706.8588,4055.5386,1687.9383,4048.7005,1696.9516,4039.6872,1690.1135,4050.06,1706.8588"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="57.1289"
+                  x="4009.34" y="1312.9555">uses
+            </text>
+        </g><!--link UserAdapter to User-->
+        <g class="link" data-entity-1="UserAdapter" data-entity-2="User" data-source-line="412" data-uid="lnk98"
+           id="link_UserAdapter_User">
+            <path codeLine="412"
+                  d="M5574.24,1887.9588 C5618.14,1930.8788 5676.72,1978.0188 5740,2000.9788 C5777.78,2014.6788 8593.82,2015.8788 8634,2016.9788 C9090.38,2029.3588 9216.78,1957.5188 9660,2066.9788 C9782.86,2097.3188 9899.5354,2144.5975 10011.1154,2198.5175"
+                  fill="none" id="UserAdapter-to-User" style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="10021.92,2203.7388,10009.1939,2188.7039,10012.9162,2199.3877,10002.2323,2203.11,10021.92,2203.7388"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="106.9834"
+                  x="9585.5" y="2044.1155">converts
+            </text>
+        </g><!--link UserAdapter to UserDTO-->
+        <g class="link" data-entity-1="UserAdapter" data-entity-2="UserDTO" data-source-line="413" data-uid="lnk99"
+           id="link_UserAdapter_UserDTO">
+            <path codeLine="413"
+                  d="M5574.32,1887.7588 C5618.24,1930.6388 5676.82,1977.7788 5740,2000.9788 C5771.46,2012.5188 6912.5,2016.2388 6946,2016.9788 C7126.04,2020.9388 8407.16,1982.1188 8566,2066.9788 C8646.9,2110.1988 8700.3639,2185.2835 8738.3839,2257.4035"
+                  fill="none" id="UserAdapter-to-UserDTO"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="8743.98,2268.0188,8742.6627,2248.3651,8739.3166,2259.1727,8728.509,2255.8266,8743.98,2268.0188"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="106.9834"
+                  x="8509.46" y="2044.1155">converts
+            </text>
+        </g><!--link CourseAdapter to Course-->
+        <g class="link" data-entity-1="CourseAdapter" data-entity-2="Course" data-source-line="414" data-uid="lnk100"
+           id="link_CourseAdapter_Course">
+            <path codeLine="414"
+                  d="M4997.22,1887.9788 C5069.12,1931.1988 5161.74,1978.5988 5252,2000.9788 C5297.6,2012.2788 8587.02,2016.5388 8634,2016.9788 C8733.22,2017.8988 12132.64,2000.1588 12206,2066.9788 C12413.06,2255.5588 12397.2017,2594.1303 12359.1217,2816.9303"
+                  fill="none" id="CourseAdapter-to-Course"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="12357.1,2828.7588,12368.0182,2812.3638,12358.7847,2818.9017,12352.2469,2809.6683,12357.1,2828.7588"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="106.9834"
+                  x="12382.88" y="2401.0955">converts
+            </text>
+        </g><!--link CourseAdapter to CourseDTO-->
+        <g class="link" data-entity-1="CourseAdapter" data-entity-2="CourseDTO" data-source-line="415" data-uid="lnk101"
+           id="link_CourseAdapter_CourseDTO">
+            <path codeLine="415"
+                  d="M4998.28,1887.7788 C5070.1,1930.6388 5162.34,1977.7788 5252,2000.9788 C5321.08,2018.8388 5822.7,2014.2388 5894,2016.9788 C6108.36,2025.1988 6667.28,1968.7788 6858,2066.9788 C6911.34,2094.4388 6949.7344,2129.1757 6987.3144,2176.0557"
+                  fill="none" id="CourseAdapter-to-CourseDTO"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="6994.82,2185.4188,6989.8036,2166.3705,6988.5653,2177.6162,6977.3196,2176.378,6994.82,2185.4188"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="106.9834"
+                  x="6821.84" y="2044.1155">converts
+            </text>
+        </g><!--link ToDoListAdapter to ToDoList-->
+        <g class="link" data-entity-1="ToDoListAdapter" data-entity-2="ToDoList" data-source-line="416"
+           data-uid="lnk102" id="link_ToDoListAdapter_ToDoList">
+            <path codeLine="416"
+                  d="M4203.82,1887.9788 C4282.32,1931.1788 4383.08,1978.5988 4480,2000.9788 C4546.74,2016.3788 6877.5,2016.0588 6946,2016.9788 C7083.8,2018.8188 9309.24,1993.7988 9426,2066.9788 C9700.58,2239.0588 9825.6301,2605.0028 9879.8701,2833.6428"
+                  fill="none" id="ToDoListAdapter-to-ToDoList"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="9882.64,2845.3188,9886.2692,2825.9582,9880.3318,2835.5888,9870.7012,2829.6514,9882.64,2845.3188"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="106.9834"
+                  x="9817.12" y="2401.0955">converts
+            </text>
+        </g><!--link ToDoListAdapter to ToDoListDTO-->
+        <g class="link" data-entity-1="ToDoListAdapter" data-entity-2="ToDoListDTO" data-source-line="417"
+           data-uid="lnk103" id="link_ToDoListAdapter_ToDoListDTO">
+            <path codeLine="417"
+                  d="M4206.04,1887.7588 C4284.36,1930.3388 4384.24,1977.2188 4480,2000.9788 C4758.02,2069.9188 5481.74,2040.8988 5768,2050.9788 C5796.1,2051.9588 6248.26,2055.6388 6274,2066.9788 C6348.68,2099.8588 6406.7762,2150.5269 6458.7762,2209.6669"
+                  fill="none" id="ToDoListAdapter-to-ToDoListDTO"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="6466.7,2218.6788,6460.8221,2199.8785,6460.0968,2211.1689,6448.8064,2210.4436,6466.7,2218.6788"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="106.9834"
+                  x="5770" y="2044.1155">converts
+            </text>
+        </g><!--SRC=[nLhXSjis4lwlfy2uFqvsxJHfvp9p6iLJnQ9IDOwbaUIxFpVJWKbOueKYLGAogsioquUu9xmdkGL0a008a5GSzp8PIo9siTZT3uiF05dC4eAMR1-Hb2K7T86k4amfwjz-k3v5unYlSxpjzVw2tZZ-eN6mdBwxGVFHQXKiRfReEdWNt8oTihrUGjOaZH3BTYWXzwo7qAVX7Gu_3hwPJ8BNmUjBXD3mE_xayXCQHNZ7I8xccC57YZvfui7hoG-JYI6-8BkCnYpB3pwDYMNWxJvE8e-1oMJoDqjyIVA7E2JVJN288w9fWThPsO8acCLPIZVnZWxEpk3XV__p1_o_H0CqeZGBOz5UFl_46wRfXkGnmodqEztk4hA579XoPo1sbMs5S_0SzIdBitIDiiUKvDpQQIcQSLFhTKxMM8e-4lpH57pnWfiTantaWQJXeGUVCYlU30Stg-bg6YmzETr1TF2Qe9DnjiLnYeAKmK09FK73uOA4uDiw8PUNw7UmZb0ee7LB8Up3eH0zb6tytmMwlPsEKHnfJvOiZy7X56z9_Ia1euck3brVvOHZESO92ikllLBeMsbZJTWqwfzgZuikeU46R1bD3raS8LeqQ0DogmTyK4vzsQAFNPUo1WyzLR-StMdDNiUbtcVfVvenWl9ulM4eknVsobxFpdwUZsJw3WA_yjyyZxSO9XKH3UW-on4zK4QsQ0_Qj9JxSPQILGP_q6FCDhOh_H1JCMrmedayUqmf2hDzJWb5M5I6YoX3IKmPHGyn5YQc4Pgy5ogyTd07UXQKD3jDe9ATMLWHJ-kmsa7VZraU_OJffjwAatK6qtQpTO7gLfZfstbLJSuyYePoE6vGpRKXEJin10gz3NntTpTIFlJh0BdB6Cks2Y5LUDkmieJo2vcaE64aAcCe1Y5HiVnfTF7NLzytWGRrYwHZYkRl1IecxoiNtiPHd4DPWVe6wSwrgkk5o9K0sD7r9imYqbg5tC2w1W0FfTaLfXyl4OE_L1V8GfoCCIEhU4luN8MlqOXv9VQxg93GSXcd3Eto3EezfGOWAii8Hn7_r4lMEUBTeeZWA8bJ-5cqHOI6URpZuQmZWY_P00VPSniCYe3p0ABjdZ9q1nwayQzxWdRsZ9iN3Y1mDzmdt4kUUVn0ShwgW4qUkz9F2paVS7gGqD5yrclDEKhmlw5g4HPgy-17hcVZhbkzqUnq1fHu8ilSjFF2fgL3QpHIfptNiQ0zvkDS0g7OmwGK7ryRWwBso1QLoJuVomDEzgHMf60X-SYvJ48OwJUiIrMGsrSd1Py4RtU4ho3evSMhbozH3iIZYj07i2mdjRG-AAFr1eJFY-YykPfzc5y7gs3iXKg1RGuMbT4ckAooSSQhmLFPJaETKIQUiTBe9koIek7KgYnw-iL8UUkbM7iAaagYSI5Bc-2WpBU1mQu9nh2VjIeObewh2ooBXAghCXnN0_wSoTvr3kiXQKkSGW6AASfsScttfgMSKZmrLVJSwI7fVgi7fah87BQfqvjtvU_fpI_pnUpT8bWkguMiB0TE2ZMEwIx11sspu2PHbVsAAMqmi2evF4wfnI9dPGtm5w6x0-_8MDyu9Qf5jtJxCz_8oGWZOrCg2A_Wjdd6bs7OtdCDkTiKM3zvTOBEBYx4fyMh1w9o5dlGVwPzs5JIqqehurelNxmuEr45Se1mjHC51GavZqwPKbjBcYcwB8Ud6n8HiKSNPh2BZhbgsREbR4nOlxfcu-BYKWVIW5S5sZFwSOjuJqvMCuhwrY74QUik6pECLh2uqNlGcjtz2xXmwruRJ844_8MsuYJawNjkRKhypf4RXv-LCUNKdVpijsn1GKEh45P4j38ntMxt3Dyb1EaQOfhmEJIQJs53G7U0Tq9R2DmNH-G9km8FHxCs2tnCpxEAbragGz2O9vllVcKGFJk_zR7kvuXb4PyEyLG5usj5ioCn_1DGfNbsH1oUXAolnu_yLEnvWjGTC5SuWJA6yoaZsxP0IS_XJprK570QajLXvsXZ_0R0eM87oUZAnLSvmE2vSvwORXonGbYQdLQASeD19UZHVGvKRBjFM0p4jV2WSgqApW2TNCrk5yi0-0dGbDLiFFlbUhfSdTHOcHfMSItW864yMmO3wrLhZvCqgRd0-OXa83szN7X8aqFBxAwTkVYbVEHb6Ip-FhqAbgXV-D-Pm2ZvQtmWkPkuGB4d-Jq6eT6URJW33KKGbUfmM7pZqq3Ur6ZJuDkIyj1udTxk-alniI2_xeaCP2w_wllJkonB24vHagtZj7_D_pOhA1l5gUxRW-zaly1qvHCNFyQJekRmh_-0_K-srq_zZNEzfci5OwpJg5_Kr2zogNRq8u-lPO_dgDEOX7P4-2vIrsw8MULrr-W96p9w-aL9jMAUsyVzJSVgHY0gBydZtA6iyFH0ylZ-qDo5QRpckvpCNNskIapXkFZTrzYhbI0j7AVEVlWjbFZXmurJz0eiwLPhXq6brcMbHjyUYjkJrb59u1NUkQ3d0PkfuJurv_qNfrohJ5TGRD8AOSVpT9SPwGR_LHwVMfOaCn4Bwxb1W_sTyYCQ_hqyfl5twS6SMXoweavVfYJkr9D-5x3fwW06zTC7E8FTAWIftwqOqeqLuLTZFG97jiwfvxZKm5AbK55D5ruQ3bBjljsvrhklPRlhYQpLawyycJoe5IfoyfkSJWo1VwUJBFy0B6OZBX4E1ESIyrl-p04VztcRYvf9nkX-XyDD75NqsyZZWh1zdb9-mtKV0pUq2NkYJgvDTgZYLRwB4KEVRhx3NzhGMSC0niQLA89zJxDAVT4qb7tqRX7CPylfQhRWxttqww_MjB8yJQKJqUDZrNIuiFfHx7L-c4pgr8ZY1-A-DvyLnyX3tdg9xkCqyfKJfsWpzr7BE_bDLfmEJ4cMZVeOlATYLGGq0DTJeL-_xuHzSKJ8pzaTFGI_CP7xdtVOQZNFodpKw_WSQOV8PROQtbDnfAIILibfBl16k7sY7ffrd7_5mRJmgxpqvXzENwH4HooQmXtPLBVusE3bdO_Ig50oc6AN27i0NISJnyMsFBaNqIr_gVN86JGbrHnZWpvy0QJg3Xi5dMNwkuX6UTUBkAhGcgnHcjtL-sbQpdbiw9kR3QvNcnU6l4qKkOOZtwODYp6qMt5fj5dnBMsZyMY-2XQmh5alcBQkQKg-OK6hhboKy71OV9DqYB_bQi3SlZe1-C1Vzvfco8AWlENhAys8PIrBIZ4KRJsnOc2yn9F2vfLHT4VO8o6fkbFaju_wCTnIZ0djMPpmvYrXcongktuvEZhLna_6nrjjVHh5qGcdojIbxM6I-cWxXKqExtG0zIzCzi3f4J18_bAJkE5DzBSOwkC2DNwHbSZRRV98MryuE3gG-kv7ZhMnjFhrZ85x-l1SXvjZ_x-7LLHlPRgrNYl1ue3KLp0jiQOwQOdsT2lAgZpT5HFIsLuU04iHSmpLgBh8M5tPezH7tbNEwl9_]-->
+    </g>
+</svg>

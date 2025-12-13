@@ -1,0 +1,1198 @@
+<svg xmlns="http://www.w3.org/2000/svg" contentStyleType="text/css"
+     data-diagram-type="CLASS" height="4070px" preserveAspectRatio="none"
+     style="width:5168px;height:4070px;background:#FFFFFF;" version="1.1" viewBox="0 0 5168 4070" width="5168px"
+     zoomAndPan="magnify">
+    <title>Studently - Terminal UI Class Diagram</title>
+    <defs/>
+    <g>
+        <g class="title" data-source-line="2">
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-weight="bold" lengthAdjust="spacing"
+                  textLength="558.209" x="2291.5137" y="47.0703">Studently - Terminal UI Class Diagram
+            </text>
+        </g><!--class StudentlyTerminalUI-->
+        <g class="entity" data-entity="StudentlyTerminalUI" data-source-line="6" data-uid="ent0002"
+           id="entity_StudentlyTerminalUI">
+            <rect fill="#F1F1F1" height="194.9297" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="579.7344"
+                  x="3018.78" y="88.9766"/>
+            <ellipse cx="3163.0866" cy="120.9766" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M3169.0329,132.2627 Q3167.8708,132.8604 3166.5925,133.1592 Q3165.3142,133.458 3163.903,133.458 Q3158.8894,133.458 3156.2497,130.1543 Q3153.6101,126.8506 3153.6101,120.6084 Q3153.6101,114.3496 3156.2497,111.0459 Q3158.8894,107.7422 3163.903,107.7422 Q3165.3142,107.7422 3166.6091,108.041 Q3167.904,108.3398 3169.0329,108.9375 L3169.0329,114.3828 Q3167.7712,113.2207 3166.5842,112.6812 Q3165.3972,112.1416 3164.1355,112.1416 Q3161.446,112.1416 3160.0764,114.2749 Q3158.7068,116.4082 3158.7068,120.6084 Q3158.7068,124.792 3160.0764,126.9253 Q3161.446,129.0586 3164.1355,129.0586 Q3165.3972,129.0586 3166.5842,128.519 Q3167.7712,127.9795 3169.0329,126.8174 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="274.1211"
+                  x="3204.0866" y="131.5586">StudentlyTerminalUI
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="3020.78" x2="3596.5144" y1="152.9766" y2="152.9766"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3034.78" y="174.4648"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="527.7344"
+                  x="3058.78" y="188.0469">ApplicationContext applicationContext
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="3020.78" x2="3596.5144" y1="201.9531" y2="201.9531"/>
+            <ellipse cx="3040.78" cy="229.4414" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="317.2148"
+                  x="3058.78" y="237.0234">void main(String[] args)
+            </text>
+            <ellipse cx="3040.78" cy="262.418" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="304.7188"
+                  x="3058.78" y="270">void run(String... args)
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN3" data-source-line="14" data-uid="ent0004" id="entity_GMN3">
+            <path d="M3668.46,115.1966 L3668.46,178.4366 L3599.46,186.4366 L3668.46,194.4366 L3668.46,257.6809 A0,0 0 0 0 3668.46,257.6809 L4356.8291,257.6809 A0,0 0 0 0 4356.8291,257.6809 L4356.8291,135.1966 L4336.8291,115.1966 L3668.46,115.1966 A0,0 0 0 0 3668.46,115.1966"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M4336.8291,115.1966 L4336.8291,135.1966 L4356.8291,135.1966 L4336.8291,115.1966" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="425.2803"
+                  x="3680.46" y="150.3333">Spring Boot CommandLineRunner
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="528.5439"
+                  x="3680.46" y="180.9544">Initializes terminal and starts LoginScreen
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="646.3691"
+                  x="3680.46" y="211.5755">Conditional on property: studently.ui.enabled=true
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="500.8555"
+                  x="3680.46" y="242.1966">Sets system property for terminal mode
+            </text>
+        </g><!--class LoginScreen-->
+        <g class="entity" data-entity="LoginScreen" data-source-line="22" data-uid="ent0006" id="entity_LoginScreen">
+            <rect fill="#F1F1F1" height="854.4609" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="644.4023"
+                  x="2986.44" y="437.8966"/>
+            <ellipse cx="3217.8843" cy="469.8966" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M3223.8306,481.1827 Q3222.6685,481.7804 3221.3902,482.0792 Q3220.1119,482.378 3218.7007,482.378 Q3213.6871,482.378 3211.0474,479.0743 Q3208.4078,475.7706 3208.4078,469.5284 Q3208.4078,463.2696 3211.0474,459.9659 Q3213.6871,456.6622 3218.7007,456.6622 Q3220.1119,456.6622 3221.4068,456.961 Q3222.7017,457.2598 3223.8306,457.8575 L3223.8306,463.3028 Q3222.5689,462.1407 3221.3819,461.6012 Q3220.1949,461.0616 3218.9332,461.0616 Q3216.2437,461.0616 3214.8741,463.1949 Q3213.5045,465.3282 3213.5045,469.5284 Q3213.5045,473.712 3214.8741,475.8453 Q3216.2437,477.9786 3218.9332,477.9786 Q3220.1949,477.9786 3221.3819,477.439 Q3222.5689,476.8995 3223.8306,475.7374 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="164.5137"
+                  x="3258.8843" y="480.4786">LoginScreen
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2988.44" x2="3628.8423" y1="501.8966" y2="501.8966"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44" y="523.3848"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="186.9629"
+                  x="3026.44" y="536.9669">Screen screen
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44" y="556.3614"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="592.4023"
+                  x="3026.44" y="569.9434">AuthenticationService authenticationService
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44" y="589.338"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="383.7148"
+                  x="3026.44" y="602.92">CourseService courseService
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44" y="622.3145"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="432.6465"
+                  x="3026.44" y="635.8966">ToDoListService toDoListService
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44" y="655.2911"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="434.0547"
+                  x="3026.44" y="668.8731">CalendarService calendarService
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44" y="688.2677"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="163.3789"
+                  x="3026.44" y="701.8497">String name
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44" y="721.2442"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="162.1895"
+                  x="3026.44" y="734.8263">String email
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44" y="754.2208"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="218.2852"
+                  x="3026.44" y="767.8028">String password
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44" y="787.1973"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="220.8281"
+                  x="3026.44" y="800.7794">int selectedField
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44" y="820.1739"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="307.3301"
+                  x="3026.44" y="833.7559">boolean isSignupMode
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44" y="853.1505"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="272.7539"
+                  x="3026.44" y="866.7325">String errorMessage
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44" y="886.127"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="310.0645"
+                  x="3026.44" y="899.7091">String successMessage
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2988.44" x2="3628.8423" y1="913.6153" y2="913.6153"/>
+            <ellipse cx="3008.44" cy="941.1036" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="180.2773"
+                  x="3026.44" y="948.6856">void display()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44"
+                  y="968.0802"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="173.5918"
+                  x="3026.44" y="981.6622">void render()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44"
+                  y="1001.0567"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="266.6016"
+                  x="3026.44" y="1014.6388">void renderSignup()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44"
+                  y="1034.0333"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="248.6504"
+                  x="3026.44" y="1047.6153">void renderLogin()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44"
+                  y="1067.0098"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="304.6504"
+                  x="3026.44" y="1080.5919">void renderMessages()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44"
+                  y="1099.9864"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="532.1367"
+                  x="3026.44" y="1113.5684">void handleCharacterInput(Character c)
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44"
+                  y="1132.963"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="315.5879"
+                  x="3026.44" y="1146.545">void handleBackspace()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44"
+                  y="1165.9395"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="226.8027"
+                  x="3026.44" y="1179.5216">void handleTab()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44"
+                  y="1198.9161"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="297.2402"
+                  x="3026.44" y="1212.4981">boolean handleEnter()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44"
+                  y="1231.8927"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="562.0508"
+                  x="3026.44" y="1245.4747">void navigateToMainMenu(UserDTO user)
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3002.44"
+                  y="1264.8692"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="228.1289"
+                  x="3026.44" y="1278.4513">void clearFields()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN7" data-source-line="50" data-uid="ent0008" id="entity_GMN7">
+            <path d="M2779.24,1604.4966 L2779.24,1746.9809 A0,0 0 0 0 2779.24,1746.9809 L3414.0476,1746.9809 A0,0 0 0 0 3414.0476,1746.9809 L3414.0476,1624.4966 L3394.0476,1604.4966 L3123.06,1604.4966 L3196.74,1292.8766 L3107.06,1604.4966 L2779.24,1604.4966 A0,0 0 0 0 2779.24,1604.4966"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M3394.0476,1604.4966 L3394.0476,1624.4966 L3414.0476,1624.4966 L3394.0476,1604.4966" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="388.5781"
+                  x="2791.24" y="1639.6333">Entry screen for authentication
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="480.7207"
+                  x="2791.24" y="1670.2544">Handles both signup and login modes
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="418.5264"
+                  x="2791.24" y="1700.8755">Switches between fields with TAB
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="592.8076"
+                  x="2791.24" y="1731.4966">Creates MainMenuScreen after successful login
+            </text>
+        </g><!--class MainMenuScreen-->
+        <g class="entity" data-entity="MainMenuScreen" data-source-line="56" data-uid="ent0010"
+           id="entity_MainMenuScreen">
+            <rect fill="#F1F1F1" height="458.7422" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="486.0547"
+                  x="1553.62" y="1446.3566"/>
+            <ellipse cx="1673.6591" cy="1478.3566" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M1679.6054,1489.6427 Q1678.4432,1490.2404 1677.1649,1490.5392 Q1675.8866,1490.838 1674.4755,1490.838 Q1669.4618,1490.838 1666.8221,1487.5343 Q1664.1825,1484.2306 1664.1825,1477.9884 Q1664.1825,1471.7296 1666.8221,1468.4259 Q1669.4618,1465.1222 1674.4755,1465.1222 Q1675.8866,1465.1222 1677.1815,1465.421 Q1678.4764,1465.7198 1679.6054,1466.3175 L1679.6054,1471.7628 Q1678.3436,1470.6007 1677.1566,1470.0612 Q1675.9696,1469.5216 1674.7079,1469.5216 Q1672.0184,1469.5216 1670.6488,1471.6549 Q1669.2792,1473.7882 1669.2792,1477.9884 Q1669.2792,1482.172 1670.6488,1484.3053 Q1672.0184,1486.4386 1674.7079,1486.4386 Q1675.9696,1486.4386 1677.1566,1485.899 Q1678.3436,1485.3595 1679.6054,1484.1974 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="228.9766"
+                  x="1714.6591" y="1488.9386">MainMenuScreen
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="1555.62" x2="2037.6747" y1="1510.3566" y2="1510.3566"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1569.62" y="1531.8448"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="186.9629"
+                  x="1593.62" y="1545.4269">Screen screen
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1569.62" y="1564.8214"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="288.832"
+                  x="1593.62" y="1578.4034">UserDTO currentUser
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1569.62" y="1597.798"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="383.7148"
+                  x="1593.62" y="1611.38">CourseService courseService
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1569.62" y="1630.7745"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="432.6465"
+                  x="1593.62" y="1644.3566">ToDoListService toDoListService
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1569.62" y="1663.7511"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="434.0547"
+                  x="1593.62" y="1677.3331">CalendarService calendarService
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1569.62" y="1696.7277"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="248.9238"
+                  x="1593.62" y="1710.3097">int selectedOption
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="1555.62" x2="2037.6747" y1="1724.2159" y2="1724.2159"/>
+            <ellipse cx="1575.62" cy="1751.7042" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="180.2773"
+                  x="1593.62" y="1759.2863">void display()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1569.62"
+                  y="1778.6808"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="173.5918"
+                  x="1593.62" y="1792.2628">void render()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1569.62"
+                  y="1811.6573"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="294.041"
+                  x="1593.62" y="1825.2394">void handleArrowUp()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1569.62"
+                  y="1844.6339"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="334.1406"
+                  x="1593.62" y="1858.2159">void handleArrowDown()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1569.62"
+                  y="1877.6105"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="246.0938"
+                  x="1593.62" y="1891.1925">void handleEnter()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN11" data-source-line="72" data-uid="ent0012" id="entity_GMN11">
+            <path d="M2109.04,1573.8766 L2109.04,1667.7366 L2040.48,1675.7366 L2109.04,1683.7366 L2109.04,1777.6031 A0,0 0 0 0 2109.04,1777.6031 L2708.25,1777.6031 A0,0 0 0 0 2708.25,1777.6031 L2708.25,1593.8766 L2688.25,1573.8766 L2109.04,1573.8766 A0,0 0 0 0 2109.04,1573.8766"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M2688.25,1573.8766 L2688.25,1593.8766 L2708.25,1593.8766 L2688.25,1573.8766" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="294.709"
+                  x="2121.04" y="1609.0133">Shows 4 menu options:
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="292.1572"
+                  x="2121.04" y="1639.6344">1. Course Management
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="339.168"
+                  x="2121.04" y="1670.2555">2. To-Do List Management
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="144.7393"
+                  x="2121.04" y="1700.8766">3. Calendar
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="120.7705"
+                  x="2121.04" y="1731.4977">4. Logout
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="557.21"
+                  x="2121.04" y="1762.1188">Navigates to respective screens on selection
+            </text>
+        </g><!--class CourseManagementScreen-->
+        <g class="entity" data-entity="CourseManagementScreen" data-source-line="80" data-uid="ent0014"
+           id="entity_CourseManagementScreen">
+            <rect fill="#F1F1F1" height="1283.1563" rx="5" ry="5" style="stroke:#181818;stroke-width:1;"
+                  width="584.1367" x="3626.56" y="2059.0966"/>
+            <ellipse cx="3730.227" cy="2091.0966" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M3736.1733,2102.3827 Q3735.0112,2102.9804 3733.7329,2103.2792 Q3732.4545,2103.578 3731.0434,2103.578 Q3726.0297,2103.578 3723.3901,2100.2743 Q3720.7504,2096.9706 3720.7504,2090.7284 Q3720.7504,2084.4696 3723.3901,2081.1659 Q3726.0297,2077.8622 3731.0434,2077.8622 Q3732.4545,2077.8622 3733.7495,2078.161 Q3735.0444,2078.4598 3736.1733,2079.0575 L3736.1733,2084.5028 Q3734.9116,2083.3407 3733.7246,2082.8012 Q3732.5375,2082.2616 3731.2758,2082.2616 Q3728.5864,2082.2616 3727.2167,2084.3949 Q3725.8471,2086.5282 3725.8471,2090.7284 Q3725.8471,2094.912 3727.2167,2097.0453 Q3728.5864,2099.1786 3731.2758,2099.1786 Q3732.5375,2099.1786 3733.7246,2098.639 Q3734.9116,2098.0995 3736.1733,2096.9374 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="359.8027"
+                  x="3771.227" y="2101.6786">CourseManagementScreen
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="3628.56" x2="4208.6967" y1="2123.0966" y2="2123.0966"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2144.5848"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="186.9629"
+                  x="3666.56" y="2158.1669">Screen screen
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2177.5614"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="288.832"
+                  x="3666.56" y="2191.1434">UserDTO currentUser
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2210.538"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="383.7148"
+                  x="3666.56" y="2224.12">CourseService courseService
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2243.5145"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="412.6445"
+                  x="3666.56" y="2257.0966">SimpleDateFormat dateFormat
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2276.4911"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="361.375"
+                  x="3666.56" y="2290.0731">List&lt;CourseDTO&gt; courses
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2309.4677"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="251.6855"
+                  x="3666.56" y="2323.0497">int selectedCourse
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2342.4442"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="220.2129"
+                  x="3666.56" y="2356.0263">int selectedTask
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2375.4208"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="121.3652"
+                  x="3666.56" y="2389.0028">int mode
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2408.3973"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="272.7539"
+                  x="3666.56" y="2421.9794">String errorMessage
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2441.3739"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="310.0645"
+                  x="3666.56" y="2454.9559">String successMessage
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2474.3505"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="248.8418"
+                  x="3666.56" y="2487.9325">String courseCode
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2507.327"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="256.9355"
+                  x="3666.56" y="2520.9091">String courseName
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2540.3036"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="223.2617"
+                  x="3666.56" y="2553.8856">String taskName
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2573.2802"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="300.877"
+                  x="3666.56" y="2586.8622">String taskDescription
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2606.2567"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="315.2598"
+                  x="3666.56" y="2619.8388">String taskDeadlineDay
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2639.2333"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="350.7383"
+                  x="3666.56" y="2652.8153">String taskDeadlineMonth
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2672.2098"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="324.1602"
+                  x="3666.56" y="2685.7919">String taskDeadlineYear
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56" y="2705.1864"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="180.168"
+                  x="3666.56" y="2718.7684">int inputField
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="3628.56" x2="4208.6967" y1="2732.6747" y2="2732.6747"/>
+            <ellipse cx="3648.56" cy="2760.163" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="180.2773"
+                  x="3666.56" y="2767.745">void display()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="2787.1395"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="173.5918"
+                  x="3666.56" y="2800.7216">void render()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="2820.1161"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="316.6406"
+                  x="3666.56" y="2833.6981">void renderCourseList()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="2853.0927"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="323.4355"
+                  x="3666.56" y="2866.6747">void renderAddCourse()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="2886.0692"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="361.8398"
+                  x="3666.56" y="2899.6513">void renderCourseDetails()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="2919.0458"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="291.9629"
+                  x="3666.56" y="2932.6278">void renderAddTask()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="2952.0223"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="304.6504"
+                  x="3666.56" y="2965.6044">void renderMessages()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="2984.9989"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="532.1367"
+                  x="3666.56" y="2998.5809">void handleCharacterInput(Character c)
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="3017.9755"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="315.5879"
+                  x="3666.56" y="3031.5575">void handleBackspace()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="3050.952"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="294.041"
+                  x="3666.56" y="3064.5341">void handleArrowUp()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="3083.9286"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="334.1406"
+                  x="3666.56" y="3097.5106">void handleArrowDown()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="3116.9052"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="280.4375"
+                  x="3666.56" y="3130.4872">void nextInputField()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="3149.8817"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="246.0938"
+                  x="3666.56" y="3163.4638">void handleEnter()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="3182.8583"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="389.3887"
+                  x="3666.56" y="3196.4403">void handleUpdateProgress()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="3215.8348"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="373.5156"
+                  x="3666.56" y="3229.4169">void handleMarkComplete()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="3248.8114"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="252.4102"
+                  x="3666.56" y="3262.3934">void loadCourses()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="3281.788"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="234.623"
+                  x="3666.56" y="3295.37">void clearInputs()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="3642.56"
+                  y="3314.7645"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="280.4922"
+                  x="3666.56" y="3328.3466">void clearMessages()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN15" data-source-line="121" data-uid="ent0016" id="entity_GMN15">
+            <path d="M3212.06,3542.4966 L3212.06,3776.8442 A0,0 0 0 0 3212.06,3776.8442 L4009.228,3776.8442 A0,0 0 0 0 4009.228,3776.8442 L4009.228,3562.4966 L3989.228,3542.4966 L3656.06,3542.4966 L3712.12,3342.9966 L3640.06,3542.4966 L3212.06,3542.4966 A0,0 0 0 0 3212.06,3542.4966"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M3989.228,3542.4966 L3989.228,3562.4966 L4009.228,3562.4966 L3989.228,3542.4966" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="755.168"
+                  x="3224.06" y="3577.6333">4 modes: 0=list view, 1=add course, 2=details, 3=add task
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="194.2002"
+                  x="3224.06" y="3608.2544">F1: Add Course
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="355.6719"
+                  x="3224.06" y="3638.8755">F2: Add Task (in detail view)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="443.8916"
+                  x="3224.06" y="3669.4966">F3: Update Progress (in detail view)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="429.1523"
+                  x="3224.06" y="3700.1177">F4: Mark Complete (in detail view)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="490.9912"
+                  x="3224.06" y="3730.7388">Shows course progress and task status
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="525.8652"
+                  x="3224.06" y="3761.3598">Date input with validation (YYYY/MM/DD)
+            </text>
+        </g><!--class ToDoListManagementScreen-->
+        <g class="entity" data-entity="ToDoListManagementScreen" data-source-line="130" data-uid="ent0018"
+           id="entity_ToDoListManagementScreen">
+            <rect fill="#F1F1F1" height="1184.2266" rx="5" ry="5" style="stroke:#181818;stroke-width:1;"
+                  width="584.1367" x="890.56" y="2108.5566"/>
+            <ellipse cx="981.4438" cy="2140.5566" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M987.3901,2151.8427 Q986.228,2152.4404 984.9496,2152.7392 Q983.6713,2153.038 982.2602,2153.038 Q977.2465,2153.038 974.6069,2149.7343 Q971.9672,2146.4306 971.9672,2140.1884 Q971.9672,2133.9296 974.6069,2130.6259 Q977.2465,2127.3222 982.2602,2127.3222 Q983.6713,2127.3222 984.9663,2127.621 Q986.2612,2127.9198 987.3901,2128.5175 L987.3901,2133.9628 Q986.1284,2132.8007 984.9413,2132.2612 Q983.7543,2131.7216 982.4926,2131.7216 Q979.8032,2131.7216 978.4335,2133.8549 Q977.0639,2135.9882 977.0639,2140.1884 Q977.0639,2144.372 978.4335,2146.5053 Q979.8032,2148.6386 982.4926,2148.6386 Q983.7543,2148.6386 984.9413,2148.099 Q986.1284,2147.5595 987.3901,2146.3974 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="385.3691"
+                  x="1022.4438" y="2151.1386">ToDoListManagementScreen
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="892.56" x2="1472.6967" y1="2172.5566" y2="2172.5566"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2194.0448"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="186.9629"
+                  x="930.56" y="2207.6269">Screen screen
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2227.0214"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="288.832"
+                  x="930.56" y="2240.6034">UserDTO currentUser
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2259.998"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="432.6465"
+                  x="930.56" y="2273.58">ToDoListService toDoListService
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2292.9745"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="412.6445"
+                  x="930.56" y="2306.5566">SimpleDateFormat dateFormat
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2325.9511"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="406.957"
+                  x="930.56" y="2339.5331">List&lt;ToDoListDTO&gt; todoLists
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2358.9277"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="204.1758"
+                  x="930.56" y="2372.5097">int selectedList
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2391.9042"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="220.2129"
+                  x="930.56" y="2405.4863">int selectedTask
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2424.8808"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="121.3652"
+                  x="930.56" y="2438.4628">int mode
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2457.8573"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="272.7539"
+                  x="930.56" y="2471.4394">String errorMessage
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2490.8339"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="310.0645"
+                  x="930.56" y="2504.4159">String successMessage
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2523.8105"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="207.6211"
+                  x="930.56" y="2537.3925">String listName
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2556.787"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="300.877"
+                  x="930.56" y="2570.3691">String taskDescription
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2589.7636"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="315.2598"
+                  x="930.56" y="2603.3456">String taskDeadlineDay
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2622.7402"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="350.7383"
+                  x="930.56" y="2636.3222">String taskDeadlineMonth
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2655.7167"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="324.1602"
+                  x="930.56" y="2669.2988">String taskDeadlineYear
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2688.6933"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="180.168"
+                  x="930.56" y="2702.2753">int inputField
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="892.56" x2="1472.6967" y1="2716.1816" y2="2716.1816"/>
+            <ellipse cx="912.56" cy="2743.6698" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="180.2773"
+                  x="930.56" y="2751.2519">void display()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="2770.6464"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="173.5918"
+                  x="930.56" y="2784.2284">void render()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="2803.623"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="284.9355"
+                  x="930.56" y="2817.205">void renderListView()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="2836.5995"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="275.9258"
+                  x="930.56" y="2850.1816">void renderAddList()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="2869.5761"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="314.3301"
+                  x="930.56" y="2883.1581">void renderListDetails()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="2902.5527"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="291.9629"
+                  x="930.56" y="2916.1347">void renderAddTask()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="2935.5292"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="304.6504"
+                  x="930.56" y="2949.1113">void renderMessages()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="2968.5058"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="532.1367"
+                  x="930.56" y="2982.0878">void handleCharacterInput(Character c)
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="3001.4823"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="315.5879"
+                  x="930.56" y="3015.0644">void handleBackspace()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="3034.4589"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="294.041"
+                  x="930.56" y="3048.0409">void handleArrowUp()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="3067.4355"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="334.1406"
+                  x="930.56" y="3081.0175">void handleArrowDown()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56" y="3100.412"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="280.4375"
+                  x="930.56" y="3113.9941">void nextInputField()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="3133.3886"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="246.0938"
+                  x="930.56" y="3146.9706">void handleEnter()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="3166.3652"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="373.5156"
+                  x="930.56" y="3179.9472">void handleMarkComplete()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="3199.3417"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="277.9766"
+                  x="930.56" y="3212.9238">void loadToDoLists()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="3232.3183"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="234.623"
+                  x="930.56" y="3245.9003">void clearInputs()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="906.56"
+                  y="3265.2948"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="280.4922"
+                  x="930.56" y="3278.8769">void clearMessages()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN19" data-source-line="168" data-uid="ent0020" id="entity_GMN19">
+            <path d="M708.94,3557.8166 L708.94,3761.5431 A0,0 0 0 0 708.94,3761.5431 L1460.316,3761.5431 A0,0 0 0 0 1460.316,3761.5431 L1460.316,3577.8166 L1440.316,3557.8166 L1102.94,3557.8166 L1122.04,3293.2166 L1086.94,3557.8166 L708.94,3557.8166 A0,0 0 0 0 708.94,3557.8166"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M1440.316,3557.8166 L1440.316,3577.8166 L1460.316,3577.8166 L1440.316,3557.8166" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="709.376"
+                  x="720.94" y="3592.9533">4 modes: 0=list view, 1=add list, 2=details, 3=add task
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="150.084"
+                  x="720.94" y="3623.5744">F1: Add List
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="355.6719"
+                  x="720.94" y="3654.1955">F2: Add Task (in detail view)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="429.1523"
+                  x="720.94" y="3684.8166">F3: Mark Complete (in detail view)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="581.1406"
+                  x="720.94" y="3715.4377">Shows task completion count (X/Y completed)
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="416.0127"
+                  x="720.94" y="3746.0588">Optional deadline with validation
+            </text>
+        </g><!--class CalendarScreen-->
+        <g class="entity" data-entity="CalendarScreen" data-source-line="176" data-uid="ent0022"
+           id="entity_CalendarScreen">
+            <rect fill="#F1F1F1" height="557.6719" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="584.2734"
+                  x="1706.5" y="2421.8366"/>
+            <ellipse cx="1885.1846" cy="2453.8366" fill="#ADD1B2" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M1891.1309,2465.1227 Q1889.9688,2465.7204 1888.6904,2466.0192 Q1887.4121,2466.318 1886.001,2466.318 Q1880.9873,2466.318 1878.3477,2463.0143 Q1875.708,2459.7106 1875.708,2453.4684 Q1875.708,2447.2096 1878.3477,2443.9059 Q1880.9873,2440.6022 1886.001,2440.6022 Q1887.4121,2440.6022 1888.707,2440.901 Q1890.002,2441.1998 1891.1309,2441.7975 L1891.1309,2447.2428 Q1889.8691,2446.0807 1888.6821,2445.5412 Q1887.4951,2445.0016 1886.2334,2445.0016 Q1883.5439,2445.0016 1882.1743,2447.1349 Q1880.8047,2449.2682 1880.8047,2453.4684 Q1880.8047,2457.652 1882.1743,2459.7853 Q1883.5439,2461.9186 1886.2334,2461.9186 Q1887.4951,2461.9186 1888.6821,2461.379 Q1889.8691,2460.8395 1891.1309,2459.6774 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="209.9043"
+                  x="1926.1846" y="2464.4186">CalendarScreen
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="1708.5" x2="2288.7734" y1="2485.8366" y2="2485.8366"/>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5" y="2507.3248"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="186.9629"
+                  x="1746.5" y="2520.9069">Screen screen
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5" y="2540.3014"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="288.832"
+                  x="1746.5" y="2553.8834">UserDTO currentUser
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5" y="2573.278"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="434.0547"
+                  x="1746.5" y="2586.86">CalendarService calendarService
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5" y="2606.2545"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="229.4277"
+                  x="1746.5" y="2619.8366">int currentMonth
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5" y="2639.2311"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="202.8496"
+                  x="1746.5" y="2652.8131">int currentYear
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5" y="2672.2077"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="532.2734"
+                  x="1746.5" y="2685.7897">List&lt;CalendarItemDTO&gt; calendarItems
+            </text>
+            <rect fill="none" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5" y="2705.1842"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="272.7539"
+                  x="1746.5" y="2718.7663">String errorMessage
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="1708.5" x2="2288.7734" y1="2732.6725" y2="2732.6725"/>
+            <ellipse cx="1728.5" cy="2760.1608" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="180.2773"
+                  x="1746.5" y="2767.7428">void display()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5"
+                  y="2787.1373"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="173.5918"
+                  x="1746.5" y="2800.7194">void render()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5"
+                  y="2820.1139"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="294.041"
+                  x="1746.5" y="2833.6959">void renderCalendar()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5"
+                  y="2853.0905"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="368.5938"
+                  x="1746.5" y="2866.6725">void renderCalendarItems()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5" y="2886.067"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="308.3145"
+                  x="1746.5" y="2899.6491">void handleArrowLeft()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5"
+                  y="2919.0436"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="328.125"
+                  x="1746.5" y="2932.6256">void handleArrowRight()
+            </text>
+            <rect fill="#F24D5C" height="12" style="stroke:#C82930;stroke-width:2;" width="12" x="1722.5"
+                  y="2952.0202"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="337.8594"
+                  x="1746.5" y="2965.6022">void loadCalendarItems()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN23" data-source-line="195" data-uid="ent0024" id="entity_GMN23">
+            <path d="M2359.88,2598.8166 L2359.88,2692.6766 L2291.64,2700.6766 L2359.88,2708.6766 L2359.88,2802.5431 A0,0 0 0 0 2359.88,2802.5431 L2809.3868,2802.5431 A0,0 0 0 0 2809.3868,2802.5431 L2809.3868,2618.8166 L2789.3868,2598.8166 L2359.88,2598.8166 A0,0 0 0 0 2359.88,2598.8166"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M2789.3868,2598.8166 L2789.3868,2618.8166 L2809.3868,2618.8166 L2789.3868,2598.8166" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="370.0811"
+                  x="2371.88" y="2633.9533">Shows monthly calendar view
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="358.1602"
+                  x="2371.88" y="2664.5744">Arrow keys navigate months
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="407.5068"
+                  x="2371.88" y="2695.1955">Displays aggregated tasks from:
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="240.4492"
+                  x="2371.88" y="2725.8166">- Course deadlines
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="287.46"
+                  x="2371.88" y="2756.4377">- To-Do List deadlines
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="282.4834"
+                  x="2371.88" y="2787.0587">Color-coded by status
+            </text>
+        </g><!--class AuthenticationService-->
+        <g class="entity" data-entity="AuthenticationService" data-source-line="208" data-uid="ent0028"
+           id="entity_AuthenticationService">
+            <rect fill="#F1F1F1" height="96" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="357.6992"
+                  x="4117.78" y="1627.7366"/>
+            <ellipse cx="4147.78" cy="1659.7366" fill="#B4A7E5" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M4139.6355,1651.2668 L4139.6355,1646.9504 L4154.3943,1646.9504 L4154.3943,1651.2668 L4149.4636,1651.2668 L4149.4636,1667.4202 L4154.3943,1667.4202 L4154.3943,1671.7366 L4139.6355,1671.7366 L4139.6355,1667.4202 L4144.5661,1667.4202 L4144.5661,1651.2668 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="293.6992" x="4175.78" y="1670.3186">AuthenticationService
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="4119.78" x2="4473.4792" y1="1691.7366" y2="1691.7366"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="4119.78" x2="4473.4792" y1="1707.7366" y2="1707.7366"/>
+        </g><!--class CourseService-->
+        <g class="entity" data-entity="CourseService" data-source-line="214" data-uid="ent0033"
+           id="entity_CourseService">
+            <rect fill="#F1F1F1" height="96" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="253.9434"
+                  x="4079.66" y="3611.6766"/>
+            <ellipse cx="4109.66" cy="3643.6766" fill="#B4A7E5" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M4101.5155,3635.2068 L4101.5155,3630.8904 L4116.2743,3630.8904 L4116.2743,3635.2068 L4111.3436,3635.2068 L4111.3436,3651.3602 L4116.2743,3651.3602 L4116.2743,3655.6766 L4101.5155,3655.6766 L4101.5155,3651.3602 L4106.4461,3651.3602 L4106.4461,3635.2068 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="189.9434" x="4137.66" y="3654.2586">CourseService
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="4081.66" x2="4331.6034" y1="3675.6766" y2="3675.6766"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="4081.66" x2="4331.6034" y1="3691.6766" y2="3691.6766"/>
+        </g><!--class CourseDTO-->
+        <g class="entity" data-entity="CourseDTO" data-source-line="215" data-uid="ent0035" id="entity_CourseDTO">
+            <rect fill="#F1F1F1" height="96" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="219.709"
+                  x="4402.78" y="3611.6766"/>
+            <ellipse cx="4432.78" cy="3643.6766" fill="#ADD1B2" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M4438.7263,3654.9627 Q4437.5642,3655.5604 4436.2859,3655.8592 Q4435.0075,3656.158 4433.5964,3656.158 Q4428.5827,3656.158 4425.9431,3652.8543 Q4423.3034,3649.5506 4423.3034,3643.3084 Q4423.3034,3637.0496 4425.9431,3633.7459 Q4428.5827,3630.4422 4433.5964,3630.4422 Q4435.0075,3630.4422 4436.3025,3630.741 Q4437.5974,3631.0398 4438.7263,3631.6375 L4438.7263,3637.0828 Q4437.4646,3635.9207 4436.2776,3635.3812 Q4435.0905,3634.8416 4433.8288,3634.8416 Q4431.1394,3634.8416 4429.7697,3636.9749 Q4428.4001,3639.1082 4428.4001,3643.3084 Q4428.4001,3647.492 4429.7697,3649.6253 Q4431.1394,3651.7586 4433.8288,3651.7586 Q4435.0905,3651.7586 4436.2776,3651.219 Q4437.4646,3650.6795 4438.7263,3649.5174 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="155.709"
+                  x="4460.78" y="3654.2586">CourseDTO
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="4404.78" x2="4620.489" y1="3675.6766" y2="3675.6766"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="4404.78" x2="4620.489" y1="3691.6766" y2="3691.6766"/>
+        </g><!--class CourseTaskDTO-->
+        <g class="entity" data-entity="CourseTaskDTO" data-source-line="216" data-uid="ent0037"
+           id="entity_CourseTaskDTO">
+            <rect fill="#F1F1F1" height="96" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="283.5156"
+                  x="4692.88" y="3611.6766"/>
+            <ellipse cx="4722.88" cy="3643.6766" fill="#ADD1B2" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M4728.8263,3654.9627 Q4727.6642,3655.5604 4726.3859,3655.8592 Q4725.1075,3656.158 4723.6964,3656.158 Q4718.6827,3656.158 4716.0431,3652.8543 Q4713.4034,3649.5506 4713.4034,3643.3084 Q4713.4034,3637.0496 4716.0431,3633.7459 Q4718.6827,3630.4422 4723.6964,3630.4422 Q4725.1075,3630.4422 4726.4025,3630.741 Q4727.6974,3631.0398 4728.8263,3631.6375 L4728.8263,3637.0828 Q4727.5646,3635.9207 4726.3776,3635.3812 Q4725.1905,3634.8416 4723.9288,3634.8416 Q4721.2394,3634.8416 4719.8697,3636.9749 Q4718.5001,3639.1082 4718.5001,3643.3084 Q4718.5001,3647.492 4719.8697,3649.6253 Q4721.2394,3651.7586 4723.9288,3651.7586 Q4725.1905,3651.7586 4726.3776,3651.219 Q4727.5646,3650.6795 4728.8263,3649.5174 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="219.5156"
+                  x="4750.88" y="3654.2586">CourseTaskDTO
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="4694.88" x2="4974.3956" y1="3675.6766" y2="3675.6766"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="4694.88" x2="4974.3956" y1="3691.6766" y2="3691.6766"/>
+        </g><!--class ToDoListService-->
+        <g class="entity" data-entity="ToDoListService" data-source-line="218" data-uid="ent0039"
+           id="entity_ToDoListService">
+            <rect fill="#F1F1F1" height="96" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="279.5098"
+                  x="1530.88" y="3611.6766"/>
+            <ellipse cx="1560.88" cy="3643.6766" fill="#B4A7E5" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M1552.7355,3635.2068 L1552.7355,3630.8904 L1567.4943,3630.8904 L1567.4943,3635.2068 L1562.5636,3635.2068 L1562.5636,3651.3602 L1567.4943,3651.3602 L1567.4943,3655.6766 L1552.7355,3655.6766 L1552.7355,3651.3602 L1557.6661,3651.3602 L1557.6661,3635.2068 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="215.5098" x="1588.88" y="3654.2586">ToDoListService
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="1532.88" x2="1808.3898" y1="3675.6766" y2="3675.6766"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="1532.88" x2="1808.3898" y1="3691.6766" y2="3691.6766"/>
+        </g><!--class ToDoListDTO-->
+        <g class="entity" data-entity="ToDoListDTO" data-source-line="219" data-uid="ent0041" id="entity_ToDoListDTO">
+            <rect fill="#F1F1F1" height="96" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="245.2754"
+                  x="14" y="3611.6766"/>
+            <ellipse cx="44" cy="3643.6766" fill="#ADD1B2" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M49.9463,3654.9627 Q48.7842,3655.5604 47.5059,3655.8592 Q46.2275,3656.158 44.8164,3656.158 Q39.8027,3656.158 37.1631,3652.8543 Q34.5234,3649.5506 34.5234,3643.3084 Q34.5234,3637.0496 37.1631,3633.7459 Q39.8027,3630.4422 44.8164,3630.4422 Q46.2275,3630.4422 47.5225,3630.741 Q48.8174,3631.0398 49.9463,3631.6375 L49.9463,3637.0828 Q48.6846,3635.9207 47.4976,3635.3812 Q46.3105,3634.8416 45.0488,3634.8416 Q42.3594,3634.8416 40.9897,3636.9749 Q39.6201,3639.1082 39.6201,3643.3084 Q39.6201,3647.492 40.9897,3649.6253 Q42.3594,3651.7586 45.0488,3651.7586 Q46.3105,3651.7586 47.4976,3651.219 Q48.6846,3650.6795 49.9463,3649.5174 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="181.2754"
+                  x="72" y="3654.2586">ToDoListDTO
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="16" x2="257.2754" y1="3675.6766" y2="3675.6766"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="16" x2="257.2754" y1="3691.6766" y2="3691.6766"/>
+        </g><!--class ToDoListTaskDTO-->
+        <g class="entity" data-entity="ToDoListTaskDTO" data-source-line="220" data-uid="ent0043"
+           id="entity_ToDoListTaskDTO">
+            <rect fill="#F1F1F1" height="96" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="309.082"
+                  x="330.1" y="3611.6766"/>
+            <ellipse cx="360.1" cy="3643.6766" fill="#ADD1B2" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M366.0463,3654.9627 Q364.8842,3655.5604 363.6059,3655.8592 Q362.3275,3656.158 360.9164,3656.158 Q355.9027,3656.158 353.2631,3652.8543 Q350.6234,3649.5506 350.6234,3643.3084 Q350.6234,3637.0496 353.2631,3633.7459 Q355.9027,3630.4422 360.9164,3630.4422 Q362.3275,3630.4422 363.6225,3630.741 Q364.9174,3631.0398 366.0463,3631.6375 L366.0463,3637.0828 Q364.7846,3635.9207 363.5976,3635.3812 Q362.4105,3634.8416 361.1488,3634.8416 Q358.4594,3634.8416 357.0897,3636.9749 Q355.7201,3639.1082 355.7201,3643.3084 Q355.7201,3647.492 357.0897,3649.6253 Q358.4594,3651.7586 361.1488,3651.7586 Q362.4105,3651.7586 363.5976,3651.219 Q364.7846,3650.6795 366.0463,3649.5174 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="245.082"
+                  x="388.1" y="3654.2586">ToDoListTaskDTO
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="332.1" x2="637.182" y1="3675.6766" y2="3675.6766"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="332.1" x2="637.182" y1="3691.6766" y2="3691.6766"/>
+        </g><!--class CalendarService-->
+        <g class="entity" data-entity="CalendarService" data-source-line="222" data-uid="ent0045"
+           id="entity_CalendarService">
+            <rect fill="#F1F1F1" height="96" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="279.1133"
+                  x="1881.08" y="3611.6766"/>
+            <ellipse cx="1911.08" cy="3643.6766" fill="#B4A7E5" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M1902.9355,3635.2068 L1902.9355,3630.8904 L1917.6943,3630.8904 L1917.6943,3635.2068 L1912.7636,3635.2068 L1912.7636,3651.3602 L1917.6943,3651.3602 L1917.6943,3655.6766 L1902.9355,3655.6766 L1902.9355,3651.3602 L1907.8661,3651.3602 L1907.8661,3635.2068 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="215.1133" x="1939.08" y="3654.2586">CalendarService
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="1883.08" x2="2158.1933" y1="3675.6766" y2="3675.6766"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="1883.08" x2="2158.1933" y1="3691.6766" y2="3691.6766"/>
+        </g><!--class CalendarItemDTO-->
+        <g class="entity" data-entity="CalendarItemDTO" data-source-line="223" data-uid="ent0047"
+           id="entity_CalendarItemDTO">
+            <rect fill="#F1F1F1" height="96" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="305.1582"
+                  x="2230.06" y="3611.6766"/>
+            <ellipse cx="2260.06" cy="3643.6766" fill="#ADD1B2" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M2266.0063,3654.9627 Q2264.8442,3655.5604 2263.5659,3655.8592 Q2262.2875,3656.158 2260.8764,3656.158 Q2255.8627,3656.158 2253.2231,3652.8543 Q2250.5834,3649.5506 2250.5834,3643.3084 Q2250.5834,3637.0496 2253.2231,3633.7459 Q2255.8627,3630.4422 2260.8764,3630.4422 Q2262.2875,3630.4422 2263.5825,3630.741 Q2264.8774,3631.0398 2266.0063,3631.6375 L2266.0063,3637.0828 Q2264.7446,3635.9207 2263.5576,3635.3812 Q2262.3705,3634.8416 2261.1088,3634.8416 Q2258.4194,3634.8416 2257.0497,3636.9749 Q2255.6801,3639.1082 2255.6801,3643.3084 Q2255.6801,3647.492 2257.0497,3649.6253 Q2258.4194,3651.7586 2261.1088,3651.7586 Q2262.3705,3651.7586 2263.5576,3651.219 Q2264.7446,3650.6795 2266.0063,3649.5174 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="241.1582"
+                  x="2288.06" y="3654.2586">CalendarItemDTO
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2232.06" x2="2533.2182" y1="3675.6766" y2="3675.6766"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="2232.06" x2="2533.2182" y1="3691.6766" y2="3691.6766"/>
+        </g><!--class Screen-->
+        <g class="entity" data-entity="Screen" data-source-line="227" data-uid="ent0049" id="entity_Screen">
+            <rect fill="#F1F1F1" height="326.8359" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="493.2461"
+                  x="2648.02" y="3496.2566"/>
+            <ellipse cx="2841.4155" cy="3528.2566" fill="#B4A7E5" rx="22" ry="22"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <path d="M2833.271,3519.7868 L2833.271,3515.4704 L2848.0298,3515.4704 L2848.0298,3519.7868 L2843.0991,3519.7868 L2843.0991,3535.9402 L2848.0298,3535.9402 L2848.0298,3540.2566 L2833.271,3540.2566 L2833.271,3535.9402 L2838.2016,3535.9402 L2838.2016,3519.7868 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" font-style="italic" lengthAdjust="spacing"
+                  textLength="89.4551" x="2882.4155" y="3538.8386">Screen
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="2650.02" x2="3139.2661" y1="3560.2566" y2="3560.2566"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="2650.02" x2="3139.2661" y1="3576.2566" y2="3576.2566"/>
+            <ellipse cx="2670.02" cy="3603.7448" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="149.4336"
+                  x="2688.02" y="3611.3269">void clear()
+            </text>
+            <ellipse cx="2670.02" cy="3636.7214" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="180.5371"
+                  x="2688.02" y="3644.3034">void refresh()
+            </text>
+            <ellipse cx="2670.02" cy="3669.698" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="292.8105"
+                  x="2688.02" y="3677.28">KeyStroke readInput()
+            </text>
+            <ellipse cx="2670.02" cy="3702.6745" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="441.2461"
+                  x="2688.02" y="3710.2566">TextGraphics newTextGraphics()
+            </text>
+            <ellipse cx="2670.02" cy="3735.6511" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="420.1094"
+                  x="2688.02" y="3743.2331">TerminalSize getTerminalSize()
+            </text>
+            <ellipse cx="2670.02" cy="3768.6277" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="236.0723"
+                  x="2688.02" y="3776.2097">void startScreen()
+            </text>
+            <ellipse cx="2670.02" cy="3801.6042" fill="#84BE84" rx="6" ry="6" style="stroke:#038048;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="233.502"
+                  x="2688.02" y="3809.1863">void stopScreen()
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN50" data-source-line="238" data-uid="ent0051" id="entity_GMN50">
+            <path d="M2647.58,3945.0966 L2647.58,4056.9598 A0,0 0 0 0 2647.58,4056.9598 L3141.6982,4056.9598 A0,0 0 0 0 3141.6982,4056.9598 L3141.6982,3965.0966 L3121.6982,3945.0966 L2902.64,3945.0966 L2894.64,3823.4366 L2886.64,3945.0966 L2647.58,3945.0966 A0,0 0 0 0 2647.58,3945.0966"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M3121.6982,3945.0966 L3121.6982,3965.0966 L3141.6982,3965.0966 L3121.6982,3945.0966" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="371.5283"
+                  x="2659.58" y="3980.2333">Lanterna framework interface
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="452.1182"
+                  x="2659.58" y="4010.8544">Provides terminal screen operations
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="275.4375"
+                  x="2659.58" y="4041.4755">Used by all UI screens
+            </text>
+        </g>
+        <g class="entity" data-entity="GMN58" data-source-line="255" data-uid="ent0059" id="entity_GMN58">
+            <path d="M4280.04,2660.0566 L4280.04,2741.2988 A0,0 0 0 0 4280.04,2741.2988 L4753.2363,2741.2988 A0,0 0 0 0 4753.2363,2741.2988 L4753.2363,2680.0566 L4733.2363,2660.0566 L4516.14,2660.0566 L4306.66,1724.2566 L4500.14,2660.0566 L4280.04,2660.0566 A0,0 0 0 0 4280.04,2660.0566"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M4733.2363,2660.0566 L4733.2363,2680.0566 L4753.2363,2680.0566 L4733.2363,2660.0566" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="288.4121"
+                  x="4292.04" y="2695.1933">Service layer interfaces
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="431.1963"
+                  x="4292.04" y="2725.8144">See main class diagram for details
+            </text>
+        </g><!--class UserDTO-->
+        <g class="entity" data-entity="UserDTO" data-source-line="259" data-uid="ent0061" id="entity_UserDTO">
+            <rect fill="#F1F1F1" height="96" rx="5" ry="5" style="stroke:#181818;stroke-width:1;" width="185.1602"
+                  x="4426.06" y="138.4366"/>
+            <ellipse cx="4456.06" cy="170.4366" fill="#ADD1B2" rx="22" ry="22" style="stroke:#181818;stroke-width:2;"/>
+            <path d="M4462.0063,181.7227 Q4460.8442,182.3204 4459.5659,182.6192 Q4458.2875,182.918 4456.8764,182.918 Q4451.8627,182.918 4449.2231,179.6143 Q4446.5834,176.3106 4446.5834,170.0684 Q4446.5834,163.8096 4449.2231,160.5059 Q4451.8627,157.2022 4456.8764,157.2022 Q4458.2875,157.2022 4459.5825,157.501 Q4460.8774,157.7998 4462.0063,158.3975 L4462.0063,163.8428 Q4460.7446,162.6807 4459.5576,162.1412 Q4458.3705,161.6016 4457.1088,161.6016 Q4454.4194,161.6016 4453.0497,163.7349 Q4451.6801,165.8682 4451.6801,170.0684 Q4451.6801,174.252 4453.0497,176.3853 Q4454.4194,178.5186 4457.1088,178.5186 Q4458.3705,178.5186 4459.5576,177.979 Q4460.7446,177.4395 4462.0063,176.2774 Z "
+                  fill="#000000"/>
+            <text fill="#000000" font-family="sans-serif" font-size="28" lengthAdjust="spacing" textLength="121.1602"
+                  x="4484.06" y="181.0186">UserDTO
+            </text>
+            <line style="stroke:#181818;stroke-width:1;" x1="4428.06" x2="4609.2202" y1="202.4366" y2="202.4366"/>
+            <line style="stroke:#181818;stroke-width:1;" x1="4428.06" x2="4609.2202" y1="218.4366" y2="218.4366"/>
+        </g>
+        <g class="entity" data-entity="GMN62" data-source-line="267" data-uid="ent0063" id="entity_GMN62">
+            <path d="M4682.04,145.8166 L4682.04,178.4366 L4611.6,186.4366 L4682.04,194.4366 L4682.04,227.0588 A0,0 0 0 0 4682.04,227.0588 L5155.2363,227.0588 A0,0 0 0 0 5155.2363,227.0588 L5155.2363,165.8166 L5135.2363,145.8166 L4682.04,145.8166 A0,0 0 0 0 4682.04,145.8166"
+                  fill="#FEFFDD" style="stroke:#181818;stroke-width:1;"/>
+            <path d="M5135.2363,145.8166 L5135.2363,165.8166 L5155.2363,165.8166 L5135.2363,145.8166" fill="#FEFFDD"
+                  style="stroke:#181818;stroke-width:1;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="275.1328"
+                  x="4694.04" y="180.9533">Data Transfer Objects
+            </text>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="431.1963"
+                  x="4694.04" y="211.5744">See main class diagram for details
+            </text>
+        </g><!--link StudentlyTerminalUI to LoginScreen-->
+        <g class="link" data-entity-1="StudentlyTerminalUI" data-entity-2="LoginScreen" data-source-line="205"
+           data-uid="lnk26" id="link_StudentlyTerminalUI_LoginScreen">
+            <path codeLine="205" d="M3308.64,284.3766 C3308.64,326.9566 3308.64,368.2766 3308.64,425.2366" fill="none"
+                  id="StudentlyTerminalUI-to-LoginScreen"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="3308.64,437.2366,3316.64,419.2366,3308.64,427.2366,3300.64,419.2366,3308.64,437.2366"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="90.2637"
+                  x="3310.64" y="371.0333">creates
+            </text>
+        </g><!--link LoginScreen to MainMenuScreen-->
+        <g class="link" data-entity-1="LoginScreen" data-entity-2="MainMenuScreen" data-source-line="207"
+           data-uid="lnk27" id="link_LoginScreen_MainMenuScreen">
+            <path codeLine="207"
+                  d="M2985.48,992.9566 C2729.7,1098.5566 2367.98,1261.5366 2074.64,1446.3566 C2063.3,1453.4966 2061.7763,1454.2405 2050.4163,1462.0805"
+                  fill="none" id="LoginScreen-to-MainMenuScreen"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="2040.54,1468.8966,2059.8985,1465.2567,2048.7703,1463.2165,2050.8104,1452.0883,2040.54,1468.8966"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#000000"
+                     points="2202.2618,1374.1514,2221.0669,1371.293,2215.7953,1360.7855,2202.2618,1374.1514"
+                     style="stroke:#000000;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="153.4229"
+                  x="2229.2" y="1379.4933">navigates to
+            </text>
+        </g><!--link LoginScreen to AuthenticationService-->
+        <g class="link" data-entity-1="LoginScreen" data-entity-2="AuthenticationService" data-source-line="208"
+           data-uid="lnk29" id="link_LoginScreen_AuthenticationService">
+            <path codeLine="208" d="M3631.46,1130.6766 C3851.58,1310.3766 4114.1242,1524.7279 4230.3242,1619.5879"
+                  fill="none" id="LoginScreen-to-AuthenticationService"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="4239.62,1627.1766,4230.7354,1609.5964,4231.8735,1620.8527,4220.6172,1621.9908,4239.62,1627.1766"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="57.1289"
+                  x="3922.18" y="1379.4933">uses
+            </text>
+        </g><!--link MainMenuScreen to CourseManagementScreen-->
+        <g class="link" data-entity-1="MainMenuScreen" data-entity-2="CourseManagementScreen" data-source-line="210"
+           data-uid="lnk30" id="link_MainMenuScreen_CourseManagementScreen">
+            <path codeLine="210"
+                  d="M2040.24,1889.4766 C2051.56,1895.2566 2063.04,1900.5166 2074.64,1905.0966 C2444.16,2051.1366 2595.02,1824.4366 2966.64,1965.0966 C3214.46,2058.9166 3441.8122,2232.1139 3616.9522,2390.9939"
+                  fill="none" id="MainMenuScreen-to-CourseManagementScreen"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="3625.84,2399.0566,3617.8834,2381.0373,3618.4335,2392.3377,3607.1332,2392.8878,3625.84,2399.0566"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#000000"
+                     points="3045.8695,1985.4382,3030.4121,1974.3535,3026.8488,1985.5562,3045.8695,1985.4382"
+                     style="stroke:#000000;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="153.4229"
+                  x="3054.34" y="1992.2333">navigates to
+            </text>
+        </g><!--link MainMenuScreen to ToDoListManagementScreen-->
+        <g class="link" data-entity-1="MainMenuScreen" data-entity-2="ToDoListManagementScreen" data-source-line="211"
+           data-uid="lnk31" id="link_MainMenuScreen_ToDoListManagementScreen">
+            <path codeLine="211" d="M1659.6,1905.5766 C1605,1996.3766 1546.1041,2094.3128 1481.8441,2201.1728"
+                  fill="none" id="MainMenuScreen-to-ToDoListManagementScreen"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="1475.66,2211.4566,1491.7921,2200.1536,1480.8134,2202.8867,1478.0803,2191.9081,1475.66,2211.4566"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#000000"
+                     points="1620.0466,1990.9769,1634.4064,1978.5031,1624.332,1972.4449,1620.0466,1990.9769"
+                     style="stroke:#000000;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="153.4229"
+                  x="1643.2" y="1992.2333">navigates to
+            </text>
+        </g><!--link MainMenuScreen to CalendarScreen-->
+        <g class="link" data-entity-1="MainMenuScreen" data-entity-2="CalendarScreen" data-source-line="212"
+           data-uid="lnk32" id="link_MainMenuScreen_CalendarScreen">
+            <path codeLine="212" d="M1841.72,1905.5766 C1871.9,2058.0766 1909.4718,2247.9646 1941.4718,2409.7646"
+                  fill="none" id="MainMenuScreen-to-CalendarScreen"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="1943.8,2421.5366,1948.1557,2402.3265,1941.8598,2411.7266,1932.4597,2405.4307,1943.8,2421.5366"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#000000" points="1868.2608,1992.217,1870.5159,1973.33,1858.9837,1975.6116,1868.2608,1992.217"
+                     style="stroke:#000000;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="153.4229"
+                  x="1884.32" y="1992.2333">navigates to
+            </text>
+        </g><!--link CourseManagementScreen to CourseService-->
+        <g class="link" data-entity-1="CourseManagementScreen" data-entity-2="CourseService" data-source-line="214"
+           data-uid="lnk34" id="link_CourseManagementScreen_CourseService">
+            <path codeLine="214" d="M4111.74,3342.9966 C4145.9,3456.2766 4172.414,3544.188 4189.134,3599.608"
+                  fill="none" id="CourseManagementScreen-to-CourseService"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="4192.6,3611.0966,4195.06,3591.5531,4189.7116,3601.5228,4179.7419,3596.1745,4192.6,3611.0966"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="57.1289"
+                  x="4139.04" y="3429.3933">uses
+            </text>
+        </g><!--link CourseManagementScreen to CourseDTO-->
+        <g class="link" data-entity-1="CourseManagementScreen" data-entity-2="CourseDTO" data-source-line="215"
+           data-uid="lnk36" id="link_CourseManagementScreen_CourseDTO">
+            <path codeLine="215"
+                  d="M4211.32,3290.5166 C4222.28,3308.1166 4233.4,3325.3966 4244.64,3342.2566 C4281.5,3397.5766 4397.0403,3528.712 4462.7403,3602.172"
+                  fill="none" id="CourseManagementScreen-to-CourseDTO"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="4470.74,3611.1166,4464.7035,3592.3666,4464.0736,3603.6628,4452.7774,3603.0329,4470.74,3611.1166"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="102.21"
+                  x="4320.12" y="3429.3933">displays
+            </text>
+        </g><!--link CourseManagementScreen to CourseTaskDTO-->
+        <g class="link" data-entity-1="CourseManagementScreen" data-entity-2="CourseTaskDTO" data-source-line="216"
+           data-uid="lnk38" id="link_CourseManagementScreen_CourseTaskDTO">
+            <path codeLine="216"
+                  d="M4211.34,3311.9766 C4222.08,3322.5166 4233.18,3332.6366 4244.64,3342.2566 C4314.42,3400.8166 4355.18,3370.6966 4440.64,3402.2566 C4538.86,3438.5366 4568.7,3439.4566 4656.64,3496.2566 C4707.1,3528.8566 4748.7312,3567.2759 4782.8312,3602.1559"
+                  fill="none" id="CourseManagementScreen-to-CourseTaskDTO"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="4791.22,3610.7366,4784.3573,3592.273,4784.2293,3603.586,4772.9164,3603.4581,4791.22,3610.7366"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="102.21"
+                  x="4539.58" y="3429.3933">displays
+            </text>
+        </g><!--link ToDoListManagementScreen to ToDoListService-->
+        <g class="link" data-entity-1="ToDoListManagementScreen" data-entity-2="ToDoListService" data-source-line="218"
+           data-uid="lnk40" id="link_ToDoListManagementScreen_ToDoListService">
+            <path codeLine="218" d="M1475.66,3276.1166 C1547.32,3416.3566 1607.6405,3534.3904 1641.4005,3600.4704"
+                  fill="none" id="ToDoListManagementScreen-to-ToDoListService"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="1646.86,3611.1566,1645.7948,3591.4877,1642.3104,3602.2514,1631.5466,3598.767,1646.86,3611.1566"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="57.1289"
+                  x="1554.7" y="3429.3933">uses
+            </text>
+        </g><!--link ToDoListManagementScreen to ToDoListDTO-->
+        <g class="link" data-entity-1="ToDoListManagementScreen" data-entity-2="ToDoListDTO" data-source-line="219"
+           data-uid="lnk42" id="link_ToDoListManagementScreen_ToDoListDTO">
+            <path codeLine="219"
+                  d="M889.76,2955.6566 C714.48,3109.1966 488.78,3310.7366 294.64,3496.2566 C255.22,3533.9166 220.3374,3569.6075 189.0774,3602.2675"
+                  fill="none" id="ToDoListManagementScreen-to-ToDoListDTO"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="180.78,3610.9366,199.0055,3603.4646,187.6945,3603.7124,187.4468,3592.4014,180.78,3610.9366"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="102.21"
+                  x="390.52" y="3429.3933">displays
+            </text>
+        </g><!--link ToDoListManagementScreen to ToDoListTaskDTO-->
+        <g class="link" data-entity-1="ToDoListManagementScreen" data-entity-2="ToDoListTaskDTO" data-source-line="220"
+           data-uid="lnk44" id="link_ToDoListManagementScreen_ToDoListTaskDTO">
+            <path codeLine="220" d="M889.66,3103.5366 C744.9,3301.5766 594.0212,3508.0086 526.0012,3601.0686"
+                  fill="none" id="ToDoListManagementScreen-to-ToDoListTaskDTO"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="518.92,3610.7566,536.0004,3600.9454,524.821,3602.6833,523.0831,3591.5038,518.92,3610.7566"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="102.21"
+                  x="655.32" y="3429.3933">displays
+            </text>
+        </g><!--link CalendarScreen to CalendarService-->
+        <g class="link" data-entity-1="CalendarScreen" data-entity-2="CalendarService" data-source-line="222"
+           data-uid="lnk46" id="link_CalendarScreen_CalendarService">
+            <path codeLine="222" d="M2005.04,2980.1766 C2010.18,3203.7766 2016.7029,3486.7798 2019.3029,3599.3398"
+                  fill="none" id="CalendarScreen-to-CalendarService"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="2019.58,3611.3366,2027.1622,3593.1566,2019.3491,3601.3392,2011.1665,3593.5261,2019.58,3611.3366"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="57.1289"
+                  x="2017.32" y="3429.3933">uses
+            </text>
+        </g><!--link CalendarScreen to CalendarItemDTO-->
+        <g class="link" data-entity-1="CalendarScreen" data-entity-2="CalendarItemDTO" data-source-line="223"
+           data-uid="lnk48" id="link_CalendarScreen_CalendarItemDTO">
+            <path codeLine="223" d="M2110.22,2980.1766 C2200.12,3203.7766 2314.2632,3487.6429 2359.5232,3600.2029"
+                  fill="none" id="CalendarScreen-to-CalendarItemDTO"
+                  style="stroke:#181818;stroke-width:2;stroke-dasharray:14,14;"/>
+            <polygon fill="#181818"
+                     points="2364,3611.3366,2364.7072,3591.6515,2360.2693,3602.0585,2349.8624,3597.6206,2364,3611.3366"
+                     style="stroke:#181818;stroke-width:2;"/>
+            <text fill="#000000" font-family="sans-serif" font-size="26" lengthAdjust="spacing" textLength="102.21"
+                  x="2291.84" y="3429.3933">displays
+            </text>
+        </g><!--link LoginScreen to Screen-->
+        <g class="link" data-entity-1="LoginScreen" data-entity-2="Screen" data-source-line="243" data-uid="lnk53"
+           id="link_LoginScreen_Screen">
+            <path codeLine="243"
+                  d="M3423.6,1292.8766 C3433.9,1344.2566 3442.68,1396.2766 3448.64,1446.3566 C3472.76,1648.8166 3476.34,1703.0966 3448.64,1905.0966 C3352.64,2605.1566 3292.52,2784.0566 3020.64,3436.2566 C3012.46,3455.8566 3008.4324,3465.2073 2998.3324,3484.8273"
+                  fill="none" id="LoginScreen-to-Screen" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#181818"
+                     points="2992.84,3495.4966,3008.1914,3483.1542,2997.417,3486.6055,2993.9657,3475.831,2992.84,3495.4966"
+                     style="stroke:#181818;stroke-width:2;"/>
+        </g><!--link MainMenuScreen to Screen-->
+        <g class="link" data-entity-1="MainMenuScreen" data-entity-2="Screen" data-source-line="244" data-uid="lnk54"
+           id="link_MainMenuScreen_Screen">
+            <path codeLine="244"
+                  d="M2040.24,1887.0966 C2051.6,1893.5966 2063.08,1899.6366 2074.64,1905.0966 C2390.18,2054.2166 2619.18,1792.6966 2844.64,2059.0966 C3193.06,2470.8166 3044.9083,3166.6048 2951.5283,3483.8648"
+                  fill="none" id="MainMenuScreen-to-Screen" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#181818"
+                     points="2948.14,3495.3766,2960.8969,3480.3678,2950.9636,3485.7835,2945.5479,3475.8501,2948.14,3495.3766"
+                     style="stroke:#181818;stroke-width:2;"/>
+        </g><!--link CourseManagementScreen to Screen-->
+        <g class="link" data-entity-1="CourseManagementScreen" data-entity-2="Screen" data-source-line="245"
+           data-uid="lnk55" id="link_CourseManagementScreen_Screen">
+            <path codeLine="245"
+                  d="M3658.04,3342.8766 C3628.22,3377.6566 3595.18,3409.3166 3558.64,3436.2566 C3420.3,3538.2166 3338.78,3439.2966 3176.64,3496.2566 C3165.2,3500.2766 3164.7374,3500.0947 3153.2574,3504.9347"
+                  fill="none" id="CourseManagementScreen-to-Screen" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#181818"
+                     points="3142.2,3509.5966,3161.8941,3509.9754,3151.4145,3505.7117,3155.6783,3495.2322,3142.2,3509.5966"
+                     style="stroke:#181818;stroke-width:2;"/>
+        </g><!--link ToDoListManagementScreen to Screen-->
+        <g class="link" data-entity-1="ToDoListManagementScreen" data-entity-2="Screen" data-source-line="246"
+           data-uid="lnk56" id="link_ToDoListManagementScreen_Screen">
+            <path codeLine="246"
+                  d="M1475.42,3163.7566 C1533.62,3230.7366 1599.12,3293.4366 1670.64,3342.2566 C2005.78,3571.0766 2181,3382.7966 2570.64,3496.2566 C2595.98,3503.6366 2610.6186,3508.3803 2635.9586,3518.7803"
+                  fill="none" id="ToDoListManagementScreen-to-Screen" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#181818"
+                     points="2647.06,3523.3366,2633.4454,3509.1013,2637.8088,3519.5397,2627.3704,3523.9032,2647.06,3523.3366"
+                     style="stroke:#181818;stroke-width:2;"/>
+        </g><!--link CalendarScreen to Screen-->
+        <g class="link" data-entity-1="CalendarScreen" data-entity-2="Screen" data-source-line="247" data-uid="lnk57"
+           id="link_CalendarScreen_Screen">
+            <path codeLine="247"
+                  d="M2097.14,2980.4366 C2150.46,3102.0966 2225.9,3240.0966 2324.64,3342.2566 C2350.96,3369.4966 2495.2934,3449.0241 2636.9934,3524.0041"
+                  fill="none" id="CalendarScreen-to-Screen" style="stroke:#181818;stroke-width:2;"/>
+            <polygon fill="#181818"
+                     points="2647.6,3529.6166,2635.4317,3514.1268,2638.7611,3524.9395,2627.9484,3528.269,2647.6,3529.6166"
+                     style="stroke:#181818;stroke-width:2;"/>
+        </g><!--SRC=[xLdTRzis47_tNt5lSz76NJ-UZ2M0QpkRCTi9OcTeCEo1aMYRYoGA96NF7VQ_x_WXXQAarFtO2WpBIwkxu_5u7xyxqegfXC9A5J7DL7A4CrXJaRAC970xWt52f8G98rj1qbxlEpXl-OF5QBRKqjFb-kOEhgzcotMhOAyN6NtLRkLMkFRF7k3V6OpoF64HKOndOvuf-eS2qY3rZF1ps7CMGqfOrbyfmRBjhxy14Llvp6UBekGE1WF7_glNoxYY8DXsfu1lsYmoEbQvNWZlE5SmvcbAidZECdfJP1aLHcAMCSL8mZvG2Qhq78g1L4Ge2NE-PTag4fHcHXvF43Dz51JZ6UI2vrIeun3bdGc3WWreHkuJ6fyhKL1h24LTyYWLJQiriE7YSS-KnxH7SMDziivGeQTNuvlfTBbwCaAUrLLatATyF0j6gr0xDDf5PqN5daKKI1lLhHZpGaXQIaR-bvDOymcVCwbA6LN_BlMG10zBHAMf_btQR08F6Ka32iMiIUga70z-u29sL9Ofa3IXaQBn9QD9IR_dFA4a0oPNR9iL-KBxlQvR22uML4go3JYoY2Aabpm_JMCcyuGS-y_S2fkxU2GgscXsxpQE2LqRm-qgwxmTvcf2npiY29vKpBAyKFtg4w8MuNSaUf0vYMYRfZMvhyYbgondYgKRd2KZUxObYgxv0ejuGREYVokfcAoleC1_Qx8HgX8c4Fe4PGNVSwLugaiuB3JSJXnTjffAgMUbaVd962QrbXr8ur9JkudMPIfAskexC1Njj21L1wFFs058ti5wzCvMjg1u50dbKLoza8tseulyfaYiSgzIRSK5gvugkj95KI4miaf_VfFYyYlaAZTE_QoCjkanmgevtEQTh0a_P6tCCgqQc5xtg8tZZXyal8KKoS2DoN9eEAy6pdcuBCCgGGbb6Ay7wBEp2GVjfP3vPb2vodo_7UWqv8NbBbrsOsFWU72PewVOdhfWIWt_rdtQSs4-M6iUz_k7ysB5qZoX4xJsaekKA8Yh_pe9VVuVh2BSvC9faIsvO8LQ66iY7pno-ld8MUDPIyODRPQ-R62_GZFQgHEA3cLvXGy1ayG9Dly9ENOp5pYWxBhPTvG8pmDCewrjBb_G2wo_TNpQkAFO1QHxwOGgx8QoOxMEshVh9vyE2naEYBFAiKz1HeDnc-kqlnPyY-NQUh054Gyu26AjgC3SX1Fdw62XQLp6e3Q6vyLcJsi70GirjZqDuVlpH2FJdj732tXrJkBO9VuBU7qUsyY-W3U6eSe2l7mr10mjUALw-TgITBYXZ-tFhZMAhTcNRuPWFGIbYpe4tmv1EmfAJxMBMJIsnkgXrchK_LVRgGTeLLXyqRXaYyMst3qEtB5fuz2_mx-NYyNBoUHP0qJBRlULOFIqvdaYb9RA39Wg7fkFDZZLz7yFJ7Ko_PV0KNll5qov3d3hGaqJcVzXyHJGAnFvwy5ULzb-5FWquHJOgqhgDD0x6SiCRaLMK8CJOXicSl_zoxkIIcChR-TblBR7Blb3O6iEXEKC_aM3uCc3lLlhbwn7zahLpeLEpqpHr4w77a4-WKjVClQuBPxYcUqxYsHEDwgJUQFl4IqjFj3Sk7RKu-GbHwfTcHmhrvZiCNop7ppGewnkn5RQTJ_h5soDMsoHccjJMi96y7HOc_6hV99LpwekBtNMc2TSd4LOIp7S7yjk-z47f9lfVBIUNIrNFyskkzwGsjxt1eEBsglI429xN-xrVB8M2wx2myefvY9rqP1lVuGQwYS4r1veqmiwxbQDZLgMTauKfomEIhYnfDTXsAFDmU4-AgzHO5WMrWdo6WU3DRtE8_l-20mxQKsmqKbhsWmCt5hpTE2lRac7N3N57IKmVR-UtYn7SvXChwVBoNGvdasxIe7fdhh19Wurt7xkjS9-_RcQRd0CtbN4d-aHSPC_8C9W-TgveUIjiQN_A4Y-On4Y1ptutvwGhS4L-q1XIvN_NT_Ql5XRCqC6pojwirrxI3Sd-hmPGMJ26VB0iMzM7Z02U77OizX_AtSlTFf9szIlHIViMGQMI69-Xt1F9Xuy-I1mTdPH6X5KdSVfo7rFeZC1VItr3F8uNgXR0SdZrshPemV5vAy8-dGOWb7dYtjP0PZHE6TM6jsx9gNcvnEm8qPiV-SnhwLkX6gC8MwsgBrIXT-kI8DBM9DIbmigCUohvSRkFaXWBKWcDtYeg_lVyKRqwIVw6m00]-->
+    </g>
+</svg>
