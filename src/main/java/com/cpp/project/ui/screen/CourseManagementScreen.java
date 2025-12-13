@@ -205,6 +205,49 @@ public class CourseManagementScreen extends StatefulScreen implements CourseMedi
         // This is handled within the TimerViewState itself by catching exceptions
     }
 
+    // ========== Task Details View: Navigation Methods ==========
+
+    @Override
+    public void onViewTaskDetails(UUID courseId, UUID taskId) {
+        // User wants to view task details
+        transitionTo(createTaskDetailsState(courseId, taskId, null));
+    }
+
+    // ========== Task Details View: Context-Aware Entry Points ==========
+
+    @Override
+    public void onUpdateTaskProgressFromTaskDetails(UUID courseId, UUID taskId) {
+        // User wants to update task progress from task details view
+        transitionTo(createUpdateProgressState(courseId, taskId, true));
+    }
+
+    @Override
+    public void onEditTaskFromTaskDetails(UUID courseId, UUID taskId) {
+        // User wants to edit task from task details view
+        transitionTo(createEditTaskState(courseId, taskId, true));
+    }
+
+    @Override
+    public void onDeleteTaskFromTaskDetails(UUID courseId, UUID taskId) {
+        // User wants to delete task from task details view
+        transitionTo(createDeleteTaskState(courseId, taskId, true));
+    }
+
+    // ========== Task Details View: Callback Methods ==========
+
+    @Override
+    public void onTaskUpdatedReturnToTaskDetails(UUID courseId, UUID taskId) {
+        // Task was updated from task details view, return to task details with success message
+        transitionTo(createTaskDetailsState(courseId, taskId, "Task updated successfully!"));
+    }
+
+    @Override
+    public void onTaskProgressUpdatedReturnToTaskDetails(UUID courseId, UUID taskId, boolean wasCompleted) {
+        // Task progress updated from task details view, return to task details with success message
+        String message = wasCompleted ? "Task marked as complete!" : "Progress updated successfully!";
+        transitionTo(createTaskDetailsState(courseId, taskId, message));
+    }
+
     // ========== Factory Method Pattern: State Creation ==========
 
     /**
@@ -248,6 +291,18 @@ public class CourseManagementScreen extends StatefulScreen implements CourseMedi
     }
 
     /**
+     * Factory method to create task details state
+     *
+     * @param courseId The course containing the task
+     * @param taskId   The task to display
+     * @param message  Optional success message to display
+     * @return New task details state
+     */
+    private TaskDetailsState createTaskDetailsState(UUID courseId, UUID taskId, String message) {
+        return new TaskDetailsState(this, courseId, taskId, message);
+    }
+
+    /**
      * Factory method to create update progress state
      *
      * @param courseId The course containing the task
@@ -255,7 +310,19 @@ public class CourseManagementScreen extends StatefulScreen implements CourseMedi
      * @return New update progress state
      */
     private UpdateProgressState createUpdateProgressState(UUID courseId, UUID taskId) {
-        return new UpdateProgressState(this, courseService, courseId, taskId);
+        return createUpdateProgressState(courseId, taskId, false);
+    }
+
+    /**
+     * Factory method to create update progress state with context
+     *
+     * @param courseId        The course containing the task
+     * @param taskId          The task to update progress for
+     * @param fromTaskDetails Whether called from task details view
+     * @return New update progress state
+     */
+    private UpdateProgressState createUpdateProgressState(UUID courseId, UUID taskId, boolean fromTaskDetails) {
+        return new UpdateProgressState(this, courseService, courseId, taskId, fromTaskDetails);
     }
 
     /**
@@ -286,7 +353,19 @@ public class CourseManagementScreen extends StatefulScreen implements CourseMedi
      * @return New edit task state
      */
     private EditCourseTaskState createEditTaskState(UUID courseId, UUID taskId) {
-        return new EditCourseTaskState(this, courseService, courseId, taskId);
+        return createEditTaskState(courseId, taskId, false);
+    }
+
+    /**
+     * Factory method to create edit task state with context
+     *
+     * @param courseId        The course containing the task
+     * @param taskId          The task to edit
+     * @param fromTaskDetails Whether called from task details view
+     * @return New edit task state
+     */
+    private EditCourseTaskState createEditTaskState(UUID courseId, UUID taskId, boolean fromTaskDetails) {
+        return new EditCourseTaskState(this, courseService, courseId, taskId, fromTaskDetails);
     }
 
     /**
@@ -297,7 +376,19 @@ public class CourseManagementScreen extends StatefulScreen implements CourseMedi
      * @return New delete task confirmation state
      */
     private DeleteCourseTaskState createDeleteTaskState(UUID courseId, UUID taskId) {
-        return new DeleteCourseTaskState(this, courseService, courseId, taskId);
+        return createDeleteTaskState(courseId, taskId, false);
+    }
+
+    /**
+     * Factory method to create delete task state with context
+     *
+     * @param courseId        The course containing the task
+     * @param taskId          The task to delete
+     * @param fromTaskDetails Whether called from task details view
+     * @return New delete task confirmation state
+     */
+    private DeleteCourseTaskState createDeleteTaskState(UUID courseId, UUID taskId, boolean fromTaskDetails) {
+        return new DeleteCourseTaskState(this, courseService, courseId, taskId, fromTaskDetails);
     }
 
     /**

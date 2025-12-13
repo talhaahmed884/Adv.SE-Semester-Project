@@ -158,6 +158,48 @@ public class ToDoListManagementScreen extends StatefulScreen implements ToDoList
         close();
     }
 
+    // ========== Task Details View: Navigation Methods ==========
+
+    @Override
+    public void onViewTaskDetails(UUID listId, UUID taskId) {
+        // User wants to view task details
+        transitionTo(createTaskDetailsState(listId, taskId, null));
+    }
+
+    // ========== Task Details View: Context-Aware Entry Points ==========
+
+    @Override
+    public void onMarkCompleteFromTaskDetails(UUID listId, UUID taskId) {
+        // Mark complete is handled directly in TaskDetailsState
+        // This method exists for consistency but may not be used
+    }
+
+    @Override
+    public void onEditTaskFromTaskDetails(UUID listId, UUID taskId) {
+        // User wants to edit task from task details view
+        transitionTo(createEditTaskState(listId, taskId, true));
+    }
+
+    @Override
+    public void onDeleteTaskFromTaskDetails(UUID listId, UUID taskId) {
+        // User wants to delete task from task details view
+        transitionTo(createDeleteTaskState(listId, taskId, true));
+    }
+
+    // ========== Task Details View: Callback Methods ==========
+
+    @Override
+    public void onTaskCompletedReturnToTaskDetails(UUID listId, UUID taskId) {
+        // Task marked complete from task details view, return with success message
+        transitionTo(createTaskDetailsState(listId, taskId, "Task status updated successfully!"));
+    }
+
+    @Override
+    public void onTaskUpdatedReturnToTaskDetails(UUID listId, UUID taskId) {
+        // Task updated from task details view, return with success message
+        transitionTo(createTaskDetailsState(listId, taskId, "Task updated successfully!"));
+    }
+
     // ========== Factory Method Pattern: State Creation ==========
 
     /**
@@ -221,6 +263,18 @@ public class ToDoListManagementScreen extends StatefulScreen implements ToDoList
     }
 
     /**
+     * Factory method to create task details state
+     *
+     * @param listId  The list containing the task
+     * @param taskId  The task to display
+     * @param message Optional success message to display
+     * @return New task details state
+     */
+    private TaskDetailsState createTaskDetailsState(UUID listId, UUID taskId, String message) {
+        return new TaskDetailsState(this, toDoListService, listId, taskId, message);
+    }
+
+    /**
      * Factory method to create edit task state
      *
      * @param listId The list containing the task
@@ -228,7 +282,19 @@ public class ToDoListManagementScreen extends StatefulScreen implements ToDoList
      * @return New edit task state
      */
     private com.cpp.project.ui.state.todolist.EditTaskState createEditTaskState(UUID listId, UUID taskId) {
-        return new com.cpp.project.ui.state.todolist.EditTaskState(this, toDoListService, listId, taskId);
+        return createEditTaskState(listId, taskId, false);
+    }
+
+    /**
+     * Factory method to create edit task state with context
+     *
+     * @param listId          The list containing the task
+     * @param taskId          The task to edit
+     * @param fromTaskDetails Whether called from task details view
+     * @return New edit task state
+     */
+    private com.cpp.project.ui.state.todolist.EditTaskState createEditTaskState(UUID listId, UUID taskId, boolean fromTaskDetails) {
+        return new com.cpp.project.ui.state.todolist.EditTaskState(this, toDoListService, listId, taskId, fromTaskDetails);
     }
 
     /**
@@ -239,6 +305,18 @@ public class ToDoListManagementScreen extends StatefulScreen implements ToDoList
      * @return New delete task confirmation state
      */
     private com.cpp.project.ui.state.todolist.DeleteTaskState createDeleteTaskState(UUID listId, UUID taskId) {
-        return new com.cpp.project.ui.state.todolist.DeleteTaskState(this, toDoListService, listId, taskId);
+        return createDeleteTaskState(listId, taskId, false);
+    }
+
+    /**
+     * Factory method to create delete task state with context
+     *
+     * @param listId          The list containing the task
+     * @param taskId          The task to delete
+     * @param fromTaskDetails Whether called from task details view
+     * @return New delete task confirmation state
+     */
+    private com.cpp.project.ui.state.todolist.DeleteTaskState createDeleteTaskState(UUID listId, UUID taskId, boolean fromTaskDetails) {
+        return new com.cpp.project.ui.state.todolist.DeleteTaskState(this, toDoListService, listId, taskId, fromTaskDetails);
     }
 }

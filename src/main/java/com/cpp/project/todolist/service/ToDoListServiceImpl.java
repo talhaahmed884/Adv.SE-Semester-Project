@@ -217,6 +217,33 @@ public class ToDoListServiceImpl implements ToDoListService {
     }
 
     @Override
+    public ToDoListTaskDTO markTaskInComplete(UUID todoListId, UUID taskId) {
+        logger.info("Marking task incomplete: {} in todo list: {}", taskId, todoListId);
+
+        try {
+            ToDoList todoList = todoListRepository.findById(todoListId)
+                    .orElseThrow(() -> new ToDoListException(ToDoListErrorCode.TODO_LIST_NOT_FOUND, "id", todoListId));
+
+            ToDoListTask task = todoList.getTasks().stream()
+                    .filter(t -> t.getId().equals(taskId))
+                    .findFirst()
+                    .orElseThrow(() -> new ToDoListException(ToDoListErrorCode.TASK_NOT_FOUND, taskId));
+
+            task.markInComplete();
+
+            todoListRepository.save(todoList);
+            logger.info("Task marked incomplete successfully");
+
+            return ToDoListTaskAdapter.toDTO(task);
+        } catch (ToDoListException e) {
+            throw e;
+        } catch (Exception e) {
+            logger.error("Unexpected error marking task complete: {}", taskId, e);
+            throw new ToDoListException(ToDoListErrorCode.TASK_UPDATE_FAILED, e, e.getMessage());
+        }
+    }
+
+    @Override
     @Transactional(readOnly = true)
     public List<Instant> getAggregatedDeadlines(UUID todoListId) {
         logger.debug("Getting aggregated deadlines for todo list: {}", todoListId);

@@ -29,16 +29,18 @@ public class UpdateProgressState implements ScreenState {
     private final CourseService courseService;
     private final UUID courseId;
     private final UUID taskId;
+    private final boolean fromTaskDetails;
     private final FormField progressField;
     private final MessagePanel messagePanel;
     private CourseTaskDTO task; // Cached during render cycle
 
     public UpdateProgressState(CourseMediator mediator, CourseService courseService,
-                               UUID courseId, UUID taskId) {
+                               UUID courseId, UUID taskId, boolean fromTaskDetails) {
         this.mediator = mediator;
         this.courseService = courseService;
         this.courseId = courseId;
         this.taskId = taskId;
+        this.fromTaskDetails = fromTaskDetails;
         this.progressField = ComponentFactory.createNumericField("New Progress (0-100)", 3);
         this.progressField.setFocused(true);
         this.messagePanel = new MessagePanel();
@@ -118,8 +120,12 @@ public class UpdateProgressState implements ScreenState {
                 wasCompleted = true;
             }
 
-            // Notify mediator - it will transition to course details with appropriate message
-            mediator.onTaskProgressUpdated(courseId, wasCompleted);
+            // Notify mediator - it will transition based on context
+            if (fromTaskDetails) {
+                mediator.onTaskProgressUpdatedReturnToTaskDetails(courseId, taskId, wasCompleted);
+            } else {
+                mediator.onTaskProgressUpdated(courseId, wasCompleted);
+            }
             return null; // Mediator handles transition
         } catch (NumberFormatException e) {
             messagePanel.setError("Invalid progress value");

@@ -19,6 +19,7 @@ import org.junit.platform.suite.api.SuiteDisplayName;
         "com.cpp.project.uc_7_create_todolist",
         "com.cpp.project.uc_8_add_todo_list_task",
         "com.cpp.project.uc_9_mark_todo_list_task_complete",
+        "com.cpp.project.uc_9_mark_todo_list_task_incomplete",
         "com.cpp.project.uc_13_update_todolist_task",
         "com.cpp.project.uc_14_delete_todolist_task"
 })

@@ -59,4 +59,12 @@ public class ToDoListTask {
     public void markComplete() {
         this.status = TaskStatus.COMPLETED;
     }
+
+    /**
+     * Mark this task as incompleted
+     * Sets status to PENDING
+     */
+    public void markInComplete() {
+        this.status = TaskStatus.PENDING;
+    }
 }

@@ -323,6 +323,55 @@ public class ToDoListControllerIntegrationTest extends BaseIntegrationTest {
     }
 
     @Test
+    @DisplayName("PUT /api/todolists/{todoListId}/tasks/{taskId}/incomplete - Success (200 OK)")
+    public void testMarkTaskInCompleteSuccess() throws Exception {
+        // Create a todo list and add a task
+        CreateToDoListRequestDTO createRequest = new CreateToDoListRequestDTO(
+                "Project Tasks",
+                testUserId
+        );
+
+        MvcResult createResult = mockMvc.perform(post("/api/todolists")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String todoListId = objectMapper.readTree(createResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        Instant futureDeadline = ZonedDateTime.now(ZoneId.of("UTC")).plusDays(5).toInstant();
+
+        AddToDoListTaskRequestDTO taskRequest = new AddToDoListTaskRequestDTO(
+                "Complete documentation",
+                futureDeadline
+        );
+
+        MvcResult taskResult = mockMvc.perform(post("/api/todolists/" + todoListId + "/tasks")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(taskRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String taskId = objectMapper.readTree(taskResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        // Mark task as complete
+        mockMvc.perform(put("/api/todolists/" + todoListId + "/tasks/" + taskId + "/complete"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.status").value("COMPLETED"))
+                .andExpect(jsonPath("$.message").value("Task marked as complete"))
+                .andExpect(jsonPath("$.statusCode").value(200));
+
+        // Mark task as incomplete
+        mockMvc.perform(put("/api/todolists/" + todoListId + "/tasks/" + taskId + "/incomplete"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.data.status").value("PENDING"))
+                .andExpect(jsonPath("$.message").value("Task marked as incomplete"))
+                .andExpect(jsonPath("$.statusCode").value(200));
+    }
+
+    @Test
     @DisplayName("GET /api/todolists/{todoListId}/deadlines - Success (200 OK)")
     public void testGetAggregatedDeadlinesSuccess() throws Exception {
         // Create a todo list and add multiple tasks
@@ -387,6 +436,39 @@ public class ToDoListControllerIntegrationTest extends BaseIntegrationTest {
 
         // Try to mark non-existent task as complete
         mockMvc.perform(put("/api/todolists/" + todoListId + "/tasks/" + nonExistentTaskId + "/complete"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code").value("TODO_TASK_001"))
+                .andExpect(jsonPath("$.statusCode").value(404));
+    }
+
+    @Test
+    @DisplayName("PUT /api/todolists/{todoListId}/tasks/{taskId}/incomplete - Task Not Found (404)")
+    public void testMarkTaskInCompleteNotFound() throws Exception {
+        // Create a todo list
+        CreateToDoListRequestDTO createRequest = new CreateToDoListRequestDTO(
+                "Test List",
+                testUserId
+        );
+
+        MvcResult createResult = mockMvc.perform(post("/api/todolists")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(createRequest)))
+                .andExpect(status().isCreated())
+                .andReturn();
+
+        String todoListId = objectMapper.readTree(createResult.getResponse().getContentAsString())
+                .get("data").get("id").asText();
+
+        UUID nonExistentTaskId = UUID.randomUUID();
+
+        // Try to mark non-existent task as complete
+        mockMvc.perform(put("/api/todolists/" + todoListId + "/tasks/" + nonExistentTaskId + "/complete"))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.code").value("TODO_TASK_001"))
+                .andExpect(jsonPath("$.statusCode").value(404));
+
+        // Try to mark non-existent task as incomplete
+        mockMvc.perform(put("/api/todolists/" + todoListId + "/tasks/" + nonExistentTaskId + "/incomplete"))
                 .andExpect(status().isNotFound())
                 .andExpect(jsonPath("$.code").value("TODO_TASK_001"))
                 .andExpect(jsonPath("$.statusCode").value(404));
