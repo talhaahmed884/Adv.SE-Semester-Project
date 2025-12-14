@@ -1,12 +1,12 @@
 # Studently
 
-A Spring Boot application for user management and authentication built with Java 21, implementing clean architecture
-principles and modern design patterns.
+A comprehensive student productivity platform built with Spring Boot and Java 21. Features include course management, to-do lists, time tracking with timers, calendar integration, and a terminal UI. Implements clean architecture principles and modern design patterns.
 
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
 - [Technology Stack](#technology-stack)
+- [Features](#features)
 - [Getting Started](#getting-started)
     - [Database Setup](#database-setup)
     - [Application Configuration](#application-configuration)
@@ -28,12 +28,54 @@ Before you begin, ensure you have the following installed:
 
 ## Technology Stack
 
-- **Framework**: Spring Boot 3.2.0
+- **Framework**: Spring Boot 3.4.0
 - **Language**: Java 21
 - **Build Tool**: Maven
-- **Database**: PostgreSQL
+- **Database**: PostgreSQL (Production), H2 (Testing)
 - **ORM**: JPA with Hibernate
-- **Additional Libraries**: Lombok, Spring DevTools, Spring Actuator
+- **Terminal UI**: Lanterna 3.1.1
+- **Additional Libraries**: Lombok, Spring DevTools, Spring Actuator, Spring Validation
+
+## Features
+
+### User Management & Authentication
+- User registration and login
+- Secure password handling
+- Email and username validation
+- User profile management (CRUD operations)
+
+### Course Management
+- Create and manage courses with unique course codes
+- Add tasks/assignments to courses with deadlines
+- Track progress on course tasks (0-100%)
+- Mark tasks as complete
+- Update and delete courses and tasks
+- View all courses for a user
+
+### To-Do List Management
+- Create multiple to-do lists per user
+- Add tasks with optional deadlines
+- Mark tasks as complete/incomplete
+- Update and delete tasks
+- Aggregate deadlines across all tasks
+
+### Time Tracking (Timer)
+- Start and stop timers for course tasks
+- Track multiple timer sessions per task
+- View timer history for each task
+- Get total accumulated time for tasks
+- Generate timer summaries (sessions, total time, active timers)
+
+### Calendar Integration
+- Unified calendar view of all tasks
+- Aggregates tasks from courses and to-do lists
+- Filter by month, year, and timezone
+- User-specific calendar items
+
+### Terminal UI
+- Interactive terminal-based user interface
+- Built with Lanterna library
+- Rich text UI for command-line interaction
 
 ## Getting Started
 
@@ -61,6 +103,9 @@ CREATE DATABASE studently;
 ```bash
 psql -U postgres -d studently -f src/main/java/com/cpp/project/user/sql/user.sql
 psql -U postgres -d studently -f src/main/java/com/cpp/project/user_credential/sql/user_credential.sql
+psql -U postgres -d studently -f src/main/java/com/cpp/project/course/sql/course.sql
+psql -U postgres -d studently -f src/main/java/com/cpp/project/todolist/sql/todolist.sql
+psql -U postgres -d studently -f src/main/java/com/cpp/project/timer/sql/timer.sql
 ```
 
 ### Application Configuration
@@ -161,6 +206,54 @@ All tests extend `BaseIntegrationTest` which provides Spring Boot test configura
 - **PUT** `/api/users/{id}` - Update user information
 - **DELETE** `/api/users/{id}` - Delete user
 
+### Course Management
+
+- **POST** `/api/courses` - Create a new course
+- **GET** `/api/courses/{id}` - Get course by ID
+- **GET** `/api/courses/code/{code}` - Get course by code
+- **GET** `/api/courses/user/{userId}` - Get all courses for a user
+- **PUT** `/api/courses/{id}` - Update course
+- **DELETE** `/api/courses/{id}` - Delete course
+
+#### Course Tasks
+
+- **POST** `/api/courses/{courseId}/tasks` - Add task to course
+- **PUT** `/api/courses/{courseId}/tasks/{taskId}` - Update task
+- **PUT** `/api/courses/{courseId}/tasks/{taskId}/progress` - Update task progress
+- **PUT** `/api/courses/{courseId}/tasks/{taskId}/complete` - Mark task as complete
+- **DELETE** `/api/courses/{courseId}/tasks/{taskId}` - Delete task
+
+### To-Do List Management
+
+- **POST** `/api/todolists` - Create a new to-do list
+- **GET** `/api/todolists/{id}` - Get to-do list by ID
+- **GET** `/api/todolists/user/{userId}` - Get all to-do lists for a user
+- **PUT** `/api/todolists/{id}` - Update to-do list
+- **DELETE** `/api/todolists/{id}` - Delete to-do list
+- **GET** `/api/todolists/{id}/deadlines` - Get aggregated deadlines
+
+#### To-Do List Tasks
+
+- **POST** `/api/todolists/{todoListId}/tasks` - Add task to list
+- **PUT** `/api/todolists/{todoListId}/tasks/{taskId}` - Update task
+- **PUT** `/api/todolists/{todoListId}/tasks/{taskId}/complete` - Mark task as complete
+- **PUT** `/api/todolists/{todoListId}/tasks/{taskId}/incomplete` - Mark task as incomplete
+- **DELETE** `/api/todolists/{todoListId}/tasks/{taskId}` - Delete task
+
+### Timer Management
+
+- **POST** `/api/timers/start` - Start a new timer
+- **POST** `/api/timers/stop` - Stop a timer
+- **GET** `/api/timers/{timerId}` - Get timer by ID
+- **GET** `/api/timers/task/{taskId}` - Get all timers for a task
+- **GET** `/api/timers/task/{taskId}/summary` - Get timer summary for task
+- **GET** `/api/timers/task/{taskId}/total` - Get total time for task
+
+### Calendar
+
+- **GET** `/api/calendar/items?year={year}&month={month}&userId={userId}&timezone={timezone}` - Get calendar items for month
+- **GET** `/api/calendar/user/{userId}/items?year={year}&month={month}&timezone={timezone}` - Get calendar items by user
+
 ### Health & Monitoring
 
 - **GET** `/actuator/health` - Application health status
@@ -173,13 +266,63 @@ The application follows a feature-based package structure:
 ```
 com.cpp.project/
 ├── user/                    # User domain
+│   ├── entity/              # User entities
+│   ├── repository/          # User data access
+│   ├── service/             # User business logic
+│   └── sql/                 # User schema
 ├── user_credential/         # User credentials domain
+│   ├── entity/              # Credential entities
+│   ├── repository/          # Credential data access
+│   ├── service/             # Credential business logic
+│   └── sql/                 # Credential schema
 ├── authentication/          # Authentication orchestration
+│   ├── dto/                 # Authentication DTOs
+│   └── service/             # Authentication services
+├── course/                  # Course management domain
+│   ├── entity/              # Course and task entities
+│   ├── repository/          # Course data access
+│   ├── service/             # Course business logic
+│   ├── dto/                 # Course DTOs
+│   └── sql/                 # Course schema
+├── todolist/                # To-do list domain
+│   ├── entity/              # To-do list entities
+│   ├── repository/          # To-do list data access
+│   ├── service/             # To-do list business logic
+│   ├── dto/                 # To-do list DTOs
+│   └── sql/                 # To-do list schema
+├── timer/                   # Time tracking domain
+│   ├── entity/              # Timer entities
+│   ├── repository/          # Timer data access
+│   ├── service/             # Timer business logic
+│   ├── dto/                 # Timer DTOs
+│   └── sql/                 # Timer schema
+├── calendar/                # Calendar integration
+│   ├── entity/              # Calendar entities
+│   ├── service/             # Calendar aggregation logic
+│   ├── dto/                 # Calendar DTOs
+│   └── validation/          # Calendar validation
+├── dashboard/               # Dashboard features
+├── ui/                      # Terminal UI components
+│   ├── core/                # Core UI components
+│   └── handler/             # Input handlers
 └── common/                  # Shared components
     ├── controller/          # REST controllers
+    │   ├── dto/             # Common DTOs
+    │   └── service/         # Controller implementations
     ├── sanitization/        # Input data sanitization
+    │   ├── adapter/         # Sanitization adapters
+    │   ├── entity/          # Sanitization entities
+    │   ├── service/         # Sanitization services
+    │   └── strategy/        # Sanitization strategies
     ├── validation/          # Validation framework
-    └── exception/           # Exception handling
+    │   ├── entity/          # Validation entities
+    │   ├── rule/            # Validation rules
+    │   └── service/         # Validators
+    ├── exception/           # Exception handling
+    │   ├── dto/             # Error DTOs
+    │   ├── entity/          # Exception entities
+    │   └── service/         # Exception handlers
+    └── config/              # Application configuration
 ```
 
 ### Key Architectural Principles
